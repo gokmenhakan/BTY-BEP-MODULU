@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bilişim Teknolojileri ve Yazılım Dersi BEP Modülü</title>
   
-  <!-- SheetJS: İstemci Taraflı Excel (.xlsx) Dışa Aktarma Kütüphanesi -->
-  <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+  <!-- xlsx-js-style: Hücre Kenarlığı (Border), Hizalama ve Biçimlendirme Destekli Excel Kütüphanesi -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js"></script>
 
   <style>
     * { box-sizing: border-box; }
@@ -1081,15 +1081,15 @@
         const mudurYrd = document.getElementById("bep_mudurYrd").value || "Hasan KÖSEOĞLU";
 
         const aoaData = [
-          ["T.C. MİLLÎ EĞİTİM BAKANLIĞI"],
-          ["SÜLEYMAN ÇELEBİ ANADOLU LİSESİ"],
-          ["BİLİŞİM TEKNOLOJİLERİ VE YAZILIM DERSİ BİREYSELLEŞTİRİLMİŞ EĞİTİM PROGRAMI (BEP) FORMU"],
-          [],
-          ["Öğrenci Adı Soyadı:", ogrAd, "", "Eğitim-Öğretim Yılı:", yil],
-          ["Sınıfı / Numarası:", sinifNo, "", "Ders:", dersAdi],
-          ["Ders Öğretmeni:", ogrt, "", "Modül:", modulAdi],
-          ["Düzenleme Tarihi:", tarih],
-          [],
+          ["T.C. MİLLÎ EĞİTİM BAKANLIĞI", "", "", "", "", "", "", "", ""],
+          ["SÜLEYMAN ÇELEBİ ANADOLU LİSESİ", "", "", "", "", "", "", "", ""],
+          ["BİLİŞİM TEKNOLOJİLERİ VE YAZILIM DERSİ BİREYSELLEŞTİRİLMİŞ EĞİTİM PROGRAMI (BEP) FORMU", "", "", "", "", "", "", "", ""],
+          ["", "", "", "", "", "", "", "", ""],
+          ["Öğrenci Adı Soyadı:", ogrAd, "", "", "Eğitim-Öğretim Yılı:", yil, "", "", ""],
+          ["Sınıfı / Numarası:", sinifNo, "", "", "Ders:", dersAdi, "", "", ""],
+          ["Ders Öğretmeni:", ogrt, "", "", "Modül:", modulAdi, "", "", ""],
+          ["Düzenleme Tarihi:", tarih, "", "", "", "", "", "", ""],
+          ["", "", "", "", "", "", "", "", ""],
           [
             "Uzun Dönemli Amaçlar",
             "Kısa Dönemli Amaçlar",
@@ -1131,43 +1131,199 @@
           }
         });
 
-        // İmza Bloğu (Excel)
-        aoaData.push([]);
-        aoaData.push([]);
-        aoaData.push(["İmza", "", "İmza", "", "İmza"]);
-        aoaData.push([ogrt, "", sinifOgrt, "", veli]);
-        aoaData.push(["Ders Öğretmeni", "", "Sınıf Rehber Öğretmeni", "", "Öğrenci Velisi"]);
-        aoaData.push([]);
-        aoaData.push(["İmza", "", "", "", "İmza"]);
-        aoaData.push([rehberOgrt, "", "", "", mudurYrd]);
-        aoaData.push(["Rehber Öğretmen", "", "", "", "BEP Birim Başkanı"]);
+        // İmza Bloğu Satırları
+        aoaData.push(["", "", "", "", "", "", "", "", ""]);
+        const sigStartRow = aoaData.length;
+        aoaData.push(["İmza", "", "", "İmza", "", "", "İmza", "", ""]);
+        aoaData.push([ogrt, "", "", sinifOgrt, "", "", veli, "", ""]);
+        aoaData.push(["Ders Öğretmeni", "", "", "Sınıf Rehber Öğretmeni", "", "", "Öğrenci Velisi", "", ""]);
+        aoaData.push(["", "", "", "", "", "", "", "", ""]);
+        aoaData.push(["İmza", "", "", "", "", "", "İmza", "", ""]);
+        aoaData.push([rehberOgrt, "", "", "", "", "", mudurYrd, "", ""]);
+        aoaData.push(["Rehber Öğretmen", "", "", "", "", "", "BEP Birim Başkanı", "", ""]);
 
         const ws = XLSX.utils.aoa_to_sheet(aoaData);
 
+        // Hücre Birleştirmeleri (Merges)
         ws['!merges'] = [
+          // Başlıklar
           { s: { r: 0, c: 0 }, e: { r: 0, c: 8 } },
           { s: { r: 1, c: 0 }, e: { r: 1, c: 8 } },
           { s: { r: 2, c: 0 }, e: { r: 2, c: 8 } },
+          // Bilgi Tablosu
+          { s: { r: 4, c: 1 }, e: { r: 4, c: 3 } },
+          { s: { r: 4, c: 5 }, e: { r: 4, c: 8 } },
+          { s: { r: 5, c: 1 }, e: { r: 5, c: 3 } },
+          { s: { r: 5, c: 5 }, e: { r: 5, c: 8 } },
+          { s: { r: 6, c: 1 }, e: { r: 6, c: 3 } },
+          { s: { r: 6, c: 5 }, e: { r: 6, c: 8 } },
+          { s: { r: 7, c: 1 }, e: { r: 7, c: 8 } },
+          // Ana Tablo Başlıkları
           { s: { r: 9, c: 0 }, e: { r: 10, c: 0 } },
           { s: { r: 9, c: 1 }, e: { r: 10, c: 1 } },
           { s: { r: 9, c: 2 }, e: { r: 10, c: 2 } },
           { s: { r: 9, c: 3 }, e: { r: 10, c: 3 } },
           { s: { r: 9, c: 4 }, e: { r: 10, c: 4 } },
           { s: { r: 9, c: 5 }, e: { r: 10, c: 5 } },
-          { s: { r: 9, c: 6 }, e: { r: 9, c: 8 } }
+          { s: { r: 9, c: 6 }, e: { r: 9, c: 8 } },
+          // İmzalar Üst Sıra
+          { s: { r: sigStartRow, c: 0 }, e: { r: sigStartRow, c: 2 } },
+          { s: { r: sigStartRow, c: 3 }, e: { r: sigStartRow, c: 5 } },
+          { s: { r: sigStartRow, c: 6 }, e: { r: sigStartRow, c: 8 } },
+          { s: { r: sigStartRow + 1, c: 0 }, e: { r: sigStartRow + 1, c: 2 } },
+          { s: { r: sigStartRow + 1, c: 3 }, e: { r: sigStartRow + 1, c: 5 } },
+          { s: { r: sigStartRow + 1, c: 6 }, e: { r: sigStartRow + 1, c: 8 } },
+          { s: { r: sigStartRow + 2, c: 0 }, e: { r: sigStartRow + 2, c: 2 } },
+          { s: { r: sigStartRow + 2, c: 3 }, e: { r: sigStartRow + 2, c: 5 } },
+          { s: { r: sigStartRow + 2, c: 6 }, e: { r: sigStartRow + 2, c: 8 } },
+          // İmzalar Alt Sıra
+          { s: { r: sigStartRow + 4, c: 0 }, e: { r: sigStartRow + 4, c: 2 } },
+          { s: { r: sigStartRow + 4, c: 6 }, e: { r: sigStartRow + 4, c: 8 } },
+          { s: { r: sigStartRow + 5, c: 0 }, e: { r: sigStartRow + 5, c: 2 } },
+          { s: { r: sigStartRow + 5, c: 6 }, e: { r: sigStartRow + 5, c: 8 } },
+          { s: { r: sigStartRow + 6, c: 0 }, e: { r: sigStartRow + 6, c: 2 } },
+          { s: { r: sigStartRow + 6, c: 6 }, e: { r: sigStartRow + 6, c: 8 } }
         ];
 
+        // Sütun Genişlikleri
         ws['!cols'] = [
-          { wch: 38 },
-          { wch: 55 },
-          { wch: 12 },
-          { wch: 28 },
-          { wch: 26 },
-          { wch: 16 },
-          { wch: 26 },
-          { wch: 16 },
-          { wch: 22 }
+          { wch: 32 }, // UDA
+          { wch: 48 }, // KDA
+          { wch: 12 }, // Ölçüt
+          { wch: 26 }, // Yöntem
+          { wch: 24 }, // Materyal
+          { wch: 14 }, // Başlama-Bitiş
+          { wch: 24 }, // Değ. Yöntem
+          { wch: 14 }, // Değ. Tarih
+          { wch: 16 }  // Performans
         ];
+
+        // Satır Yükseklikleri
+        const rowsHeight = [];
+        rowsHeight[0] = { hpt: 22 };
+        rowsHeight[1] = { hpt: 22 };
+        rowsHeight[2] = { hpt: 20 };
+        rowsHeight[3] = { hpt: 8 };
+        rowsHeight[4] = { hpt: 18 };
+        rowsHeight[5] = { hpt: 18 };
+        rowsHeight[6] = { hpt: 18 };
+        rowsHeight[7] = { hpt: 18 };
+        rowsHeight[8] = { hpt: 10 };
+        rowsHeight[9] = { hpt: 22 };
+        rowsHeight[10] = { hpt: 26 };
+        rowsHeight[sigStartRow] = { hpt: 28 };
+        rowsHeight[sigStartRow + 1] = { hpt: 18 };
+        rowsHeight[sigStartRow + 2] = { hpt: 18 };
+        rowsHeight[sigStartRow + 3] = { hpt: 15 };
+        rowsHeight[sigStartRow + 4] = { hpt: 28 };
+        rowsHeight[sigStartRow + 5] = { hpt: 18 };
+        rowsHeight[sigStartRow + 6] = { hpt: 18 };
+        ws['!rows'] = rowsHeight;
+
+        // Kılavuz Çizgileri Görünümü
+        ws['!views'] = [{ showGridLines: true }];
+
+        // ================= STİL TANIMLARI (xlsx-js-style) =================
+        const borderThin = {
+          top: { style: "thin", color: { rgb: "000000" } },
+          bottom: { style: "thin", color: { rgb: "000000" } },
+          left: { style: "thin", color: { rgb: "000000" } },
+          right: { style: "thin", color: { rgb: "000000" } }
+        };
+
+        function setCellStyle(r, c, style) {
+          const cellRef = XLSX.utils.encode_cell({ r, c });
+          if (!ws[cellRef]) {
+            ws[cellRef] = { t: "s", v: "" };
+          }
+          ws[cellRef].s = style;
+        }
+
+        // 1. Üst Başlıklar
+        const titleStyle = {
+          font: { name: "Arial", sz: 12, bold: true, color: { rgb: "000000" } },
+          alignment: { horizontal: "center", vertical: "center" }
+        };
+        const titleSubStyle = {
+          font: { name: "Arial", sz: 11, bold: true, color: { rgb: "000000" } },
+          alignment: { horizontal: "center", vertical: "center" }
+        };
+        for (let c = 0; c < 9; c++) {
+          setCellStyle(0, c, titleStyle);
+          setCellStyle(1, c, titleStyle);
+          setCellStyle(2, c, titleSubStyle);
+        }
+
+        // 2. Bilgi Alanı Stilleri
+        const infoLabelStyle = {
+          font: { name: "Arial", sz: 10, bold: true, color: { rgb: "000000" } },
+          alignment: { horizontal: "left", vertical: "center" }
+        };
+        const infoValStyle = {
+          font: { name: "Arial", sz: 10, color: { rgb: "000000" } },
+          alignment: { horizontal: "left", vertical: "center" }
+        };
+        for (let r = 4; r <= 7; r++) {
+          setCellStyle(r, 0, infoLabelStyle);
+          for (let c = 1; c <= 3; c++) setCellStyle(r, c, infoValStyle);
+          setCellStyle(r, 4, infoLabelStyle);
+          for (let c = 5; c <= 8; c++) setCellStyle(r, c, infoValStyle);
+        }
+
+        // 3. Tablo Başlıkları (Row 9 ve 10) - Dolgulu ve Çizgili
+        const headerStyle = {
+          border: borderThin,
+          fill: { fgColor: { rgb: "F1F5F9" } },
+          font: { name: "Arial", sz: 9.5, bold: true, color: { rgb: "000000" } },
+          alignment: { horizontal: "center", vertical: "center", wrapText: true }
+        };
+        for (let r = 9; r <= 10; r++) {
+          for (let c = 0; c < 9; c++) {
+            setCellStyle(r, c, headerStyle);
+          }
+        }
+
+        // 4. Tablo Veri Satırları - Çizgili ve Metin Kaydırmalı (wrapText)
+        for (let i = 0; i < satirlar.length; i++) {
+          const rowIdx = 11 + i;
+          for (let colIdx = 0; colIdx < 9; colIdx++) {
+            const isCenter = (colIdx === 2 || colIdx === 5 || colIdx === 6 || colIdx === 7 || colIdx === 8);
+            const isBold = (colIdx === 8);
+            const dataCellStyle = {
+              border: borderThin,
+              font: { name: "Arial", sz: 9.5, bold: isBold, color: { rgb: "000000" } },
+              alignment: {
+                horizontal: isCenter ? "center" : "left",
+                vertical: "top",
+                wrapText: true
+              }
+            };
+            setCellStyle(rowIdx, colIdx, dataCellStyle);
+          }
+        }
+
+        // 5. İmzalar Bölümü Stilleri
+        const sigImzaStyle = {
+          font: { name: "Arial", sz: 10, color: { rgb: "333333" } },
+          alignment: { horizontal: "center", vertical: "center" }
+        };
+        const sigNameStyle = {
+          font: { name: "Arial", sz: 10, bold: true, color: { rgb: "000000" } },
+          alignment: { horizontal: "center", vertical: "center" }
+        };
+        const sigTitleStyle = {
+          font: { name: "Arial", sz: 9.5, bold: true, color: { rgb: "000000" } },
+          alignment: { horizontal: "center", vertical: "center" }
+        };
+
+        for (let c = 0; c < 9; c++) {
+          setCellStyle(sigStartRow, c, sigImzaStyle);
+          setCellStyle(sigStartRow + 1, c, sigNameStyle);
+          setCellStyle(sigStartRow + 2, c, sigTitleStyle);
+          setCellStyle(sigStartRow + 4, c, sigImzaStyle);
+          setCellStyle(sigStartRow + 5, c, sigNameStyle);
+          setCellStyle(sigStartRow + 6, c, sigTitleStyle);
+        }
 
         const wb = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(wb, ws, "BEP_Plani");

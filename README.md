@@ -13,7 +13,7 @@ MEB Bilişim Teknolojileri ve Yazılım Dersi Öğretim Programı'na uygun, iste
 - **Düzenlenebilir UDA Alanı:** Seçilen uzun dönemli amacı öğrencinin bireysel performans düzeyine göre düzenleyebilme.
 - **Çoklu Kazanım Seçimi:** Açılır menü üzerinden birden fazla kazanım seçebilme.
 - **Yazdırma ve PDF:** MEB standart BEP planı şablonunda doğrudan yazdırma veya PDF olarak kaydetme.
-- **Excel Dışa Aktarma:** SheetJS kütüphanesi ile hücre birleştirmeli ve resmi imzalı tam formatlı `.xlsx` Excel dosyası indirme.
+- **Excel Dışa Aktarma:** xlsx-js-style kütüphanesi ile tablo hücre çizgileri (borders), başlık dolguları, metin kaydırma (wrapText), hücre birleştirmeleri ve resmi imza bloklarıyla tam formatlı MEB uyumlu `.xlsx` Excel dosyası indirme.
 
 ## Yerel Sunucuda Çalıştırma (Local Server)
 
