@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <base target="_top">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bilişim Teknolojileri ve Yazılım Dersi BEP Modülü</title>
+  
+  <!-- SheetJS: İstemci Taraflı Excel (.xlsx) Dışa Aktarma Kütüphanesi -->
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      color: #1e293b;
+      background-color: #f8fafc;
+      margin: 0;
+      padding: 15px;
+    }
+    #bep_app {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .bep-panel {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+    .bep-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    label {
+      font-size: 12px;
+      font-weight: bold;
+      color: #475569;
+      display: block;
+      margin-bottom: 5px;
+    }
+    input, select {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      font-size: 13px;
+      color: #0f172a;
+      background: #fff;
+    }
+    input:focus, select:focus {
+      outline: none;
+      border-color: #0284c7;
+    }
+    .btn {
+      border: none;
+      padding: 10px 18px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 13px;
+      transition: 0.2s;
+    }
+    .btn-add { background: #16a34a; color: #ffffff; }
+    .btn-add:hover { background: #15803d; }
+    .btn-print { background: #0284c7; color: #ffffff; }
+    .btn-print:hover { background: #0369a1; }
+    .btn-excel { background: #107c41; color: #ffffff; }
+    .btn-excel:hover { background: #0b582e; }
+    .btn-del {
+      background: #ef4444;
+      color: #ffffff;
+      padding: 5px 8px;
+      font-size: 11px;
+      border-radius: 4px;
+    }
+    
+    /* MEB Tablo Stili */
+    .bep-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px auto;
+      font-size: 11px;
+    }
+    .bep-table th, .bep-table td {
+      border: 1px solid #64748b;
+      padding: 7px 6px;
+      text-align: center;
+      vertical-align: middle;
+    }
+    .bep-table th {
+      background-color: transparent;
+      color: #0f172a;
+      font-weight: 700;
+    }
+    .bep-table td.text-left {
+      text-align: left;
+    }
+    .kda-item {
+      margin-bottom: 4px;
+      line-height: 1.35;
+    }
+    .kda-item:last-child {
+      margin-bottom: 0;
+    }
+    .info-table {
+      width: 100%;
+      border: none;
+      margin: 0 auto 12px auto;
+      font-size: 13px;
+    }
+    .info-table td { border: none; padding: 4px; }
+
+    /* Çoklu Seçim Dropdown Menüleri */
+    .multiselect-container {
+      position: relative;
+      user-select: none;
+    }
+    .selectBox {
+      position: relative;
+    }
+    .selectBox select {
+      width: 100%;
+      cursor: pointer;
+    }
+    .overSelect {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+    }
+    .checkboxes-panel {
+      display: none;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      background-color: #ffffff;
+      position: absolute;
+      z-index: 100;
+      width: 100%;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+      max-height: 220px;
+      overflow-y: auto;
+      padding: 6px;
+    }
+    .checkboxes-panel label {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-weight: normal;
+      font-size: 12px;
+      padding: 5px 4px;
+      margin: 0;
+      cursor: pointer;
+      line-height: 1.35;
+    }
+    .checkboxes-panel label:hover {
+      background-color: #f1f5f9;
+      border-radius: 3px;
+    }
+    .checkboxes-panel input[type="checkbox"] {
+      width: auto;
+      margin-top: 2px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    /* ========================================================= */
+    /* YAZDIRMA (TAM SAYFAYA ORTALANMIŞ A4 LANDSCAPE)           */
+    /* ========================================================= */
+    @page {
+      size: A4 landscape;
+      margin: 10mm;
+    }
+
+    @media print {
+      html, body {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #fff !important;
+      }
+      body * { visibility: hidden !important; }
+
+      #bep_cikti_alani, #bep_cikti_alani * { 
+        visibility: visible !important; 
+      }
+      
+      #bep_cikti_alani {
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+      }
+
+      .bep-no-print { display: none !important; }
+      
+      .bep-header { 
+        width: 100% !important; 
+        text-align: center !important; 
+        margin-bottom: 10px !important;
+      }
+      .bep-header h3 { font-size: 13pt !important; margin: 2px 0 !important; }
+      .bep-header h4 { font-size: 11pt !important; margin: 2px 0 !important; }
+      
+      .info-table { 
+        width: 100% !important; 
+        margin: 0 auto 8px auto !important;
+      }
+      .info-table td { font-size: 9.5pt !important; padding: 2px 4px !important; }
+
+      .bep-table {
+        font-size: 8.5pt !important;
+        width: 100% !important;
+        margin: 0 auto !important;
+        table-layout: auto !important;
+      }
+      .bep-table tr {
+        page-break-inside: avoid;
+      }
+      .bep-table th, .bep-table td {
+        padding: 5px 4px !important;
+        line-height: 1.25 !important;
+        border: 1px solid #000 !important;
+      }
+      .bep-table th {
+        background-color: transparent !important;
+        color: #000 !important;
+      }
+
+      .bep-imza-grid {
+        margin: 25px auto 0 auto !important;
+        page-break-inside: avoid !important;
+        row-gap: 20px !important;
+        column-gap: 15px !important;
+        width: 100% !important;
+      }
+      .bep-imza-grid p {
+        margin: 1px 0 !important;
+        font-size: 9.5pt !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div id="bep_app">
+
+  <!-- FORM GİRİŞ ALANI -->
+  <div class="bep-panel bep-no-print">
+    <h3 style="margin-top:0; color:#1e3a8a;">Bilişim Teknolojileri ve Yazılım Dersi BEP Hazırlama Modülü</h3>
+    
+    <div class="bep-grid">
+      <div>
+        <label>Öğrenci Adı Soyadı</label>
+        <input type="text" id="bep_ogrAd" placeholder="Örn: Ahmet Yılmaz">
+      </div>
+      <div>
+        <label>Sınıfı / Şubesi</label>
+        <input type="text" id="bep_sinif" placeholder="Örn: 9/A veya 10/B">
+      </div>
+      <div>
+        <label>Öğrenci Numarası</label>
+        <input type="text" id="bep_no" placeholder="Örn: 450">
+      </div>
+      <div>
+        <label>Eğitim-Öğretim Yılı</label>
+        <input type="text" id="bep_yil" value="2026-2027">
+      </div>
+      <div>
+        <label>Ders Seçiniz</label>
+        <select id="bep_ders">
+          <option value="Bilişim Teknolojileri ve Yazılım 9.Sınıf" selected>Bilişim Teknolojileri ve Yazılım 9.Sınıf</option>
+          <option value="Bilişim Teknolojileri ve Yazılım 10.Sınıf">Bilişim Teknolojileri ve Yazılım 10.Sınıf</option>
+          <option value="Bilişim Teknolojileri ve Yazılım 11.Sınıf">Bilişim Teknolojileri ve Yazılım 11.Sınıf</option>
+        </select>
+      </div>
+      <div>
+        <label>Modül Seçiniz</label>
+        <select id="bep_modul">
+          <option value="9_algoritma" selected>Programlamaya Giriş ve Algoritma</option>
+          <option value="10_python">Programlama Dilleri (Python)</option>
+          <option value="robotik_kodlama">Robotik Kodlama</option>
+          <option value="mobil_uygulama">Mobil Uygulama Geliştirme</option>
+          <option value="yapay_zeka">Yapay Zekâ Uygulamaları</option>
+        </select>
+      </div>
+      <div>
+        <label>Ders Öğretmeni</label>
+        <input type="text" id="bep_ogretmen" value="Hakan GÖKMEN">
+      </div>
+      <div>
+        <label>Sınıf Rehber Öğretmeni</label>
+        <input type="text" id="bep_sinifOgretmeni" placeholder="Örn: Ad Soyad">
+      </div>
+      <div>
+        <label>Öğrenci Velisi</label>
+        <input type="text" id="bep_veli" placeholder="Örn: Veli Ad Soyad">
+      </div>
+      <div>
+        <label>Rehber Öğretmen</label>
+        <input type="text" id="bep_rehberOgretmen" placeholder="Örn: Ad Soyad">
+      </div>
+      <div>
+        <label>BEP Birim Başkanı</label>
+        <input type="text" id="bep_mudurYrd" value="Hasan KÖSEOĞLU">
+      </div>
+    </div>
+
+    <div class="bep-grid" style="margin-top: 15px;">
+      <div style="grid-column: span 2;">
+        <label>Uzun Dönemli Amaçlar (Ünite)</label>
+        <select id="bep_uda">
+          <option value="">Önce modül seçiniz...</option>
+        </select>
+      </div>
+      
+      <!-- KISA DÖNEMLİ AMAÇLAR (ÇOKLU SEÇİM DROPDOWN) -->
+      <div style="grid-column: span 2;">
+        <label>Kısa Dönemli Amaçlar (Çoklu Seçim)</label>
+        <div class="multiselect-container">
+          <div class="selectBox" id="selectBoxKdaTrigger">
+            <select>
+              <option id="multiSelectKdaLabel">Önce UDA seçiniz...</option>
+            </select>
+            <div class="overSelect"></div>
+          </div>
+          <div id="checkboxesKdaArea" class="checkboxes-panel">
+            <div style="padding: 6px; font-size: 12px; color: #64748b;">Önce yukarıdan bir UDA seçiniz.</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <label>Ölçüt*</label>
+        <select id="bep_degerlendirme">
+          <option value="4/5 (%80)" selected>4/5 (%80)</option>
+          <option value="1/5 (%20)">1/5 (%20)</option>
+          <option value="2/5 (%40)">2/5 (%40)</option>
+          <option value="3/5 (%60)">3/5 (%60)</option>
+          <option value="5/5 (%100)">5/5 (%100)</option>
+        </select>
+      </div>
+      <div>
+        <label>Öğretim Yöntem ve Teknikleri</label>
+        <input type="text" id="bep_yontem" value="Anlatım, Soru-Cevap, Gösterip Yaptırma">
+      </div>
+      <div>
+        <label>Kullanılacak Materyaller</label>
+        <input type="text" id="bep_materyal" value="Ders Kitabı, Bilgisayar, Flowgorithm / Kodlama Araçları">
+      </div>
+      <div>
+        <label>Başlama ve Bitiş Tarihi</label>
+        <input type="text" id="bep_sure" value="Ekim - Ocak">
+      </div>
+      <div>
+        <label>Değ. Yöntem ve Teknikleri (Çoklu Seçim)</label>
+        <div class="multiselect-container">
+          <div class="selectBox" id="selectBoxTrigger">
+            <select>
+              <option id="multiSelectLabel">Gözlem formu</option>
+            </select>
+            <div class="overSelect"></div>
+          </div>
+          <div id="checkboxesArea" class="checkboxes-panel">
+            <label><input type="checkbox" value="Gözlem formu" checked onchange="guncelleSecimLabel()"> Gözlem formu</label>
+            <label><input type="checkbox" value="Performans görevi" onchange="guncelleSecimLabel()"> Performans görevi</label>
+            <label><input type="checkbox" value="Görüşme formu" onchange="guncelleSecimLabel()"> Görüşme formu</label>
+            <label><input type="checkbox" value="Çalışma kâğıdı" onchange="guncelleSecimLabel()"> Çalışma kâğıdı</label>
+            <label><input type="checkbox" value="Kontrol listesi" onchange="guncelleSecimLabel()"> Kontrol listesi</label>
+          </div>
+        </div>
+      </div>
+      <div>
+        <label>Değerlendirme Tarihleri</label>
+        <input type="text" id="bep_degTarih" value="" placeholder="Tarih giriniz...">
+      </div>
+      <div>
+        <label>Performans Yeterli (+) / Geliştirilmeli (-)</label>
+        <select id="bep_performans">
+          <option value="" selected>Boş Bırak</option>
+          <option value="( + )">Yeterli ( + )</option>
+          <option value="( - )">Geliştirilmeli ( - )</option>
+        </select>
+      </div>
+    </div>
+
+    <button type="button" class="btn btn-add" id="bep_btn_ekle">+ Seçilen Amacı Plana Ekle</button>
+  </div>
+
+  <!-- YAZDIRILABİLİR MEB BEP FORMU (ORTALANMIŞ YATAY ÇIKTI ALANI) -->
+  <div id="bep_cikti_alani" class="bep-panel">
+    <div class="bep-header" style="text-align: center; margin-bottom: 12px;">
+      <h3 style="margin: 0; text-transform: uppercase;">T.C. MİLLÎ EĞİTİM BAKANLIĞI</h3>
+      <h3 style="margin: 2px 0; text-transform: uppercase;">SÜLEYMAN ÇELEBİ ANADOLU LİSESİ</h3>
+      <h4 style="margin: 4px 0;">BİLİŞİM TEKNOLOJİLERİ VE YAZILIM DERSİ BİREYSELLEŞTİRİLMİŞ EĞİTİM PROGRAMI (BEP) FORMU</h4>
+    </div>
+
+    <!-- ÜST BİLGİ ALANI: DERS VE MODÜL AYRI AYRI İŞLENİYOR -->
+    <table class="info-table">
+      <tr>
+        <td width="16%"><strong>Öğrenci Adı Soyadı:</strong></td>
+        <td width="34%" id="bep_lblOgr">-</td>
+        <td width="16%"><strong>Eğitim-Öğretim Yılı:</strong></td>
+        <td width="34%" id="bep_lblYil">2026-2027</td>
+      </tr>
+      <tr>
+        <td><strong>Sınıfı / Numarası:</strong></td>
+        <td id="bep_lblSinifNo">-</td>
+        <td><strong>Ders:</strong></td>
+        <td id="bep_lblDers">Bilişim Teknolojileri ve Yazılım 9.Sınıf</td>
+      </tr>
+      <tr>
+        <td><strong>Ders Öğretmeni:</strong></td>
+        <td id="bep_lblOgrt">Hakan GÖKMEN</td>
+        <td><strong>Modül:</strong></td>
+        <td id="bep_lblModul">Programlamaya Giriş ve Algoritma</td>
+      </tr>
+      <tr>
+        <td><strong>Düzenleme Tarihi:</strong></td>
+        <td id="bep_lblTarih" colspan="3">-</td>
+      </tr>
+    </table>
+
+    <!-- SAYFAYA ORTALANMIŞ MEB TABLOSU -->
+    <table class="bep-table" id="bep_tablo">
+      <thead>
+        <tr>
+          <th rowspan="2" style="width: 20%;">Uzun Dönemli Amaçlar</th>
+          <th rowspan="2" style="width: 26%;">Kısa Dönemli Amaçlar</th>
+          <th rowspan="2" style="width: 7%;">Ölçüt*</th>
+          <th rowspan="2" style="width: 12%;">Öğretim Yöntem ve Teknikleri</th>
+          <th rowspan="2" style="width: 11%;">Kullanılacak Materyaller</th>
+          <th rowspan="2" style="width: 7%;">Başlama ve Bitiş Tarihi</th>
+          <th colspan="3" style="width: 17%;">Ölçme – Değerlendirme</th>
+          <th rowspan="2" class="bep-no-print" style="width: 4%;">Sil</th>
+        </tr>
+        <tr>
+          <th style="width: 7%;">Değerlendirme Yöntem ve Teknikleri</th>
+          <th style="width: 5%;">Değerlendirme Tarihleri</th>
+          <th style="width: 5%;">Performans Yeterli (+)<br>Geliştirilmeli (-)</th>
+        </tr>
+      </thead>
+      <tbody id="bep_govde"></tbody>
+    </table>
+
+    <!-- İMZALAR BÖLÜMÜ (İMZA ALANI ÜSTTE, İSİM VE UNVAN ALTTA) -->
+    <div class="bep-imza-grid" style="margin-top: 30px; display: grid; grid-template-columns: repeat(3, 1fr); row-gap: 25px; column-gap: 15px; text-align: center; font-size: 11px;">
+      <div>
+        <p style="margin-bottom: 25px;">İmza</p>
+        <p style="margin: 2px 0;"><strong id="bep_imza_ogrt">Hakan GÖKMEN</strong></p>
+        <p style="margin: 2px 0;"><strong>Ders Öğretmeni</strong></p>
+      </div>
+      <div>
+        <p style="margin-bottom: 25px;">İmza</p>
+        <p style="margin: 2px 0;"><strong id="bep_imza_sinifOgretmeni">______________________</strong></p>
+        <p style="margin: 2px 0;"><strong>Sınıf Rehber Öğretmeni</strong></p>
+      </div>
+      <div>
+        <p style="margin-bottom: 25px;">İmza</p>
+        <p style="margin: 2px 0;"><strong id="bep_imza_veli">______________________</strong></p>
+        <p style="margin: 2px 0;"><strong>Öğrenci Velisi</strong></p>
+      </div>
+      <div>
+        <p style="margin-bottom: 25px;">İmza</p>
+        <p style="margin: 2px 0;"><strong id="bep_imza_rehberOgretmen">______________________</strong></p>
+        <p style="margin: 2px 0;"><strong>Rehber Öğretmen</strong></p>
+      </div>
+      <div>
+        <!-- Boş grid hücresi (Düzen dengesi) -->
+        <p style="margin-bottom: 25px;">&nbsp;</p>
+        <p style="margin: 2px 0;">&nbsp;</p>
+        <p style="margin: 2px 0;">&nbsp;</p>
+      </div>
+      <div>
+        <p style="margin-bottom: 25px;">İmza</p>
+        <p style="margin: 2px 0;"><strong id="bep_imza_mudurYrd">Hasan KÖSEOĞLU</strong></p>
+        <p style="margin: 2px 0;"><strong>BEP Birim BAŞKANI</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- BUTONLAR -->
+  <div class="bep-no-print" style="text-align: right; margin-top: 15px; display: flex; justify-content: flex-end; gap: 10px;">
+    <button class="btn btn-print" id="bep_btn_yazdir">🖨️ Yazdır / PDF Olarak Kaydet (Yatay A4)</button>
+    <button class="btn btn-excel" id="bep_btn_excel">📊 Excel'e Aktar (.xlsx)</button>
+  </div>
+
+</div>
+
+<script>
+  // ===================== DEĞERLENDİRME ÇOKLU SEÇİM =====================
+  let expandedDeg = false;
+  const triggerDeg = document.getElementById("selectBoxTrigger");
+  const checkboxesDeg = document.getElementById("checkboxesArea");
+
+  triggerDeg.addEventListener("click", function(e) {
+    e.stopPropagation();
+    if (!expandedDeg) {
+      checkboxesDeg.style.display = "block";
+      expandedDeg = true;
+    } else {
+      checkboxesDeg.style.display = "none";
+      expandedDeg = false;
+    }
+  });
+
+  function guncelleSecimLabel() {
+    const checkedBoxes = document.querySelectorAll('#checkboxesArea input[type="checkbox"]:checked');
+    const label = document.getElementById('multiSelectLabel');
+    if (checkedBoxes.length === 0) {
+      label.textContent = "Seçim Yapılmadı";
+    } else if (checkedBoxes.length === 1) {
+      label.textContent = checkedBoxes[0].value;
+    } else {
+      label.textContent = checkedBoxes.length + " Yöntem Seçildi";
+    }
+  }
+
+  function getSeciliYontemler() {
+    const checkedBoxes = document.querySelectorAll('#checkboxesArea input[type="checkbox"]:checked');
+    const secilenler = [];
+    checkedBoxes.forEach(function(box) {
+      secilenler.push(box.value);
+    });
+    return secilenler.length > 0 ? secilenler.join(", ") : "-";
+  }
+
+  // ===================== KDA ÇOKLU SEÇİM =====================
+  let expandedKda = false;
+  const triggerKda = document.getElementById("selectBoxKdaTrigger");
+  const checkboxesKda = document.getElementById("checkboxesKdaArea");
+
+  triggerKda.addEventListener("click", function(e) {
+    e.stopPropagation();
+    if (!expandedKda) {
+      checkboxesKda.style.display = "block";
+      expandedKda = true;
+    } else {
+      checkboxesKda.style.display = "none";
+      expandedKda = false;
+    }
+  });
+
+  function guncelleKdaLabel() {
+    const checkedBoxes = document.querySelectorAll('#checkboxesKdaArea input[type="checkbox"]:checked');
+    const label = document.getElementById('multiSelectKdaLabel');
+    if (checkedBoxes.length === 0) {
+      label.textContent = "Kazanım Seçiniz (0 Seçildi)";
+    } else if (checkedBoxes.length === 1) {
+      const txt = checkedBoxes[0].value;
+      label.textContent = txt.length > 35 ? txt.substring(0, 32) + "..." : txt;
+    } else {
+      label.textContent = checkedBoxes.length + " Kazanım Seçildi";
+    }
+  }
+
+  function getSeciliKdaListesi() {
+    const checkedBoxes = document.querySelectorAll('#checkboxesKdaArea input[type="checkbox"]:checked');
+    const secilenler = [];
+    checkedBoxes.forEach(function(box) {
+      secilenler.push(box.value);
+    });
+    return secilenler;
+  }
+
+  // Dışarı tıklandığında açık menüleri kapat
+  document.addEventListener("click", function(e) {
+    if (expandedDeg && !checkboxesDeg.contains(e.target) && !triggerDeg.contains(e.target)) {
+      checkboxesDeg.style.display = "none";
+      expandedDeg = false;
+    }
+    if (expandedKda && !checkboxesKda.contains(e.target) && !triggerKda.contains(e.target)) {
+      checkboxesKda.style.display = "none";
+      expandedKda = false;
+    }
+  });
+
+(function() {
+  const bepHavuzu = {
+    "9_algoritma": {
+      modulAdi: "Programlamaya Giriş ve Algoritma",
+      veriler: [
+        {
+          uda: "1. Ünite: Bilişim Teknolojilerinin Programlamadaki Yeri",
+          kda: [
+            "1.1. Bilişim teknolojilerine ilişkin temel kavramları tanımlar.",
+            "1.2. Bilişim teknolojisi araçlarını listeler.",
+            "1.3. Bilişim teknolojileri cihazlarının gelişimini açıklar.",
+            "1.4. Bilişim teknolojilerinin gelişiminde önemli rol oynayan keşifler, buluşlar, olaylar ve dönüm noktalarını tartışır.",
+            "1.5. Bilişim teknolojilerinin kullanım alanlarını açıklar.",
+            "1.6. Bilişim teknolojilerinin olumlu ve olumsuz yönlerini tartışır.",
+            "1.7. Teknolojik gelişmeleri takip etmenin öneminin farkına varır."
+          ]
+        },
+        {
+          uda: "2. Ünite: Algoritma ile Problem Çözme ve Akış Diyagramı",
+          kda: [
+            "2.1. Çözümü istenen problemi kavrar.",
+            "2.2. Çözüm için gereksinimlerini belirler.",
+            "2.3. Problemin girdi, çıktı ve işlem aşamalarını belirler.",
+            "2.4. Algoritma kavramını açıklar.",
+            "2.5. Bir problemin çözümü için en doğru algoritmayı geliştirir.",
+            "2.6. Programlamanın önemini yorumlar.",
+            "2.7. Programlama dillerinin gelişimini açıklar.",
+            "2.8. Akış diyagramının kullanım amaçlarını açıklar.",
+            "2.9. Temel akış diyagramı şekillerini ve elemanlarını listeler.",
+            "2.10. Var olan bir akış diyagramını okuyarak problemi kavrar.",
+            "2.11. Problemin akış diyagramını tasarlar."
+          ]
+        },
+        {
+          uda: "3. Ünite: Programlamanın Temel Kavramları",
+          kda: [
+            "3.1. Programlamada kullanılan işlem ve sembolleri listeler.",
+            "3.2. Veri türlerini amacına uygun şekilde programa tanımlar.",
+            "3.3. Farklı veri türlerini program içerisinde kullanır.",
+            "3.4. Karar yapılarını kullanarak programı geliştirir.",
+            "3.5. Döngü yapılarını kullanarak programı geliştirir.",
+            "3.6. Döngü ve karar yapıları ile program tasarlar."
+          ]
+        },
+        {
+          uda: "4. Ünite: Algoritma ve Akış Diyagramını Test Etme",
+          kda: [
+            "4.1. Tasarlanan algoritma ve akış diyagramını test eder.",
+            "4.2. Tasarladığı algoritma ve akış diyagramının hatalarını listeler.",
+            "4.3. Hatalı algoritma ve akış diyagramlarının, programın istenilen çıktıyı vermesine engel olacağını fark eder.",
+            "4.4. Tasarladığı algoritma ve akış diyagramının hatalarını düzeltir."
+          ]
+        },
+        {
+          uda: "5. Ünite: İleri Düzey Algoritma Uygulamaları",
+          kda: [
+            "5.1. Arama ve sıralama algoritmalarını akış diyagramıyla gösterir.",
+            "5.2. İleri algoritma uygulamalarını ve kullanım yerlerini açıklar."
+          ]
+        }
+      ]
+    },
+    "10_python": {
+      modulAdi: "Programlama Dilleri (Python)",
+      veriler: [
+        {
+          uda: "1. Ünite: Python Programlamaya Giriş",
+          kda: [
+            "1.1. Python programlama diliyle çalışılacak ortamları tanır.",
+            "1.2. Farklı entegre geliştirme ortamlarını analiz ederek kendisine en uygun çalışma ortamını seçer.",
+            "1.3. Değişkenlerde tutulacak verileri tanımlar.",
+            "1.4. Bir değişkeni tanımlarken hangi tür veriyi tutacağını belirler.",
+            "1.5. Tanımlanan değişkenlerde işlem önceliğini gözetir.",
+            "1.6. Kullanıcıdan veri alır.",
+            "1.7. Kullanıcıdan alınan veriyi değişkene tanımlar."
+          ]
+        },
+        {
+          uda: "2. Ünite: Python Programlama Dili ile Yazılım Geliştirme",
+          kda: [
+            "2.1. Python programlama dili karar yapılarını içeren programlar geliştirir.",
+            "2.2. Bir problemi çözmek için kullanacağı döngü yapısına karar verir.",
+            "2.3. Çoklu koşulların mantıksal sonuçlarını değerlendirir.",
+            "2.4. Fonksiyonları program içinde yöntemlerine göre kullanır.",
+            "2.5. Standart fonksiyon kümelerini ve kütüphanelerini kullanır."
+          ]
+        },
+        {
+          uda: "3. Ünite: Nesne Yönelimli Proje Geliştirme",
+          kda: [
+            "3.1. Nesne yönelimli programlama kavramını açıklar.",
+            "3.2. Nesne yönelimli programlamanın faydalarının farkına varır.",
+            "3.3. Programın ihtiyacına yönelik sınıf tanımlaması yapar.",
+            "3.4. Python programlama diline özgü temel sınıfları kullanır.",
+            "3.5. Geliştirdiği programda kapsülleme (encapsulation), kalıtım (inheritance) ve çok biçimlilik (polymorphism) prensiplerini kullanır.",
+            "3.6. List, tuple, set ve dictionary türlerinde verileri tanımlar.",
+            "3.7. Dosya nesnesi üzerinde okuma, yazma, silme işlemlerini uygular.",
+            "3.8. Dizi türündeki verileri dosya nesnesi içerisinde örneklendirir.",
+            "3.9. İleri seviye nesne yönelimi teknikleriyle özgün projeler geliştirir."
+          ]
+        }
+      ]
+    },
+    "robotik_kodlama": {
+      modulAdi: "Robotik Kodlama",
+      veriler: [
+        {
+          uda: "1. ÜNİTE: ROBOTİK SİSTEMLER VE TARİHSEL GELİŞİMİ",
+          kda: [
+            "1.1. Robotiğin tarihsel gelişimini açıklar.",
+            "1.2. Robotik kodlamanın endüstriyel ve günlük hayattaki uygulamalarını araştırır.",
+            "1.3. Günümüz sorunlarından birine robotik ile çözüm fikri oluşturur.",
+            "1.4. Farklı robot türleri ve mikrodenetleyicileri karşılaştırır.",
+            "1.5. Otomatik sistemlerin çalışma mantığını kavrar.",
+            "1.6. Yarı otonom ve otonom sistemlerin çalışma mantığını kavrar.",
+            "1.7. Otomatik, yarı otomatik ve otonom sistemler arasındaki farkı bilir.",
+            "1.8. Öğrenebilen sistemlerin çalışma mantığını kavrar."
+          ]
+        },
+        {
+          uda: "2. ÜNİTE: ROBOTİK BİLEŞENLER",
+          kda: [
+            "2.1. Yazılım ve sistem tasarımına uygun akış diyagramı tasarlar.",
+            "2.2. Kodların anlamını açıklar.",
+            "2.3. Kodları amacına uygun düzenler.",
+            "2.4. Temel elektronik kavramları ve bileşenleri açıklar.",
+            "2.5. Elektronik eklentileri belirler.",
+            "2.6. Problemleri robotik kodlama ile çözebilmek için mantık geliştirir.",
+            "2.7. Sensörler kullanarak yeni sistemler önerir.",
+            "2.8. Modüller kullanarak yeni sistemler geliştirir.",
+            "2.9. Motor türlerini kullanarak özgün sistemler geliştirir.",
+            "2.10. Hareketli nesnelerin kullanıldığı farklı sistemler geliştirir.",
+            "2.11. Elektronik tasarımın kodlarını hazırlar."
+          ]
+        },
+        {
+          uda: "3. ÜNİTE: PROJE GELİŞTİRME",
+          kda: [
+            "3.1. Ortam algılayıcı sensörler ile uygulamalar geliştirir.",
+            "3.2. Farklı motor türleri ve sürücüler ile projeler geliştirir.",
+            "3.3. Hareketli parçalar ile robotik üniteler oluşturur.",
+            "3.4. İletişim ekipmanlarının kullanıldığı sistemler oluşturur.",
+            "3.5. İleri seviye sensörlerin kullanıldığı özgün projeler hazırlar."
+          ]
+        }
+      ]
+    },
+    "mobil_uygulama": {
+      modulAdi: "Mobil Uygulama Geliştirme",
+      veriler: [
+        {
+          uda: "1. ÜNİTE: MOBİL PROGRAMLAMA OKURYAZARLIĞI",
+          kda: [
+            "1.1. Mobil cihaz ve uygulamaların tarihsel gelişimini kavrar.",
+            "1.2. Mobil uygulamaların ve mobil teknolojilerin günümüzdeki önemini kavrar.",
+            "1.3. Mobil Uygulamaların kullanım alanlarını sıralar.",
+            "1.4. Ülkemizde en çok kullanılan ve topluma yararlı olan yerli mobil uygulamaları tanır.",
+            "1.5. Mobil donanım bileşenlerinin çalışma mantığını açıklar.",
+            "1.6. Mobil cihazlarda yer alan sensörlerin çalışma mantığını kavrar.",
+            "1.7. Mobil işletim sistemlerini sıralar.",
+            "1.8. Mobil uygulama geliştirme tasarım yapılarını açıklar.",
+            "1.9. Mobil uygulama geliştirme araçlarını kavrar."
+          ]
+        },
+        {
+          uda: "2. ÜNİTE: MOBİL UYGULAMA TASARIMI VE ARAYÜZÜ",
+          kda: [
+            "2.1. Mobil uygulama tasarımında hedef kitleyi belirlemenin önemini kavrar.",
+            "2.2. Etkin bir mobil uygulamada olması gereken özellikleri açıklar.",
+            "2.3. Mobil uygulamanın farklı cihazlar ve farklı işletim sistemlerine uyumlu olmasının önemini açıklar.",
+            "2.4. Mobil uygulama tasarım ilkelerini açıklar.",
+            "2.5. Mobil uygulama geliştirme programının sistem gereksinimlerini açıklar.",
+            "2.6. Mobil uygulama geliştirme programının kurulumunu yapar.",
+            "2.7. Emülatör kurulumu yapar.",
+            "2.8. Emülatör çalışma mantığını kavrar.",
+            "2.9. Mobil uygulama geliştirme programının arayüz bileşenlerini tanır."
+          ]
+        },
+        {
+          uda: "3. ÜNİTE: PROGRAM BİLEŞENLERİ İLE ÇALIŞMA",
+          kda: [
+            "3.1. Mobil uygulamalarda kullanılan temel bileşenleri tanır.",
+            "3.2. Temel bileşenleri kullanarak basit mobil uygulamalar geliştirir.",
+            "3.3. Yatay ve dikey yerleşim düzeni bileşenlerini ve özelliklerini tanır.",
+            "3.4. Yerleşim düzeni bileşenlerini kullanarak basit mobil uygulamalar geliştirir.",
+            "3.5. Yerleşim düzeni bileşenleri arasındaki farkları ve kullanım yerlerini kavrar.",
+            "3.6. Temel bileşenleri ve yerleşim düzeni bileşenlerini bir arada kullanır.",
+            "3.7. Temel bileşenler ile hazırlanmış birden çok sahneyle çalışır.",
+            "3.8. Çeşitli mobil uygulamalar geliştirir."
+          ]
+        }
+      ]
+    },
+    "yapay_zeka": {
+      modulAdi: "Yapay Zekâ Uygulamaları",
+      veriler: [
+        {
+          uda: "1. ÜNİTE: VERİ BİLİMİ TEMEL KAVRAMLARI",
+          kda: [
+            "1.1. Veri bilimi temel kavramlarını açıklar.",
+            "1.2. Soru tiplerini açıklar.",
+            "1.3. Veri bilimcilerin çalışma basamaklarını açıklar.",
+            "1.4. Keşifçi veri analizini açıklar.",
+            "1.5. Veri döngüsü basamaklarını açıklar.",
+            "1.6. Veri türlerini açıklar.",
+            "1.7. Veri etiği kavramını açıklar.",
+            "1.8. Python programlama dili için etkileşimli tasarım ortamı kurar.",
+            "1.9. Python programlama dili temellerini veri bilimi bağlamında kullanır.",
+            "1.10. Açık kaynak kodlu programlama dili kavramını tanımlar.",
+            "1.11. Veri bilimi için gerekli olan Python programlama dili kütüphanelerini tanımlar.",
+            "1.12. Array veri yapısını kullanır.",
+            "1.13. Arraylerde birleştirme, sıralama, ayırma ve matematiksel işlemler yapar.",
+            "1.14. Arraylerde biçim, boyut ve boy işlemlerini uygular.",
+            "1.15. Veri seti oluşturarak veri çerçevesine dönüşüm işlemleri gerçekleştirir.",
+            "1.16. Belirli koşullara dayanarak bir veri çerçevesini filtreler.",
+            "1.17. Bir veri çerçevesinde indeksleme, satır ve sütun işlemlerini gerçekleştirir."
+          ]
+        },
+        {
+          uda: "2. ÜNİTE: TEMEL İSTATİSTİK",
+          kda: [
+            "2.1. Bir seri veri yapısı oluşturur.",
+            "2.2. Bir serinin ortalama, mod ve medyan değerlerini hesaplar.",
+            "2.3. Bir serinin merkezi eğilim ve yayılım ölçülerini hesaplar."
+          ]
+        },
+        {
+          uda: "3. ÜNİTE: DEĞİŞİM VE VERİ",
+          kda: [
+            "3.1. Toplumsal problemler üzerinde veri biliminin etkilerini açıklar.",
+            "3.2. Veri setleri ile ilgili uygulamalar yapar."
+          ]
+        },
+        {
+          uda: "4. ÜNİTE: VERİ GÖRSELLEŞTİRME",
+          kda: [
+            "4.1. Veriyi görselleştirmek için çizgi grafiği çizer.",
+            "4.2. Veriyi görselleştirmek için histogram grafiği çizer.",
+            "4.3. Veriyi görselleştirmek için kutu grafiği çizer.",
+            "4.4. Veriyi görselleştirmek için bar grafiği çizer.",
+            "4.5. Veriyi görselleştirmek için saçılım grafiği çizer."
+          ]
+        },
+        {
+          uda: "5. ÜNİTE: VERİLER ARASI İLİŞKİ",
+          kda: [
+            "5.1. Bağımlı ve bağımsız değişken kavramını tanımlar.",
+            "5.2. İki değişken arasındaki ilişkiyi yorumlar.",
+            "5.3. Doğrusal regresyon modeli oluşturur."
+          ]
+        },
+        {
+          uda: "6. ÜNİTE: VERİ MANİPÜLASYONU",
+          kda: [
+            "6.1. Veri setleri ile ilgili olan kavramları açıklar.",
+            "6.2. Veri setleri üzerinde toplulaştırma ve gruplama işlemleri yapar.",
+            "6.3. Bir veri setindeki eksik ve aykırı değerleri tespit eder.",
+            "6.4. One-Hot dönüşümü ile kategorik değişkenleri sayısal değişkenlere dönüştürür.",
+            "6.5. Label Encoder ile kategorik değişkenleri sayısal değişkenlere dönüştürür.",
+            "6.6. Verileri standart hâle getirmek için gerekli olan fonksiyonları kullanır.",
+            "6.7. Fonksiyon kullanarak verileri normalleştirir."
+          ]
+        },
+        {
+          uda: "7. ÜNİTE: VERİ UYGULAMALARI",
+          kda: [
+            "7.1. Açık kaynak kodlu platformları kullanır.",
+            "7.2. Açık kaynak kodlu platformlar üzerinden veri analizi projeleri geliştirir."
+          ]
+        },
+        {
+          uda: "8. ÜNİTE: YAPAY ZEKÂ TEMEL KAVRAMLARI VE UYGULAMALARI",
+          kda: [
+            "8.1. Yapay zekâyla ilişkili olan kavramları açıklar.",
+            "8.2. İstatistiksel yöntemler ve farklı makine öğrenimi teknikleri kullanarak tahmin modelleri geliştirir.",
+            "8.3. Sınıflandırma modellerini kullanarak belirli sınıflara ait verileri tanımlar.",
+            "8.4. Büyük ve karmaşık veri kümeleri içindeki desenleri keşfetmek ve veri setlerindeki bilgileri keşfetmek için güdümsüz modeller kullanır."
+          ]
+        },
+        {
+          uda: "9. ÜNİTE: YAPAY ZEKÂ TABANLI OYUN GELİŞTİRME",
+          kda: [
+            "9.1. Oyunlarda yapay zekânın kullanımını açıklar.",
+            "9.2. Bir yapay zekâ oyun uygulaması geliştirir.",
+            "9.3. Yapay zekâ tabanlı Chatbot uygulamaları geliştirir."
+          ]
+        }
+      ]
+    }
+  };
+
+  function baslat() {
+    const elDers = document.getElementById("bep_ders");
+    const elModul = document.getElementById("bep_modul");
+    const elUda = document.getElementById("bep_uda");
+    const elBtnEkle = document.getElementById("bep_btn_ekle");
+    const elBtnYazdir = document.getElementById("bep_btn_yazdir");
+    const elBtnExcel = document.getElementById("bep_btn_excel");
+
+    if (!elDers || !elModul || !elUda) return;
+
+    document.getElementById("bep_lblTarih").textContent = new Date().toLocaleDateString("tr-TR");
+    guncelleSecimLabel();
+
+    const senkronizeIdler = [
+      "bep_ogrAd", "bep_sinif", "bep_no", "bep_yil", 
+      "bep_ders", "bep_modul", "bep_ogretmen", 
+      "bep_sinifOgretmeni", "bep_veli", "bep_rehberOgretmen", "bep_mudurYrd"
+    ];
+
+    senkronizeIdler.forEach(function(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.addEventListener("input", senkronizeEt);
+      }
+    });
+
+    // Modüle göre UDA'ları yükle
+    function modulYukle() {
+      senkronizeEt();
+      const secim = elModul.value;
+      elUda.innerHTML = '<option value="">-- UDA (Ünite) Seçiniz --</option>';
+      checkboxesKda.innerHTML = '<div style="padding: 6px; font-size: 12px; color: #64748b;">Önce yukarıdan bir UDA seçiniz.</div>';
+      document.getElementById('multiSelectKdaLabel').textContent = "Önce UDA seçiniz...";
+
+      if (secim && bepHavuzu[secim]) {
+        bepHavuzu[secim].veriler.forEach(function(item, idx) {
+          const opt = document.createElement("option");
+          opt.value = idx;
+          opt.textContent = item.uda;
+          elUda.appendChild(opt);
+        });
+      }
+    }
+
+    // Ders değiştiğinde ilgili sınıfın modülünü otomatik seç
+    elDers.addEventListener("change", function() {
+      if (this.value.includes("9")) {
+        elModul.value = "9_algoritma";
+      } else if (this.value.includes("10")) {
+        elModul.value = "10_python";
+      }
+      modulYukle();
+    });
+
+    elModul.addEventListener("change", modulYukle);
+
+    // Başlangıç yüklemesi
+    modulYukle();
+
+    // UDA Değiştiğinde KDA Checkbox Listesini Dinamik Doldur
+    elUda.addEventListener("change", function() {
+      const modulKey = elModul.value;
+      const udaIdx = this.value;
+      checkboxesKda.innerHTML = '';
+
+      if (modulKey && udaIdx !== "" && bepHavuzu[modulKey].veriler[udaIdx]) {
+        const kdalar = bepHavuzu[modulKey].veriler[udaIdx].kda;
+        kdalar.forEach(function(kazanimMetni) {
+          const lbl = document.createElement("label");
+          lbl.innerHTML = `<input type="checkbox" value="${kazanimMetni}" onchange="guncelleKdaLabel()"> <span>${kazanimMetni}</span>`;
+          checkboxesKda.appendChild(lbl);
+        });
+        document.getElementById('multiSelectKdaLabel').textContent = "Kazanım Seçiniz (0 Seçildi)";
+      } else {
+        checkboxesKda.innerHTML = '<div style="padding: 6px; font-size: 12px; color: #64748b;">Önce yukarıdan bir UDA seçiniz.</div>';
+        document.getElementById('multiSelectKdaLabel').textContent = "Önce UDA seçiniz...";
+      }
+    });
+
+    // Satır Ekle (Seçilen tüm KDA'ları TEK BİR SATIRDA maddeler halinde ekler)
+    elBtnEkle.addEventListener("click", function() {
+      senkronizeEt();
+      const modulKey = elModul.value;
+      const udaIdx = elUda.value;
+      const seciliKdalar = getSeciliKdaListesi();
+
+      if (!modulKey || udaIdx === "") {
+        alert("Lütfen önce bir modül ve UDA (Ünite) seçiniz.");
+        return;
+      }
+
+      if (seciliKdalar.length === 0) {
+        alert("Lütfen Kısa Dönemli Amaçlar listesinden en az bir kazanım işaretleyiniz.");
+        return;
+      }
+
+      const secilenUda = bepHavuzu[modulKey].veriler[udaIdx].uda;
+      const olcut = document.getElementById("bep_degerlendirme").value;
+      const yontem = document.getElementById("bep_yontem").value || "-";
+      const materyal = document.getElementById("bep_materyal").value || "-";
+      const sure = document.getElementById("bep_sure").value || "-";
+      
+      const degYontem = getSeciliYontemler();
+      const degTarih = document.getElementById("bep_degTarih").value || "";
+      const performans = document.getElementById("bep_performans").value || "";
+      const tbody = document.getElementById("bep_govde");
+
+      // KDA'ları tek hücre içinde madde işaretiyle alt alta diz
+      const kdaHtml = seciliKdalar.map(item => `<div class="kda-item">• ${item}</div>`).join('');
+
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td class="text-left">${secilenUda}</td>
+        <td class="text-left">${kdaHtml}</td>
+        <td>${olcut}</td>
+        <td class="text-left">${yontem}</td>
+        <td class="text-left">${materyal}</td>
+        <td>${sure}</td>
+        <td>${degYontem}</td>
+        <td>${degTarih}</td>
+        <td style="font-weight: bold; font-size: 11pt;">${performans}</td>
+        <td class="bep-no-print">
+          <button type="button" class="btn btn-del">Sil</button>
+        </td>
+      `;
+
+      tr.querySelector(".btn-del").addEventListener("click", function() {
+        tr.remove();
+      });
+
+      tbody.appendChild(tr);
+    });
+
+    if (elBtnYazdir) {
+      elBtnYazdir.addEventListener("click", function() {
+        window.print();
+      });
+    }
+
+    if (elBtnExcel) {
+      elBtnExcel.addEventListener("click", function() {
+        const tbody = document.getElementById("bep_govde");
+        const satirlar = tbody.querySelectorAll("tr");
+
+        if (satirlar.length === 0) {
+          alert("Excel'e aktarmak için lütfen önce plana en az bir amaç ekleyiniz.");
+          return;
+        }
+
+        const ogrAd = document.getElementById("bep_ogrAd").value || "-";
+        const sinifNo = (document.getElementById("bep_sinif").value || "") + " / " + (document.getElementById("bep_no").value || "");
+        const yil = document.getElementById("bep_yil").value || "2026-2027";
+        const ogrt = document.getElementById("bep_ogretmen").value || "-";
+        const dersAdi = document.getElementById("bep_lblDers").textContent || "-";
+        const modulAdi = document.getElementById("bep_lblModul").textContent || "-";
+        const tarih = document.getElementById("bep_lblTarih").textContent || "-";
+
+        const sinifOgrt = document.getElementById("bep_sinifOgretmeni").value || "______________________";
+        const veli = document.getElementById("bep_veli").value || "______________________";
+        const rehberOgrt = document.getElementById("bep_rehberOgretmen").value || "______________________";
+        const mudurYrd = document.getElementById("bep_mudurYrd").value || "Hasan KÖSEOĞLU";
+
+        const aoaData = [
+          ["T.C. MİLLÎ EĞİTİM BAKANLIĞI"],
+          ["SÜLEYMAN ÇELEBİ ANADOLU LİSESİ"],
+          ["BİLİŞİM TEKNOLOJİLERİ VE YAZILIM DERSİ BİREYSELLEŞTİRİLMİŞ EĞİTİM PROGRAMI (BEP) FORMU"],
+          [],
+          ["Öğrenci Adı Soyadı:", ogrAd, "", "Eğitim-Öğretim Yılı:", yil],
+          ["Sınıfı / Numarası:", sinifNo, "", "Ders:", dersAdi],
+          ["Ders Öğretmeni:", ogrt, "", "Modül:", modulAdi],
+          ["Düzenleme Tarihi:", tarih],
+          [],
+          [
+            "Uzun Dönemli Amaçlar",
+            "Kısa Dönemli Amaçlar",
+            "Ölçüt*",
+            "Öğretim Yöntem ve Teknikleri",
+            "Kullanılacak Materyaller",
+            "Başlama ve Bitiş Tarihi",
+            "Ölçme – Değerlendirme",
+            "",
+            ""
+          ],
+          [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "Değerlendirme Yöntem ve Teknikleri",
+            "Değerlendirme Tarihleri",
+            "Performans Yeterli (+) / Geliştirilmeli (-)"
+          ]
+        ];
+
+        satirlar.forEach(function(tr) {
+          const tds = tr.querySelectorAll("td");
+          if (tds.length >= 9) {
+            aoaData.push([
+              tds[0].innerText.trim(),
+              tds[1].innerText.trim(),
+              tds[2].innerText.trim(),
+              tds[3].innerText.trim(),
+              tds[4].innerText.trim(),
+              tds[5].innerText.trim(),
+              tds[6].innerText.trim(),
+              tds[7].innerText.trim(),
+              tds[8].innerText.trim()
+            ]);
+          }
+        });
+
+        // İmza Bloğu (Excel)
+        aoaData.push([]);
+        aoaData.push([]);
+        aoaData.push(["İmza", "", "İmza", "", "İmza"]);
+        aoaData.push([ogrt, "", sinifOgrt, "", veli]);
+        aoaData.push(["Ders Öğretmeni", "", "Sınıf Rehber Öğretmeni", "", "Öğrenci Velisi"]);
+        aoaData.push([]);
+        aoaData.push(["İmza", "", "", "", "İmza"]);
+        aoaData.push([rehberOgrt, "", "", "", mudurYrd]);
+        aoaData.push(["Rehber Öğretmen", "", "", "", "BEP Birim Başkanı"]);
+
+        const ws = XLSX.utils.aoa_to_sheet(aoaData);
+
+        ws['!merges'] = [
+          { s: { r: 0, c: 0 }, e: { r: 0, c: 8 } },
+          { s: { r: 1, c: 0 }, e: { r: 1, c: 8 } },
+          { s: { r: 2, c: 0 }, e: { r: 2, c: 8 } },
+          { s: { r: 9, c: 0 }, e: { r: 10, c: 0 } },
+          { s: { r: 9, c: 1 }, e: { r: 10, c: 1 } },
+          { s: { r: 9, c: 2 }, e: { r: 10, c: 2 } },
+          { s: { r: 9, c: 3 }, e: { r: 10, c: 3 } },
+          { s: { r: 9, c: 4 }, e: { r: 10, c: 4 } },
+          { s: { r: 9, c: 5 }, e: { r: 10, c: 5 } },
+          { s: { r: 9, c: 6 }, e: { r: 9, c: 8 } }
+        ];
+
+        ws['!cols'] = [
+          { wch: 38 },
+          { wch: 55 },
+          { wch: 12 },
+          { wch: 28 },
+          { wch: 26 },
+          { wch: 16 },
+          { wch: 26 },
+          { wch: 16 },
+          { wch: 22 }
+        ];
+
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, "BEP_Plani");
+
+        let dosyaAdi = "BEP_Plani_" + (ogrAd !== "-" ? ogrAd.replace(/\s+/g, '_') : "Ogrenci") + ".xlsx";
+        XLSX.writeFile(wb, dosyaAdi);
+      });
+    }
+  }
+
+  function senkronizeEt() {
+    document.getElementById("bep_lblOgr").textContent = document.getElementById("bep_ogrAd").value || "-";
+    document.getElementById("bep_lblSinifNo").textContent = (document.getElementById("bep_sinif").value || "") + " / " + (document.getElementById("bep_no").value || "-");
+    document.getElementById("bep_lblYil").textContent = document.getElementById("bep_yil").value || "-";
+    document.getElementById("bep_lblOgrt").textContent = document.getElementById("bep_ogretmen").value || "-";
+    
+    // Ders ve Modül Başlıklarını Ayrı Ayrı Senkronize Et
+    const elDers = document.getElementById("bep_ders");
+    document.getElementById("bep_lblDers").textContent = elDers ? elDers.value : "-";
+
+    const elModul = document.getElementById("bep_modul");
+    const modulKey = elModul ? elModul.value : "";
+    document.getElementById("bep_lblModul").textContent = (modulKey && bepHavuzu[modulKey]) ? bepHavuzu[modulKey].modulAdi : "-";
+
+    const ogrt = document.getElementById("bep_ogretmen").value.trim();
+    const sinifOgrt = document.getElementById("bep_sinifOgretmeni").value.trim();
+    const veli = document.getElementById("bep_veli").value.trim();
+    const rehberOgrt = document.getElementById("bep_rehberOgretmen").value.trim();
+    const mudurYrd = document.getElementById("bep_mudurYrd").value.trim();
+
+    document.getElementById("bep_imza_ogrt").textContent = ogrt || "______________________";
+    document.getElementById("bep_imza_sinifOgretmeni").textContent = sinifOgrt || "______________________";
+    document.getElementById("bep_imza_veli").textContent = veli || "______________________";
+    document.getElementById("bep_imza_rehberOgretmen").textContent = rehberOgrt || "______________________";
+    document.getElementById("bep_imza_mudurYrd").textContent = mudurYrd || "______________________";
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", baslat);
+  } else {
+    baslat();
+  }
+})();
+</script>
+</body>
+</html>
