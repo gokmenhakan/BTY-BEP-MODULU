@@ -44,7 +44,7 @@
       display: block;
       margin-bottom: 5px;
     }
-    input, select {
+    input, select, textarea {
       width: 100%;
       padding: 8px 10px;
       border: 1px solid #cbd5e1;
@@ -52,8 +52,9 @@
       font-size: 13px;
       color: #0f172a;
       background: #fff;
+      font-family: inherit;
     }
-    input:focus, select:focus {
+    input:focus, select:focus, textarea:focus {
       outline: none;
       border-color: #0284c7;
     }
@@ -319,10 +320,15 @@
 
     <div class="bep-grid" style="margin-top: 15px;">
       <div style="grid-column: span 2;">
-        <label>Uzun Dönemli Amaçlar (Ünite)</label>
+        <label>Uzun Dönemli Amaç (UDA) / Ünite Seçiniz</label>
         <select id="bep_uda">
           <option value="">Önce modül seçiniz...</option>
         </select>
+      </div>
+
+      <div style="grid-column: span 2;">
+        <label>Uzun Dönemli Amaç Cümlesi (Öğrenci düzeyine göre düzenleyebilirsiniz)</label>
+        <textarea id="bep_uda_metin" rows="2" placeholder="UDA seçildiğinde otomatik doldurulur..."></textarea>
       </div>
       
       <!-- KISA DÖNEMLİ AMAÇLAR (ÇOKLU SEÇİM DROPDOWN) -->
@@ -592,7 +598,8 @@
       modulAdi: "Programlamaya Giriş ve Algoritma",
       veriler: [
         {
-          uda: "1. Ünite: Bilişim Teknolojilerinin Programlamadaki Yeri",
+          unite: "1. Ünite: Bilişim Teknolojilerinin Programlamadaki Yeri",
+          uda: "Öğrenci, bilişim teknolojilerine ilişkin temel kavramları, gelişim sürecini ve programlamadaki önemini açıklar.",
           kda: [
             "1.1. Bilişim teknolojilerine ilişkin temel kavramları tanımlar.",
             "1.2. Bilişim teknolojisi araçlarını listeler.",
@@ -604,7 +611,8 @@
           ]
         },
         {
-          uda: "2. Ünite: Algoritma ile Problem Çözme ve Akış Diyagramı",
+          unite: "2. Ünite: Algoritma ile Problem Çözme ve Akış Diyagramı",
+          uda: "Öğrenci, verilen bir problemin çözüm adımlarını belirleyerek uygun algoritma ve akış diyagramını tasarlar.",
           kda: [
             "2.1. Çözümü istenen problemi kavrar.",
             "2.2. Çözüm için gereksinimlerini belirler.",
@@ -620,7 +628,8 @@
           ]
         },
         {
-          uda: "3. Ünite: Programlamanın Temel Kavramları",
+          unite: "3. Ünite: Programlamanın Temel Kavramları",
+          uda: "Öğrenci, temel programlama kavramlarını (veri türleri, karar ve döngü yapıları) kullanarak program modelleri geliştirir.",
           kda: [
             "3.1. Programlamada kullanılan işlem ve sembolleri listeler.",
             "3.2. Veri türlerini amacına uygun şekilde programa tanımlar.",
@@ -631,7 +640,8 @@
           ]
         },
         {
-          uda: "4. Ünite: Algoritma ve Akış Diyagramını Test Etme",
+          unite: "4. Ünite: Algoritma ve Akış Diyagramını Test Etme",
+          uda: "Öğrenci, tasarlanan algoritma ve akış diyagramlarını test ederek mantıksal hataları tespit eder ve düzeltir.",
           kda: [
             "4.1. Tasarlanan algoritma ve akış diyagramını test eder.",
             "4.2. Tasarladığı algoritma ve akış diyagramının hatalarını listeler.",
@@ -640,7 +650,8 @@
           ]
         },
         {
-          uda: "5. Ünite: İleri Düzey Algoritma Uygulamaları",
+          unite: "5. Ünite: İleri Düzey Algoritma Uygulamaları",
+          uda: "Öğrenci, arama ve sıralama gibi ileri düzey algoritmaların işleyiş mantığını kavrar ve akış diyagramıyla modeller.",
           kda: [
             "5.1. Arama ve sıralama algoritmalarını akış diyagramıyla gösterir.",
             "5.2. İleri algoritma uygulamalarını ve kullanım yerlerini açıklar."
@@ -652,7 +663,8 @@
       modulAdi: "Programlama Dilleri (Python)",
       veriler: [
         {
-          uda: "1. Ünite: Python Programlamaya Giriş",
+          unite: "1. Ünite: Python Programlamaya Giriş",
+          uda: "Öğrenci, Python çalışma ortamlarını tanır ve değişkenler, veri türleri ile kullanıcı etkileşimini içeren temel kodlar yazar.",
           kda: [
             "1.1. Python programlama diliyle çalışılacak ortamları tanır.",
             "1.2. Farklı entegre geliştirme ortamlarını analiz ederek kendisine en uygun çalışma ortamını seçer.",
@@ -664,7 +676,8 @@
           ]
         },
         {
-          uda: "2. Ünite: Python Programlama Dili ile Yazılım Geliştirme",
+          unite: "2. Ünite: Python Programlama Dili ile Yazılım Geliştirme",
+          uda: "Öğrenci, Python dilinde karar yapıları, döngüler ve fonksiyonları kullanarak problem çözmeye yönelik programlar geliştirir.",
           kda: [
             "2.1. Python programlama dili karar yapılarını içeren programlar geliştirir.",
             "2.2. Bir problemi çözmek için kullanacağı döngü yapısına karar verir.",
@@ -674,7 +687,8 @@
           ]
         },
         {
-          uda: "3. Ünite: Nesne Yönelimli Proje Geliştirme",
+          unite: "3. Ünite: Nesne Yönelimli Proje Geliştirme",
+          uda: "Öğrenci, nesne yönelimli programlama prensiplerini, gelişmiş veri yapılarını ve dosya işlemlerini uygulayarak projeler geliştirir.",
           kda: [
             "3.1. Nesne yönelimli programlama kavramını açıklar.",
             "3.2. Nesne yönelimli programlamanın faydalarının farkına varır.",
@@ -693,7 +707,8 @@
       modulAdi: "Robotik Kodlama",
       veriler: [
         {
-          uda: "1. ÜNİTE: ROBOTİK SİSTEMLER VE TARİHSEL GELİŞİMİ",
+          unite: "1. Ünite: Robotik Sistemler ve Tarihsel Gelişimi",
+          uda: "Öğrenci, robotik sistemlerin temel çalışma mantığını, türlerini, mikrodenetleyicileri ve tarihsel gelişimini açıklar.",
           kda: [
             "1.1. Robotiğin tarihsel gelişimini açıklar.",
             "1.2. Robotik kodlamanın endüstriyel ve günlük hayattaki uygulamalarını araştırır.",
@@ -706,7 +721,8 @@
           ]
         },
         {
-          uda: "2. ÜNİTE: ROBOTİK BİLEŞENLER",
+          unite: "2. Ünite: Robotik Bileşenler",
+          uda: "Öğrenci, robotik sistemlerde kullanılan elektronik bileşenleri (sensör, modül, motor) tanır ve kontrol kodlarını tasarlar.",
           kda: [
             "2.1. Yazılım ve sistem tasarımına uygun akış diyagramı tasarlar.",
             "2.2. Kodların anlamını açıklar.",
@@ -722,7 +738,8 @@
           ]
         },
         {
-          uda: "3. ÜNİTE: PROJE GELİŞTİRME",
+          unite: "3. Ünite: Proje Geliştirme",
+          uda: "Öğrenci, sensörler, eyleyiciler ve iletişim donanımlarını bir araya getirerek özgün robotik projeler geliştirir.",
           kda: [
             "3.1. Ortam algılayıcı sensörler ile uygulamalar geliştirir.",
             "3.2. Farklı motor türleri ve sürücüler ile projeler geliştirir.",
@@ -737,7 +754,8 @@
       modulAdi: "Mobil Uygulama Geliştirme",
       veriler: [
         {
-          uda: "1. ÜNİTE: MOBİL PROGRAMLAMA OKURYAZARLIĞI",
+          unite: "1. Ünite: Mobil Programlama Okuryazarlığı",
+          uda: "Öğrenci, mobil donanım yapısını, mobil işletim sistemlerini ve uygulama geliştirme süreçlerini kavrar.",
           kda: [
             "1.1. Mobil cihaz ve uygulamaların tarihsel gelişimini kavrar.",
             "1.2. Mobil uygulamaların ve mobil teknolojilerin günümüzdeki önemini kavrar.",
@@ -751,7 +769,8 @@
           ]
         },
         {
-          uda: "2. ÜNİTE: MOBİL UYGULAMA TASARIMI VE ARAYÜZÜ",
+          unite: "2. Ünite: Mobil Uygulama Tasarımı ve Arayüzü",
+          uda: "Öğrenci, kullanıcı odaklı mobil arayüz tasarım ilkelerini kavrar ve geliştirme ortamında arayüz bileşenlerini tasarlar.",
           kda: [
             "2.1. Mobil uygulama tasarımında hedef kitleyi belirlemenin önemini kavrar.",
             "2.2. Etkin bir mobil uygulamada olması gereken özellikleri açıklar.",
@@ -765,7 +784,8 @@
           ]
         },
         {
-          uda: "3. ÜNİTE: PROGRAM BİLEŞENLERİ İLE ÇALIŞMA",
+          unite: "3. Ünite: Program Bileşenleri ile Çalışma",
+          uda: "Öğrenci, mobil uygulama bileşenlerini ve yerleşim düzenlerini kullanarak çok sahneli temel mobil uygulamalar geliştirir.",
           kda: [
             "3.1. Mobil uygulamalarda kullanılan temel bileşenleri tanır.",
             "3.2. Temel bileşenleri kullanarak basit mobil uygulamalar geliştirir.",
@@ -783,7 +803,8 @@
       modulAdi: "Yapay Zekâ Uygulamaları",
       veriler: [
         {
-          uda: "1. ÜNİTE: VERİ BİLİMİ TEMEL KAVRAMLARI",
+          unite: "1. Ünite: Veri Bilimi Temel Kavramları",
+          uda: "Öğrenci, veri biliminin temel kavramlarını açıklar ve Python ortamında temel veri manipülasyon işlemlerini uygular.",
           kda: [
             "1.1. Veri bilimi temel kavramlarını açıklar.",
             "1.2. Soru tiplerini açıklar.",
@@ -805,7 +826,8 @@
           ]
         },
         {
-          uda: "2. ÜNİTE: TEMEL İSTATİSTİK",
+          unite: "2. Ünite: Temel İstatistik",
+          uda: "Öğrenci, veri serileri üzerinde merkezi eğilim ve yayılım ölçülerini hesaplayarak verileri istatistiksel açıdan yorumlar.",
           kda: [
             "2.1. Bir seri veri yapısı oluşturur.",
             "2.2. Bir serinin ortalama, mod ve medyan değerlerini hesaplar.",
@@ -813,14 +835,16 @@
           ]
         },
         {
-          uda: "3. ÜNİTE: DEĞİŞİM VE VERİ",
+          unite: "3. Ünite: Değişim ve Veri",
+          uda: "Öğrenci, veri biliminin toplumsal problemlerdeki rolünü kavrar ve gerçek dünya veri setleri üzerinde analiz çalışmaları yapar.",
           kda: [
             "3.1. Toplumsal problemler üzerinde veri biliminin etkilerini açıklar.",
             "3.2. Veri setleri ile ilgili uygulamalar yapar."
           ]
         },
         {
-          uda: "4. ÜNİTE: VERİ GÖRSELLEŞTİRME",
+          unite: "4. Ünite: Veri Görselleştirme",
+          uda: "Öğrenci, veri setlerini analiz etmek amacıyla uygun grafik türlerini kullanarak veri görselleştirme uygulamaları yapar.",
           kda: [
             "4.1. Veriyi görselleştirmek için çizgi grafiği çizer.",
             "4.2. Veriyi görselleştirmek için histogram grafiği çizer.",
@@ -830,7 +854,8 @@
           ]
         },
         {
-          uda: "5. ÜNİTE: VERİLER ARASI İLİŞKİ",
+          unite: "5. Ünite: Veriler Arası İlişki",
+          uda: "Öğrenci, değişkenler arasındaki ilişkileri analiz eder ve doğrusal regresyon modelleri oluşturur.",
           kda: [
             "5.1. Bağımlı ve bağımsız değişken kavramını tanımlar.",
             "5.2. İki değişken arasındaki ilişkiyi yorumlar.",
@@ -838,7 +863,8 @@
           ]
         },
         {
-          uda: "6. ÜNİTE: VERİ MANİPÜLASYONU",
+          unite: "6. Ünite: Veri Manipülasyonu",
+          uda: "Öğrenci, eksik ve aykırı verileri tespit ederek veri temizleme ve kodlama (One-Hot, Label Encoder) gibi veri ön işleme adımlarını uygular.",
           kda: [
             "6.1. Veri setleri ile ilgili olan kavramları açıklar.",
             "6.2. Veri setleri üzerinde toplulaştırma ve gruplama işlemleri yapar.",
@@ -850,14 +876,16 @@
           ]
         },
         {
-          uda: "7. ÜNİTE: VERİ UYGULAMALARI",
+          unite: "7. Ünite: Veri Uygulamaları",
+          uda: "Öğrenci, açık kaynak kodlu araçları kullanarak uçtan uca veri analizi projeleri geliştirir.",
           kda: [
             "7.1. Açık kaynak kodlu platformları kullanır.",
             "7.2. Açık kaynak kodlu platformlar üzerinden veri analizi projeleri geliştirir."
           ]
         },
         {
-          uda: "8. ÜNİTE: YAPAY ZEKÂ TEMEL KAVRAMLARI VE UYGULAMALARI",
+          unite: "8. Ünite: Yapay Zekâ Temel Kavramları ve Uygulamaları",
+          uda: "Öğrenci, makine öğrenimi modellerinin işleyişini kavrar ve temel tahmin/sınıflandırma algoritmalarını modeller.",
           kda: [
             "8.1. Yapay zekâyla ilişkili olan kavramları açıklar.",
             "8.2. İstatistiksel yöntemler ve farklı makine öğrenimi teknikleri kullanarak tahmin modelleri geliştirir.",
@@ -866,7 +894,8 @@
           ]
         },
         {
-          uda: "9. ÜNİTE: YAPAY ZEKÂ TABANLI OYUN GELİŞTİRME",
+          unite: "9. Ünite: Yapay Zekâ Tabanlı Oyun Geliştirme",
+          uda: "Öğrenci, yapay zekâ destekli oyun ve sohbet botu (Chatbot) projeleri geliştirir.",
           kda: [
             "9.1. Oyunlarda yapay zekânın kullanımını açıklar.",
             "9.2. Bir yapay zekâ oyun uygulaması geliştirir.",
@@ -907,7 +936,9 @@
     function modulYukle() {
       senkronizeEt();
       const secim = elModul.value;
-      elUda.innerHTML = '<option value="">-- UDA (Ünite) Seçiniz --</option>';
+      elUda.innerHTML = '<option value="">-- UDA / Ünite Seçiniz --</option>';
+      const elUdaMetin = document.getElementById("bep_uda_metin");
+      if (elUdaMetin) elUdaMetin.value = "";
       checkboxesKda.innerHTML = '<div style="padding: 6px; font-size: 12px; color: #64748b;">Önce yukarıdan bir UDA seçiniz.</div>';
       document.getElementById('multiSelectKdaLabel').textContent = "Önce UDA seçiniz...";
 
@@ -915,7 +946,7 @@
         bepHavuzu[secim].veriler.forEach(function(item, idx) {
           const opt = document.createElement("option");
           opt.value = idx;
-          opt.textContent = item.uda;
+          opt.textContent = item.unite;
           elUda.appendChild(opt);
         });
       }
@@ -936,14 +967,20 @@
     // Başlangıç yüklemesi
     modulYukle();
 
-    // UDA Değiştiğinde KDA Checkbox Listesini Dinamik Doldur
+    // UDA Değiştiğinde KDA Checkbox Listesini Dinamik Doldur ve UDA Metnini Ata
     elUda.addEventListener("change", function() {
       const modulKey = elModul.value;
       const udaIdx = this.value;
       checkboxesKda.innerHTML = '';
+      const elUdaMetin = document.getElementById("bep_uda_metin");
 
       if (modulKey && udaIdx !== "" && bepHavuzu[modulKey].veriler[udaIdx]) {
-        const kdalar = bepHavuzu[modulKey].veriler[udaIdx].kda;
+        const item = bepHavuzu[modulKey].veriler[udaIdx];
+        if (elUdaMetin) {
+          elUdaMetin.value = item.uda;
+        }
+
+        const kdalar = item.kda;
         kdalar.forEach(function(kazanimMetni) {
           const lbl = document.createElement("label");
           lbl.innerHTML = `<input type="checkbox" value="${kazanimMetni}" onchange="guncelleKdaLabel()"> <span>${kazanimMetni}</span>`;
@@ -951,6 +988,7 @@
         });
         document.getElementById('multiSelectKdaLabel').textContent = "Kazanım Seçiniz (0 Seçildi)";
       } else {
+        if (elUdaMetin) elUdaMetin.value = "";
         checkboxesKda.innerHTML = '<div style="padding: 6px; font-size: 12px; color: #64748b;">Önce yukarıdan bir UDA seçiniz.</div>';
         document.getElementById('multiSelectKdaLabel').textContent = "Önce UDA seçiniz...";
       }
@@ -973,7 +1011,10 @@
         return;
       }
 
-      const secilenUda = bepHavuzu[modulKey].veriler[udaIdx].uda;
+      const elUdaMetin = document.getElementById("bep_uda_metin");
+      const secilenUda = (elUdaMetin && elUdaMetin.value.trim()) 
+        ? elUdaMetin.value.trim() 
+        : bepHavuzu[modulKey].veriler[udaIdx].uda;
       const olcut = document.getElementById("bep_degerlendirme").value;
       const yontem = document.getElementById("bep_yontem").value || "-";
       const materyal = document.getElementById("bep_materyal").value || "-";
