@@ -61,7 +61,7 @@ TÜRKİYE YÜZYILI MAARİF MODELİ (TYMM) UZAK HEDEF YÜKLEMLERİ (ÖĞRENME ÇI
 * hazırlayabilme          : Problem çözümüne yönelik algoritma adımlarını veya çalışma ortamını hazır hale getirme.
 * yapabilme               : Temel düzeydeki bilişim ve kodlama uygulamalarını eyleme dökme.
 
-2. BİLİŞİM TEKNOLOJİLERİ VE YAZILIM ALAN BECERİLERİ:
+2. BİLİŞİM TEKNOLOJİLERİ VE YAZILIM ALAN BECERİLERİ (TYMM RESMÎ PLANDAN ALINANLAR):
 * kodlayabilme            : Tasarlanan bir algoritmayı ilgili programlama dilinde kod satırlarına dökebilme.
 * tasarlayabilme          : Akış diyagramı, kullanıcı arayüzü veya yazılım mimarisi tasarlayabilme.
 * modelleyebilme          : Gerçek hayat durumlarını veya süreçleri akış şeması ya da nesne (OOP) olarak modelleyebilme.
@@ -69,20 +69,29 @@ TÜRKİYE YÜZYILI MAARİF MODELİ (TYMM) UZAK HEDEF YÜKLEMLERİ (ÖĞRENME ÇI
 * test edebilme           : Yazılan kod veya akış şemasını farklı veri girişleriyle deneyerek doğrulayabilme.
 * geliştirebilme          : Karar, döngü, fonksiyon veya kütüphaneleri kullanarak amaca uygun yazılım/proje geliştirebilme.
 * uygulayabilme           : Komutları, veri yapılarını, dosya işlemlerini veya fonksiyonları projede amaca uygun kullanabilme.
+* yararlanabilme          : Yazılım araçlarından, arayüz özelliklerinden, veri yapılarından veya kütüphanelerden işlevsel olarak faydalanabilme (BTY.5.2.1, BTY.5.6.3, BTY.6.2.1).
+* çalışabilme             : İşletim sistemi, dosya yönetimi, geliştirme ortamı (IDE), internet veya operatörlerle amacına uygun etkileşime girip çalışabilme (BTY.5.1.6, BTY.5.3.3, BTY.6.5.2).
+* yönetebilme             : Yazılım geliştirme sürecini, akış denetimini (karar/döngü) veya güvenlik/gizlilik önlemlerini planlı şekilde idare edebilme (BTY.5.4.2, BTY.5.6.4, BTY.6.6.2).
+* algoritmik düşünebilme  : Problem çözme sürecinde girdileri, çıktıları ve işlem basamaklarını mantıksal bir kurguyla tasarlayabilme (BTY.5.6.1).
+* ürün ortaya koyabilme   : Blok tabanlı veya metin tabanlı kodlama ortamında amaca uygun çalışan bir proje/yazılım meydana getirebilme (BTY.6.6.3).
+* kurgu oluşturabilme     : Yazılım tasarımı, görsel/ses/video veya animasyon öncesinde hikâye/senaryo ve işlem adımı kurgusu kurabilme (BTY.5.2.2, BTY.6.2.6).
+* belirleyebilme          : Problem durumlarını, girdi-çıktıları veya yazılım ihtiyaçlarını amaca uygun tespit edebilme (BTY.6.2.2).
+* bilgi toplayabilme ve düzenleyebilme: Veri toplama, analiz için veri düzenleme ve yapay zekâ girdi verilerini hazır hâle getirebilme (BTY.6.2.3, BTY.6.5.1).
 
 ================================================================================
 FİLTRELENMİŞ İFADELER
 (BİLİŞİM TEKNOLOJİLERİ VE YAZILIM DERSİ BEP KISA DÖNEMLİ HEDEFLERİ / KDA İÇİN)
 ================================================================================
-Yukarıdaki genel gelişim alanları taranarak, Bilişim Teknolojileri ve Programlama dersinde
-BEP'li öğrencinin yapabileceği en somut, doğrudan gözlenebilir ve ölçülebilir eylemler
-filtrelenmiş ve kategorize edilmiştir:
+Yukarıdaki genel gelişim alanları ve TYMM BTY Süreç Bileşenleri taranarak,
+Bilişim Teknolojileri ve Programlama dersinde BEP'li öğrencinin yapabileceği en somut,
+doğrudan gözlenebilir ve ölçülebilir eylemler filtrelenmiş ve kategorize edilmiştir:
 
 1. GÖSTERME, SEÇME VE İŞARET ETME (Bilişsel & Algılama)
    - gösterir         (Örn: Masadaki fareyi parmağıyla gösterir.)
    - seçer            (Örn: Verilen 3 donanım kartı arasından monitörü seçer.)
    - işaret eder      (Örn: Ekrandaki doğru çalışma sonucunu fareyle işaret eder.)
    - bulur            (Örn: Karışık kartlar arasından 'Başla' sembolünü bulur.)
+   - belirler         (Örn: Problemdeki girdi ve çıktı seçenekleri arasından doğru olanı belirler.)
 
 2. BİLGİSAYAR VE CİHAZ KULLANIMI (İnce Motor & Bilişim Becerileri)
    - açar             (Örn: Bilgisayarı açma butonuna basarak açar.)
@@ -90,6 +99,9 @@ filtrelenmiş ve kategorize edilmiştir:
    - tıklar           (Örn: Ekrandaki yeşil bayrak/başlat butonunu fareyle tıklar.)
    - basar            (Örn: Klavyeden Enter / Space tuşuna basar.)
    - sürükler/bırakır (Örn: Scratch bloklarını çalışma alanına sürükleyip bırakır.)
+   - kullanır         (Örn: Farenin sol tuşunu veya klavye yön tuşlarını amacına uygun kullanır.)
+   - kaydeder         (Örn: Hazırladığı dosya veya kod projesini 'Kaydet' butonuna basarak kaydeder.)
+   - çalıştırır       (Örn: Kodlama ortamında 'Run / Çalıştır' butonuna basarak programı yürütür.)
 
 3. ADLANDIRMA VE SÖYLEME (Dil ve İfade)
    - söyler           (Örn: Bilişim aracının ne işe yaradığını söyler.)
@@ -97,19 +109,24 @@ filtrelenmiş ve kategorize edilmiştir:
    - okur             (Örn: Konsol ekranında çıkan sonucu sesli okur.)
    - sayar            (Örn: Döngü çıktısındaki satır sayısını sayar.)
    - cevap verir      (Örn: Öğretmenin problemle ilgili sorusuna cevap verir.)
+   - açıklar          (Örn: Basit bir kuralın veya komutun ne iş yaptığını kendi cümleleriyle açıklar.)
 
 4. YAZMA VE KODLAMA (Akademik & Üretim)
    - yazar            (Örn: `print()` fonksiyonunun içine adını klavyeyle yazar.)
    - çizer            (Örn: Kağıda basit bir dikdörtgen işlem sembolü çizer.)
    - tamamlar         (Örn: Eksik bırakılmış 1 komut satırını tamamlar.)
+   - oluşturur        (Örn: İki bloktan oluşan basit bir kod öbeği veya yeni bir dosya oluşturur.)
+   - düzenler         (Örn: Verilen komut satırındaki küçük bir yazım hatasını düzenler.)
 
-5. EŞLEŞTİRME VE DİZME (Algoritma ve Problem Çözme)
+5. EŞLEŞTİRME, DİZME VE LİSTELEME (Algoritma ve Problem Çözme)
    - eşleştirir       (Örn: Akış sembolleri ile görev kartlarını masada eşleştirir.)
    - dizer            (Örn: 3 adımlı resimli günlük yaşam kartlarını soldan sağa sırayla dizer.)
    - gruplar / ayırır (Örn: Sayı ve metin verilerini ilgili kutulara ayırır.)
+   - listeler / sıralar (Örn: Çay demleme algoritmasının 3 adımını numaralandırarak listeler.)
 
-6. YÖNERGE TAKİBİ VE DÜZELTME (Uygulama & Test)
+6. YÖNERGE TAKİBİ, TEST VE DÜZELTME (Uygulama & Test)
    - yerine getirir   (Örn: Öğretmenin verdiği 2 adımlı yönergeyi yerine getirir.)
    - takip eder       (Örn: Akış şemasının adımlarını parmağıyla sırayla takip eder.)
    - değiştirir       (Örn: Hatalı kartı çıkarıp yerine doğru adımı koyar.)
+   - çalışır hâle getirir (Örn: Hatalı bloğu düzelterek kodun hatasız çalışmasını sağlar.)
 ================================================================================

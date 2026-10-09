@@ -88,10 +88,10 @@ Her bir ünite ve konu kümesi için iki düzeyde Uzak Hedef tanımlanmıştır:
 [1. KONU (İÇERİK ÇERÇEVESİ)]: Problem Çözme Süreci, Girdi - İşlem - Çıktı ve Algoritma Geliştirme
 
 * RESMÎ MAARİF ÇIKTISI (UDA 1):
-  BTY.9.2.1. Verilen bir problemin girdi-işlem-çıktı bileşenlerini ilişkilendirerek çözüm algoritması hazırlayabilme
+  BTY.9.2.1. Problem çözme sürecinde girdi-işlem-çıktı bileşenlerini ilişkilendirerek algoritmik düşünebilme ve çözüm algoritması geliştirebilme
 
 >>> BEP UYARLANMIŞ UZAK HEDEF (BEP UDA 1):
-Öğrenci, dönem sonunda önüne konulan 3-4 adımlı günlük yaşam resimli kartlarını (el yıkama, uyanma) oluş sırasına göre soldan sağa hatasız dizer ve problemin ilk adımını söyler.
+Öğrenci, dönem sonunda önüne konulan 3-4 adımlı günlük yaşam probleminin girdi-çıktılarını belirler; işlem adımı kartlarını oluş sırasına göre soldan sağa hatasız dizer ve sıralar.
 
 [SÜREÇ BİLEŞENLERİ (KISA DÖNEMLİ HEDEFLER / KDA)]:
 * 2.1. Çözümü istenen problemi kavrar.
@@ -99,7 +99,7 @@ Her bir ünite ve konu kümesi için iki düzeyde Uzak Hedef tanımlanmıştır:
   - Ölçüt: %80
 
 * 2.2. Çözüm için gereksinimlerini belirler.
-  - BEP Uyarlaması: Belirtilen iş için gereken malzemeleri/araçları resimler arasından seçip gösterir.
+  - BEP Uyarlaması: Belirtilen iş için gereken girdi malzemelerini/araçlarını resimler arasından belirler ve seçip gösterir.
   - Ölçüt: 4 denemenin 3'ünde
 
 * 2.3. Problemin girdi, çıktı ve işlem aşamalarını belirler.
@@ -111,7 +111,7 @@ Her bir ünite ve konu kümesi için iki düzeyde Uzak Hedef tanımlanmıştır:
   - Ölçüt: İstendiğinde ifade eder
 
 * 2.5. Bir problemin çözümü için en doğru algoritmayı geliştirir.
-  - BEP Uyarlaması: Önüne konulan 3-4 adımlı günlük yaşam kartlarını doğru oluş sırasına göre soldan sağa dizer.
+  - BEP Uyarlaması: Önüne konulan 3-4 adımlı günlük yaşam kartlarını doğru oluş sırasına göre soldan sağa dizer ve adımları numaralandırarak sıralar.
   - Ölçüt: 4 denemenin en az 3'ünde
 
 --------------------------------------------------------------------------------
@@ -168,14 +168,14 @@ Her bir ünite ve konu kümesi için iki düzeyde Uzak Hedef tanımlanmıştır:
 [1. KONU (İÇERİK ÇERÇEVESİ)]: Programlama Sembolleri, İşlemler ve Veri Türleri
 
 * RESMÎ MAARİF ÇIKTISI (UDA 1):
-  BTY.9.3.1. Programlamada kullanılan işlem sembollerini ve temel veri türlerini yapılandırabilme
+  BTY.9.3.1. Programlamada kullanılan işlem sembolleri ve temel veri türlerinden yararlanabilme
 
 >>> BEP UYARLANMIŞ UZAK HEDEF (BEP UDA 1):
-Öğrenci, dönem sonunda programlama ekranındaki başlatma/durdurma butonlarını fareyle tıklar; sayı ve metin kutucuklarına klavyeyle yazar.
+Öğrenci, dönem sonunda programlama ekranındaki başlatma/durdurma butonlarını tıklar; sayı ve metin kutucuklarına klavyeyle yazar ve 'Çalıştır' butonuyla programı çalıştırır.
 
 [SÜREÇ BİLEŞENLERİ (KISA DÖNEMLİ HEDEFLER / KDA)]:
 * 3.1. Programlamada kullanılan işlem ve sembolleri listeler.
-  - BEP Uyarlaması: Programlama ortamındaki başlat (yeşil bayrak), durdur (kırmızı buton) ve matematiksel sembolleri (+, -) fareyle gösterir.
+  - BEP Uyarlaması: Programlama ortamındaki başlat (yeşil bayrak), durdur (kırmızı buton) sembollerini tıklar, gösterir ve programı çalıştırır.
   - Ölçüt: %100
 
 * 3.2. Veri türlerini amacına uygun şekilde programa tanımlar.
@@ -190,10 +190,10 @@ Her bir ünite ve konu kümesi için iki düzeyde Uzak Hedef tanımlanmıştır:
 [2. KONU (İÇERİK ÇERÇEVESİ)]: Karar Yapıları (Koşullar) ve Döngü Yapıları (Tekrarlı İşlemler)
 
 * RESMÎ MAARİF ÇIKTISI (UDA 2):
-  BTY.9.3.2. Karar ve döngü yapılarını kullanarak temel programlama blokları geliştirebilme
+  BTY.9.3.2. Karar ve döngü yapılarını kullanarak temel programlama blokları geliştirebilme ve süreci yönetebilme
 
 >>> BEP UYARLANMIŞ UZAK HEDEF (BEP UDA 2):
-Öğrenci, dönem sonunda şartlı (eğer-ise) ve tekrarlı (döngü) komut kartlarını seçer; blok kodlama ekranında sürükleyip birleştirerek çalıştırır.
+Öğrenci, dönem sonunda şartlı (eğer-ise) ve tekrarlı (döngü) komut kartlarını seçer; blok kodlama ekranında sürükleyip birleştirerek programı çalıştırır ve projeyi kaydeder.
 
 [SÜREÇ BİLEŞENLERİ (KISA DÖNEMLİ HEDEFLER / KDA)]:
 * 3.4. Karar yapılarını kullanarak programı geliştirir.
@@ -205,7 +205,7 @@ Her bir ünite ve konu kümesi için iki düzeyde Uzak Hedef tanımlanmıştır:
   - Ölçüt: %80
 
 * 3.6. Döngü ve karar yapıları ile program tasarlar.
-  - BEP Uyarlaması: Şart ve döngü içeren hazır blokları (Scratch'te tekrarla bloğu) fareyle sürükleyip birleştirir.
+  - BEP Uyarlaması: Şart ve döngü içeren hazır blokları (Scratch'te tekrarla bloğu) fareyle sürükleyip birleştirir, çalıştırır ve projeyi kaydeder.
   - Ölçüt: Yardımla %75
 
 --------------------------------------------------------------------------------
@@ -218,10 +218,10 @@ Her bir ünite ve konu kümesi için iki düzeyde Uzak Hedef tanımlanmıştır:
 [KONU (İÇERİK ÇERÇEVESİ)]: Algoritma ve Akış Şemalarında Test Süreci, Hata Belirleme ve Hata Ayıklama (Debugging)
 
 * RESMÎ MAARİF ÇIKTISI (UDA 1):
-  BTY.9.4.1. Algoritma ve akış diyagramlarındaki hataların sonuçlarını tahmin edebilme ve hata ayıklayabilme
+  BTY.9.4.1. Algoritma ve akış diyagramlarındaki mantıksal hataları test edebilme ve hata ayıklayabilme
 
 >>> BEP UYARLANMIŞ UZAK HEDEF (BEP UDA 1):
-Öğrenci, dönem sonunda sırası karışmış 3 işlem adımı içerisindeki hatalı adımı parmağıyla gösterir ve öğretmenin rehberliğinde doğru kartla değiştirir.
+Öğrenci, dönem sonunda sırası karışmış veya eksik verilmiş işlem adımı içerisindeki hatayı parmağıyla gösterir, yönergeyle düzelterek akışı hatasız çalışır hâle getirir.
 
 [SÜREÇ BİLEŞENLERİ (KISA DÖNEMLİ HEDEFLER / KDA)]:
 * 4.1. Tasarlanan algoritma ve akış diyagramını test eder.
@@ -237,7 +237,7 @@ Her bir ünite ve konu kümesi için iki düzeyde Uzak Hedef tanımlanmıştır:
   - Ölçüt: İstendiğinde açıklar
 
 * 4.4. Tasarladığı algoritma ve akış diyagramının hatalarını düzeltir.
-  - BEP Uyarlaması: Hatalı kartı çıkarıp yerine doğru adımı koyarak akışı düzeltir.
+  - BEP Uyarlaması: Hatalı kartı çıkarıp yerine doğru adımı koyarak akışı düzenler ve çalışır hâle getirir.
   - Ölçüt: 4 denemenin 3'ünde
 
 --------------------------------------------------------------------------------

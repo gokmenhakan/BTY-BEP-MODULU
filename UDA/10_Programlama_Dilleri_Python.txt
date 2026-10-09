@@ -24,10 +24,10 @@ Her bir ünite ve konu kümesi için iki düzeyde Uzak Hedef tanımlanmıştır:
 [1. KONU (İÇERİK ÇERÇEVESİ)]: Python Çalışma Ortamları ve Entegre Geliştirme Ortamı (IDE) Seçimi
 
 * RESMÎ MAARİF ÇIKTISI (UDA 1):
-  BTY.10.1.1. Python geliştirme ortamlarını karşılaştırarak uygun çalışma ortamına karar verebilme
+  BTY.10.1.1. Python programlama dili ve entegre geliştirme ortamı (IDE) ile amacına uygun çalışabilme
 
 >>> BEP UYARLANMIŞ UZAK HEDEF (BEP UDA 1):
-Öğrenci, dönem sonunda masaüstündeki Python IDE (Thonny/IDLE) simgesini parmağıyla gösterir ve fareyle çift tıklayarak çalışma ortamını açar.
+Öğrenci, dönem sonunda masaüstündeki Python IDE (Thonny/IDLE) simgesini çift tıklayarak açar, yeni dosya oluşturur ve 'Kaydet' butonuna basarak kod dosyasını kaydeder.
 
 [SÜREÇ BİLEŞENLERİ (KISA DÖNEMLİ HEDEFLER / KDA)]:
 * 1.1. Python programlama diliyle çalışılacak ortamları tanır.
@@ -35,17 +35,17 @@ Her bir ünite ve konu kümesi için iki düzeyde Uzak Hedef tanımlanmıştır:
   - Ölçüt: %100
 
 * 1.2. Farklı entegre geliştirme ortamlarını analiz ederek kendisine en uygun çalışma ortamını seçer.
-  - BEP Uyarlaması: Kendisine gösterilen IDE simgesine çift tıklayarak çalışma ortamını başlatır.
+  - BEP Uyarlaması: Kendisine gösterilen IDE simgesine çift tıklayarak çalışma ortamını başlatır ve yeni bir kod dosyası oluşturur.
   - Ölçüt: %100
 
 --------------------------------------------------------------------------------
 [2. KONU (İÇERİK ÇERÇEVESİ)]: Değişkenler, Veri Türleri, İşlem Önceliği ve Girdi/Çıktı İşlemleri
 
 * RESMÎ MAARİF ÇIKTISI (UDA 2):
-  BTY.10.1.2. Değişkenler, işlem önceliği ve veri giriş-çıkış komutlarını kullanarak temel Python programları oluşturabilme
+  BTY.10.1.2. Değişkenler, işlem önceliği ve veri giriş-çıkış komutlarından yararlanarak temel Python programları oluşturabilme
 
 >>> BEP UYARLANMIŞ UZAK HEDEF (BEP UDA 2):
-Öğrenci, dönem sonunda klavyeden print() fonksiyonu içine adını yazar, 'Run' butonuna basarak konsol ekranında kendi adını işaret eder.
+Öğrenci, dönem sonunda klavyeden print() fonksiyonu içine adını yazar, 'Run / Çalıştır' butonuna basarak programı çalıştırır ve konsol ekranında çıktısını gösterir.
 
 [SÜREÇ BİLEŞENLERİ (KISA DÖNEMLİ HEDEFLER / KDA)]:
 * 1.3. Değişkenlerde tutulacak verileri tanımlar.
@@ -53,7 +53,7 @@ Her bir ünite ve konu kümesi için iki düzeyde Uzak Hedef tanımlanmıştır:
   - Ölçüt: Yardımla %75
 
 * 1.5. Tanımlanan değişkenlerde işlem önceliğini gözetir.
-  - BEP Uyarlaması: İki sayıyı toplayan (`sayi1 + sayi2`) basit komut satırını yazar veya çalıştırır.
+  - BEP Uyarlaması: İki sayıyı toplayan (`sayi1 + sayi2`) basit komut satırını yazar ve 'Çalıştır' butonuyla programı çalıştırır.
   - Ölçüt: 3/4 denemede
 
 * 1.6. Kullanıcıdan veri alır.
@@ -74,10 +74,10 @@ Her bir ünite ve konu kümesi için iki düzeyde Uzak Hedef tanımlanmıştır:
 [1. KONU (İÇERİK ÇERÇEVESİ)]: Karar Yapıları (if-else), Mantıksal Koşullar ve Döngü Yapıları (for-while)
 
 * RESMÎ MAARİF ÇIKTISI (UDA 1):
-  BTY.10.2.1. Çoklu koşul ve döngülerin işleyişine yönelik çıkarımda bulunarak program blokları geliştirebilme
+  BTY.10.2.1. Python dilinde çoklu koşul durumlarını (if-else) ve tekrarlı döngü yapılarını yönetebilme ve geliştirebilme
 
 >>> BEP UYARLANMIŞ UZAK HEDEF (BEP UDA 1):
-Öğrenci, dönem sonunda hazır verilen koşullu (if-else) programa konsoldan yaşını girer ve ekranda beliren sonucu fareyle işaret eder.
+Öğrenci, dönem sonunda hazır verilen koşullu (if-else) programı çalıştırır, konsoldan veri girer ve ekranda beliren çıktıyı fareyle işaret eder.
 
 [SÜREÇ BİLEŞENLERİ (KISA DÖNEMLİ HEDEFLER / KDA)]:
 * 2.1. Python programlama dili karar yapılarını içeren programlar geliştirir.
@@ -96,10 +96,10 @@ Her bir ünite ve konu kümesi için iki düzeyde Uzak Hedef tanımlanmıştır:
 [2. KONU (İÇERİK ÇERÇEVESİ)]: Fonksiyonlar (def) ve Standart Kütüphaneler
 
 * RESMÎ MAARİF ÇIKTISI (UDA 2):
-  BTY.10.2.2. Python programlarında fonksiyonları ve hazır kütüphaneleri amaca uygun uygulayabilme
+  BTY.10.2.2. Python programlarında fonksiyonlar ve hazır kütüphanelerden amaca uygun yararlanabilme
 
 >>> BEP UYARLANMIŞ UZAK HEDEF (BEP UDA 2):
-Öğrenci, dönem sonunda hazır rastgele sayı üreten fonksiyonu çalıştırır ve konsola gelen sayıyı sesli okur.
+Öğrenci, dönem sonunda hazır rastgele sayı üreten fonksiyonu çalıştırır, konsola gelen sayıyı sesli okur ve kod dosyasını kaydeder.
 
 [SÜREÇ BİLEŞENLERİ (KISA DÖNEMLİ HEDEFLER / KDA)]:
 * 2.4. Fonksiyonları program içinde yöntemlerine göre kullanır.
@@ -150,10 +150,10 @@ Her bir ünite ve konu kümesi için iki düzeyde Uzak Hedef tanımlanmıştır:
 [2. KONU (İÇERİK ÇERÇEVESİ)]: Veri Koleksiyonları (List, Tuple, Dict), Dosya İşlemleri ve Proje Geliştirme
 
 * RESMÎ MAARİF ÇIKTISI (UDA 2):
-  BTY.10.3.2. Veri yapıları ve dosya işlemlerini kullanarak ileri düzey Python projeleri hazırlayabilme ve geliştirebilme
+  BTY.10.3.2. Veri koleksiyonları ve dosya işlemlerinden yararlanarak Python ile çalışan bir ürün ve yazılım ortaya koyabilme
 
 >>> BEP UYARLANMIŞ UZAK HEDEF (BEP UDA 2):
-Öğrenci, dönem sonunda ekranda listelenen verilerden istenen elemanı seçer ve 'Dosyadan Oku / Kaydet' butonuna basarak veriyi ekranda işaret eder.
+Öğrenci, dönem sonunda ekranda listelenen verilerden istenen elemanı seçer; 'Dosyadan Oku / Kaydet' butonuna basarak veriyi kaydeder ve programı çalıştırır.
 
 [SÜREÇ BİLEŞENLERİ (KISA DÖNEMLİ HEDEFLER / KDA)]:
 * 3.6. List, tuple, set ve dictionary türlerinde verileri tanımlar.
@@ -169,7 +169,7 @@ Her bir ünite ve konu kümesi için iki düzeyde Uzak Hedef tanımlanmıştır:
   - Ölçüt: %80
 
 * 3.9. İleri seviye nesne yönelimi teknikleriyle özgün projeler geliştirir.
-  - BEP Uyarlaması: Hazır bir projede (hesap makinesi veya mini quiz) butonlara tıklayarak projeyi baştan sona tamamlar.
+  - BEP Uyarlaması: Hazır bir projede (hesap makinesi veya mini quiz) butonlara tıklayarak projeyi baştan sona tamamlar ve kaydeder.
   - Ölçüt: Yardımla %80
 
 ================================================================================
