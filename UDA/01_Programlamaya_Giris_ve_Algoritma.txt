@@ -21,21 +21,21 @@ Her bir ünite ve konu kümesi için iki düzeyde Uzak Hedef tanımlanmıştır:
 ################################################################################
 
 --------------------------------------------------------------------------------
-[1. KONU (İÇERİK ÇERÇEVESİ)]: Bilişim Teknolojilerine İlişkin Temel Kavramlar (Bilgi, İletişim, Teknoloji) ve Donanım Araçları
+[1. KONU (İÇERİK ÇERÇEVESİ)]: Bilişim Teknolojilerine İlişkin Temel Kavramlar ve Bilişim Araçları
 
 * RESMÎ MAARİF ÇIKTISI (UDA 1):
-  BTY.9.1.1. Bilişim teknolojilerine ilişkin temel kavramları (bilgi, iletişim, teknoloji) ve donanım araçlarını sınıflandırabilme
+  BTY.9.1.1. Bilişim teknolojilerine ilişkin temel kavramları ve bilişim araçlarını sınıflandırabilme
 
 >>> BEP UYARLANMIŞ UZAK HEDEF (BEP UDA 1):
-Öğrenci, dönem sonunda temel bilişim kavramlarını (bilgi, iletişim, teknoloji) ve bilgisayar donanım parçalarını (monitör, kasa, klavye, fare) resimli kartlarla eşleştirir, gösterir ve adını söyler.
+Öğrenci, dönem sonunda bilişim teknolojilerine ilişkin temel kavramları ve yaygın bilişim araçlarını eşleştirir, gösterir ve kullanım amacını söyler.
 
 [SÜREÇ BİLEŞENLERİ (KISA DÖNEMLİ HEDEFLER / KDA)]:
-* 1.1. Bilişim teknolojilerine ilişkin temel kavramları (bilgi, iletişim, teknoloji) tanımlar.
-  - BEP Uyarlaması: Temel kavramları (bilgi, iletişim, teknoloji ve bilgisayar) temsil eden resimli kartlardan adı söyleneni seçip gösterir.
+* 1.1. Bilişim teknolojilerine ilişkin temel kavramları tanımlar.
+  - BEP Uyarlaması: Temel bilişim kavramlarını (bilgisayar, yazılım, veri, donanım) temsil eden kartlardan veya seçeneklerden adı söyleneni seçip gösterir.
   - Ölçüt: 4 denemenin en az 3'ünde (%75)
 
 * 1.2. Bilişim teknolojisi araçlarını listeler.
-  - BEP Uyarlaması: Masada/ekranda bulunan bilişim araçlarından (monitör, kasa, klavye, fare, tablet) adı söyleneni gösterir.
+  - BEP Uyarlaması: Masada/ekranda bulunan bilişim araçlarından (bilgisayar, kasa, monitör, klavye, fare, tablet) adı söyleneni parmağıyla gösterir.
   - Ölçüt: %80 doğrulukla
 
 --------------------------------------------------------------------------------
