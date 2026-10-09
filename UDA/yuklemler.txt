@@ -1,0 +1,115 @@
+================================================================================
+BEP (BİREYSELLEŞTİRİLMİŞ EĞİTİM PROGRAMI) AMAÇ VE HEDEF YAZIM İLKELERİ (REFERANS KILAVUZ)
+================================================================================
+
+BEP (Bireyselleştirilmiş Eğitim Programı) hazırlarken amaç ve hedef yazımında kullanılan 
+beceri yüklemleri, öğrencinin gerçekleştireceği davranışı gözlenebilir ve ölçülebilir kılan en kritik ögelerdir.
+BEP yazımında "anlar", "kavrar", "öğrenir", "bilir" gibi ölçülmesi zor muğlak kelimeler yerine, 
+eylem bildiren net yüklemler seçilmelidir. Gelişim alanlarına göre kullanabileceğiniz temel beceri yüklemleri şunlardır:
+
+🌟 Öz Bakım ve Günlük Yaşam Becerileri
+• Giyinme/Soyunma : Giyer, çıkarır, düğmeler, bağlar, cırtcırtı açar/kapatır.
+• Temizlik/Hijyen : Yıkar, kurular, fırçalar, tarar, temizler.
+• Yemek Yeme      : Kaşıklar, çatala batırır, içer, doldurur, keser, çiğner.
+• Ev İçi Beceriler: Toplar, dizer, siler, yerleştirir, açar, kapatır.
+
+📚 Bilişsel ve Akademik Beceriler
+• Eşleme                   : Aynısını bulur, eşler, eşleştirir.
+• Ayırt Etme/Sınıflandırma : Ayırt eder, gruplar, sınıflandırır, ayırır.
+• Gösterme/Seçme           : İşaret eder, gösterir, seçer, elini kaldırır.
+• Adlandırma/Söyleme       : Adlandırır, söyler, ifade eder, sayar, okur.
+• Yazma/Çizme              : Yazar, çizer, boyar, üzerinden geçer, tamamlar.
+• Problem Çözme            : Çözer, hesaplar, eşitler, eşleştirir.
+
+🗣️ Dil ve İletişim Becerileri
+• Alıcı Dil    : Bakar, yönelir, dinler, yerine getirir (yönergeyi), taklit eder.
+• İfade Edici Dil: Cevap verir, sorar, anlatır, açıklar, tekrar eder, selamlaşır.
+
+🏃 Motor (Kaba ve İnce) Beceriler
+• Kaba Motor: Yürür, koşar, zıplar, tırmanır, fırlatır, yakalar, dengede durur.
+• İnce Motor: Tutar, sıkar, keser (makasla), yapıştırır, yırtar, yoğurur, dizer (boncuk).
+
+👥 Sosyal ve Duygusal Beceriler
+• Sosyal Etkileşim: Paylaşır, sıra bekler, izin ister, iş birliği yapar, kurallara uyar.
+• Duygu Yönetimi  : İfade eder, sakinleşir, kabul eder, yardım ister.
+
+💡 BEP Amaç Cümlesi Kurarken Formül (Örnek):
+• Yanlış: "Ahmet renkleri öğrenir." (Nasıl ölçeceğiz? Ne kadar sürede?)
+• Doğru : "Ahmet, önüne konulan 3 farklı renkteki nesne arasından söylenen rengi gösterir." (Gözlenebilir ve ölçülebilir).
+
+================================================================================
+TÜRKİYE YÜZYILI MAARİF MODELİ (TYMM) UZAK HEDEF YÜKLEMLERİ (ÖĞRENME ÇIKTILARI - UDA)
+================================================================================
+
+1. MAARİF MODELİ GENEL KAVRAMSAL BECERİLER (ÇERÇEVE PLANDAN ALINAN YÜKLEMLER):
+* algılayabilme           : Temel kavramları, donanımları veya sembolleri tanıma ve fark etme.
+* sınıflandırabilme       : Donanım birimlerini, yazılım türlerini veya veri tiplerini gruplandırma.
+* ilişkilendirebilme      : Girdi-işlem-çıktı, donanım-yazılım veya sebep-sonuç bağını kurma.
+* çözümleyebilme          : Karmaşık bir konuyu, sistemi veya problem durumunu bileşenlerine ayırma.
+* karşılaştırabilme       : İki algoritmayı, programlama dilini veya teknolojiyi kıyaslama.
+* çıkarımda bulunabilme   : Verilen durumlardan, kod çıktılarından veya verilerden mantıksal sonuç çıkarma.
+* yorumlayabilme          : Teknolojik gelişmeleri, algoritmaların işleyişini kendi cümleleriyle anlamlandırma.
+* tahmin edebilme         : Bir kodun/algoritmanın sonucunu veya yapılan bir mantık hatasının etkisini öngörme.
+* karar verebilme         : Şartlı durumlarda veya alternatif çözüm yolları arasından amaca en uygun olanı seçme.
+* sorgulayabilme          : Bilişim etiğini, bilgi güvenliğini ve teknolojinin olumlu/olumsuz etkilerini eleştirme.
+* araştırabilme           : Yeni teknolojileri, yazılım geliştirme araçlarını veya kütüphaneleri inceleme.
+* değerlendirebilme       : Bir algoritmanın veya yazılımın doğruluğunu ve verimliliğini değerlendirme.
+* yansıtabilme            : Teknolojinin günlük yaşama, mesleklere ve insan hayatına etkisini ifade etme.
+* özetleyebilme           : Problem çözümünü veya bir süreci temel basamaklarıyla kısa ve öz ifade etme.
+* yapılandırabilme        : Çözüm basamaklarını veya kod bloklarını mantıksal bir sıra içinde kurgulama.
+* oluşturabilme           : Yeni bir algoritma, akış diyagramı, değişken veya fonksiyon meydana getirme.
+* hazırlayabilme          : Problem çözümüne yönelik algoritma adımlarını veya çalışma ortamını hazır hale getirme.
+* yapabilme               : Temel düzeydeki bilişim ve kodlama uygulamalarını eyleme dökme.
+
+2. BİLİŞİM TEKNOLOJİLERİ VE YAZILIM ALAN BECERİLERİ:
+* kodlayabilme            : Tasarlanan bir algoritmayı ilgili programlama dilinde kod satırlarına dökebilme.
+* tasarlayabilme          : Akış diyagramı, kullanıcı arayüzü veya yazılım mimarisi tasarlayabilme.
+* modelleyebilme          : Gerçek hayat durumlarını veya süreçleri akış şeması ya da nesne (OOP) olarak modelleyebilme.
+* hata ayıklayabilme      : Algoritma veya kod içerisindeki mantıksal/yazımsal hataları tespit edip düzeltebilme.
+* test edebilme           : Yazılan kod veya akış şemasını farklı veri girişleriyle deneyerek doğrulayabilme.
+* geliştirebilme          : Karar, döngü, fonksiyon veya kütüphaneleri kullanarak amaca uygun yazılım/proje geliştirebilme.
+* uygulayabilme           : Komutları, veri yapılarını, dosya işlemlerini veya fonksiyonları projede amaca uygun kullanabilme.
+
+================================================================================
+FİLTRELENMİŞ İFADELER
+(BİLİŞİM TEKNOLOJİLERİ VE YAZILIM DERSİ BEP KISA DÖNEMLİ HEDEFLERİ / KDA İÇİN)
+================================================================================
+Yukarıdaki genel gelişim alanları taranarak, Bilişim Teknolojileri ve Programlama dersinde
+BEP'li öğrencinin yapabileceği en somut, doğrudan gözlenebilir ve ölçülebilir eylemler
+filtrelenmiş ve kategorize edilmiştir:
+
+1. GÖSTERME, SEÇME VE İŞARET ETME (Bilişsel & Algılama)
+   - gösterir         (Örn: Masadaki fareyi parmağıyla gösterir.)
+   - seçer            (Örn: Verilen 3 donanım kartı arasından monitörü seçer.)
+   - işaret eder      (Örn: Ekrandaki doğru çalışma sonucunu fareyle işaret eder.)
+   - bulur            (Örn: Karışık kartlar arasından 'Başla' sembolünü bulur.)
+
+2. BİLGİSAYAR VE CİHAZ KULLANIMI (İnce Motor & Bilişim Becerileri)
+   - açar             (Örn: Bilgisayarı açma butonuna basarak açar.)
+   - kapatır          (Örn: Bilgisayarı kuralına uygun güvenle kapatır.)
+   - tıklar           (Örn: Ekrandaki yeşil bayrak/başlat butonunu fareyle tıklar.)
+   - basar            (Örn: Klavyeden Enter / Space tuşuna basar.)
+   - sürükler/bırakır (Örn: Scratch bloklarını çalışma alanına sürükleyip bırakır.)
+
+3. ADLANDIRMA VE SÖYLEME (Dil ve İfade)
+   - söyler           (Örn: Bilişim aracının ne işe yaradığını söyler.)
+   - adlandırır       (Örn: Kendisine gösterilen akış sembolünü adlandırır.)
+   - okur             (Örn: Konsol ekranında çıkan sonucu sesli okur.)
+   - sayar            (Örn: Döngü çıktısındaki satır sayısını sayar.)
+   - cevap verir      (Örn: Öğretmenin problemle ilgili sorusuna cevap verir.)
+
+4. YAZMA VE KODLAMA (Akademik & Üretim)
+   - yazar            (Örn: `print()` fonksiyonunun içine adını klavyeyle yazar.)
+   - çizer            (Örn: Kağıda basit bir dikdörtgen işlem sembolü çizer.)
+   - tamamlar         (Örn: Eksik bırakılmış 1 komut satırını tamamlar.)
+
+5. EŞLEŞTİRME VE DİZME (Algoritma ve Problem Çözme)
+   - eşleştirir       (Örn: Akış sembolleri ile görev kartlarını masada eşleştirir.)
+   - dizer            (Örn: 3 adımlı resimli günlük yaşam kartlarını soldan sağa sırayla dizer.)
+   - gruplar / ayırır (Örn: Sayı ve metin verilerini ilgili kutulara ayırır.)
+
+6. YÖNERGE TAKİBİ VE DÜZELTME (Uygulama & Test)
+   - yerine getirir   (Örn: Öğretmenin verdiği 2 adımlı yönergeyi yerine getirir.)
+   - takip eder       (Örn: Akış şemasının adımlarını parmağıyla sırayla takip eder.)
+   - değiştirir       (Örn: Hatalı kartı çıkarıp yerine doğru adımı koyar.)
+================================================================================

@@ -1,0 +1,2068 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <base target="_top">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bilişim Teknolojileri ve Yazılım BEP Modülü (Temel / Uygulamalı Düzey)</title>
+  
+  <!-- xlsx-js-style: Hücre Kenarlığı (Border), Hizalama ve Biçimlendirme Destekli Excel Kütüphanesi -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js"></script>
+
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      color: #1e293b;
+      background-color: #f8fafc;
+      margin: 0;
+      padding: 15px;
+    }
+    #bep_app {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .bep-panel {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+    .bep-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    label {
+      font-size: 12px;
+      font-weight: bold;
+      color: #475569;
+      display: block;
+      margin-bottom: 5px;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      font-size: 13px;
+      color: #0f172a;
+      background: #fff;
+      font-family: inherit;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #0284c7;
+    }
+    .btn {
+      border: none;
+      padding: 10px 18px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 13px;
+      transition: 0.2s;
+    }
+    .btn-add { background: #16a34a; color: #ffffff; }
+    .btn-add:hover { background: #15803d; }
+    .btn-print { background: #0284c7; color: #ffffff; }
+    .btn-print:hover { background: #0369a1; }
+    .btn-excel { background: #107c41; color: #ffffff; }
+    .btn-excel:hover { background: #0b582e; }
+    .btn-del {
+      background: #ef4444;
+      color: #ffffff;
+      padding: 5px 8px;
+      font-size: 11px;
+      border-radius: 4px;
+    }
+    
+    /* MEB Tablo Stili */
+    .bep-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px auto;
+      font-size: 11px;
+    }
+    .bep-table th, .bep-table td {
+      border: 1px solid #64748b;
+      padding: 7px 6px;
+      text-align: center;
+      vertical-align: middle;
+    }
+    .bep-table th {
+      background-color: transparent;
+      color: #0f172a;
+      font-weight: 700;
+    }
+    .bep-table td.text-left {
+      text-align: left;
+    }
+    .kda-item {
+      margin-bottom: 4px;
+      line-height: 1.35;
+    }
+    .kda-item:last-child {
+      margin-bottom: 0;
+    }
+    .info-table {
+      width: 100%;
+      border: none;
+      margin: 0 auto 12px auto;
+      font-size: 13px;
+    }
+    .info-table td { border: none; padding: 4px; }
+
+    /* Çoklu Seçim Dropdown Menüleri */
+    .multiselect-container {
+      position: relative;
+      user-select: none;
+    }
+    .selectBox {
+      position: relative;
+    }
+    .selectBox select {
+      width: 100%;
+      cursor: pointer;
+    }
+    .overSelect {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+    }
+    .checkboxes-panel {
+      display: none;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      background-color: #ffffff;
+      position: absolute;
+      z-index: 100;
+      width: 100%;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+      max-height: 220px;
+      overflow-y: auto;
+      padding: 6px;
+    }
+    .checkboxes-panel label {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-weight: normal;
+      font-size: 12px;
+      padding: 5px 4px;
+      margin: 0;
+      cursor: pointer;
+      line-height: 1.35;
+    }
+    .checkboxes-panel label:hover {
+      background-color: #f1f5f9;
+      border-radius: 3px;
+    }
+    .checkboxes-panel input[type="checkbox"] {
+      width: auto;
+      margin-top: 2px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    /* ========================================================= */
+    /* YAZDIRMA (TAM SAYFAYA ORTALANMIŞ A4 LANDSCAPE)           */
+    /* ========================================================= */
+    @page {
+      size: A4 landscape;
+      margin: 10mm;
+    }
+
+    @media print {
+      html, body {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #fff !important;
+      }
+      body * { visibility: hidden !important; }
+
+      #bep_cikti_alani, #bep_cikti_alani * { 
+        visibility: visible !important; 
+      }
+      
+      #bep_cikti_alani {
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+      }
+
+      .bep-no-print { display: none !important; }
+      
+      .bep-header { 
+        width: 100% !important; 
+        text-align: center !important; 
+        margin-bottom: 10px !important;
+      }
+      .bep-header h3 { font-size: 13pt !important; margin: 2px 0 !important; }
+      .bep-header h4 { font-size: 11pt !important; margin: 2px 0 !important; }
+      
+      .info-table { 
+        width: 100% !important; 
+        margin: 0 auto 8px auto !important;
+      }
+      .info-table td { font-size: 9.5pt !important; padding: 2px 4px !important; }
+
+      .bep-table {
+        font-size: 8.5pt !important;
+        width: 100% !important;
+        margin: 0 auto !important;
+        table-layout: auto !important;
+      }
+      .bep-table tr {
+        page-break-inside: avoid;
+      }
+      .bep-table th, .bep-table td {
+        padding: 5px 4px !important;
+        line-height: 1.25 !important;
+        border: 1px solid #000 !important;
+      }
+      .bep-table th {
+        background-color: transparent !important;
+        color: #000 !important;
+      }
+
+      .bep-imza-grid {
+        margin: 25px auto 0 auto !important;
+        page-break-inside: avoid !important;
+        row-gap: 20px !important;
+        column-gap: 15px !important;
+        width: 100% !important;
+      }
+      .bep-imza-grid p {
+        margin: 1px 0 !important;
+        font-size: 9.5pt !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div id="bep_app">
+
+  <!-- FORM GİRİŞ ALANI -->
+  <div class="bep-panel bep-no-print">
+    <div class="bep-no-print" style="background:#fef3c7; border:1px solid #fde68a; padding:10px 14px; border-radius:6px; margin-bottom:15px; font-size:13px; display:flex; justify-content:space-between; align-items:center;"><span>⭐ <strong>Temel / Uygulamalı Düzey (Saha Gerçeği) Sürümü</strong>ndeyiz. (Öğrencinin yapabileceği somut, pratik eylemler)</span><a href="index.html" style="color:#b45309; font-weight:bold; text-decoration:none; background:#fff; padding:5px 10px; border-radius:4px; border:1px solid #fcd34d;">➔ Standart / Akademik Sürüme Geç</a></div>
+    <h3 style="margin-top:0; color:#1e3a8a;">Bilişim Teknolojileri ve Yazılım Dersi BEP Hazırlama Modülü <span style="font-size:13px; color:#d97706; font-weight:normal;">(Temel / Uygulamalı Düzey)</span></h3>
+    
+    <div class="bep-grid">
+      <div>
+        <label>Öğrenci Adı Soyadı</label>
+        <input type="text" id="bep_ogrAd" placeholder="Örn: Ahmet Yılmaz">
+      </div>
+      <div>
+        <label>Sınıfı / Şubesi</label>
+        <input type="text" id="bep_sinif" placeholder="Örn: 9/A veya 10/B">
+      </div>
+      <div>
+        <label>Öğrenci Numarası</label>
+        <input type="text" id="bep_no" placeholder="Örn: 450">
+      </div>
+      <div>
+        <label>Eğitim-Öğretim Yılı</label>
+        <input type="text" id="bep_yil" value="2026-2027">
+      </div>
+      <div>
+        <label>Ders Seçiniz</label>
+        <select id="bep_ders">
+          <option value="Bilişim Teknolojileri ve Yazılım 9.Sınıf" selected>Bilişim Teknolojileri ve Yazılım 9.Sınıf</option>
+          <option value="Bilişim Teknolojileri ve Yazılım 10.Sınıf">Bilişim Teknolojileri ve Yazılım 10.Sınıf</option>
+          <option value="Bilişim Teknolojileri ve Yazılım 11.Sınıf">Bilişim Teknolojileri ve Yazılım 11.Sınıf</option>
+        </select>
+      </div>
+      <div>
+        <label>Modül Seçiniz</label>
+        <select id="bep_modul">
+          <option value="9_algoritma" selected>Programlamaya Giriş ve Algoritma</option>
+          <option value="10_python">Programlama Dilleri (Python)</option>
+          <option value="robotik_kodlama">Robotik Kodlama</option>
+          <option value="mobil_uygulama">Mobil Uygulama Geliştirme</option>
+          <option value="java">Programlama Dilleri (Java)</option>
+          <option value="cpp">Programlama Dilleri (C++)</option>
+          <option value="csharp">Programlama Dilleri (C#)</option>
+          <option value="dart">Programlama Dilleri (Dart)</option>
+          <option value="php">Programlama Dilleri (PHP)</option>
+          <option value="javascript">Programlama Dilleri (JavaScript)</option>
+          <option value="yapay_zeka">Yapay Zekâ Uygulamaları</option>
+        </select>
+      </div>
+      <div>
+        <label>Ders Öğretmeni</label>
+        <input type="text" id="bep_ogretmen" value="Hakan GÖKMEN">
+      </div>
+      <div>
+        <label>Sınıf Rehber Öğretmeni</label>
+        <input type="text" id="bep_sinifOgretmeni" placeholder="Örn: Ad Soyad">
+      </div>
+      <div>
+        <label>Öğrenci Velisi</label>
+        <input type="text" id="bep_veli" placeholder="Örn: Veli Ad Soyad">
+      </div>
+      <div>
+        <label>Rehber Öğretmen</label>
+        <input type="text" id="bep_rehberOgretmen" placeholder="Örn: Ad Soyad">
+      </div>
+      <div>
+        <label>BEP Birim Başkanı</label>
+        <input type="text" id="bep_mudurYrd" value="Hasan KÖSEOĞLU">
+      </div>
+    </div>
+
+    <div class="bep-grid" style="margin-top: 15px;">
+      <div style="grid-column: span 2;">
+        <label>Uzun Dönemli Amaç (UDA) / Ünite Seçiniz</label>
+        <select id="bep_uda">
+          <option value="">Önce modül seçiniz...</option>
+        </select>
+      </div>
+
+      <div style="grid-column: span 2;">
+        <label>Uzun Dönemli Amaç Cümlesi (Öğrenci düzeyine göre düzenleyebilirsiniz)</label>
+        <textarea id="bep_uda_metin" rows="2" placeholder="UDA seçildiğinde otomatik doldurulur..."></textarea>
+      </div>
+      
+      <!-- 1. KISA DÖNEMLİ AMAÇLAR (REVİZE EDİLMİŞ - ÇOKLU SEÇİM) -->
+      <div style="grid-column: span 2;">
+        <label style="color: #0369a1; font-weight: 700;">⭐ Revize Edilmiş KDA (Temel / Somut Düzey)</label>
+        <div class="multiselect-container">
+          <div class="selectBox" id="selectBoxKdaTrigger">
+            <select>
+              <option id="multiSelectKdaLabel">Önce UDA seçiniz...</option>
+            </select>
+            <div class="overSelect"></div>
+          </div>
+          <div id="checkboxesKdaArea" class="checkboxes-panel">
+            <div style="padding: 6px; font-size: 12px; color: #64748b;">Önce yukarıdan bir UDA seçiniz.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. RESMÎ MEB KAZANIMLARI (REVİZE EDİLMEYEN ORİJİNAL KDA - ÇOKLU SEÇİM) -->
+      <div style="grid-column: span 2;">
+        <label style="color: #b45309; font-weight: 700;">📜 Resmî MEB Kazanımları (Orijinal / Revize Edilmemiş)</label>
+        <div class="multiselect-container">
+          <div class="selectBox" id="selectBoxMebTrigger">
+            <select>
+              <option id="multiSelectMebLabel">Önce UDA seçiniz...</option>
+            </select>
+            <div class="overSelect"></div>
+          </div>
+          <div id="checkboxesMebArea" class="checkboxes-panel">
+            <div style="padding: 6px; font-size: 12px; color: #64748b;">Önce yukarıdan bir UDA seçiniz.</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <label>Ölçüt*</label>
+        <select id="bep_degerlendirme">
+          <option value="1/5 (%20)">1/5 (%20)</option>
+          <option value="2/5 (%40)">2/5 (%40)</option>
+          <option value="3/5 (%60)">3/5 (%60)</option>
+          <option value="4/5 (%80)" selected>4/5 (%80)</option>
+          <option value="5/5 (%100)">5/5 (%100)</option>
+        </select>
+      </div>
+      <div>
+        <label>Öğretim Yöntem ve Teknikleri</label>
+        <input type="text" id="bep_yontem" value="Anlatım, Soru-Cevap, Gösterip Yaptırma">
+      </div>
+      <div>
+        <label>Kullanılacak Materyaller</label>
+        <input type="text" id="bep_materyal" value="Ders Kitabı, Bilgisayar, Flowgorithm / Kodlama Araçları">
+      </div>
+      <div>
+        <label>Başlama Tarihi</label>
+        <select id="bep_baslamaAy">
+          <option value="Eylül">Eylül</option>
+          <option value="Ekim" selected>Ekim</option>
+          <option value="Kasım">Kasım</option>
+          <option value="Aralık">Aralık</option>
+          <option value="Ocak">Ocak</option>
+          <option value="Şubat">Şubat</option>
+          <option value="Mart">Mart</option>
+          <option value="Nisan">Nisan</option>
+          <option value="Mayıs">Mayıs</option>
+          <option value="Haziran">Haziran</option>
+          <option value="Temmuz">Temmuz</option>
+          <option value="Ağustos">Ağustos</option>
+        </select>
+      </div>
+      <div>
+        <label>Bitiş Tarihi</label>
+        <select id="bep_bitisAy">
+          <option value="Eylül">Eylül</option>
+          <option value="Ekim">Ekim</option>
+          <option value="Kasım">Kasım</option>
+          <option value="Aralık">Aralık</option>
+          <option value="Ocak" selected>Ocak</option>
+          <option value="Şubat">Şubat</option>
+          <option value="Mart">Mart</option>
+          <option value="Nisan">Nisan</option>
+          <option value="Mayıs">Mayıs</option>
+          <option value="Haziran">Haziran</option>
+          <option value="Temmuz">Temmuz</option>
+          <option value="Ağustos">Ağustos</option>
+        </select>
+      </div>
+      <div>
+        <label>Değ. Yöntem ve Teknikleri (Çoklu Seçim)</label>
+        <div class="multiselect-container">
+          <div class="selectBox" id="selectBoxTrigger">
+            <select>
+              <option id="multiSelectLabel">Gözlem formu</option>
+            </select>
+            <div class="overSelect"></div>
+          </div>
+          <div id="checkboxesArea" class="checkboxes-panel">
+            <label><input type="checkbox" value="Gözlem formu" checked onchange="guncelleSecimLabel()"> Gözlem formu</label>
+            <label><input type="checkbox" value="Performans görevi" onchange="guncelleSecimLabel()"> Performans görevi</label>
+            <label><input type="checkbox" value="Görüşme formu" onchange="guncelleSecimLabel()"> Görüşme formu</label>
+            <label><input type="checkbox" value="Çalışma kâğıdı" onchange="guncelleSecimLabel()"> Çalışma kâğıdı</label>
+            <label><input type="checkbox" value="Kontrol listesi" onchange="guncelleSecimLabel()"> Kontrol listesi</label>
+          </div>
+        </div>
+      </div>
+      <div>
+        <label>Değerlendirme Tarihleri</label>
+        <input type="text" id="bep_degTarih" value="" placeholder="Tarih giriniz...">
+      </div>
+      <div>
+        <label>Performans Yeterli (+) / Geliştirilmeli (-)</label>
+        <select id="bep_performans">
+          <option value="" selected>Boş Bırak</option>
+          <option value="( + )">Yeterli ( + )</option>
+          <option value="( - )">Geliştirilmeli ( - )</option>
+        </select>
+      </div>
+    </div>
+
+    <button type="button" class="btn btn-add" id="bep_btn_ekle">+ Seçilen Amacı Plana Ekle</button>
+  </div>
+
+  <!-- YAZDIRILABİLİR MEB BEP FORMU (ORTALANMIŞ YATAY ÇIKTI ALANI) -->
+  <div id="bep_cikti_alani" class="bep-panel">
+    <div class="bep-header" style="text-align: center; margin-bottom: 12px;">
+      <h3 style="margin: 0; text-transform: uppercase;">T.C. MİLLÎ EĞİTİM BAKANLIĞI</h3>
+      <h3 style="margin: 2px 0; text-transform: uppercase;">SÜLEYMAN ÇELEBİ ANADOLU LİSESİ</h3>
+      <h4 style="margin: 4px 0;">BİLİŞİM TEKNOLOJİLERİ VE YAZILIM DERSİ BİREYSELLEŞTİRİLMİŞ EĞİTİM PROGRAMI (BEP) FORMU</h4>
+    </div>
+
+    <!-- ÜST BİLGİ ALANI: DERS VE MODÜL AYRI AYRI İŞLENİYOR -->
+    <table class="info-table">
+      <tr>
+        <td width="16%"><strong>Öğrenci Adı Soyadı:</strong></td>
+        <td width="34%" id="bep_lblOgr">-</td>
+        <td width="16%"><strong>Eğitim-Öğretim Yılı:</strong></td>
+        <td width="34%" id="bep_lblYil">2026-2027</td>
+      </tr>
+      <tr>
+        <td><strong>Sınıfı / Numarası:</strong></td>
+        <td id="bep_lblSinifNo">-</td>
+        <td><strong>Ders:</strong></td>
+        <td id="bep_lblDers">Bilişim Teknolojileri ve Yazılım 9.Sınıf</td>
+      </tr>
+      <tr>
+        <td><strong>Ders Öğretmeni:</strong></td>
+        <td id="bep_lblOgrt">Hakan GÖKMEN</td>
+        <td><strong>Modül:</strong></td>
+        <td id="bep_lblModul">Programlamaya Giriş ve Algoritma</td>
+      </tr>
+      <tr>
+        <td><strong>Düzenleme Tarihi:</strong></td>
+        <td id="bep_lblTarih" colspan="3">-</td>
+      </tr>
+    </table>
+
+    <!-- SAYFAYA ORTALANMIŞ MEB TABLOSU -->
+    <table class="bep-table" id="bep_tablo">
+      <thead>
+        <tr>
+          <th rowspan="2" style="width: 20%;">Uzun Dönemli Amaçlar</th>
+          <th rowspan="2" style="width: 26%;">Kısa Dönemli Amaçlar</th>
+          <th rowspan="2" style="width: 7%;">Ölçüt*</th>
+          <th rowspan="2" style="width: 12%;">Öğretim Yöntem ve Teknikleri</th>
+          <th rowspan="2" style="width: 11%;">Kullanılacak Materyaller</th>
+          <th rowspan="2" style="width: 7%;">Başlama ve Bitiş Tarihi</th>
+          <th colspan="3" style="width: 17%;">Ölçme – Değerlendirme</th>
+          <th rowspan="2" class="bep-no-print" style="width: 4%;">Sil</th>
+        </tr>
+        <tr>
+          <th style="width: 7%;">Değerlendirme Yöntem ve Teknikleri</th>
+          <th style="width: 5%;">Değerlendirme Tarihleri</th>
+          <th style="width: 5%;">Performans Yeterli (+)<br>Geliştirilmeli (-)</th>
+        </tr>
+      </thead>
+      <tbody id="bep_govde"></tbody>
+    </table>
+
+    <!-- İMZALAR BÖLÜMÜ (İMZA ALANI ÜSTTE, İSİM VE UNVAN ALTTA) -->
+    <div class="bep-imza-grid" style="margin-top: 30px; display: grid; grid-template-columns: repeat(3, 1fr); row-gap: 25px; column-gap: 15px; text-align: center; font-size: 11px;">
+      <div>
+        <p style="margin-bottom: 25px;">İmza</p>
+        <p style="margin: 2px 0;"><strong id="bep_imza_ogrt">Hakan GÖKMEN</strong></p>
+        <p style="margin: 2px 0;"><strong>Ders Öğretmeni</strong></p>
+      </div>
+      <div>
+        <p style="margin-bottom: 25px;">İmza</p>
+        <p style="margin: 2px 0;"><strong id="bep_imza_sinifOgretmeni">______________________</strong></p>
+        <p style="margin: 2px 0;"><strong>Sınıf Rehber Öğretmeni</strong></p>
+      </div>
+      <div>
+        <p style="margin-bottom: 25px;">İmza</p>
+        <p style="margin: 2px 0;"><strong id="bep_imza_veli">______________________</strong></p>
+        <p style="margin: 2px 0;"><strong>Öğrenci Velisi</strong></p>
+      </div>
+      <div>
+        <p style="margin-bottom: 25px;">İmza</p>
+        <p style="margin: 2px 0;"><strong id="bep_imza_rehberOgretmen">______________________</strong></p>
+        <p style="margin: 2px 0;"><strong>Rehber Öğretmen</strong></p>
+      </div>
+      <div>
+        <!-- Boş grid hücresi (Düzen dengesi) -->
+        <p style="margin-bottom: 25px;">&nbsp;</p>
+        <p style="margin: 2px 0;">&nbsp;</p>
+        <p style="margin: 2px 0;">&nbsp;</p>
+      </div>
+      <div>
+        <p style="margin-bottom: 25px;">İmza</p>
+        <p style="margin: 2px 0;"><strong id="bep_imza_mudurYrd">Hasan KÖSEOĞLU</strong></p>
+        <p style="margin: 2px 0;"><strong>BEP Birim BAŞKANI</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- BUTONLAR -->
+  <div class="bep-no-print" style="text-align: right; margin-top: 15px; display: flex; justify-content: flex-end; gap: 10px;">
+    <button class="btn btn-print" id="bep_btn_yazdir">🖨️ Yazdır / PDF Olarak Kaydet (Yatay A4)</button>
+    <button class="btn btn-excel" id="bep_btn_excel">📊 Excel'e Aktar (.xlsx)</button>
+  </div>
+
+</div>
+
+<script>
+  // ===================== DEĞERLENDİRME ÇOKLU SEÇİM =====================
+  let expandedDeg = false;
+  const triggerDeg = document.getElementById("selectBoxTrigger");
+  const checkboxesDeg = document.getElementById("checkboxesArea");
+
+  triggerDeg.addEventListener("click", function(e) {
+    e.stopPropagation();
+    if (!expandedDeg) {
+      checkboxesDeg.style.display = "block";
+      expandedDeg = true;
+    } else {
+      checkboxesDeg.style.display = "none";
+      expandedDeg = false;
+    }
+  });
+
+  function guncelleSecimLabel() {
+    const checkedBoxes = document.querySelectorAll('#checkboxesArea input[type="checkbox"]:checked');
+    const label = document.getElementById('multiSelectLabel');
+    if (checkedBoxes.length === 0) {
+      label.textContent = "Seçim Yapılmadı";
+    } else if (checkedBoxes.length === 1) {
+      label.textContent = checkedBoxes[0].value;
+    } else {
+      label.textContent = checkedBoxes.length + " Yöntem Seçildi";
+    }
+  }
+
+  function getSeciliYontemler() {
+    const checkedBoxes = document.querySelectorAll('#checkboxesArea input[type="checkbox"]:checked');
+    const secilenler = [];
+    checkedBoxes.forEach(function(box) {
+      secilenler.push(box.value);
+    });
+    return secilenler.length > 0 ? secilenler.join(", ") : "-";
+  }
+
+  // ===================== KDA ÇOKLU SEÇİM (REVİZE) =====================
+  let expandedKda = false;
+  const triggerKda = document.getElementById("selectBoxKdaTrigger");
+  const checkboxesKda = document.getElementById("checkboxesKdaArea");
+
+  triggerKda.addEventListener("click", function(e) {
+    e.stopPropagation();
+    if (!expandedKda) {
+      checkboxesKda.style.display = "block";
+      expandedKda = true;
+    } else {
+      checkboxesKda.style.display = "none";
+      expandedKda = false;
+    }
+  });
+
+  function guncelleKdaLabel() {
+    const checkedBoxes = document.querySelectorAll('#checkboxesKdaArea input[type="checkbox"]:checked');
+    const label = document.getElementById('multiSelectKdaLabel');
+    if (checkedBoxes.length === 0) {
+      label.textContent = "Revize KDA Seçiniz (0 Seçildi)";
+    } else if (checkedBoxes.length === 1) {
+      const txt = checkedBoxes[0].value;
+      label.textContent = txt.length > 35 ? txt.substring(0, 32) + "..." : txt;
+    } else {
+      label.textContent = checkedBoxes.length + " Revize KDA Seçildi";
+    }
+  }
+
+  function getSeciliKdaListesi() {
+    const checkedBoxes = document.querySelectorAll('#checkboxesKdaArea input[type="checkbox"]:checked');
+    const secilenler = [];
+    checkedBoxes.forEach(function(box) {
+      secilenler.push(box.value);
+    });
+    return secilenler;
+  }
+
+  // ===================== RESMÎ MEB KAZANIMLARI ÇOKLU SEÇİM =====================
+  let expandedMeb = false;
+  const triggerMeb = document.getElementById("selectBoxMebTrigger");
+  const checkboxesMeb = document.getElementById("checkboxesMebArea");
+
+  triggerMeb.addEventListener("click", function(e) {
+    e.stopPropagation();
+    if (!expandedMeb) {
+      checkboxesMeb.style.display = "block";
+      expandedMeb = true;
+    } else {
+      checkboxesMeb.style.display = "none";
+      expandedMeb = false;
+    }
+  });
+
+  function guncelleMebLabel() {
+    const checkedBoxes = document.querySelectorAll('#checkboxesMebArea input[type="checkbox"]:checked');
+    const label = document.getElementById('multiSelectMebLabel');
+    if (checkedBoxes.length === 0) {
+      label.textContent = "MEB Kazanımı Seçiniz (0 Seçildi)";
+    } else if (checkedBoxes.length === 1) {
+      const txt = checkedBoxes[0].value;
+      label.textContent = txt.length > 35 ? txt.substring(0, 32) + "..." : txt;
+    } else {
+      label.textContent = checkedBoxes.length + " MEB Kazanımı Seçildi";
+    }
+  }
+
+  function getSeciliMebListesi() {
+    const checkedBoxes = document.querySelectorAll('#checkboxesMebArea input[type="checkbox"]:checked');
+    const secilenler = [];
+    checkedBoxes.forEach(function(box) {
+      secilenler.push(box.value);
+    });
+    return secilenler;
+  }
+
+  // Dışarı tıklandığında açık menüleri kapat
+  document.addEventListener("click", function(e) {
+    if (expandedDeg && !checkboxesDeg.contains(e.target) && !triggerDeg.contains(e.target)) {
+      checkboxesDeg.style.display = "none";
+      expandedDeg = false;
+    }
+    if (expandedKda && !checkboxesKda.contains(e.target) && !triggerKda.contains(e.target)) {
+      checkboxesKda.style.display = "none";
+      expandedKda = false;
+    }
+    if (expandedMeb && !checkboxesMeb.contains(e.target) && !triggerMeb.contains(e.target)) {
+      checkboxesMeb.style.display = "none";
+      expandedMeb = false;
+    }
+  });
+
+(function() {
+  const bepHavuzu = {
+  "9_algoritma": {
+    "modulAdi": "PROGRAMLAMAYA GİRİŞ VE ALGORİTMA",
+    "veriler": [
+      {
+        "unite": "1. ÜNİTE: BİLİŞİM TEKNOLOJİLERİNİN PROGRAMLAMADAKİ YERİ",
+        "uda": "Öğrenci, temel bilgisayar donanım parçalarını (monitör, klavye, fare, kasa) ve yaygın bilişim araçlarını gösterir ve kullanım amaçlarını söyler.",
+        "kda": [
+          "KDA 1.1: Öğrenci, masada bulunan temel donanım birimlerinden (kasa, monitör, klavye, fare) adı söylenen parçayı 4 denemenin en az 3'ünde parmağıyla gösterir.",
+          "KDA 1.2: Öğrenci, kendisine gösterilen bilişim araçlarının (bilgisayar, telefon, tablet) ne amaçla kullanıldığını istendiğinde söyler.",
+          "KDA 1.3: Öğrenci, bilgisayarı kurallara uygun olarak açma/kapama butonuna basarak açar ve güvenli şekilde kapatır.",
+          "KDA 1.4: Öğrenci, bilişim araçlarının günlük yaşamdaki faydalarına dair en az iki örnek verir."
+        ],
+        "meb_kda": [
+          "1.1. Bilişim teknolojilerine ilişkin temel kavramları tanımlar.",
+          "1.2. Bilişim teknolojisi araçlarını listeler.",
+          "1.3. Bilişim teknolojileri cihazlarının gelişimini açıklar.",
+          "1.4. Bilişim teknolojilerinin gelişiminde önemli rol oynayan keşifler, buluşlar, olaylar ve dönüm noktalarını",
+          "1.5. Bilişim teknolojilerinin kullanım alanlarını açıklar.",
+          "1.6. Bilişim teknolojilerinin olumlu ve olumsuz yönlerini tartışır.",
+          "1.7. Teknolojik gelişmeleri takip etmenin öneminin farkına varır."
+        ]
+      },
+      {
+        "unite": "2. ÜNİTE: ALGORİTMA İLE PROBLEM ÇÖZME VE AKIŞ DİYAGRAMI",
+        "uda": "Öğrenci, günlük hayattaki olayların işlem adımlarını oluş sırasına göre resimli kartlarla masaya dizer ve temel akış şeması şekillerini (başla/bitir, işlem) eşleştirir.",
+        "kda": [
+          "KDA 2.1: Öğrenci, önüne konulan 3 adımlı resimli günlük yaşam kartlarını (ör. el yıkama, çay yapma, uyanma) doğru oluş sırasına göre soldan sağa dizer.",
+          "KDA 2.2: Öğrenci, verilen bir akış diyagramındaki 'Başla/Bitir' elips sembolü ile 'İşlem' dikdörtgen sembolünü doğru adıyla gösterir.",
+          "KDA 2.3: Öğrenci, 2 adımlı basit bir yönergeyi (ör. 1. Adım: Butona bas, 2. Adım: Ekrana bak) sırasıyla hatasız uygular.",
+          "KDA 2.4: Öğrenci, öğretmenin anlattığı basit bir problem durumunu dinleyerek ilk yapılacak adımı söyler."
+        ],
+        "meb_kda": [
+          "2.1. Çözümü istenen problemi kavrar.",
+          "2.2. Çözüm için gereksinimlerini belirler.",
+          "2.3. Problemin girdi, çıktı ve işlem aşamalarını belirler.",
+          "2.4. Algoritma kavramını açıklar.",
+          "2.5. Bir problemin çözümü için en doğru algoritmayı geliştirir.",
+          "2.6. Programlamanın önemini yorumlar.",
+          "2.7. Programlama dillerinin gelişimini açıklar.",
+          "2.8. Akış diyagramının kullanım amaçlarını açıklar.",
+          "2.9. Temel akış diyagramı şekillerini ve elemanlarını listeler.",
+          "2.10. Var olan bir akış diyagramını okuyarak problemi kavrar.",
+          "2.11. Problemin akış diyagramını tasarlar."
+        ]
+      },
+      {
+        "unite": "3. ÜNİTE: PROGRAMLAMANIN TEMEL KAVRAMLARI",
+        "uda": "Öğrenci, kodlama ekranındaki başlatma ve durdurma butonlarını fareyle tıklar; sayı ve metin veri türlerini ilgili kutucuklara yazar.",
+        "kda": [
+          "KDA 3.1: Öğrenci, ekrandaki yeşil bayrak / başlat butonunu ve kırmızı durdur butonunu fareyle tıklar.",
+          "KDA 3.2: Öğrenci, kendisine verilen örnek verilerden sayıyı sayı kutusuna, kelimeyi metin kutusuna klavye kullanarak yazar.",
+          "KDA 3.3: Öğrenci, 'Eğer / Değilse' (karar) mantığını içeren basit bir şartlı yönergeyi ('Hava yağmurluysa şemsiye al') doğru davranışla açıklar.",
+          "KDA 3.4: Öğrenci, döngü yapısı ile tekrarlanan basit bir hareketi (3 kez zıpla / 3 kez tıkla) komuta göre uygular."
+        ],
+        "meb_kda": [
+          "3.1. Programlamada kullanılan işlem ve sembolleri listeler.",
+          "3.2. Veri türlerini amacına uygun şekilde programa tanımlar.",
+          "3.3. Farklı veri türlerini program içerisinde kullanır.",
+          "3.4. Karar yapılarını kullanarak programı geliştirir.",
+          "3.5. Döngü yapılarını kullanarak programı geliştirir.",
+          "3.6. Döngü ve karar yapıları ile program tasarlar."
+        ]
+      },
+      {
+        "unite": "4. ÜNİTE: ALGORİTMA VE AKIŞ DİYAGRAMINI TEST ETME",
+        "uda": "Öğrenci, sırası karışmış 3 işlem adımı içerisindeki hatalı adımı parmağıyla gösterir ve öğretmenin rehberliğinde doğru sırasına koyar.",
+        "kda": [
+          "KDA 4.1: Öğrenci, sırası ters verilmiş 3 adımlı akış sıralamasında hata olan basamağı işaret eder.",
+          "KDA 4.2: Öğrenci, öğretmenin yönlendirmesiyle programdaki basit bir komut sırasını düzelterek kodu yeniden çalıştırır.",
+          "KDA 4.3: Öğrenci, hatalı çalışan bir program çıktısı ile doğru çalışan çıktıyı ekranda karşılaştırır."
+        ],
+        "meb_kda": [
+          "4.1. Tasarlanan algoritma ve akış diyagramını test eder.",
+          "4.2. Tasarladığı algoritma ve akış diyagramının hatalarını listeler.",
+          "4.3. Hatalı algoritma ve akış diyagramlarının, programın istenilen çıktıyı vermesine engel olacağını fark",
+          "4.4. Tasarladığı algoritma ve akış diyagramının hatalarını düzeltir."
+        ]
+      },
+      {
+        "unite": "5. ÜNİTE: İLERİ DÜZEY ALGORİTMA UYGULAMALARI",
+        "uda": "Öğrenci, üzerinde 1'den 5'e kadar rakamlar yazan kartları küçükten büyüğe sırayla yan yana dizer ve aranan kartı bulup gösterir.",
+        "kda": [
+          "KDA 5.1: Öğrenci, karışık verilen 5 adet rakam kartını masada soldan sağa küçükten büyüğe doğru dizer.",
+          "KDA 5.2: Öğrenci, önüne konulan kartlar arasından öğretmenin söylediği hedef sayıyı en fazla 2 denemede seçip gösterir.",
+          "KDA 5.3: Öğrenci, sıralama ve arama işlemlerinin günlük hayatta (ör. rehberden isim arama, boy sırasına girme) nerede kullanıldığını söyler."
+        ],
+        "meb_kda": [
+          "5.1. Arama ve sıralama algoritmalarını akış diyagramıyla gösterir.",
+          "5.2. İleri algoritma uygulamalarını ve kullanım yerlerini açıklar."
+        ]
+      }
+    ]
+  },
+  "robotik_kodlama": {
+    "modulAdi": "ROBOTİK KODLAMA",
+    "veriler": [
+      {
+        "unite": "1. ÜNİTE: ROBOTİK SİSTEMLER VE TARİHSEL GELİŞİMİ",
+        "uda": "Öğrenci, robotik set kutusundaki temel parçaları (kart, motor, tekerlek, kablo) gösterir, adını söyler ve robotların kullanım alanlarına 2 örnek verir.",
+        "kda": [
+          "KDA 1.1: Öğrenci, robotik set kutusundan adı söylenen parçayı (kart, tekerlek, motor) 4 denemenin en az 3'ünde bulup çıkarır.",
+          "KDA 1.2: Öğrenci, robotların temizlik, üretim veya sağlık alanındaki kullanımını gösteren resimleri doğru adlandırır.",
+          "KDA 1.3: Öğrenci, otomatik çalışan cihazlar ile uzaktan kumandalı cihazlar arasındaki farkı basit örnekle söyler."
+        ],
+        "meb_kda": [
+          "1.1.Robotiğin tarihsel gelişimini açıklar.",
+          "1.2. Robotik kodlamanın endüstriyel ve günlük hayattaki uygulamalarını araştırır.",
+          "1.3. Günümüz sorunlarından birine robotik ile çözüm fikri oluşturur.",
+          "1.4. Farklı robot türleri ve mikrodenetleyicileri karşılaştırır.",
+          "1.5. Otomatik sistemlerin çalışma mantığını kavrar.",
+          "1.6. Yarı otonom ve otonom sistemlerin çalışma mantığını kavrar",
+          "1.7. Otomatik, yarı otomatik ve otonom sistemler arasındaki farkı bilir.",
+          "1.8. Öğrenebilen sistemlerin çalışma mantığını kavrar."
+        ]
+      },
+      {
+        "unite": "2. ÜNİTE: ROBOTİK BİLEŞENLER",
+        "uda": "Öğrenci, USB bağlantı kablosunu karta ve bilgisayara takıp çıkarır; devre kartı üzerindeki LED lamba ve butonu gösterir.",
+        "kda": [
+          "KDA 2.1: Öğrenci, USB kablosunu bilgisayar girişine ve karta doğru yönde zarar vermeden takar ve çıkarır.",
+          "KDA 2.2: Öğrenci, devre tahtası veya kart üzerindeki LED lambayı ve buton anahtarı parmağıyla gösterir.",
+          "KDA 2.3: Öğrenci, basit bir bağlantı kablosunun iki ucunu karta takarak öğretmenin rehberliğinde devreyi tamamlar."
+        ],
+        "meb_kda": [
+          "2.1. Yazılım ve sistem tasarımına uygun akış diyagramı tasarlar.",
+          "2.2. Kodların anlamını açıklar.",
+          "2.3. Kodları amacına uygun düzenler.",
+          "2.4. Temel elektronik kavramları ve bileşenleri açıklar.",
+          "2.5. Elektronik eklentileri belirler.",
+          "2.6. Problemleri robotik kodlama ile çözebilmek için mantık geliştirir.",
+          "2.7. Sensörler kullanarak yeni sistemler önerir.",
+          "2.8. Modüller kullanarak yeni sistemler geliştirir.",
+          "2.9. Motor türlerini kullanarak özgün sistemler geliştirir.",
+          "2.10. Hareketli nesnelerin kullanıldığı farklı sistemler geliştirir.",
+          "2.11. Elektronik tasarımın kodlarını hazırlar."
+        ]
+      },
+      {
+        "unite": "3. ÜNİTE: PROJE GELİŞTİRME",
+        "uda": "Öğrenci, hazır kodlanmış devre kartındaki butona basarak LED ışığı yakar ve robot tekerleğinin döndüğünü gözlemleyerek gösterir.",
+        "kda": [
+          "KDA 3.1: Öğrenci, devre kartındaki başlat butonuna basarak LED lambanın yandığını işaret eder.",
+          "KDA 3.2: Öğrenci, motora bağlı tekerleğin döndüğünü fark edip açma/kapama düğmesinden robotu durdurur.",
+          "KDA 3.3: Öğrenci, ışık sensörüne elini yaklaştırdığında meydana gelen değişimi (ses veya ışık) gözlemler ve söyler."
+        ],
+        "meb_kda": [
+          "3.1. Ortam algılayıcı sensörler ile uygulamalar geliştirir.",
+          "3.2. Farklı motor türleri ve sürücüler ile projeler geliştirir.",
+          "3.3. Hareketli parçalar ile robotik üniteler oluşturur.",
+          "3.4. İletişim ekipmanlarının kullanıldığı sistemler oluşturur.",
+          "3.5. İleri seviye sensörlerin kullanıldığı özgün projeler hazırlar."
+        ]
+      }
+    ]
+  },
+  "mobil_uygulama": {
+    "modulAdi": "MOBİL UYGULAMA GELİŞTİRME",
+    "veriler": [
+      {
+        "unite": "1. ÜNİTE: MOBİL PROGRAMLAMA OKURYAZARLIĞI",
+        "uda": "Öğrenci, tablet/telefon ekranındaki temel uygulama simgelerine (kamera, galeri, ayarlar) dokunarak açar ve kapatır.",
+        "kda": [
+          "KDA 1.1: Öğrenci, tablet ekranındaki kamera uygulamasının simgesini bulup dokunarak açar.",
+          "KDA 1.2: Öğrenci, açtığı uygulamayı 'ana ekran' veya 'geri' tuşuna basarak kapatır.",
+          "KDA 1.3: Öğrenci, dokunmatik ekranda parmağıyla sağa/sola kaydırma hareketini amacına uygun yapar."
+        ],
+        "meb_kda": [
+          "1.1. Mobil cihaz ve uygulamaların tarihsel gelişimini kavrar.",
+          "1.2. Mobil uygulamaların ve mobil teknolojilerin günümüzdeki önemini kavrar.",
+          "1.3. Mobil Uygulamaların kullanım alanlarını sıralar.",
+          "1.4. Ülkemizde en çok kullanılan ve topluma yararlı olan yerli mobil uygulamaları tanır.",
+          "1.5. Mobil donanım bileşenlerinin çalışma mantığını açıklar.",
+          "1.6. Mobil cihazlarda yer alan sensörlerin çalışma mantığını kavrar.",
+          "1.7. Mobil işletim sistemlerini sıralar.",
+          "1.8. Mobil uygulama geliştirme tasarım yapılarını açıklar.",
+          "1.9. Mobil uygulama geliştirme araçlarını kavrar."
+        ]
+      },
+      {
+        "unite": "2. ÜNİTE: MOBİL UYGULAMA TASARIMI VE ARAYÜZÜ",
+        "uda": "Öğrenci, mobil geliştirme programında buton veya resim simgesini fareyle tutup ekrana sürükleyip bırakır.",
+        "kda": [
+          "KDA 2.1: Öğrenci, sol araç panelindeki 'Button' (Düğme) bileşenini fareyle tutup mobil tasarım ekranına bırakır.",
+          "KDA 2.2: Öğrenci, ekrana eklenen butonun rengini veya üzerindeki yazıyı öğretmenin yardımıyla değiştirir.",
+          "KDA 2.3: Öğrenci, mobil ekran tasarımına bir resim kutusu (Image) ekler."
+        ],
+        "meb_kda": [
+          "2.1. Mobil uygulama tasarımında hedef kitleyi belirlemenin önemini kavrar.",
+          "2.2. Etkin bir mobil uygulamada olması gereken özellikleri açıklar.",
+          "2.3. Mobil uygulamanın farklı cihazlar ve farklı işletim sistemlerine uyumlu olmasının önemini açıklar.",
+          "2.4. Mobil uygulama tasarım ilkelerini açıklar.",
+          "2.5. Mobil uygulama geliştirme programının sistem gereksinimlerini açıklar.",
+          "2.6. Mobil uygulama geliştirme programının kurulumunu yapar.",
+          "2.7. Emülatör kurulumu yapar.",
+          "2.8. Emülatör çalışma mantığını kavrar.",
+          "2.9. Mobil uygulama geliştirme programının arayüz bileşenlerini tanır."
+        ]
+      },
+      {
+        "unite": "3. ÜNİTE: PROGRAM BİLEŞENLERİ İLE ÇALIŞMA",
+        "uda": "Öğrenci, hazırlanan basit uygulamadaki butona tıkladığında ekranda çıkan resmi veya yazıyı parmağıyla gösterir.",
+        "kda": [
+          "KDA 3.1: Öğrenci, 'Tıkla ve Dinle' butonuna basarak çıkan sesi dinler ve ne sesi olduğunu söyler.",
+          "KDA 3.2: Öğrenci, iki ekranlı basit bir uygulamada 'İleri' butonuna basarak diğer sayfaya geçer.",
+          "KDA 3.3: Öğrenci, ekrandaki butona her bastığında rengin değiştiğini gözlemler ve açıklar."
+        ],
+        "meb_kda": [
+          "3.1. Mobil uygulamalarda kullanılan temel bileşenleri tanır.",
+          "3.2. Temel bileşenleri kullanarak basit mobil uygulamalar geliştirir.",
+          "3.3. Yatay ve dikey yerleşim düzeni bileşenlerini ve özelliklerini tanır.",
+          "3.4. Yerleşim düzeni bileşenlerini kullanarak basit mobil uygulamalar geliştirir.",
+          "3.5. Yerleşim düzeni bileşenleri arasındaki farkları ve kullanım yerlerini kavrar.",
+          "3.6. Temel bileşenleri ve yerleşim düzeni bileşenlerini bir arada kullanır.",
+          "3.7. Temel bileşenler ile hazırlanmış birden çok sahneyle çalışır.",
+          "3.8. Çeşitli mobil uygulamalar geliştirir."
+        ]
+      }
+    ]
+  },
+  "java": {
+    "modulAdi": "PROGRAMLAMA DİLLERİ (JAVA)",
+    "veriler": [
+      {
+        "unite": "1. ÜNİTE: JAVA PROGRAMLAMAYA GİRİŞ",
+        "uda": "Öğrenci, Java geliştirme ortamını bilgisayarda açar ve hazır kod projesini 'Run' butonuna basarak konsolda çalıştırır.",
+        "kda": [
+          "KDA 1.1: Masaüstündeki Java IDE simgesine çift tıklayarak programı açar.",
+          "KDA 1.2: Ekranda görünen yeşil üçgen 'Run / Çalıştır' butonuna fareyle tıklar.",
+          "KDA 1.3: Konsol ekranında beliren yazıyı fareyle işaret eder."
+        ],
+        "meb_kda": [
+          "1.1. Java programlama dilini popüler kılan özellikleri kavrar.",
+          "1.2. Java programlama için gerekli (Java Geliştime Kiti ve Tümleşik Geliştirme Ortamı) kurulumları yapar."
+        ]
+      },
+      {
+        "unite": "2. ÜNİTE: İLKEL VERİ TİPLERİ",
+        "uda": "Öğrenci, tamsayı (int) ve metin (String) türündeki basit değerleri klavyeden kod içerisindeki ilgili alanlara yazar.",
+        "kda": [
+          "KDA 2.1: Tırnak işaretleri arasına klavyeden kendi adını yazar.",
+          "KDA 2.2: Sayı değişkeninin karşısına klavyeden kendi yaşını yazar.",
+          "KDA 2.3: Yazılan değerlerin konsolda ekrana geldiğini kontrol eder."
+        ],
+        "meb_kda": [
+          "2.1. Ekranda çıktı oluşturabilmek için gereken kodları kullanır.",
+          "2.2. Dize değişmezleri oluşturur.",
+          "2.3. En uygun veri tipinin hangisi olduğunu belirler.",
+          "2.4. Doğru türlerde değişkenleri kullanır."
+        ]
+      },
+      {
+        "unite": "3. ÜNİTE: SINIFLAR VE NESNELER",
+        "uda": "Öğrenci, kodlama ekranındaki hazır nesneye ait özellikleri (renk, boyut) listeden seçerek değiştirir.",
+        "kda": [
+          "KDA 3.1: Hazır araba/öğrenci nesnesinin adını kodda bulup değiştirir.",
+          "KDA 3.2: Nesne oluşturma butonuna tıklayarak yeni nesnenin oluştuğunu gözlemler."
+        ],
+        "meb_kda": [
+          "3.1. Nesne ve sınıf kavramlarını açıklar.",
+          "3.2. Sınıftan nesne oluşturur.",
+          "3.3. Void ve Non-Void Metotları çağırır."
+        ]
+      },
+      {
+        "unite": "4. ÜNİTE: KARŞILAŞTIRMA OPERATÖRLERİ, MANTIKSAL OPERATÖRLER VE KOŞULLU İFADELER",
+        "uda": "Öğrenci, ekrandaki iki sayıdan büyük olanı şartlı ifadeyle (if-else) karşılaştırıp sonucu konsolda gösterir.",
+        "kda": [
+          "KDA 4.1: Kod satırındaki sayıları değiştirerek sonucu konsolda gözlemler.",
+          "KDA 4.2: 'Doğru' veya 'Yanlış' çıktısını konsolda parmağıyla işaret eder."
+        ],
+        "meb_kda": [
+          "4.1. Java programlama dili kurallarıyla karşılaştırma operatörleri ve mantıksal operatörler kullanır.",
+          "4.2. Koşullu ifadeleri (if, If-else ve if else-if else) kullanır."
+        ]
+      },
+      {
+        "unite": "5. ÜNİTE: DÖNGÜLER",
+        "uda": "Öğrenci, döngü komutuyla ekranda 1'den 5'e kadar sayıların sıralandığını konsol ekranında gösterir.",
+        "kda": [
+          "KDA 5.1: Döngü sayısını 3 yaparak ekranda 3 kez tekrar eden yazıyı parmağıyla gösterir.",
+          "KDA 5.2: Döngünün başladığı ve bittiği anı öğretmenin rehberliğinde takip eder."
+        ],
+        "meb_kda": [
+          "5.1. Farklı döngüleri (while, do-while, for) kullanarak program kodu yazar.",
+          "5.2. İç içe döngüler kullanır.",
+          "5.3. Dallanma ifadelerini (break, continue) kullanır."
+        ]
+      },
+      {
+        "unite": "6. ÜNİTE: ARRAY VE ARRAYLİST SINIFI",
+        "uda": "Öğrenci, liste (Array) içerisindeki 3 elemandan ilk elemanı fareyle veya klavyeyle seçip görüntüler.",
+        "kda": [
+          "KDA 6.1: Hazır listeye yeni bir kelime ekleme alanına klavyeden yazı yazar.",
+          "KDA 6.2: Listenin 1. sırasındaki meyve/öğrenci adını konsoldan okur."
+        ],
+        "meb_kda": [
+          "6.1. Array (dizi) oluşturur.",
+          "6.2. Array ile işlemler yapar.",
+          "6.3. ArrayList kullanımını bilir.",
+          "6.4. ArrayList metotlarını kullanır.",
+          "6.5. ArrayList üzerinde dolaşım yapar."
+        ]
+      },
+      {
+        "unite": "7. ÜNİTE: KALITIM",
+        "uda": "Öğrenci, üst sınıf ve alt sınıf kavramını resimli hayvan/araç şemaları üzerinden eşleştirir.",
+        "kda": [
+          "KDA 7.1: Taşıt üst sınıfının altına araba ve uçak kartlarını yerleştirir.",
+          "KDA 7.2: Anne-baba ve çocuk benzetmesiyle kalıtım mantığını söyler."
+        ],
+        "meb_kda": [
+          "7.1. Kalıtım yöntemini kullanır.",
+          "7.2. Çok biçimlilik yöntemini kullanır."
+        ]
+      },
+      {
+        "unite": "8. ÜNİTE: RECURSIVE (ÖZYİNELEMELİ) FONKSİYON",
+        "uda": "Öğrenci, kendini tekrar eden basit bir geri sayım işlemini (3-2-1-Bitti) ekranda gözlemler ve söyler.",
+        "kda": [
+          "KDA 8.1: Sayacın sıfıra ulaştığında durduğunu belirtir.",
+          "KDA 8.2: Başlangıç sayısını 5 yaparak geri sayımı yeniden başlatır."
+        ],
+        "meb_kda": [
+          "8.1. Recursive fonksiyonun ne olduğunu kavrar.",
+          "8.2. Recursive fonksiyon kullanımı yapar."
+        ]
+      }
+    ]
+  },
+  "cpp": {
+    "modulAdi": "PROGRAMLAMA DİLLERİ (C++)",
+    "veriler": [
+      {
+        "unite": "1. ÜNİTE: C++ ÇALIŞMA ORTAMI",
+        "uda": "Öğrenci, C++ editörünü açar ve 'cout' komutu içerisine kendi adını yazarak programı derleyip çalıştırır.",
+        "kda": [
+          "KDA 1.1: C++ editörünün masaüstü simgesine tıklar.",
+          "KDA 1.2: Ekrana 'Merhaba' yazdıran hazır kod satırını bulur.",
+          "KDA 1.3: Derle ve Çalıştır (F9 / Run) butonuna basarak siyah konsol penceresini açar."
+        ],
+        "meb_kda": [
+          "1.1. C++ programlama dilini tanır.",
+          "1.2. Kod düzenleyici arayüzünde temel işlemleri gerçekleştirir.",
+          "1.3. Temel veri türlerini ve değişken işlemlerini açıklar."
+        ]
+      },
+      {
+        "unite": "2. ÜNİTE: KARAR VE DÖNGÜ YAPILARI",
+        "uda": "Öğrenci, şartlı durumda (if) girilen sayının pozitif veya negatif olduğunu konsol ekranında kontrol eder.",
+        "kda": [
+          "KDA 2.1: Klavyeden bir rakam girip Enter tuşuna basar.",
+          "KDA 2.2: Ekranda çıkan sonucu okur veya parmağıyla gösterir."
+        ],
+        "meb_kda": [
+          "2.1. Karar ifadelerini örneklerle açıklar.",
+          "2.2. Mantıksal operatörleri kullanarak koşullar oluşturur.",
+          "2.3. Döngü yapılarını kullanarak tekrarlayan işlemler gerçekleştirir."
+        ]
+      },
+      {
+        "unite": "3. ÜNİTE: FONKSİYONLAR VE DİZİLER",
+        "uda": "Öğrenci, toplama işlemi yapan hazır fonksiyonu çağırıp iki sayının sonucunu konsolda görüntüler.",
+        "kda": [
+          "KDA 3.1: Fonksiyon parantezi içerisindeki sayıları klavyeden değiştirir.",
+          "KDA 3.2: Ekranda çıkan toplam sonucunu söyler."
+        ],
+        "meb_kda": [
+          "3.1. C++ programlama dilinde kullanılan fonksiyonları tanır.",
+          "3.2. Nesne tabanlı programlamayı anlar ve C++ programlama arayüzü içerisinde nasıl uygulandığını öğrenir.",
+          "3.3. Değer ve referans tipleri arasındaki farkı kavrar.",
+          "3.4. Tek boyutlu ve çok boyutlu dizileri kullanır."
+        ]
+      },
+      {
+        "unite": "4. ÜNİTE: FORMLAR",
+        "uda": "Öğrenci, grafik arayüz form penceresine bir etiket (label) ve metin kutusu ekler.",
+        "kda": [
+          "KDA 4.1: Araç kutusundan butonu forma sürükler.",
+          "KDA 4.2: Butonun başlığını klavyeden 'Giriş' olarak düzenler."
+        ],
+        "meb_kda": [
+          "4.1. Formları, form sınıflarını, kontrol sınıflarını ve konteyner sınıflarını tanır ve bu yapıları kullanır.",
+          "4.2. İletişim kutularını kullanır.",
+          "4.3. Doğrulama ve veri bağlama işlemlerini öğrenir."
+        ]
+      },
+      {
+        "unite": "5. ÜNİTE: VERİ TABANI İŞLEMLERİ",
+        "uda": "Öğrenci, hazır veri listesindeki isimleri ekranda listeler ve kendi adını yeni kayıt kutusuna yazar.",
+        "kda": [
+          "KDA 5.1: 'Kayıtları Göster' butonuna basarak listeyi ekrana getirir.",
+          "KDA 5.2: Metin kutusuna adını yazıp 'Ekle' butonuna tıklar."
+        ],
+        "meb_kda": [
+          "5.1. Veri tabanı yazılımlarını C++ arayüzü ile entegre eder.",
+          "5.2. Veri tabanı tasarımı yapar.",
+          "5.3. Tablo işlemlerini gerçekleştirir.",
+          "5.4. Temel SQL komutlarını kullanır.",
+          "5.5. İlişkisel veri tabanları oluşturur.",
+          "5.6. C++ programlama arayüzü ile oluşturulan veri tabanlarına bağlantı sağlar."
+        ]
+      }
+    ]
+  },
+  "csharp": {
+    "modulAdi": "PROGRAMLAMA DİLLERİ (C#)",
+    "veriler": [
+      {
+        "unite": "1. ÜNİTE: C# ÇALIŞMA ORTAMI",
+        "uda": "Öğrenci, Visual Studio ortamını açar, yeni bir Windows Form projesi başlatır ve 'Başlat' butonuna tıklar.",
+        "kda": [
+          "KDA 1.1: Visual Studio programını masaüstünden açar.",
+          "KDA 1.2: Yeşil 'Başlat' (Start) butonuna basarak form penceresini görüntüler.",
+          "KDA 1.3: Açılan form penceresini 'X' butonuna basarak kapatır."
+        ],
+        "meb_kda": [
+          "1.1. C# programlama dilini tanır.",
+          "1.2. .NET Framework ile C# programlama dili ilişkisini tanımlar.",
+          "1.3. Kod düzenleyici arayüzünde temel işlemleri gerçekleştirir.",
+          "1.4. Namespace kavramını bilir.",
+          "1.5. Temel veri türlerini ve değişken işlemlerini açıklar."
+        ]
+      },
+      {
+        "unite": "2. ÜNİTE: KARAR VE DÖNGÜ YAPILARI",
+        "uda": "Öğrenci, form üzerindeki metin kutusuna girilen sayıya göre buton renginin yeşil veya kırmızı olduğunu gözlemler.",
+        "kda": [
+          "KDA 2.1: Metin kutusuna fareyle tıklayıp klavyeden sayı yazar.",
+          "KDA 2.2: Butona basarak buton renginin değiştiğini işaret eder."
+        ],
+        "meb_kda": [
+          "2.1. Karar ifadelerini örneklerle açıklar.",
+          "2.2. Mantıksal operatörleri kullanarak koşullar oluşturur.",
+          "2.3. Döngü yapılarını kullanarak tekrarlayan işlemler gerçekleştirir."
+        ]
+      },
+      {
+        "unite": "3. ÜNİTE: SINIFLAR (CLASS)",
+        "uda": "Öğrenci, hazır araba sınıfından nesne üreterek rengini ve modelini form üzerindeki etiketlerde görüntüler.",
+        "kda": [
+          "KDA 3.1: Kod ekranında renk yazan kısmı 'Mavi' olarak günceller.",
+          "KDA 3.2: Ekranda oluşan araba görselini gösterir."
+        ],
+        "meb_kda": [
+          "3.1. Nesne tabanlı programlamanın C# programlama dili içerisinde nasıl uygulandığını açıklar.",
+          "3.2. Kapsülleme, alanlar ve özellikler kavramlarını açıklar.",
+          "3.3. Metotları kullanır.",
+          "3.4. Yapıcı ve yıkıcı metotların rolünü açıklar.",
+          "3.5. Değer ve referans tipleri arasındaki farkı kavrar.",
+          "3.6. Kalıtım kavramını kavrar.",
+          "3.7. Nesneye yönelik C# programlama dili temel yapılarını kullanır."
+        ]
+      },
+      {
+        "unite": "4. ÜNİTE: DİZİLER VE KOLEKSİYONLAR",
+        "uda": "Öğrenci, liste kutusuna (ListBox) 3 öğrenci ismi ekler ve listeden istediği ismi fareyle seçer.",
+        "kda": [
+          "KDA 4.1: Kutucuğa arkadaşının adını yazıp 'Listeye Ekle'ye tıklar.",
+          "KDA 4.2: Listeden kendi adını fareyle işaretler."
+        ],
+        "meb_kda": [
+          "4.1. Tek boyutlu ve çok boyutlu dizileri kavrar.",
+          "4.2. Koleksiyonlarda boxing ve unboxing kavramlarını açıklar.",
+          "4.3. Koleksiyon türlerini kavrar."
+        ]
+      },
+      {
+        "unite": "5. ÜNİTE: FORMLAR",
+        "uda": "Öğrenci, buton, metin kutusu ve onay kutusunu form üzerine hizalayarak yerleştirir.",
+        "kda": [
+          "KDA 5.1: Form üzerine araç kutusundan CheckBox (onay kutusu) sürükler.",
+          "KDA 5.2: Kutucuğu işaretleyip işaretini kaldırır."
+        ],
+        "meb_kda": [
+          "5.1. Formları, form sınıflarını, kontrol sınıflarını ve konteyner sınıflarını tanır.",
+          "5.2. Menüler, MenuStrip kontrolü ve ContextMenuStrip kontrollerini tanır.",
+          "5.3. İletişim kutularını kullanır.",
+          "5.4. Doğrulama ve veri bağlama işlemlerini yapar."
+        ]
+      },
+      {
+        "unite": "6. ÜNİTE: VERİ TABANI İŞLEMLERİ",
+        "uda": "Öğrenci, veri tablosundaki (DataGridView) satırları fareyle seçer ve 'Kaydet' butonuna tıklar.",
+        "kda": [
+          "KDA 6.1: Tablodaki ilk satırı fareyle tıklar.",
+          "KDA 6.2: 'Kaydet' butonuna basarak onay mesajını görür."
+        ],
+        "meb_kda": [
+          "6.1. Veri tabanı yazılımlarını C# arayüzü ile entegre eder.",
+          "6.2. Veri tabanı tasarımı yapar.",
+          "6.3. Tablo işlemlerini gerçekleştirir.",
+          "6.4. Temel SQL komutlarını kullanır.",
+          "6.5. İlişkisel veri tabanları oluşturur.",
+          "6.6. C# programlama arayüzü ile oluşturulan veri tabanlarına bağlantı sağlar."
+        ]
+      }
+    ]
+  },
+  "dart": {
+    "modulAdi": "PROGRAMLAMA DİLLERİ (DART)",
+    "veriler": [
+      {
+        "unite": "1. ÜNİTE: DART PROGRAMLAMA DİLİ TEMELLERİ",
+        "uda": "Öğrenci, çevrim içi DartPad editörünü tarayıcıda açar, `print()` fonksiyonu içerisine adını yazar ve çalıştırır.",
+        "kda": [
+          "KDA 1.1: Web tarayıcısında DartPad sayfasını açar.",
+          "KDA 1.2: Kod satırına klavyeden adını tırnak içinde yazar.",
+          "KDA 1.3: Mavi 'Run' butonuna tıklar ve konsoldaki çıktıyı gösterir."
+        ],
+        "meb_kda": [
+          "1.1. Dart programlama dilinin temel özelliklerini kavrar.",
+          "1.2. Dart programlama dilindeki değişken tiplerini kavrar.",
+          "1.3. Dart programlama dilindeki operatörleri öğrenir.",
+          "1.4. Dart programlama dilinde fonksiyonları ve parametreleri tanımlar.",
+          "1.5. Kontrol akışını yöneterek koşullu ifadeler ve döngüler kullanmayı kavrar.",
+          "1.6. Dart programlama dilinde derleme sürecini kavrar.",
+          "1.7. Derleme aşamasında AOT ile JIT arasındaki farkları kavrar.",
+          "1.8. Dart programlama dilinde paket yönetimini kullanarak harici kütüphaneleri projelerine dâhil etmeyi"
+        ]
+      },
+      {
+        "unite": "2. ÜNİTE: NESNE TABANLI PROGRAMLAMA VE ASENKRON PROGRAMLAMA",
+        "uda": "Öğrenci, ekranda beliren yükleniyor simgesi sonrasında gelen metni konsol ekranında gösterir.",
+        "kda": [
+          "KDA 2.1: Veri getirme butonuna basar ve bekleme süresini takip eder.",
+          "KDA 2.2: Gelen mesajı ekranda okur."
+        ],
+        "meb_kda": [
+          "2.1. Dart programlama dilinde nesne tabanlı programlama konusunu kavrar.",
+          "2.2. Sınıf ve nesne kavramlarını açıklar.",
+          "2.3. Constructor yöntemlerini, kalıtımı ve arayüzleri kullanarak programlar geliştirir.",
+          "2.4. Dart programlama dilindeki istisna (exception) mekanizmasını kullanmayı kavrar.",
+          "2.5. Fonksiyonel programlama özelliklerini kullanarak yüksek düzeyde fonksiyonları yönetir.",
+          "2.6. Dart programlama dilinde asenkron programlamanın önemini kavrar.",
+          "2.7. Future ve Stream terimlerini kavrar.",
+          "2.8. Asenkron operasyonların yönetimini sağlamak için async/await yapısını kullanmayı kavrar.",
+          "2.9. Dart programlama dilinde dosya işlemleri yapar."
+        ]
+      },
+      {
+        "unite": "3. ÜNİTE: DERİNLEMESİNE DART PROGRAMLAMA DİLİ",
+        "uda": "Öğrenci, hazır listedeki şehir isimlerini konsola yazdırır ve listeden bir şehri seçer.",
+        "kda": [
+          "KDA 3.1: Şehirler listesine yeni bir şehir adı ekler.",
+          "KDA 3.2: Listenin kaç elemandan oluştuğunu konsol çıktısından söyler."
+        ],
+        "meb_kda": [
+          "3.1. Dart programlama dilinde reflection ve metaprogramming kavramlarını kavrar.",
+          "3.2. Dart programlama dilinin genişletilebilirlik özelliklerini kullanarak özel veri tipleri ve operatörler",
+          "3.3. Dart programlama dilindeki kodları performanslı hâle getirmek için en uygun şekle sokma tekniklerini",
+          "3.4. Dart programlama dilinde mevcut olan kod analiz araçlarını ve IDE entegrasyonunu kullanmayı kavrar.",
+          "3.5. Dart programlama dilinde test odaklı geliştirme (TDD) kavramını açıklar.",
+          "3.6. Dart programlama dilinde test yazmayı kavrar."
+        ]
+      }
+    ]
+  },
+  "php": {
+    "modulAdi": "PROGRAMLAMA DİLLERİ (PHP)",
+    "veriler": [
+      {
+        "unite": "1. ÜNİTE: PHP TEMEL KAVRAMLAR",
+        "uda": "Öğrenci, yerel web sunucusunu (XAMPP/Apache) başlatır ve tarayıcıda 'localhost' adresini açar.",
+        "kda": [
+          "KDA 1.1: Masaüstündeki XAMPP simgesine tıklar.",
+          "KDA 1.2: Apache servisinin yanındaki 'Start' butonuna basar.",
+          "KDA 1.3: Tarayıcı adres çubuğuna 'localhost' yazar ve sayfayı açar."
+        ],
+        "meb_kda": [
+          "1.1. Sunucu ve istemci tarafında çalışma mantığını kavrar.",
+          "1.2. PHP programlama dili için gerekli programları tanır.",
+          "1.3. PHP programlama dili için gerekli programların kurulumunu yapar.",
+          "1.4. PHP programlama dilinin farklı işletim sistemlerinde nasıl çalıştığını kavrar."
+        ]
+      },
+      {
+        "unite": "2. ÜNİTE: PHP PROGRAMLAMA DİLİNİ TANIYALIM",
+        "uda": "Öğrenci, `echo` komutu ile web tarayıcısı sayfasına 'Merhaba Dünya' metnini yazdırıp sayfayı yeniler.",
+        "kda": [
+          "KDA 2.1: Kod editöründe `echo` yazan yeri bulur.",
+          "KDA 2.2: Tarayıcıda 'Yenile' butonuna basarak yazının geldiğini görür."
+        ],
+        "meb_kda": [
+          "2.1. PHP programlama dilinin nasıl çalıştığını kavrar.",
+          "2.2. Yazım kurallarını kavrar.",
+          "2.3. Yapılandırma ayarlarını uygular."
+        ]
+      },
+      {
+        "unite": "3. ÜNİTE: PHP FONKSİYONLARI, ARİTMETİKSEL VE MANTIKSAL İŞLEMLER",
+        "uda": "Öğrenci, web sayfasındaki form kutusuna yazdığı adın 'Gönder' butonuna basınca ekranda görüntülendiğini gösterir.",
+        "kda": [
+          "KDA 3.1: Form kutusuna klavyeden adını yazar.",
+          "KDA 3.2: 'Gönder' butonuna tıklar ve karşı sayfadaki selamlama yazısını gösterir."
+        ],
+        "meb_kda": [
+          "3.1. PHP programlama dili fonksiyonlarını tanır.",
+          "3.2. PHP programlama dilinde mantıksal ve aritmetiksel işlemleri kavrar.",
+          "3.3. Döngüleri kullanır."
+        ]
+      },
+      {
+        "unite": "4. ÜNİTE: PHP PROGRAMLAMA DİLİ İLE VERİ TABANI İŞLEMLERİ",
+        "uda": "Öğrenci, web sayfasında listelenen tablodan bir satırı seçer ve 'Sil' butonuna tıklar.",
+        "kda": [
+          "KDA 4.1: Tablodaki ilk kayıt satırını gösterir.",
+          "KDA 4.2: Silme butonuna basarak kaydın ekrandan çıktığını doğrular."
+        ],
+        "meb_kda": [
+          "4.1. Veri tabanı bağlantısı yapar.",
+          "4.2. Veri tabanı oluşturur.",
+          "4.3. Veri tabanı üzerinde işlemler yapar."
+        ]
+      }
+    ]
+  },
+  "javascript": {
+    "modulAdi": "PROGRAMLAMA DİLLERİ (JAVASCRIPT)",
+    "veriler": [
+      {
+        "unite": "1. ÜNİTE: JAVASCRIPT PROGRAMLAMA DİLİ TEMELLERİ",
+        "uda": "Öğrenci, web tarayıcısında 'alert' uyarı penceresi açan butona tıklar ve açılan kutudaki 'Tamam' düğmesine basar.",
+        "kda": [
+          "KDA 1.1: Web sayfasındaki mavi butona fareyle tıklar.",
+          "KDA 1.2: Ekranda açılan uyarı penceresini okur veya gösterir.",
+          "KDA 1.3: 'Tamam' butonuna basarak pencereyi kapatır."
+        ],
+        "meb_kda": [
+          "1.1. Web geliştirme süreçlerinin işleyiş şekillerini anlar.",
+          "1.2. Javascript programlama dilinin web sitelerindeki rolünü kavrar.",
+          "1.3. Javascript programlama dilinin terim ve kavramlarını tanır.",
+          "1.4. Değişkenleri Javascript programlama dili ile kullanır.",
+          "1.5. Javascript programlama dili içerisinde kullanılan farklı veri tiplerini kavrar.",
+          "1.6. Problemlerde karşılaşılan farklı senaryolarda koşullu ifadeleri kullanır.",
+          "1.7. Karşılaştırma operatörlerini Javascript programlama dili ile kullanır.",
+          "1.8. Birden fazla koşul durumlarını birleştirmek için mantıksal operatörler kullanır."
+        ]
+      },
+      {
+        "unite": "2. ÜNİTE: JAVASCRIPT PROGRAMLAMA DİLİ FONKSİYONLARI VE NESNE TABANLI PROGRAMLAMA",
+        "uda": "Öğrenci, butona her tıklandığında ekrandaki sayacın 1 arttığını takip eder ve ekrandaki sayıyı söyler.",
+        "kda": [
+          "KDA 2.1: 'Arttır' butonuna 3 kez tıklar.",
+          "KDA 2.2: Ekranda beliren güncel sayıyı (1, 2, 3) söyler.",
+          "KDA 2.3: 'Sıfırla' butonuna basarak sayacı sıfıra döndürür."
+        ],
+        "meb_kda": [
+          "2.1. Javascript programlama dili ile fonksiyon tanımlar.",
+          "2.2. Fonksiyonları çağırarak kodun düzenlenmesini kavrar.",
+          "2.3. Fonksiyonları çağırarak kodun yönetilmesini kavrar.",
+          "2.4. Fonksiyonlara parametre eklemeyi kavrar.",
+          "2.5. Fonksiyonların değişkenlere atanarak kullanılabileceğini anlar.",
+          "2.6. Javascript programlama dili ile dizileri tanımlar.",
+          "2.7. Javascript programlama dilinde döngülerin kullanımını kavrar.",
+          "2.8. Diziler içerisinde gezinmeyi kavrar.",
+          "2.9. Diziler içerisinde işlem yapmayı kavrar.",
+          "2.9. Javascript programlama dilindeki nesne ve sınıf kavramlarını tanımlar.",
+          "2.10. Constructor fonksiyonuyla nesne oluşturmayı kavrar.",
+          "2.11. Nesnelere özellik ve metotlar ekleyerek diğer nesnelerle etkileşim kurmayı kavrar."
+        ]
+      },
+      {
+        "unite": "3. ÜNİTE: JAVASCRIPT PROGRAMLAMA DİLİ İLE WEB GELİŞTİRME",
+        "uda": "Öğrenci, butona tıkladığında web sayfasının arka plan renginin veya yazı boyutunun değiştiğini gösterir.",
+        "kda": [
+          "KDA 3.1: 'Karanlık Mod' butonuna tıklar ve sayfanın siyah olduğunu görür.",
+          "KDA 3.2: 'Aydınlık Mod' butonuna basarak sayfayı beyaz yapar.",
+          "KDA 3.3: 'Yazıyı Büyüt' butonuna basarak metnin büyüdüğünü işaret eder."
+        ],
+        "meb_kda": [
+          "3.1. DOM kavramını tanımlar.",
+          "3.2. DOM’un web sayfalarındaki rolünü kavrar.",
+          "3.3. DOM aracılığı ile HTML elemanlarına nasıl erişileceğini kavrar.",
+          "3.4. Kullanıcılar ile etkileşim kurmayı kavrar.",
+          "3.5. Asenkron programlamanın web uygulamalarındaki önemini kavrar.",
+          "3.6. Jquery ve Ajax kütüphaneleri ile etkileşimli şekilde çalışmayı kavrar.",
+          "3.7. Fetch işlemlerini kullanarak asenkron çalışmayı kavrar.",
+          "3.8. Javascript programlama dili kodlarını daha modüler hâle getirerek kullanmanın önemini kavrar.",
+          "3.9. NodeJS modülünü kullanarak arkaplanda işlemler yapılabileceğini kavrar.",
+          "3.10. CommonJS modülünü kullanarak arkaplanda işlemler yapılabileceğini kavrar.",
+          "3.11. Npm aracılığı ile harici kütüphaneler kullanarak modül ekleme işlemini kavrar.",
+          "3.12. Javascript programlama dilindeki yaygın framework’lerin web geliştirmedeki rolünü kavrar.",
+          "3.13. Farklı açık kaynak kodlu web geliştirme framework’lerinin mobil uygulama geliştirmede nasıl kullanılacağını kavrar.",
+          "3.14. Gelişmekte olan EcmaScript ile Javascript programlama dilinin güncel standartlara uyumlu şekilde"
+        ]
+      }
+    ]
+  },
+  "10_python": {
+    "modulAdi": "PROGRAMLAMA DİLLERİ (PYTHON)",
+    "veriler": [
+      {
+        "unite": "1. ÜNİTE: PYTHON PROGRAMLAMAYA GİRİŞ",
+        "uda": "Öğrenci, Python geliştirme ortamını açar, `print()` fonksiyonu içerisine adını yazar ve 'Run' butonuna basarak konsolda görüntüler.",
+        "kda": [
+          "KDA 1.1: Masaüstündeki Python IDE (Thonny/IDLE/VS Code) simgesine çift tıklayarak programı açar.",
+          "KDA 1.2: Klavyeden `print('...')` fonksiyonunun tırnakları içerisine kendi adını yazar.",
+          "KDA 1.3: Yeşil 'Çalıştır / Run' butonuna basar ve alt konsolda kendi adını parmağıyla gösterir.",
+          "KDA 1.4: Klavyeden iki sayıyı (ör. 5 ve 3) yazıp `+` işareti koyarak sonucu konsolda kontrol eder."
+        ],
+        "meb_kda": [
+          "1.1. Python programlama diliyle çalışılacak ortamları tanır.",
+          "1.2. Farklı entegre geliştirme ortamlarını analiz ederek kendisine en uygun çalışma ortamını seçer.",
+          "1.3. Değişkenlerde tutulacak verileri tanımlar.",
+          "1.5. Tanımlanan değişkenlerde işlem önceliğini gözetir.",
+          "1.6. Kullanıcıdan veri alır.",
+          "1.7. Kullanıcıdan alınan veriyi değişkene tanımlar."
+        ]
+      },
+      {
+        "unite": "2. ÜNİTE: PYTHON PROGRAMLAMA DİLİ İLE YAZILIM GELİŞTİRME",
+        "uda": "Öğrenci, klavyeden girilen sayıya göre çalışan hazır şartlı programı (if-else) çalıştırır ve ekrandaki doğru sonucu işaret eder.",
+        "kda": [
+          "KDA 2.1: Konsoldan yaşını yazıp Enter tuşuna basar.",
+          "KDA 2.2: Ekranda 'Geçtiniz' veya 'Kaldınız' mesajını fareyle işaret eder.",
+          "KDA 2.3: 3 kez tekrar eden basit bir for döngüsünün çıktısını ekranda sayar."
+        ],
+        "meb_kda": [
+          "2.1. Python programlama dili karar yapılarını içeren programlar geliştirir.",
+          "2.2. Bir problemi çözmek için kullanacağı döngü yapısına karar verir.",
+          "2.3. Çoklu koşulların mantıksal sonuçlarını değerlendirir.",
+          "2.4. Fonksiyonları program içinde yöntemlerine göre kullanır.",
+          "2.5. Standart fonksiyon kümelerini ve kütüphanelerini kullanır."
+        ]
+      },
+      {
+        "unite": "3. ÜNİTE: NESNE YÖNELİMLİ PROJE GELİŞTİRME",
+        "uda": "Öğrenci, grafik pencereli veya basit listeli Python uygulamasında butonlara tıklayarak ekrandaki veriyi değiştirir.",
+        "kda": [
+          "KDA 3.1: Hazır listedeki 3 meyve isminden birincisini konsolda gösterir.",
+          "KDA 3.2: Ekranda açılan basit arayüzdeki butona tıklar.",
+          "KDA 3.3: Programın ürettiği sonucu ekrandan takip eder."
+        ],
+        "meb_kda": [
+          "3.1. Nesne yönelimli programlama kavramını açıklar.",
+          "3.2. Nesne yönelimli programlamanın faydalarının farkına varır.",
+          "3.3. Programın ihtiyacına yönelik sınıf tanımlaması yapar.",
+          "3.4. Python programlama diline özgü temel sınıfları kullanır.",
+          "3.5. Geliştirdiği programda kapsülleme (encapsulation), kalıtım (inheritance) ve çok biçimlilik (polymorphism) prensiplerini kullanır.",
+          "3.6. List, tuple, set ve dictionary türlerinde verileri tanımlar.",
+          "3.7. Dosya nesnesi üzerinde okuma yazma silme işlemlerini uygular.",
+          "3.8. Dizi türündeki verileri dosya nesnesi içerisinde örneklendirir.",
+          "3.9. İleri seviye nesne yönelimi teknikleriyle özgün projeler geliştirir."
+        ]
+      }
+    ]
+  },
+  "yapay_zeka": {
+    "modulAdi": "YAPAY ZEKÂ UYGULAMALARI",
+    "veriler": [
+      {
+        "unite": "1. ÜNİTE: VERİ BİLİMİ TEMEL KAVRAMLARI",
+        "uda": "Öğrenci, klavyeden sayıları ve metinleri kullanarak basit veri giriş kutusuna adını ve numarasını yazar.",
+        "kda": [
+          "KDA 1.1: Metin kutusuna klavyeden adını ve soyadını yazar.",
+          "KDA 1.2: Sayı kutusuna öğrenci numarasını yazar.",
+          "KDA 1.3: Veri tablosundaki satır ve sütunları parmağıyla gösterir."
+        ],
+        "meb_kda": [
+          "1.1. Veri bilimi temel kavramlarını açıklar.",
+          "1.2. Soru tiplerini açıklar.",
+          "1.3. Veri bilimcilerin çalışma basamaklarını açıklar.",
+          "1.4. Keşifçi veri analizini açıklar.",
+          "1.5. Veri döngüsü basamaklarını açıklar.",
+          "1.6. Veri türlerini açıklar.",
+          "1.7. Veri etiği kavramını açıklar.",
+          "1.8. Python programlama dili için etkileşimli tasarım ortamı kurar.",
+          "1.9.Python programlama dili temellerini veri bilimi bağlamında kullanır.",
+          "1.10. Açık kaynak kodlu programlama dili kavramını tanımlar.",
+          "1.11. Veri bilimi için gerekli olan Python programlama dili kütüphanelerini tanımlar.",
+          "1.12. Array veri yapısını kullanır.",
+          "1.13. Arraylerde birleştirme, sıralama, ayırma ve matematiksel işlemler yapar.",
+          "1.14. Arraylerde biçim, boyut ve boy işlemlerini uygular.",
+          "1.15. Veri seti oluşturarak veri çerçevesine dönüşüm işlemleri gerçekleştirir.",
+          "1.16. Belirli koşullara dayanarak bir veri çerçevesini filtreler.",
+          "1.17. Bir veri çerçevesinde indeksleme, satır ve sütun işlemlerini gerçekleştirir.",
+          "1.15., 1.16.)"
+        ]
+      },
+      {
+        "unite": "2. ÜNİTE: TEMEL İSTATİSTİK",
+        "uda": "Öğrenci, ekranda verilen 3 farklı sayıdan en büyüğünü veya en küçüğünü parmağıyla gösterir.",
+        "kda": [
+          "KDA 2.1: Ekranda görünen sayılardan en büyük olanı söyler.",
+          "KDA 2.2: İki sayının ortalamasını hazır hesaplama butonuyla bulup gösterir."
+        ],
+        "meb_kda": [
+          "2.1. Bir seri veri yapısı oluşturur.",
+          "2.2. Bir serinin ortalama, mod ve medyan değerlerini hesaplar.",
+          "2.3. Bir serinin merkezi eğilim ve yayılım ölçülerini hesaplar."
+        ]
+      },
+      {
+        "unite": "3. ÜNİTE: DEĞİŞİM VE VERİ",
+        "uda": "Öğrenci, ekrandaki veri tablosunda ad ve numara yazan kutucukları fareyle tıklar.",
+        "kda": [
+          "KDA 3.1: Tablodaki ilk öğrencinin adını okur.",
+          "KDA 3.2: Tabloya yeni bir satır eklendiğini fark edip işaret eder."
+        ],
+        "meb_kda": [
+          "3.1. Toplumsal problemler üzerinde veri biliminin etkilerini açıklar.",
+          "3.2. Veri setleri ile ilgili uygulamalar yapar."
+        ]
+      },
+      {
+        "unite": "4. ÜNİTE: VERİ GÖRSELLEŞTİRME",
+        "uda": "Öğrenci, ekranda beliren renkli sütun veya pasta grafiğini gösterir ve en uzun çubuğu işaret eder.",
+        "kda": [
+          "KDA 4.1: Sütun grafiğindeki en yüksek renkli sütunu parmağıyla gösterir.",
+          "KDA 4.2: Pasta grafiğindeki en büyük dilimi söyler."
+        ],
+        "meb_kda": [
+          "4.1. Veriyi görselleştirmek için çizgi grafiği çizer.",
+          "4.2. Veriyi görselleştirmek için histogram grafiği çizer.",
+          "4.3. Veriyi görselleştirmek için kutu grafiği çizer.",
+          "4.4. Veriyi görselleştirmek için bar grafiği çizer.",
+          "4.5. Veriyi görselleştirmek için saçılım grafiği çizer."
+        ]
+      },
+      {
+        "unite": "5. ÜNİTE: VERİLER ARASI İLİŞKİ",
+        "uda": "Öğrenci, grafikte yukarı doğru çıkan çizgiyi parmağıyla takip ederek gösterir.",
+        "kda": [
+          "KDA 5.1: Çizgi grafiğindeki artış ve azalış yönünü parmağıyla takip eder.",
+          "KDA 5.2: Grafikteki en yüksek noktayı işaretler."
+        ],
+        "meb_kda": [
+          "5.1. Bağımlı ve bağımsız değişken kavramını tanımlar.",
+          "5.2. İki değişken arasındaki ilişkiyi yorumlar.",
+          "5.3. Doğrusal regresyon modeli oluşturur."
+        ]
+      },
+      {
+        "unite": "6. ÜNİTE: VERİ MANİPÜLASYONU",
+        "uda": "Öğrenci, veri tablosundaki boş veya hatalı kutucuğu fareyle tıklar ve silme (backspace) tuşuyla düzeltir.",
+        "kda": [
+          "KDA 6.1: Boş kalan hücreyi gösterir.",
+          "KDA 6.2: Klavyeden doğru harfi yazarak kutuyu tamamlar."
+        ],
+        "meb_kda": [
+          "6.1. Veri setleri ile ilgili olan kavramları açıklar.",
+          "6.2. Veri setleri üzerinde toplulaştırma ve gruplama işlemleri yapar.",
+          "6.3. Bir veri setindeki eksik ve aykırı değerleri tespit eder.",
+          "6.4. One-Hot dönüşümü ile kategorik değişkenleri sayısal değişkenlere dönüştürür.",
+          "6.5. Label Encoder ile kategorik değişkenleri sayısal değişkenlere dönüştürür.",
+          "6.6. Verileri standart hâle getirmek için gerekli olan fonksiyonları kullanır.",
+          "6.7. Fonksiyon kullanarak verileri normalleştirir."
+        ]
+      },
+      {
+        "unite": "7. ÜNİTE: VERİ UYGULAMALARI",
+        "uda": "Öğrenci, öğretmenin gösterdiği hazır veri uygulamasında 'Yükle' ve 'Başlat' butonlarına tıklar.",
+        "kda": [
+          "KDA 7.1: 'Dosya Yükle' butonuna tıklar.",
+          "KDA 7.2: 'Analizi Başlat' butonuna basarak sonucu bekler."
+        ],
+        "meb_kda": [
+          "7.1. Açık kaynak kodlu platformları kullanır.",
+          "7.2. Açık kaynak kodlu platformlar üzerinden veri analizi projeleri geliştirir."
+        ]
+      },
+      {
+        "unite": "8. ÜNİTE: YAPAY ZEKÂ TEMEL KAVRAMLARI VE UYGULAMALARI",
+        "uda": "Öğrenci, yapay zekâ kamera/çizim uygulamasına bir nesne gösterir ve ekranda ne tanıdığını söyler.",
+        "kda": [
+          "KDA 8.1: Kameraya kalemi gösterir ve ekranda beliren 'Kalem' yazısını okur.",
+          "KDA 8.2: Yapay zekâ çizim aracına bir daire çizer ve yapay zekânın tahminini seçer."
+        ],
+        "meb_kda": [
+          "8.1. Yapay zekâyla ilişkili olan kavramları açıklar.",
+          "8.2. İstatistiksel yöntemler ve farklı makine öğrenimi teknikleri kullanarak tahmin modelleri geliştirir.",
+          "8.3. Sınıflandırma modellerini kullanarak belirli sınıflara ait verileri tanımlar.",
+          "8.4. Büyük ve karmaşık veri kümeleri içindeki desenleri keşfetmek ve veri setlerindeki bilgileri keşfetmek"
+        ]
+      },
+      {
+        "unite": "9. ÜNİTE: YAPAY ZEKÂ TABANLI OYUN GELİŞTİRME",
+        "uda": "Öğrenci, sohbet botunun (Chatbot) metin kutusuna 'Merhaba' yazar, 'Gönder' tuşuna tıklar ve gelen cevabı okur.",
+        "kda": [
+          "KDA 9.1: Sohbet kutusuna klavyeden bir soru veya selamlama yazar.",
+          "KDA 9.2: Gönder (uçak simgesi veya Enter) tuşuna tıklar.",
+          "KDA 9.3: Sohbet botunun verdiği cevabı seslendirir veya okur."
+        ],
+        "meb_kda": [
+          "9.1. Oyunlarda yapay zekânın kullanımını açıklar.",
+          "9.2. Bir yapay zekâ oyun uygulaması geliştirir.",
+          "9.3. Yapay zekâ tabanlı Chatbot uygulamaları geliştirir.",
+          "9.2., 9.3.)"
+        ]
+      }
+    ]
+  }
+};
+
+  function baslat() {
+    const elDers = document.getElementById("bep_ders");
+    const elModul = document.getElementById("bep_modul");
+    const elUda = document.getElementById("bep_uda");
+    const elBtnEkle = document.getElementById("bep_btn_ekle");
+    const elBtnYazdir = document.getElementById("bep_btn_yazdir");
+    const elBtnExcel = document.getElementById("bep_btn_excel");
+
+    if (!elDers || !elModul || !elUda) return;
+
+    document.getElementById("bep_lblTarih").textContent = new Date().toLocaleDateString("tr-TR");
+    guncelleSecimLabel();
+
+    const senkronizeIdler = [
+      "bep_ogrAd", "bep_sinif", "bep_no", "bep_yil", 
+      "bep_ders", "bep_modul", "bep_ogretmen", 
+      "bep_sinifOgretmeni", "bep_veli", "bep_rehberOgretmen", "bep_mudurYrd"
+    ];
+
+    senkronizeIdler.forEach(function(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.addEventListener("input", senkronizeEt);
+      }
+    });
+
+    // Modüle göre UDA'ları yükle
+    function modulYukle() {
+      senkronizeEt();
+      const secim = elModul.value;
+      elUda.innerHTML = '<option value="">-- UDA / Ünite Seçiniz --</option>';
+      const elUdaMetin = document.getElementById("bep_uda_metin");
+      if (elUdaMetin) elUdaMetin.value = "";
+      checkboxesKda.innerHTML = '<div style="padding: 6px; font-size: 12px; color: #64748b;">Önce yukarıdan bir UDA seçiniz.</div>';
+      document.getElementById('multiSelectKdaLabel').textContent = "Önce UDA seçiniz...";
+      checkboxesMeb.innerHTML = '<div style="padding: 6px; font-size: 12px; color: #64748b;">Önce yukarıdan bir UDA seçiniz.</div>';
+      document.getElementById('multiSelectMebLabel').textContent = "Önce UDA seçiniz...";
+
+      if (secim && bepHavuzu[secim]) {
+        bepHavuzu[secim].veriler.forEach(function(item, idx) {
+          const opt = document.createElement("option");
+          opt.value = idx;
+          opt.textContent = item.unite;
+          elUda.appendChild(opt);
+        });
+      }
+    }
+
+    // Ders değiştiğinde ilgili sınıfın modülünü otomatik seç
+    elDers.addEventListener("change", function() {
+      if (this.value.includes("9")) {
+        elModul.value = "9_algoritma";
+      } else if (this.value.includes("10")) {
+        elModul.value = "10_python";
+      }
+      modulYukle();
+    });
+
+    elModul.addEventListener("change", modulYukle);
+
+    // Başlangıç yüklemesi
+    modulYukle();
+
+    // UDA Değiştiğinde KDA ve Resmî MEB Checkbox Listelerini Dinamik Doldur ve UDA Metnini Ata
+    elUda.addEventListener("change", function() {
+      const modulKey = elModul.value;
+      const udaIdx = this.value;
+      checkboxesKda.innerHTML = '';
+      checkboxesMeb.innerHTML = '';
+      const elUdaMetin = document.getElementById("bep_uda_metin");
+
+      if (modulKey && udaIdx !== "" && bepHavuzu[modulKey].veriler[udaIdx]) {
+        const item = bepHavuzu[modulKey].veriler[udaIdx];
+        if (elUdaMetin) {
+          elUdaMetin.value = item.uda;
+        }
+
+        // 1. Revize Edilmiş Kısa Dönemli Amaçlar (Somut / Temel Düzey)
+        const kdalar = item.kda || [];
+        kdalar.forEach(function(kazanimMetni) {
+          const lbl = document.createElement("label");
+          lbl.innerHTML = `<input type="checkbox" value="${kazanimMetni}" onchange="guncelleKdaLabel()"> <span>${kazanimMetni}</span>`;
+          checkboxesKda.appendChild(lbl);
+        });
+        document.getElementById('multiSelectKdaLabel').textContent = "Revize KDA Seçiniz (0 Seçildi)";
+
+        // 2. Resmî Orijinal MEB Kazanımları (Revize Edilmemiş)
+        const mebKdalar = item.meb_kda || [];
+        mebKdalar.forEach(function(kazanimMetni) {
+          const lbl = document.createElement("label");
+          lbl.innerHTML = `<input type="checkbox" value="${kazanimMetni}" onchange="guncelleMebLabel()"> <span>${kazanimMetni}</span>`;
+          checkboxesMeb.appendChild(lbl);
+        });
+        document.getElementById('multiSelectMebLabel').textContent = "MEB Kazanımı Seçiniz (0 Seçildi)";
+      } else {
+        if (elUdaMetin) elUdaMetin.value = "";
+        checkboxesKda.innerHTML = '<div style="padding: 6px; font-size: 12px; color: #64748b;">Önce yukarıdan bir UDA seçiniz.</div>';
+        document.getElementById('multiSelectKdaLabel').textContent = "Önce UDA seçiniz...";
+        checkboxesMeb.innerHTML = '<div style="padding: 6px; font-size: 12px; color: #64748b;">Önce yukarıdan bir UDA seçiniz.</div>';
+        document.getElementById('multiSelectMebLabel').textContent = "Önce UDA seçiniz...";
+      }
+    });
+
+    // Satır Ekle (Seçilen tüm Revize KDA ve Orijinal MEB Kazanımlarını TEK BİR SATIRDA ekler)
+    elBtnEkle.addEventListener("click", function() {
+      senkronizeEt();
+      const modulKey = elModul.value;
+      const udaIdx = elUda.value;
+      const seciliKdalar = getSeciliKdaListesi();
+      const seciliMebKdalar = getSeciliMebListesi();
+      const tumSeciliKdalar = [...seciliKdalar, ...seciliMebKdalar];
+
+      if (!modulKey || udaIdx === "") {
+        alert("Lütfen önce bir modül ve UDA (Ünite) seçiniz.");
+        return;
+      }
+
+      if (tumSeciliKdalar.length === 0) {
+        alert("Lütfen 'Revize Edilmiş KDA' veya 'Resmî MEB Kazanımları' listesinden en az bir kazanım işaretleyiniz.");
+        return;
+      }
+
+      const elUdaMetin = document.getElementById("bep_uda_metin");
+      const secilenUda = (elUdaMetin && elUdaMetin.value.trim()) 
+        ? elUdaMetin.value.trim() 
+        : bepHavuzu[modulKey].veriler[udaIdx].uda;
+      const olcut = document.getElementById("bep_degerlendirme").value;
+      const yontem = document.getElementById("bep_yontem").value || "-";
+      const materyal = document.getElementById("bep_materyal").value || "-";
+      const baslamaAy = document.getElementById("bep_baslamaAy") ? document.getElementById("bep_baslamaAy").value.trim() : "";
+      const bitisAy = document.getElementById("bep_bitisAy") ? document.getElementById("bep_bitisAy").value.trim() : "";
+      const sure = (baslamaAy && bitisAy) ? `${baslamaAy} - ${bitisAy}` : (baslamaAy || bitisAy || "-");
+      
+      const degYontem = getSeciliYontemler();
+      const degTarih = document.getElementById("bep_degTarih").value || "";
+      const performans = document.getElementById("bep_performans").value || "";
+      const tbody = document.getElementById("bep_govde");
+
+      // Seçilen tüm kazanımları tek hücre içinde madde işaretiyle alt alta diz
+      const kdaHtml = tumSeciliKdalar.map(item => `<div class="kda-item">• ${item}</div>`).join('');
+
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td class="text-left">${secilenUda}</td>
+        <td class="text-left">${kdaHtml}</td>
+        <td>${olcut}</td>
+        <td class="text-left">${yontem}</td>
+        <td class="text-left">${materyal}</td>
+        <td>${sure}</td>
+        <td>${degYontem}</td>
+        <td>${degTarih}</td>
+        <td style="font-weight: bold; font-size: 11pt;">${performans}</td>
+        <td class="bep-no-print">
+          <button type="button" class="btn btn-del">Sil</button>
+        </td>
+      `;
+
+      tr.querySelector(".btn-del").addEventListener("click", function() {
+        tr.remove();
+      });
+
+      tbody.appendChild(tr);
+    });
+
+    if (elBtnYazdir) {
+      elBtnYazdir.addEventListener("click", function() {
+        window.print();
+      });
+    }
+
+    if (elBtnExcel) {
+      elBtnExcel.addEventListener("click", function() {
+        const tbody = document.getElementById("bep_govde");
+        const satirlar = tbody.querySelectorAll("tr");
+
+        if (satirlar.length === 0) {
+          alert("Excel'e aktarmak için lütfen önce plana en az bir amaç ekleyiniz.");
+          return;
+        }
+
+        const ogrAd = document.getElementById("bep_ogrAd").value || "-";
+        const sinifNo = (document.getElementById("bep_sinif").value || "") + " / " + (document.getElementById("bep_no").value || "");
+        const yil = document.getElementById("bep_yil").value || "2026-2027";
+        const ogrt = document.getElementById("bep_ogretmen").value || "-";
+        const dersAdi = document.getElementById("bep_lblDers").textContent || "-";
+        const modulAdi = document.getElementById("bep_lblModul").textContent || "-";
+        const tarih = document.getElementById("bep_lblTarih").textContent || "-";
+
+        const sinifOgrt = document.getElementById("bep_sinifOgretmeni").value || "______________________";
+        const veli = document.getElementById("bep_veli").value || "______________________";
+        const rehberOgrt = document.getElementById("bep_rehberOgretmen").value || "______________________";
+        const mudurYrd = document.getElementById("bep_mudurYrd").value || "Hasan KÖSEOĞLU";
+
+        const aoaData = [
+          ["T.C. MİLLÎ EĞİTİM BAKANLIĞI", "", "", "", "", "", "", "", ""],
+          ["SÜLEYMAN ÇELEBİ ANADOLU LİSESİ", "", "", "", "", "", "", "", ""],
+          ["BİLİŞİM TEKNOLOJİLERİ VE YAZILIM DERSİ BİREYSELLEŞTİRİLMİŞ EĞİTİM PROGRAMI (BEP) FORMU", "", "", "", "", "", "", "", ""],
+          ["", "", "", "", "", "", "", "", ""],
+          ["Öğrenci Adı Soyadı:", ogrAd, "", "", "Eğitim-Öğretim Yılı:", yil, "", "", ""],
+          ["Sınıfı / Numarası:", sinifNo, "", "", "Ders:", dersAdi, "", "", ""],
+          ["Ders Öğretmeni:", ogrt, "", "", "Modül:", modulAdi, "", "", ""],
+          ["Düzenleme Tarihi:", tarih, "", "", "", "", "", "", ""],
+          ["", "", "", "", "", "", "", "", ""],
+          [
+            "Uzun Dönemli Amaçlar",
+            "Kısa Dönemli Amaçlar",
+            "Ölçüt*",
+            "Öğretim Yöntem ve Teknikleri",
+            "Kullanılacak Materyaller",
+            "Başlama ve Bitiş Tarihi",
+            "Ölçme – Değerlendirme",
+            "",
+            ""
+          ],
+          [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "Değerlendirme Yöntem ve Teknikleri",
+            "Değerlendirme Tarihleri",
+            "Performans Yeterli (+) / Geliştirilmeli (-)"
+          ]
+        ];
+
+        satirlar.forEach(function(tr) {
+          const tds = tr.querySelectorAll("td");
+          if (tds.length >= 9) {
+            aoaData.push([
+              tds[0].innerText.trim(),
+              tds[1].innerText.trim(),
+              tds[2].innerText.trim(),
+              tds[3].innerText.trim(),
+              tds[4].innerText.trim(),
+              tds[5].innerText.trim(),
+              tds[6].innerText.trim(),
+              tds[7].innerText.trim(),
+              tds[8].innerText.trim()
+            ]);
+          }
+        });
+
+        // İmza Bloğu Satırları
+        aoaData.push(["", "", "", "", "", "", "", "", ""]);
+        const sigStartRow = aoaData.length;
+        aoaData.push(["İmza", "", "", "İmza", "", "", "İmza", "", ""]);
+        aoaData.push([ogrt, "", "", sinifOgrt, "", "", veli, "", ""]);
+        aoaData.push(["Ders Öğretmeni", "", "", "Sınıf Rehber Öğretmeni", "", "", "Öğrenci Velisi", "", ""]);
+        aoaData.push(["", "", "", "", "", "", "", "", ""]);
+        aoaData.push(["İmza", "", "", "", "", "", "İmza", "", ""]);
+        aoaData.push([rehberOgrt, "", "", "", "", "", mudurYrd, "", ""]);
+        aoaData.push(["Rehber Öğretmen", "", "", "", "", "", "BEP Birim Başkanı", "", ""]);
+
+        const ws = XLSX.utils.aoa_to_sheet(aoaData);
+
+        // Hücre Birleştirmeleri (Merges)
+        ws['!merges'] = [
+          // Başlıklar
+          { s: { r: 0, c: 0 }, e: { r: 0, c: 8 } },
+          { s: { r: 1, c: 0 }, e: { r: 1, c: 8 } },
+          { s: { r: 2, c: 0 }, e: { r: 2, c: 8 } },
+          // Bilgi Tablosu
+          { s: { r: 4, c: 1 }, e: { r: 4, c: 3 } },
+          { s: { r: 4, c: 5 }, e: { r: 4, c: 8 } },
+          { s: { r: 5, c: 1 }, e: { r: 5, c: 3 } },
+          { s: { r: 5, c: 5 }, e: { r: 5, c: 8 } },
+          { s: { r: 6, c: 1 }, e: { r: 6, c: 3 } },
+          { s: { r: 6, c: 5 }, e: { r: 6, c: 8 } },
+          { s: { r: 7, c: 1 }, e: { r: 7, c: 8 } },
+          // Ana Tablo Başlıkları
+          { s: { r: 9, c: 0 }, e: { r: 10, c: 0 } },
+          { s: { r: 9, c: 1 }, e: { r: 10, c: 1 } },
+          { s: { r: 9, c: 2 }, e: { r: 10, c: 2 } },
+          { s: { r: 9, c: 3 }, e: { r: 10, c: 3 } },
+          { s: { r: 9, c: 4 }, e: { r: 10, c: 4 } },
+          { s: { r: 9, c: 5 }, e: { r: 10, c: 5 } },
+          { s: { r: 9, c: 6 }, e: { r: 9, c: 8 } },
+          // İmzalar Üst Sıra
+          { s: { r: sigStartRow, c: 0 }, e: { r: sigStartRow, c: 2 } },
+          { s: { r: sigStartRow, c: 3 }, e: { r: sigStartRow, c: 5 } },
+          { s: { r: sigStartRow, c: 6 }, e: { r: sigStartRow, c: 8 } },
+          { s: { r: sigStartRow + 1, c: 0 }, e: { r: sigStartRow + 1, c: 2 } },
+          { s: { r: sigStartRow + 1, c: 3 }, e: { r: sigStartRow + 1, c: 5 } },
+          { s: { r: sigStartRow + 1, c: 6 }, e: { r: sigStartRow + 1, c: 8 } },
+          { s: { r: sigStartRow + 2, c: 0 }, e: { r: sigStartRow + 2, c: 2 } },
+          { s: { r: sigStartRow + 2, c: 3 }, e: { r: sigStartRow + 2, c: 5 } },
+          { s: { r: sigStartRow + 2, c: 6 }, e: { r: sigStartRow + 2, c: 8 } },
+          // İmzalar Alt Sıra
+          { s: { r: sigStartRow + 4, c: 0 }, e: { r: sigStartRow + 4, c: 2 } },
+          { s: { r: sigStartRow + 4, c: 6 }, e: { r: sigStartRow + 4, c: 8 } },
+          { s: { r: sigStartRow + 5, c: 0 }, e: { r: sigStartRow + 5, c: 2 } },
+          { s: { r: sigStartRow + 5, c: 6 }, e: { r: sigStartRow + 5, c: 8 } },
+          { s: { r: sigStartRow + 6, c: 0 }, e: { r: sigStartRow + 6, c: 2 } },
+          { s: { r: sigStartRow + 6, c: 6 }, e: { r: sigStartRow + 6, c: 8 } }
+        ];
+
+        // Sütun Genişlikleri
+        ws['!cols'] = [
+          { wch: 32 }, // UDA
+          { wch: 48 }, // KDA
+          { wch: 12 }, // Ölçüt
+          { wch: 26 }, // Yöntem
+          { wch: 24 }, // Materyal
+          { wch: 14 }, // Başlama-Bitiş
+          { wch: 24 }, // Değ. Yöntem
+          { wch: 14 }, // Değ. Tarih
+          { wch: 16 }  // Performans
+        ];
+
+        // Satır Yükseklikleri
+        const rowsHeight = [];
+        rowsHeight[0] = { hpt: 22 };
+        rowsHeight[1] = { hpt: 22 };
+        rowsHeight[2] = { hpt: 20 };
+        rowsHeight[3] = { hpt: 8 };
+        rowsHeight[4] = { hpt: 18 };
+        rowsHeight[5] = { hpt: 18 };
+        rowsHeight[6] = { hpt: 18 };
+        rowsHeight[7] = { hpt: 18 };
+        rowsHeight[8] = { hpt: 10 };
+        rowsHeight[9] = { hpt: 22 };
+        rowsHeight[10] = { hpt: 26 };
+        rowsHeight[sigStartRow] = { hpt: 28 };
+        rowsHeight[sigStartRow + 1] = { hpt: 18 };
+        rowsHeight[sigStartRow + 2] = { hpt: 18 };
+        rowsHeight[sigStartRow + 3] = { hpt: 15 };
+        rowsHeight[sigStartRow + 4] = { hpt: 28 };
+        rowsHeight[sigStartRow + 5] = { hpt: 18 };
+        rowsHeight[sigStartRow + 6] = { hpt: 18 };
+        ws['!rows'] = rowsHeight;
+
+        // Kılavuz Çizgileri Görünümü
+        ws['!views'] = [{ showGridLines: true }];
+
+        // ================= STİL TANIMLARI (xlsx-js-style) =================
+        const borderThin = {
+          top: { style: "thin", color: { rgb: "000000" } },
+          bottom: { style: "thin", color: { rgb: "000000" } },
+          left: { style: "thin", color: { rgb: "000000" } },
+          right: { style: "thin", color: { rgb: "000000" } }
+        };
+
+        function setCellStyle(r, c, style) {
+          const cellRef = XLSX.utils.encode_cell({ r, c });
+          if (!ws[cellRef]) {
+            ws[cellRef] = { t: "s", v: "" };
+          }
+          ws[cellRef].s = style;
+        }
+
+        // 1. Üst Başlıklar
+        const titleStyle = {
+          font: { name: "Arial", sz: 12, bold: true, color: { rgb: "000000" } },
+          alignment: { horizontal: "center", vertical: "center" }
+        };
+        const titleSubStyle = {
+          font: { name: "Arial", sz: 11, bold: true, color: { rgb: "000000" } },
+          alignment: { horizontal: "center", vertical: "center" }
+        };
+        for (let c = 0; c < 9; c++) {
+          setCellStyle(0, c, titleStyle);
+          setCellStyle(1, c, titleStyle);
+          setCellStyle(2, c, titleSubStyle);
+        }
+
+        // 2. Bilgi Alanı Stilleri
+        const infoLabelStyle = {
+          font: { name: "Arial", sz: 10, bold: true, color: { rgb: "000000" } },
+          alignment: { horizontal: "left", vertical: "center" }
+        };
+        const infoValStyle = {
+          font: { name: "Arial", sz: 10, color: { rgb: "000000" } },
+          alignment: { horizontal: "left", vertical: "center" }
+        };
+        for (let r = 4; r <= 7; r++) {
+          setCellStyle(r, 0, infoLabelStyle);
+          for (let c = 1; c <= 3; c++) setCellStyle(r, c, infoValStyle);
+          setCellStyle(r, 4, infoLabelStyle);
+          for (let c = 5; c <= 8; c++) setCellStyle(r, c, infoValStyle);
+        }
+
+        // 3. Tablo Başlıkları (Row 9 ve 10) - Dolgulu ve Çizgili
+        const headerStyle = {
+          border: borderThin,
+          fill: { fgColor: { rgb: "F1F5F9" } },
+          font: { name: "Arial", sz: 9.5, bold: true, color: { rgb: "000000" } },
+          alignment: { horizontal: "center", vertical: "center", wrapText: true }
+        };
+        for (let r = 9; r <= 10; r++) {
+          for (let c = 0; c < 9; c++) {
+            setCellStyle(r, c, headerStyle);
+          }
+        }
+
+        // 4. Tablo Veri Satırları - Çizgili ve Metin Kaydırmalı (wrapText)
+        for (let i = 0; i < satirlar.length; i++) {
+          const rowIdx = 11 + i;
+          for (let colIdx = 0; colIdx < 9; colIdx++) {
+            const isCenter = (colIdx === 2 || colIdx === 5 || colIdx === 6 || colIdx === 7 || colIdx === 8);
+            const isBold = (colIdx === 8);
+            const dataCellStyle = {
+              border: borderThin,
+              font: { name: "Arial", sz: 9.5, bold: isBold, color: { rgb: "000000" } },
+              alignment: {
+                horizontal: isCenter ? "center" : "left",
+                vertical: "top",
+                wrapText: true
+              }
+            };
+            setCellStyle(rowIdx, colIdx, dataCellStyle);
+          }
+        }
+
+        // 5. İmzalar Bölümü Stilleri
+        const sigImzaStyle = {
+          font: { name: "Arial", sz: 10, color: { rgb: "333333" } },
+          alignment: { horizontal: "center", vertical: "center" }
+        };
+        const sigNameStyle = {
+          font: { name: "Arial", sz: 10, bold: true, color: { rgb: "000000" } },
+          alignment: { horizontal: "center", vertical: "center" }
+        };
+        const sigTitleStyle = {
+          font: { name: "Arial", sz: 9.5, bold: true, color: { rgb: "000000" } },
+          alignment: { horizontal: "center", vertical: "center" }
+        };
+
+        for (let c = 0; c < 9; c++) {
+          setCellStyle(sigStartRow, c, sigImzaStyle);
+          setCellStyle(sigStartRow + 1, c, sigNameStyle);
+          setCellStyle(sigStartRow + 2, c, sigTitleStyle);
+          setCellStyle(sigStartRow + 4, c, sigImzaStyle);
+          setCellStyle(sigStartRow + 5, c, sigNameStyle);
+          setCellStyle(sigStartRow + 6, c, sigTitleStyle);
+        }
+
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, "BEP_Plani");
+
+        let dosyaAdi = "BEP_Plani_" + (ogrAd !== "-" ? ogrAd.replace(/\s+/g, '_') : "Ogrenci") + ".xlsx";
+        XLSX.writeFile(wb, dosyaAdi);
+      });
+    }
+  }
+
+  function senkronizeEt() {
+    document.getElementById("bep_lblOgr").textContent = document.getElementById("bep_ogrAd").value || "-";
+    document.getElementById("bep_lblSinifNo").textContent = (document.getElementById("bep_sinif").value || "") + " / " + (document.getElementById("bep_no").value || "-");
+    document.getElementById("bep_lblYil").textContent = document.getElementById("bep_yil").value || "-";
+    document.getElementById("bep_lblOgrt").textContent = document.getElementById("bep_ogretmen").value || "-";
+    
+    // Ders ve Modül Başlıklarını Ayrı Ayrı Senkronize Et
+    const elDers = document.getElementById("bep_ders");
+    document.getElementById("bep_lblDers").textContent = elDers ? elDers.value : "-";
+
+    const elModul = document.getElementById("bep_modul");
+    const modulKey = elModul ? elModul.value : "";
+    document.getElementById("bep_lblModul").textContent = (modulKey && bepHavuzu[modulKey]) ? bepHavuzu[modulKey].modulAdi : "-";
+
+    const ogrt = document.getElementById("bep_ogretmen").value.trim();
+    const sinifOgrt = document.getElementById("bep_sinifOgretmeni").value.trim();
+    const veli = document.getElementById("bep_veli").value.trim();
+    const rehberOgrt = document.getElementById("bep_rehberOgretmen").value.trim();
+    const mudurYrd = document.getElementById("bep_mudurYrd").value.trim();
+
+    document.getElementById("bep_imza_ogrt").textContent = ogrt || "______________________";
+    document.getElementById("bep_imza_sinifOgretmeni").textContent = sinifOgrt || "______________________";
+    document.getElementById("bep_imza_veli").textContent = veli || "______________________";
+    document.getElementById("bep_imza_rehberOgretmen").textContent = rehberOgrt || "______________________";
+    document.getElementById("bep_imza_mudurYrd").textContent = mudurYrd || "______________________";
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", baslat);
+  } else {
+    baslat();
+  }
+})();
+</script>
+</body>
+</html>
