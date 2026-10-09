@@ -336,14 +336,24 @@
 
     <div class="bep-grid" style="margin-top: 15px;">
       <div style="grid-column: span 2;">
-        <label>Uzun Dönemli Amaç (UDA) / Ünite Seçiniz</label>
+        <label>Uzun Dönemli Amaç (UDA) / Maarif Öğrenme Çıktısı Seçiniz</label>
         <select id="bep_uda">
           <option value="">Önce modül seçiniz...</option>
         </select>
       </div>
 
       <div style="grid-column: span 2;">
-        <label>Uzun Dönemli Amaç Cümlesi (Öğrenci düzeyine göre düzenleyebilirsiniz)</label>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; flex-wrap: wrap; gap: 8px;">
+          <label style="margin: 0; font-weight: 700;">Uzun Dönemli Amaç (UDA) Cümlesi</label>
+          <div style="font-size: 12px; display: flex; gap: 14px; background: #f8fafc; padding: 4px 10px; border-radius: 6px; border: 1px solid #cbd5e1;">
+            <label style="cursor: pointer; color: #0369a1; font-weight: 600; margin: 0; display: flex; align-items: center; gap: 4px;">
+              <input type="radio" name="bep_uda_tipi" value="bep" checked> ⭐ BEP Uyarlaması (Ölçülebilir Eylem)
+            </label>
+            <label style="cursor: pointer; color: #15803d; font-weight: 600; margin: 0; display: flex; align-items: center; gap: 4px;">
+              <input type="radio" name="bep_uda_tipi" value="maarif"> 📜 Resmî Maarif Çıktısı (TYMM / -ebilme)
+            </label>
+          </div>
+        </div>
         <textarea id="bep_uda_metin" rows="2" placeholder="UDA seçildiğinde otomatik doldurulur..."></textarea>
       </div>
       
@@ -703,18 +713,49 @@
     "veriler": [
       {
         "unite": "1. ÜNİTE: BİLİŞİM TEKNOLOJİLERİNİN PROGRAMLAMADAKİ YERİ",
-        "uda": "Öğrenci, temel bilgisayar donanım parçalarını (monitör, klavye, fare, kasa) ve yaygın bilişim araçlarını gösterir ve kullanım amaçlarını söyler.",
+        "konu": "Temel Kavramlar (Bilgi, İletişim, Teknoloji) ve Donanım Araçları",
+        "kod": "BTY.9.1.1",
+        "maarif_uda": "BTY.9.1.1. Bilişim teknolojilerine ilişkin temel kavramları (bilgi, iletişim, teknoloji) ve donanım araçlarını sınıflandırabilme",
+        "bep_uda": "Öğrenci, dönem sonunda temel bilişim kavramlarını (bilgi, iletişim, teknoloji) ve bilgisayar donanım parçalarını (monitör, kasa, klavye, fare) resimli kartlarla eşleştirir, gösterir ve adını söyler.",
+        "uda": "Öğrenci, temel bilişim kavramlarını ve bilgisayar donanım parçalarını resimli kartlarla eşleştirir ve adını söyler.",
         "kda": [
-          "KDA 1.1: Öğrenci, masada bulunan temel donanım birimlerinden (kasa, monitör, klavye, fare) adı söylenen parçayı 4 denemenin en az 3'ünde parmağıyla gösterir.",
-          "KDA 1.2: Öğrenci, kendisine gösterilen bilişim araçlarının (bilgisayar, telefon, tablet) ne amaçla kullanıldığını istendiğinde söyler.",
-          "KDA 1.3: Öğrenci, bilgisayarı kurallara uygun olarak açma/kapama butonuna basarak açar ve güvenli şekilde kapatır.",
-          "KDA 1.4: Öğrenci, bilişim araçlarının günlük yaşamdaki faydalarına dair en az iki örnek verir."
+          "KDA 1.1: Temel kavramları (bilgi, iletişim, teknoloji ve bilgisayar) temsil eden resimli kartlardan adı söyleneni seçip gösterir. [%75]",
+          "KDA 1.2: Masada/ekranda bulunan bilişim araçlarından (monitör, kasa, klavye, fare, tablet) adı söyleneni parmağıyla gösterir. [%80]"
         ],
         "meb_kda": [
-          "1.1. Bilişim teknolojilerine ilişkin temel kavramları tanımlar.",
-          "1.2. Bilişim teknolojisi araçlarını listeler.",
+          "1.1. Bilişim teknolojilerine ilişkin temel kavramları (bilgi, iletişim, teknoloji) tanımlar.",
+          "1.2. Bilişim teknolojisi araçlarını listeler."
+        ]
+      },
+      {
+        "unite": "1. ÜNİTE: BİLİŞİM TEKNOLOJİLERİNİN PROGRAMLAMADAKİ YERİ",
+        "konu": "Cihazların Gelişimi ve Tarihsel Dönüm Noktaları",
+        "kod": "BTY.9.1.2",
+        "maarif_uda": "BTY.9.1.2. Bilişim teknolojisi cihazlarının tarihsel gelişimini ve önemli dönüm noktalarını karşılaştırarak yorumlayabilme",
+        "bep_uda": "Öğrenci, dönem sonunda kendisine karışık verilen eski ve yeni teknolojik cihaz kartlarını (tüplü/düz ekran, tuşlu/dokunmatik telefon) eskiden yeniye doğru sırasıyla masaya dizer.",
+        "uda": "Öğrenci, eski ve yeni teknolojik cihaz kartlarını eskiden yeniye doğru sırayla masaya dizer.",
+        "kda": [
+          "KDA 1.3: Eski ve yeni teknoloji kartlarını (tüplü ekran ile düz ekran) eskiden yeniye doğru dizer. [3/4]",
+          "KDA 1.4: Bilgisayarın ve internetin icadını temsil eden görselleri panoda yardımla gösterir. [%70]"
+        ],
+        "meb_kda": [
           "1.3. Bilişim teknolojileri cihazlarının gelişimini açıklar.",
-          "1.4. Bilişim teknolojilerinin gelişiminde önemli rol oynayan keşifler, buluşlar, olaylar ve dönüm noktalarını",
+          "1.4. Bilişim teknolojilerinin gelişiminde önemli rol oynayan keşifler, buluşlar, olaylar ve dönüm noktalarını tartışır/listeler."
+        ]
+      },
+      {
+        "unite": "1. ÜNİTE: BİLİŞİM TEKNOLOJİLERİNİN PROGRAMLAMADAKİ YERİ",
+        "konu": "Kullanım Alanları, Toplumsal Etkileri ve Gelişmeler",
+        "kod": "BTY.9.1.3",
+        "maarif_uda": "BTY.9.1.3. Bilişim teknolojilerinin kullanım alanlarını ve toplumsal etkilerini sorgulayabilme",
+        "bep_uda": "Öğrenci, dönem sonunda bilişim araçlarının günlük yaşamdaki faydalarına ve olumlu/olumsuz yönlerine ilişkin sorulan sorulara en az ikişer örnek söyler.",
+        "uda": "Öğrenci, bilişim araçlarının günlük yaşamdaki faydalarını ve olumlu/olumsuz yönlerini söyler.",
+        "kda": [
+          "KDA 1.5: Bilişim araçlarının okulda, hastanede veya evde ne amaçla kullanıldığını istendiğinde söyler. [En az 2 farklı alan]",
+          "KDA 1.6: Teknolojinin faydalı (ödev, haberleşme) ve zararlı (uzun süre ekrana bakma) yönlerine birer örnek söyler. [1 olumlu, 1 olumsuz]",
+          "KDA 1.7: Yeni bir teknolojik aracın hayatımızı nasıl kolaylaştırdığını (ör. akıllı telefon ile konuşma) söyler. [3/4]"
+        ],
+        "meb_kda": [
           "1.5. Bilişim teknolojilerinin kullanım alanlarını açıklar.",
           "1.6. Bilişim teknolojilerinin olumlu ve olumsuz yönlerini tartışır.",
           "1.7. Teknolojik gelişmeleri takip etmenin öneminin farkına varır."
@@ -722,21 +763,56 @@
       },
       {
         "unite": "2. ÜNİTE: ALGORİTMA İLE PROBLEM ÇÖZME VE AKIŞ DİYAGRAMI",
-        "uda": "Öğrenci, günlük hayattaki olayların işlem adımlarını oluş sırasına göre resimli kartlarla masaya dizer ve temel akış şeması şekillerini (başla/bitir, işlem) eşleştirir.",
+        "konu": "Problem Çözme, Girdi-İşlem-Çıktı ve Algoritma",
+        "kod": "BTY.9.2.1",
+        "maarif_uda": "BTY.9.2.1. Verilen bir problemin girdi-işlem-çıktı bileşenlerini ilişkilendirerek çözüm algoritması hazırlayabilme",
+        "bep_uda": "Öğrenci, dönem sonunda önüne konulan 3-4 adımlı günlük yaşam resimli kartlarını (el yıkama, uyanma) oluş sırasına göre soldan sağa hatasız dizer ve problemin ilk adımını söyler.",
+        "uda": "Öğrenci, günlük yaşam olaylarının işlem adımlarını resimli kartlarla oluş sırasına göre masaya dizer.",
         "kda": [
-          "KDA 2.1: Öğrenci, önüne konulan 3 adımlı resimli günlük yaşam kartlarını (ör. el yıkama, çay yapma, uyanma) doğru oluş sırasına göre soldan sağa dizer.",
-          "KDA 2.2: Öğrenci, verilen bir akış diyagramındaki 'Başla/Bitir' elips sembolü ile 'İşlem' dikdörtgen sembolünü doğru adıyla gösterir.",
-          "KDA 2.3: Öğrenci, 2 adımlı basit bir yönergeyi (ör. 1. Adım: Butona bas, 2. Adım: Ekrana bak) sırasıyla hatasız uygular.",
-          "KDA 2.4: Öğrenci, öğretmenin anlattığı basit bir problem durumunu dinleyerek ilk yapılacak adımı söyler."
+          "KDA 2.1: Basit bir problem durumunu dinleyerek problemin ne olduğunu söyler. [%80]",
+          "KDA 2.2: Belirtilen iş için gereken malzemeleri/araçları resimler arasından seçip gösterir. [3/4]",
+          "KDA 2.3: Günlük bir olayda malzemeleri (girdi), pişirmeyi (işlem) ve tostu (çıktı) ayırt edip gösterir. [%75]",
+          "KDA 2.4: Algoritmanın 'sıralı işlem adımları' olduğunu söyler. [İstendiğinde]",
+          "KDA 2.5: Önüne konulan 3-4 adımlı günlük yaşam kartlarını doğru oluş sırasına göre soldan sağa dizer. [3/4]"
         ],
         "meb_kda": [
           "2.1. Çözümü istenen problemi kavrar.",
           "2.2. Çözüm için gereksinimlerini belirler.",
           "2.3. Problemin girdi, çıktı ve işlem aşamalarını belirler.",
           "2.4. Algoritma kavramını açıklar.",
-          "2.5. Bir problemin çözümü için en doğru algoritmayı geliştirir.",
+          "2.5. Bir problemin çözümü için en doğru algoritmayı geliştirir."
+        ]
+      },
+      {
+        "unite": "2. ÜNİTE: ALGORİTMA İLE PROBLEM ÇÖZME VE AKIŞ DİYAGRAMI",
+        "konu": "Programlamanın Önemi ve Dillerin Gelişimi",
+        "kod": "BTY.9.2.2",
+        "maarif_uda": "BTY.9.2.2. Programlamanın önemi ve programlama dillerinin gerekliliğine ilişkin çıkarımda bulunabilme",
+        "bep_uda": "Öğrenci, dönem sonunda bilgisayarların komut verilmeden çalışamayacağını söyler ve gösterilen programlama simgelerini seçip gösterir.",
+        "uda": "Öğrenci, bilgisayarların komut verilmeden çalışamayacağını söyler ve program simgelerini gösterir.",
+        "kda": [
+          "KDA 2.6: Bilgisayarların komutlar olmadan çalışamayacağını söyler. [1 geçerli ifade]",
+          "KDA 2.7: İnsanların bilgisayara komut vermek için programlama dili kullandığını görseller eşliğinde söyler. [%70]"
+        ],
+        "meb_kda": [
           "2.6. Programlamanın önemini yorumlar.",
-          "2.7. Programlama dillerinin gelişimini açıklar.",
+          "2.7. Programlama dillerinin gelişimini açıklar."
+        ]
+      },
+      {
+        "unite": "2. ÜNİTE: ALGORİTMA İLE PROBLEM ÇÖZME VE AKIŞ DİYAGRAMI",
+        "konu": "Akış Diyagramı Sembolleri, Okuma ve Tasarım",
+        "kod": "BTY.9.2.3",
+        "maarif_uda": "BTY.9.2.3. Algoritmik süreçleri temel akış diyagramı sembolleriyle modelleyebilme ve tasarlayabilme",
+        "bep_uda": "Öğrenci, dönem sonunda temel akış şeması şekillerini (Başla/Bitir, İşlem, Karar) tanır ve 2-3 adımlı basit bir süreci sembol kartlarıyla masada yan yana dizerek oluşturur.",
+        "uda": "Öğrenci, temel akış şeması sembollerini tanır ve basit bir süreci sembol kartlarıyla masada oluşturur.",
+        "kda": [
+          "KDA 2.8: Akış şemasının algoritmayı şekillerle göstermeye yaradığını söyler. [3/4]",
+          "KDA 2.9: 'Başla/Bitir' elipsi, 'İşlem' dikdörtgeni ve 'Karar' eşkenar dörtgen sembollerini doğru adıyla gösterir. [En az 3/4]",
+          "KDA 2.10: Verilen 3 adımlı basit bir akış şemasını parmağıyla takip ederek sonuca ulaşır ve söyler. [%80]",
+          "KDA 2.11: Hazır sembol kartlarını kullanarak 2 adımlı bir sürecin akış diyagramını yan yana dizer. [%75]"
+        ],
+        "meb_kda": [
           "2.8. Akış diyagramının kullanım amaçlarını açıklar.",
           "2.9. Temel akış diyagramı şekillerini ve elemanlarını listeler.",
           "2.10. Var olan bir akış diyagramını okuyarak problemi kavrar.",
@@ -745,17 +821,35 @@
       },
       {
         "unite": "3. ÜNİTE: PROGRAMLAMANIN TEMEL KAVRAMLARI",
-        "uda": "Öğrenci, kodlama ekranındaki başlatma ve durdurma butonlarını fareyle tıklar; sayı ve metin veri türlerini ilgili kutucuklara yazar.",
+        "konu": "Programlama Sembolleri, İşlemler ve Veri Türleri",
+        "kod": "BTY.9.3.1",
+        "maarif_uda": "BTY.9.3.1. Programlamada kullanılan işlem sembollerini ve temel veri türlerini yapılandırabilme",
+        "bep_uda": "Öğrenci, dönem sonunda programlama ekranındaki başlatma/durdurma butonlarını fareyle tıklar; sayı ve metin kutucuklarına klavyeyle yazar.",
+        "uda": "Öğrenci, programlama ekranındaki başlat/durdur butonlarını tıklar; sayı ve metin verilerini ilgili kutulara yazar.",
         "kda": [
-          "KDA 3.1: Öğrenci, ekrandaki yeşil bayrak / başlat butonunu ve kırmızı durdur butonunu fareyle tıklar.",
-          "KDA 3.2: Öğrenci, kendisine verilen örnek verilerden sayıyı sayı kutusuna, kelimeyi metin kutusuna klavye kullanarak yazar.",
-          "KDA 3.3: Öğrenci, 'Eğer / Değilse' (karar) mantığını içeren basit bir şartlı yönergeyi ('Hava yağmurluysa şemsiye al') doğru davranışla açıklar.",
-          "KDA 3.4: Öğrenci, döngü yapısı ile tekrarlanan basit bir hareketi (3 kez zıpla / 3 kez tıkla) komuta göre uygular."
+          "KDA 3.1: Programlama ortamındaki başlat (yeşil bayrak), durdur (kırmızı buton) ve matematiksel sembolleri (+, -) fareyle gösterir. [%100]",
+          "KDA 3.2: Sayısal veriyi (yaş) sayı kutusuna, metinsel veriyi (isim) metin kutusuna klavyeyle yazar. [3/4]",
+          "KDA 3.3: Ekranda gösterilen örnek verileri ilgili veri kutusuna sürükleyip bırakır veya yazar. [%80]"
         ],
         "meb_kda": [
           "3.1. Programlamada kullanılan işlem ve sembolleri listeler.",
           "3.2. Veri türlerini amacına uygun şekilde programa tanımlar.",
-          "3.3. Farklı veri türlerini program içerisinde kullanır.",
+          "3.3. Farklı veri türlerini program içerisinde kullanır."
+        ]
+      },
+      {
+        "unite": "3. ÜNİTE: PROGRAMLAMANIN TEMEL KAVRAMLARI",
+        "konu": "Karar ve Döngü Yapıları",
+        "kod": "BTY.9.3.2",
+        "maarif_uda": "BTY.9.3.2. Karar ve döngü yapılarını kullanarak temel programlama blokları geliştirebilme",
+        "bep_uda": "Öğrenci, dönem sonunda şartlı (eğer-ise) ve tekrarlı (döngü) komut kartlarını seçer; blok kodlama ekranında sürükleyip birleştirerek çalıştırır.",
+        "uda": "Öğrenci, şartlı ve tekrarlı basit yönergeleri blok kod ortamında seçer ve uygular.",
+        "kda": [
+          "KDA 3.4: 'Eğer hava yağmurluysa şemsiye al' mantığını içeren şartlı kartı seçip gösterir. [3/4]",
+          "KDA 3.5: '3 kez tıkla / 3 kez zıpla' gibi döngü komutunu sayarak hatasız uygular. [%80]",
+          "KDA 3.6: Şart ve döngü içeren hazır blokları (Scratch tekrarla bloğu) fareyle sürükleyip birleştirir. [%75]"
+        ],
+        "meb_kda": [
           "3.4. Karar yapılarını kullanarak programı geliştirir.",
           "3.5. Döngü yapılarını kullanarak programı geliştirir.",
           "3.6. Döngü ve karar yapıları ile program tasarlar."
@@ -763,26 +857,34 @@
       },
       {
         "unite": "4. ÜNİTE: ALGORİTMA VE AKIŞ DİYAGRAMINI TEST ETME",
-        "uda": "Öğrenci, sırası karışmış 3 işlem adımı içerisindeki hatalı adımı parmağıyla gösterir ve öğretmenin rehberliğinde doğru sırasına koyar.",
+        "konu": "Test Süreci, Hata Belirleme ve Hata Ayıklama",
+        "kod": "BTY.9.4.1",
+        "maarif_uda": "BTY.9.4.1. Algoritma ve akış diyagramlarındaki hataların sonuçlarını tahmin edebilme ve hata ayıklayabilme",
+        "bep_uda": "Öğrenci, dönem sonunda sırası karışmış 3 işlem adımı içerisindeki hatalı adımı parmağıyla gösterir ve öğretmenin rehberliğinde doğru kartla değiştirir.",
+        "uda": "Öğrenci, sırası karışmış 3 işlem adımı içerisindeki hatalı adımı parmağıyla gösterir ve doğru sıraya koyar.",
         "kda": [
-          "KDA 4.1: Öğrenci, sırası ters verilmiş 3 adımlı akış sıralamasında hata olan basamağı işaret eder.",
-          "KDA 4.2: Öğrenci, öğretmenin yönlendirmesiyle programdaki basit bir komut sırasını düzelterek kodu yeniden çalıştırır.",
-          "KDA 4.3: Öğrenci, hatalı çalışan bir program çıktısı ile doğru çalışan çıktıyı ekranda karşılaştırır."
+          "KDA 4.1: Hazırlanan 3 adımlı bir akış şemasını öğretmenin yönergeleriyle sırayla takip eder. [%80]",
+          "KDA 4.2: Sırası ters verilmiş veya eksik bırakılmış adımı parmağıyla işaret eder. [3/4]",
+          "KDA 4.3: Yanlış sırayla yapılan işlemin sonucunun bozuk çıkacağını söyler. [İstendiğinde]",
+          "KDA 4.4: Hatalı kartı çıkarıp yerine doğru adımı koyarak akışı düzeltir. [3/4]"
         ],
         "meb_kda": [
           "4.1. Tasarlanan algoritma ve akış diyagramını test eder.",
           "4.2. Tasarladığı algoritma ve akış diyagramının hatalarını listeler.",
-          "4.3. Hatalı algoritma ve akış diyagramlarının, programın istenilen çıktıyı vermesine engel olacağını fark",
+          "4.3. Hatalı algoritma ve akış diyagramlarının çıktıyı engelleyeceğini fark eder.",
           "4.4. Tasarladığı algoritma ve akış diyagramının hatalarını düzeltir."
         ]
       },
       {
         "unite": "5. ÜNİTE: İLERİ DÜZEY ALGORİTMA UYGULAMALARI",
-        "uda": "Öğrenci, üzerinde 1'den 5'e kadar rakamlar yazan kartları küçükten büyüğe sırayla yan yana dizer ve aranan kartı bulup gösterir.",
+        "konu": "Arama ve Sıralama Algoritmaları Mantığı",
+        "kod": "BTY.9.5.1",
+        "maarif_uda": "BTY.9.5.1. Temel arama ve sıralama algoritmalarının işleyişini modelleyebilme ve kullanım alanlarını ilişkilendirebilme",
+        "bep_uda": "Öğrenci, dönem sonunda önüne karışık konulan 1'den 5'e kadar rakam kartlarını küçükten büyüğe sırayla dizer ve söylenen hedef kartı seçip gösterir.",
+        "uda": "Öğrenci, karışık verilen 1'den 5'e kadar rakam kartlarını küçükten büyüğe dizer ve hedef kartı bulup gösterir.",
         "kda": [
-          "KDA 5.1: Öğrenci, karışık verilen 5 adet rakam kartını masada soldan sağa küçükten büyüğe doğru dizer.",
-          "KDA 5.2: Öğrenci, önüne konulan kartlar arasından öğretmenin söylediği hedef sayıyı en fazla 2 denemede seçip gösterir.",
-          "KDA 5.3: Öğrenci, sıralama ve arama işlemlerinin günlük hayatta (ör. rehberden isim arama, boy sırasına girme) nerede kullanıldığını söyler."
+          "KDA 5.1: Karışık verilen 5 adet rakam kartını masada soldan sağa küçükten büyüğe doğru dizer. [3/4]",
+          "KDA 5.2: Kartlar arasından aranan hedef sayıyı seçip gösterir; telefon rehberinden isim arama örneğini söyler. [%80]"
         ],
         "meb_kda": [
           "5.1. Arama ve sıralama algoritmalarını akış diyagramıyla gösterir.",
@@ -1391,16 +1493,34 @@
     "veriler": [
       {
         "unite": "1. ÜNİTE: PYTHON PROGRAMLAMAYA GİRİŞ",
-        "uda": "Öğrenci, Python geliştirme ortamını açar, `print()` fonksiyonu içerisine adını yazar ve 'Run' butonuna basarak konsolda görüntüler.",
+        "konu": "Python Çalışma Ortamları ve IDE Seçimi",
+        "kod": "BTY.10.1.1",
+        "maarif_uda": "BTY.10.1.1. Python geliştirme ortamlarını karşılaştırarak uygun çalışma ortamına karar verebilme",
+        "bep_uda": "Öğrenci, dönem sonunda masaüstündeki Python IDE (Thonny/IDLE) simgesini parmağıyla gösterir ve fareyle çift tıklayarak çalışma ortamını açar.",
+        "uda": "Öğrenci, masaüstündeki Python IDE simgesini gösterir ve çift tıklayarak çalışma ortamını açar.",
         "kda": [
-          "KDA 1.1: Masaüstündeki Python IDE (Thonny/IDLE/VS Code) simgesine çift tıklayarak programı açar.",
-          "KDA 1.2: Klavyeden `print('...')` fonksiyonunun tırnakları içerisine kendi adını yazar.",
-          "KDA 1.3: Yeşil 'Çalıştır / Run' butonuna basar ve alt konsolda kendi adını parmağıyla gösterir.",
-          "KDA 1.4: Klavyeden iki sayıyı (ör. 5 ve 3) yazıp `+` işareti koyarak sonucu konsolda kontrol eder."
+          "KDA 1.1: Masaüstündeki Python IDE simgesini (Thonny, IDLE) diğer simgeler arasından tanıyıp gösterir. [%100]",
+          "KDA 1.2: Gösterilen IDE simgesine çift tıklayarak çalışma ortamını başlatır. [%100]"
         ],
         "meb_kda": [
           "1.1. Python programlama diliyle çalışılacak ortamları tanır.",
-          "1.2. Farklı entegre geliştirme ortamlarını analiz ederek kendisine en uygun çalışma ortamını seçer.",
+          "1.2. Farklı entegre geliştirme ortamlarını analiz ederek kendisine en uygun çalışma ortamını seçer."
+        ]
+      },
+      {
+        "unite": "1. ÜNİTE: PYTHON PROGRAMLAMAYA GİRİŞ",
+        "konu": "Değişkenler, İşlem Önceliği ve Girdi/Çıktı",
+        "kod": "BTY.10.1.2",
+        "maarif_uda": "BTY.10.1.2. Değişkenler, işlem önceliği ve veri giriş-çıkış komutlarını kullanarak temel Python programları oluşturabilme",
+        "bep_uda": "Öğrenci, dönem sonunda klavyeden print() fonksiyonu içine adını yazar, 'Run' butonuna basarak konsol ekranında kendi adını işaret eder.",
+        "uda": "Öğrenci, print() fonksiyonu ile adını konsola yazdırır; klavyeden veri girerek sonucu ekranda inceler.",
+        "kda": [
+          "KDA 1.3: Klavyeden `ad = \"Ahmet\"` gibi basit bir metin değişkenini ekrana yazar. [%75]",
+          "KDA 1.4: İki sayıyı toplayan (`sayi1 + sayi2`) basit komut satırını yazar veya çalıştırır. [3/4]",
+          "KDA 1.5: Ekranda beliren girdi istemine klavyeden adını veya yaşını yazıp Enter tuşuna basar. [%100]",
+          "KDA 1.6: Girilen verinin ekranda görüntülendiğini konsolda parmağıyla işaret eder. [%80]"
+        ],
+        "meb_kda": [
           "1.3. Değişkenlerde tutulacak verileri tanımlar.",
           "1.5. Tanımlanan değişkenlerde işlem önceliğini gözetir.",
           "1.6. Kullanıcıdan veri alır.",
@@ -1409,34 +1529,74 @@
       },
       {
         "unite": "2. ÜNİTE: PYTHON PROGRAMLAMA DİLİ İLE YAZILIM GELİŞTİRME",
-        "uda": "Öğrenci, klavyeden girilen sayıya göre çalışan hazır şartlı programı (if-else) çalıştırır ve ekrandaki doğru sonucu işaret eder.",
+        "konu": "Karar ve Döngü Yapıları",
+        "kod": "BTY.10.2.1",
+        "maarif_uda": "BTY.10.2.1. Çoklu koşul ve döngülerin işleyişine yönelik çıkarımda bulunarak program blokları geliştirebilme",
+        "bep_uda": "Öğrenci, dönem sonunda hazır verilen koşullu (if-else) programa konsoldan yaşını girer ve ekranda beliren sonucu fareyle işaret eder.",
+        "uda": "Öğrenci, hazır verilen koşullu ve döngülü programları çalıştırır; konsola değer girerek sonucu gösterir.",
         "kda": [
-          "KDA 2.1: Konsoldan yaşını yazıp Enter tuşuna basar.",
-          "KDA 2.2: Ekranda 'Geçtiniz' veya 'Kaldınız' mesajını fareyle işaret eder.",
-          "KDA 2.3: 3 kez tekrar eden basit bir for döngüsünün çıktısını ekranda sayar."
+          "KDA 2.1: Konsola yaşını girerek 'Geçtiniz' veya 'Kaldınız' çıktısını ekranda fareyle işaret eder. [3/4]",
+          "KDA 2.2: 3 kez tekrar eden for döngüsünün ekrandaki çıktısını sayarak gösterir. [%80]",
+          "KDA 2.3: İki şartın birlikte sağlandığı (yaş > 18 ve bilet == var) durumu seçeneklerden işaretler. [3/4]"
         ],
         "meb_kda": [
           "2.1. Python programlama dili karar yapılarını içeren programlar geliştirir.",
           "2.2. Bir problemi çözmek için kullanacağı döngü yapısına karar verir.",
-          "2.3. Çoklu koşulların mantıksal sonuçlarını değerlendirir.",
+          "2.3. Çoklu koşulların mantıksal sonuçlarını değerlendirir."
+        ]
+      },
+      {
+        "unite": "2. ÜNİTE: PYTHON PROGRAMLAMA DİLİ İLE YAZILIM GELİŞTİRME",
+        "konu": "Fonksiyonlar ve Standart Kütüphaneler",
+        "kod": "BTY.10.2.2",
+        "maarif_uda": "BTY.10.2.2. Python programlarında fonksiyonları ve hazır kütüphaneleri amaca uygun uygulayabilme",
+        "bep_uda": "Öğrenci, dönem sonunda hazır rastgele sayı üreten fonksiyonu çalıştırır ve konsola gelen sayıyı sesli okur.",
+        "uda": "Öğrenci, hazır fonksiyonları veya kütüphaneleri içeren kodu çalıştırır ve konsoldaki çıktıyı söyler.",
+        "kda": [
+          "KDA 2.4: Önceden yazılmış `selamla()` gibi basit bir fonksiyonu çağırma satırını çalıştırır. [%80]",
+          "KDA 2.5: Rastgele sayı üreten `random` kütüphanesi fonksiyonunu çalıştırıp ekrana gelen sayıyı sesli söyler. [3/4]"
+        ],
+        "meb_kda": [
           "2.4. Fonksiyonları program içinde yöntemlerine göre kullanır.",
           "2.5. Standart fonksiyon kümelerini ve kütüphanelerini kullanır."
         ]
       },
       {
         "unite": "3. ÜNİTE: NESNE YÖNELİMLİ PROJE GELİŞTİRME",
-        "uda": "Öğrenci, grafik pencereli veya basit listeli Python uygulamasında butonlara tıklayarak ekrandaki veriyi değiştirir.",
+        "konu": "OOP İlkeleri ve Temel Sınıflar",
+        "kod": "BTY.10.3.1",
+        "maarif_uda": "BTY.10.3.1. Nesne yönelimli programlama prensiplerinin sağladığı avantajları değerlendirebilme ve sınıf yapılarını modelleyebilme",
+        "bep_uda": "Öğrenci, dönem sonunda gerçek hayattaki nesneler ile sınıfları temsil eden resimli kartları masada eşleştirir ve ekrandaki nesneye fareyle tıklar.",
+        "uda": "Öğrenci, sınıfların ve nesnelerin gerçek hayattaki eşyalar gibi özelliklere sahip olduğunu görsel kartlarla eşleştirir.",
         "kda": [
-          "KDA 3.1: Hazır listedeki 3 meyve isminden birincisini konsolda gösterir.",
-          "KDA 3.2: Ekranda açılan basit arayüzdeki butona tıklar.",
-          "KDA 3.3: Programın ürettiği sonucu ekrandan takip eder."
+          "KDA 3.1: Nesnelerin gerçek hayattaki eşyalar gibi özelliklere sahip olduğunu görsel kartlarla eşleştirir. [İstendiğinde]",
+          "KDA 3.2: Kodların düzenli ve tekrar kullanılabilir olmasının faydasını söyler. [1 geçerli ifade]",
+          "KDA 3.3: Örnek bir `Araba` sınıfı şablonundaki özellikleri (renk, model) öğretmenin rehberliğinde inceler. [%70]",
+          "KDA 3.4: Hazır metotları (str, int) içeren komut satırını çalıştırır. [%80]",
+          "KDA 3.5: Alt sınıf ve üst sınıf kartlarını (Hayvan -> Kedi) masada alt alta eşleştirir. [3/4]"
         ],
         "meb_kda": [
           "3.1. Nesne yönelimli programlama kavramını açıklar.",
           "3.2. Nesne yönelimli programlamanın faydalarının farkına varır.",
           "3.3. Programın ihtiyacına yönelik sınıf tanımlaması yapar.",
           "3.4. Python programlama diline özgü temel sınıfları kullanır.",
-          "3.5. Geliştirdiği programda kapsülleme (encapsulation), kalıtım (inheritance) ve çok biçimlilik (polymorphism) prensiplerini kullanır.",
+          "3.5. Geliştirdiği programda kapsülleme, kalıtım ve çok biçimlilik prensiplerini kullanır."
+        ]
+      },
+      {
+        "unite": "3. ÜNİTE: NESNE YÖNELİMLİ PROJE GELİŞTİRME",
+        "konu": "Veri Koleksiyonları, Dosya İşlemleri ve Proje",
+        "kod": "BTY.10.3.2",
+        "maarif_uda": "BTY.10.3.2. Veri yapıları ve dosya işlemlerini kullanarak ileri düzey Python projeleri hazırlayabilme ve geliştirebilme",
+        "bep_uda": "Öğrenci, dönem sonunda ekranda listelenen verilerden istenen elemanı seçer ve 'Dosyadan Oku / Kaydet' butonuna basarak veriyi ekranda işaret eder.",
+        "uda": "Öğrenci, listeden istenen elemanı seçer ve 'Dosyadan Oku/Kaydet' butonuna basarak veriyi görüntüler.",
+        "kda": [
+          "KDA 3.6: Hazır listedeki 3 meyve isminden birincisini konsolda fareyle işaret eder. [%80]",
+          "KDA 3.7: 'Dosyadan Oku' veya 'Kaydet' butonuna basarak metin belgesini ekranda açar. [%100]",
+          "KDA 3.8: Dosyadan okunan listenin ekrana geldiğini parmağıyla gösterir. [%80]",
+          "KDA 3.9: Hazır bir projede butonlara tıklayarak projeyi baştan sona tamamlar. [%80]"
+        ],
+        "meb_kda": [
           "3.6. List, tuple, set ve dictionary türlerinde verileri tanımlar.",
           "3.7. Dosya nesnesi üzerinde okuma yazma silme işlemlerini uygular.",
           "3.8. Dizi türündeki verileri dosya nesnesi içerisinde örneklendirir.",
@@ -1622,7 +1782,7 @@
     function modulYukle() {
       senkronizeEt();
       const secim = elModul.value;
-      elUda.innerHTML = '<option value="">-- UDA / Ünite Seçiniz --</option>';
+      elUda.innerHTML = '<option value="">-- UDA / Öğrenme Çıktısı Seçiniz --</option>';
       const elUdaMetin = document.getElementById("bep_uda_metin");
       if (elUdaMetin) elUdaMetin.value = "";
       checkboxesKda.innerHTML = '<div style="padding: 6px; font-size: 12px; color: #64748b;">Önce yukarıdan bir UDA seçiniz.</div>';
@@ -1631,14 +1791,61 @@
       document.getElementById('multiSelectMebLabel').textContent = "Önce UDA seçiniz...";
 
       if (secim && bepHavuzu[secim]) {
+        let currentUnite = "";
+        let currentGroup = null;
+
         bepHavuzu[secim].veriler.forEach(function(item, idx) {
+          // Eğer ünite başlığı değiştiyse veya TYMM grubuysa optgroup oluştur
+          if (item.unite && item.unite !== currentUnite) {
+            currentUnite = item.unite;
+            currentGroup = document.createElement("optgroup");
+            currentGroup.label = item.unite;
+            elUda.appendChild(currentGroup);
+          }
+
           const opt = document.createElement("option");
           opt.value = idx;
-          opt.textContent = item.unite;
-          elUda.appendChild(opt);
+          if (item.kod && item.konu) {
+            opt.textContent = `${item.kod} - ${item.konu}`;
+          } else {
+            opt.textContent = item.unite || ("Hedef " + (idx + 1));
+          }
+
+          if (currentGroup) {
+            currentGroup.appendChild(opt);
+          } else {
+            elUda.appendChild(opt);
+          }
         });
       }
     }
+
+    // UDA Metnini Seçilen Moda Göre (BEP / Resmî Maarif) Doldur
+    function guncelleUdaMetni() {
+      const modulKey = elModul.value;
+      const udaIdx = elUda.value;
+      const elUdaMetin = document.getElementById("bep_uda_metin");
+      if (!elUdaMetin) return;
+
+      if (modulKey && udaIdx !== "" && bepHavuzu[modulKey].veriler[udaIdx]) {
+        const item = bepHavuzu[modulKey].veriler[udaIdx];
+        const seciliTip = document.querySelector('input[name="bep_uda_tipi"]:checked')?.value || 'bep';
+        if (seciliTip === 'maarif' && item.maarif_uda) {
+          elUdaMetin.value = item.maarif_uda;
+        } else if (item.bep_uda) {
+          elUdaMetin.value = item.bep_uda;
+        } else {
+          elUdaMetin.value = item.uda || "";
+        }
+      } else {
+        elUdaMetin.value = "";
+      }
+    }
+
+    // BEP / Maarif Radio Butonları Dinle
+    document.querySelectorAll('input[name="bep_uda_tipi"]').forEach(function(radio) {
+      radio.addEventListener("change", guncelleUdaMetni);
+    });
 
     // Ders değiştiğinde ilgili sınıfın modülünü otomatik seç
     elDers.addEventListener("change", function() {
@@ -1661,13 +1868,11 @@
       const udaIdx = this.value;
       checkboxesKda.innerHTML = '';
       checkboxesMeb.innerHTML = '';
-      const elUdaMetin = document.getElementById("bep_uda_metin");
+
+      guncelleUdaMetni();
 
       if (modulKey && udaIdx !== "" && bepHavuzu[modulKey].veriler[udaIdx]) {
         const item = bepHavuzu[modulKey].veriler[udaIdx];
-        if (elUdaMetin) {
-          elUdaMetin.value = item.uda;
-        }
 
         // 1. Revize Edilmiş Kısa Dönemli Amaçlar (Somut / Temel Düzey)
         const kdalar = item.kda || [];
@@ -1687,7 +1892,6 @@
         });
         document.getElementById('multiSelectMebLabel').textContent = "MEB Kazanımı Seçiniz (0 Seçildi)";
       } else {
-        if (elUdaMetin) elUdaMetin.value = "";
         checkboxesKda.innerHTML = '<div style="padding: 6px; font-size: 12px; color: #64748b;">Önce yukarıdan bir UDA seçiniz.</div>';
         document.getElementById('multiSelectKdaLabel').textContent = "Önce UDA seçiniz...";
         checkboxesMeb.innerHTML = '<div style="padding: 6px; font-size: 12px; color: #64748b;">Önce yukarıdan bir UDA seçiniz.</div>';
