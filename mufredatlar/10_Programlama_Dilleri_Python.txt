@@ -1,0 +1,99 @@
+================================================================================
+T.C. MİLLÎ EĞİTİM BAKANLIĞI - BİLİŞİM TEKNOLOJİLERİ VE YAZILIM DERSİ
+MODÜL: PROGRAMLAMA DİLLERİ (PYTHON) (10. Sınıf)
+BEP (BİREYSELLEŞTİRİLMİŞ EĞİTİM PROGRAMI) UYARLAMA VE MÜFREDAT KILAVUZU
+================================================================================
+
+[BEP HEDEF YAZIM İLKELERİ VE AÇIKLAMA]
+1. UZUN DÖNEMLİ AMAÇ (UDA / Uzak Hedef):
+   Öğrencinin dönem veya öğretim yılı sonunda kazanması beklenen genel ve kalıcı davranıştır.
+   Soyut fiiller ("anlar", "kavrar", "özümser") yerine doğrudan gözlenebilir ve ölçülebilir
+   eylem bildiren fiillerle ("yazar", "söyler", "gösterir", "tıklar", "eşleştirir") formüle edilmiştir.
+
+2. KISA DÖNEMLİ AMAÇLAR (KDA / Kısa Hedefler - Görev Analizi):
+   UDA'ya ulaştıran küçük, basamaklandırılmış ara adımlardır.
+   Her bir KDA; Birey (Öğrenci), Koşul (şartlar/araçlar), Davranış (somut eylem) ve Ölçüt
+   bileşenlerini barındıracak şekilde yapılandırılmıştır.
+
+3. MEB ORİJİNAL MÜFREDAT KAZANIMLARI:
+   Dersin resmî öğretim programında yer alan akademik kazanımların tam listesidir.
+--------------------------------------------------------------------------------
+
+################################################################################
+1. ÜNİTE: PYTHON PROGRAMLAMAYA GİRİŞ
+################################################################################
+
+[Ünite Özeti/Kapsamı]:
+Bu ünitede sırasıyla; Python çalışma ortamı türleri, değişken tanımlama, veri türleri, tanımlanan değişkenlerde işlem önceliği ve kullanıcıdan alınan verinin değişkene aktarılması üzerinde durulur.
+
+A) REVİZE EDİLMİŞ UZUN DÖNEMLİ AMAÇ (UDA / Uzak Hedef):
+   >>> Öğrenci, Python geliştirme ortamını açar, `print()` fonksiyonu içerisine adını yazar ve 'Run' butonuna basarak konsolda görüntüler.
+
+B) REVİZE EDİLMİŞ KISA DÖNEMLİ AMAÇLAR (KDA / Kısa Hedefler - Görev Analizi):
+   * KDA 1.1: Masaüstündeki Python IDE (Thonny/IDLE/VS Code) simgesine çift tıklayarak programı açar.
+   * KDA 1.2: Klavyeden `print('...')` fonksiyonunun tırnakları içerisine kendi adını yazar.
+   * KDA 1.3: Yeşil 'Çalıştır / Run' butonuna basar ve alt konsolda kendi adını parmağıyla gösterir.
+   * KDA 1.4: Klavyeden iki sayıyı (ör. 5 ve 3) yazıp `+` işareti koyarak sonucu konsolda kontrol eder.
+
+C) MEB ORİJİNAL MÜFREDAT KAZANIMLARI (Referans):
+   - 1.1. Python programlama diliyle çalışılacak ortamları tanır.
+   - 1.2. Farklı entegre geliştirme ortamlarını analiz ederek kendisine en uygun çalışma ortamını seçer.
+   - 1.3. Değişkenlerde tutulacak verileri tanımlar.
+   - 1.5. Tanımlanan değişkenlerde işlem önceliğini gözetir.
+   - 1.6. Kullanıcıdan veri alır.
+   - 1.7. Kullanıcıdan alınan veriyi değişkene tanımlar.
+
+--------------------------------------------------------------------------------
+
+################################################################################
+2. ÜNİTE: PYTHON PROGRAMLAMA DİLİ İLE YAZILIM GELİŞTİRME
+################################################################################
+
+[Ünite Özeti/Kapsamı]:
+Bu ünitede sırasıyla; karar yapılarını kullanma, döngüleri kullanarak bir problem çözme, çoklu koşulların mantıksal sonuçlarını açıklama, fonksiyonları program içinde yöntemine göre kullanma ve standart fonksiyonlar ve kütüphaneleri üzerinde durulur.
+
+A) REVİZE EDİLMİŞ UZUN DÖNEMLİ AMAÇ (UDA / Uzak Hedef):
+   >>> Öğrenci, klavyeden girilen sayıya göre çalışan hazır şartlı programı (if-else) çalıştırır ve ekrandaki doğru sonucu işaret eder.
+
+B) REVİZE EDİLMİŞ KISA DÖNEMLİ AMAÇLAR (KDA / Kısa Hedefler - Görev Analizi):
+   * KDA 2.1: Konsoldan yaşını yazıp Enter tuşuna basar.
+   * KDA 2.2: Ekranda 'Geçtiniz' veya 'Kaldınız' mesajını fareyle işaret eder.
+   * KDA 2.3: 3 kez tekrar eden basit bir for döngüsünün çıktısını ekranda sayar.
+
+C) MEB ORİJİNAL MÜFREDAT KAZANIMLARI (Referans):
+   - 2.1. Python programlama dili karar yapılarını içeren programlar geliştirir.
+   - 2.2. Bir problemi çözmek için kullanacağı döngü yapısına karar verir.
+   - 2.3. Çoklu koşulların mantıksal sonuçlarını değerlendirir.
+   - 2.4. Fonksiyonları program içinde yöntemlerine göre kullanır.
+   - 2.5. Standart fonksiyon kümelerini ve kütüphanelerini kullanır.
+
+--------------------------------------------------------------------------------
+
+################################################################################
+3. ÜNİTE: NESNE YÖNELİMLİ PROJE GELİŞTİRME
+################################################################################
+
+[Ünite Özeti/Kapsamı]:
+Nesne yönelimli programlama, programlama açısından düşünüldüğünde önemli bir kavramdır. Nesne yönelimli programlama ileri düzey ve gelişmiş programlar yazmayı sağlar. Karmaşık projelerdeki kodların daha iyi organize edilmesi, kod tekrarlarından kurtulma, hata düzeltmeyi kolaylaştırma gibi avantajlar sunar. Bu ünitede sırasıyla; nesne yönelimli programlamanın faydaları, sınıf tanımlaması, Pythona özgü temel sınıflar, programda kapsülleme, kalıtım ve çok biçimlilik kullanımı, liste, demet, küme, sözlük türündeki veriler, dosya işlemleri ve ileri seviye nesne yönelimli tekniklerle proje geliştirme üzerinde durulur.
+
+A) REVİZE EDİLMİŞ UZUN DÖNEMLİ AMAÇ (UDA / Uzak Hedef):
+   >>> Öğrenci, grafik pencereli veya basit listeli Python uygulamasında butonlara tıklayarak ekrandaki veriyi değiştirir.
+
+B) REVİZE EDİLMİŞ KISA DÖNEMLİ AMAÇLAR (KDA / Kısa Hedefler - Görev Analizi):
+   * KDA 3.1: Hazır listedeki 3 meyve isminden birincisini konsolda gösterir.
+   * KDA 3.2: Ekranda açılan basit arayüzdeki butona tıklar.
+   * KDA 3.3: Programın ürettiği sonucu ekrandan takip eder.
+
+C) MEB ORİJİNAL MÜFREDAT KAZANIMLARI (Referans):
+   - 3.1. Nesne yönelimli programlama kavramını açıklar.
+   - 3.2. Nesne yönelimli programlamanın faydalarının farkına varır.
+   - 3.3. Programın ihtiyacına yönelik sınıf tanımlaması yapar.
+   - 3.4. Python programlama diline özgü temel sınıfları kullanır.
+   - 3.5. Geliştirdiği programda kapsülleme (encapsulation), kalıtım (inheritance) ve çok biçimlilik (polymorphism) prensiplerini kullanır.
+   - 3.6. List, tuple, set ve dictionary türlerinde verileri tanımlar.
+   - 3.7. Dosya nesnesi üzerinde okuma yazma silme işlemlerini uygular.
+   - 3.8. Dizi türündeki verileri dosya nesnesi içerisinde örneklendirir.
+   - 3.9. İleri seviye nesne yönelimi teknikleriyle özgün projeler geliştirir.
+
+--------------------------------------------------------------------------------
+

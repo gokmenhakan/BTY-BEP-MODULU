@@ -1,0 +1,112 @@
+================================================================================
+T.C. MİLLÎ EĞİTİM BAKANLIĞI - BİLİŞİM TEKNOLOJİLERİ VE YAZILIM DERSİ
+MODÜL: PROGRAMLAMA DİLLERİ (JAVASCRIPT) (10. / 11. Sınıf)
+BEP (BİREYSELLEŞTİRİLMİŞ EĞİTİM PROGRAMI) UYARLAMA VE MÜFREDAT KILAVUZU
+================================================================================
+
+[BEP HEDEF YAZIM İLKELERİ VE AÇIKLAMA]
+1. UZUN DÖNEMLİ AMAÇ (UDA / Uzak Hedef):
+   Öğrencinin dönem veya öğretim yılı sonunda kazanması beklenen genel ve kalıcı davranıştır.
+   Soyut fiiller ("anlar", "kavrar", "özümser") yerine doğrudan gözlenebilir ve ölçülebilir
+   eylem bildiren fiillerle ("yazar", "söyler", "gösterir", "tıklar", "eşleştirir") formüle edilmiştir.
+
+2. KISA DÖNEMLİ AMAÇLAR (KDA / Kısa Hedefler - Görev Analizi):
+   UDA'ya ulaştıran küçük, basamaklandırılmış ara adımlardır.
+   Her bir KDA; Birey (Öğrenci), Koşul (şartlar/araçlar), Davranış (somut eylem) ve Ölçüt
+   bileşenlerini barındıracak şekilde yapılandırılmıştır.
+
+3. MEB ORİJİNAL MÜFREDAT KAZANIMLARI:
+   Dersin resmî öğretim programında yer alan akademik kazanımların tam listesidir.
+--------------------------------------------------------------------------------
+
+################################################################################
+1. ÜNİTE: JAVASCRIPT PROGRAMLAMA DİLİ TEMELLERİ
+################################################################################
+
+[Ünite Özeti/Kapsamı]:
+Bu ünitede; web geliştirme süreçlerinin işleyişi, Javascript programlama dilinin web sitelerindeki rolü, Javascript programlama dilinin terim ve kavramları üzerinde durulur. Javascript programlama dilinde değişkenler, veri tipleri, koşullu ifadeler, karşılaştırma operatörleri ve mantıksal operatörler kavramları anlatılır.
+
+A) REVİZE EDİLMİŞ UZUN DÖNEMLİ AMAÇ (UDA / Uzak Hedef):
+   >>> Öğrenci, web tarayıcısında 'alert' uyarı penceresi açan butona tıklar ve açılan kutudaki 'Tamam' düğmesine basar.
+
+B) REVİZE EDİLMİŞ KISA DÖNEMLİ AMAÇLAR (KDA / Kısa Hedefler - Görev Analizi):
+   * KDA 1.1: Web sayfasındaki mavi butona fareyle tıklar.
+   * KDA 1.2: Ekranda açılan uyarı penceresini okur veya gösterir.
+   * KDA 1.3: 'Tamam' butonuna basarak pencereyi kapatır.
+
+C) MEB ORİJİNAL MÜFREDAT KAZANIMLARI (Referans):
+   - 1.1. Web geliştirme süreçlerinin işleyiş şekillerini anlar.
+   - 1.2. Javascript programlama dilinin web sitelerindeki rolünü kavrar.
+   - 1.3. Javascript programlama dilinin terim ve kavramlarını tanır.
+   - 1.4. Değişkenleri Javascript programlama dili ile kullanır.
+   - 1.5. Javascript programlama dili içerisinde kullanılan farklı veri tiplerini kavrar.
+   - 1.6. Problemlerde karşılaşılan farklı senaryolarda koşullu ifadeleri kullanır.
+   - 1.7. Karşılaştırma operatörlerini Javascript programlama dili ile kullanır.
+   - 1.8. Birden fazla koşul durumlarını birleştirmek için mantıksal operatörler kullanır.
+
+--------------------------------------------------------------------------------
+
+################################################################################
+2. ÜNİTE: JAVASCRIPT PROGRAMLAMA DİLİ FONKSİYONLARI VE NESNE TABANLI PROGRAMLAMA
+################################################################################
+
+[Ünite Özeti/Kapsamı]:
+Bu ünitede; Javascript programlama dilinde fonksiyonlarının genel tanımı, fonksiyonların düzenlenmesi ve yönetilmesi, fonksiyonlarda kullanılan parametreler, fonksiyonların değişkenlere atanabilmesi üzerinde durulur. Javascript programlama dilinde diziler ve döngüler anlatılarak dizi elemanlarını sıralama ve filtreleme olaylarından bahsedilir. Nesne ve sınıf kavramları anlatılarak constructor’lara özellikler ekleme, nesneler arası etkileşim kurma işlemleri uygulamalı olarak yapılır.
+
+A) REVİZE EDİLMİŞ UZUN DÖNEMLİ AMAÇ (UDA / Uzak Hedef):
+   >>> Öğrenci, butona her tıklandığında ekrandaki sayacın 1 arttığını takip eder ve ekrandaki sayıyı söyler.
+
+B) REVİZE EDİLMİŞ KISA DÖNEMLİ AMAÇLAR (KDA / Kısa Hedefler - Görev Analizi):
+   * KDA 2.1: 'Arttır' butonuna 3 kez tıklar.
+   * KDA 2.2: Ekranda beliren güncel sayıyı (1, 2, 3) söyler.
+   * KDA 2.3: 'Sıfırla' butonuna basarak sayacı sıfıra döndürür.
+
+C) MEB ORİJİNAL MÜFREDAT KAZANIMLARI (Referans):
+   - 2.1. Javascript programlama dili ile fonksiyon tanımlar.
+   - 2.2. Fonksiyonları çağırarak kodun düzenlenmesini kavrar.
+   - 2.3. Fonksiyonları çağırarak kodun yönetilmesini kavrar.
+   - 2.4. Fonksiyonlara parametre eklemeyi kavrar.
+   - 2.5. Fonksiyonların değişkenlere atanarak kullanılabileceğini anlar.
+   - 2.6. Javascript programlama dili ile dizileri tanımlar.
+   - 2.7. Javascript programlama dilinde döngülerin kullanımını kavrar.
+   - 2.8. Diziler içerisinde gezinmeyi kavrar.
+   - 2.9. Diziler içerisinde işlem yapmayı kavrar.
+   - 2.9. Javascript programlama dilindeki nesne ve sınıf kavramlarını tanımlar.
+   - 2.10. Constructor fonksiyonuyla nesne oluşturmayı kavrar.
+   - 2.11. Nesnelere özellik ve metotlar ekleyerek diğer nesnelerle etkileşim kurmayı kavrar.
+
+--------------------------------------------------------------------------------
+
+################################################################################
+3. ÜNİTE: JAVASCRIPT PROGRAMLAMA DİLİ İLE WEB GELİŞTİRME
+################################################################################
+
+[Ünite Özeti/Kapsamı]:
+Bu ünitede; Javascript programlama dilinde DOM kavramı, DOM’un web sitelerindeki rolü, DOM aracılığı ile HTML elemanlarına erişimden bahsedilir. Javascript programlama dilinde eventler kullanılarak kullanıcı ile etkileşim kurma, asenkron programlamanın web sitelerindeki önemi üzerinde durulur. Jquery ve Ajax kütüphaneleri ile etkileşim kurma, fetch işlemleri ile asenkron veri alışverişi yapma işlemleri anlatılır. Javascript programlama dili kodlarını modüler hâle getirerek kullanmanın öneminden, NodeJS ve CommonJS modülleri kullanılarak arkaplanda yapılabilecek işlemlerden, NPM aracılığı ile Javascript programlama dili içerisine harici kütüphaneler yüklenebileceğinden bahsedilir. Javascript programlama dilinin popüler framework’lerinden React, Angular ve Vue kullanılarak web siteleri oluşturabilme, React Native framework’ü ile mobil uygulamalar oluşturabilme işlemleri anlatılacaktır. Ecmascript kullanarak Javascript programlama dilinin güncel standartlarına uygun şekilde çalışılabileceğinden bahsedilecektir.
+
+A) REVİZE EDİLMİŞ UZUN DÖNEMLİ AMAÇ (UDA / Uzak Hedef):
+   >>> Öğrenci, butona tıkladığında web sayfasının arka plan renginin veya yazı boyutunun değiştiğini gösterir.
+
+B) REVİZE EDİLMİŞ KISA DÖNEMLİ AMAÇLAR (KDA / Kısa Hedefler - Görev Analizi):
+   * KDA 3.1: 'Karanlık Mod' butonuna tıklar ve sayfanın siyah olduğunu görür.
+   * KDA 3.2: 'Aydınlık Mod' butonuna basarak sayfayı beyaz yapar.
+   * KDA 3.3: 'Yazıyı Büyüt' butonuna basarak metnin büyüdüğünü işaret eder.
+
+C) MEB ORİJİNAL MÜFREDAT KAZANIMLARI (Referans):
+   - 3.1. DOM kavramını tanımlar.
+   - 3.2. DOM’un web sayfalarındaki rolünü kavrar.
+   - 3.3. DOM aracılığı ile HTML elemanlarına nasıl erişileceğini kavrar.
+   - 3.4. Kullanıcılar ile etkileşim kurmayı kavrar.
+   - 3.5. Asenkron programlamanın web uygulamalarındaki önemini kavrar.
+   - 3.6. Jquery ve Ajax kütüphaneleri ile etkileşimli şekilde çalışmayı kavrar.
+   - 3.7. Fetch işlemlerini kullanarak asenkron çalışmayı kavrar.
+   - 3.8. Javascript programlama dili kodlarını daha modüler hâle getirerek kullanmanın önemini kavrar.
+   - 3.9. NodeJS modülünü kullanarak arkaplanda işlemler yapılabileceğini kavrar.
+   - 3.10. CommonJS modülünü kullanarak arkaplanda işlemler yapılabileceğini kavrar.
+   - 3.11. Npm aracılığı ile harici kütüphaneler kullanarak modül ekleme işlemini kavrar.
+   - 3.12. Javascript programlama dilindeki yaygın framework’lerin web geliştirmedeki rolünü kavrar.
+   - 3.13. Farklı açık kaynak kodlu web geliştirme framework’lerinin mobil uygulama geliştirmede nasıl kullanılacağını kavrar.
+   - 3.14. Gelişmekte olan EcmaScript ile Javascript programlama dilinin güncel standartlara uyumlu şekilde
+
+--------------------------------------------------------------------------------
+

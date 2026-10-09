@@ -1,0 +1,233 @@
+================================================================================
+T.C. MİLLÎ EĞİTİM BAKANLIĞI - BİLİŞİM TEKNOLOJİLERİ VE YAZILIM DERSİ
+MODÜL: YAPAY ZEKÂ UYGULAMALARI (11. / 12. Sınıf)
+BEP (BİREYSELLEŞTİRİLMİŞ EĞİTİM PROGRAMI) UYARLAMA VE MÜFREDAT KILAVUZU
+================================================================================
+
+[BEP HEDEF YAZIM İLKELERİ VE AÇIKLAMA]
+1. UZUN DÖNEMLİ AMAÇ (UDA / Uzak Hedef):
+   Öğrencinin dönem veya öğretim yılı sonunda kazanması beklenen genel ve kalıcı davranıştır.
+   Soyut fiiller ("anlar", "kavrar", "özümser") yerine doğrudan gözlenebilir ve ölçülebilir
+   eylem bildiren fiillerle ("yazar", "söyler", "gösterir", "tıklar", "eşleştirir") formüle edilmiştir.
+
+2. KISA DÖNEMLİ AMAÇLAR (KDA / Kısa Hedefler - Görev Analizi):
+   UDA'ya ulaştıran küçük, basamaklandırılmış ara adımlardır.
+   Her bir KDA; Birey (Öğrenci), Koşul (şartlar/araçlar), Davranış (somut eylem) ve Ölçüt
+   bileşenlerini barındıracak şekilde yapılandırılmıştır.
+
+3. MEB ORİJİNAL MÜFREDAT KAZANIMLARI:
+   Dersin resmî öğretim programında yer alan akademik kazanımların tam listesidir.
+--------------------------------------------------------------------------------
+
+################################################################################
+1. ÜNİTE: VERİ BİLİMİ TEMEL KAVRAMLARI
+################################################################################
+
+[Ünite Özeti/Kapsamı]:
+Bu ünitede öğrenciler veri biliminin temel kavramlarını öğrenir. Veri bilimi alanında çalışmak için Python programlama dilinin önemini kavrar ve çalışma ortamını hazırlar. Veri etiği konusunda bilgi sahibi olur. Python programlama dili altında kullanılan temel modüller, paketler ve kütüphaneleri kullanır.
+
+A) REVİZE EDİLMİŞ UZUN DÖNEMLİ AMAÇ (UDA / Uzak Hedef):
+   >>> Öğrenci, klavyeden sayıları ve metinleri kullanarak basit veri giriş kutusuna adını ve numarasını yazar.
+
+B) REVİZE EDİLMİŞ KISA DÖNEMLİ AMAÇLAR (KDA / Kısa Hedefler - Görev Analizi):
+   * KDA 1.1: Metin kutusuna klavyeden adını ve soyadını yazar.
+   * KDA 1.2: Sayı kutusuna öğrenci numarasını yazar.
+   * KDA 1.3: Veri tablosundaki satır ve sütunları parmağıyla gösterir.
+
+C) MEB ORİJİNAL MÜFREDAT KAZANIMLARI (Referans):
+   - 1.1. Veri bilimi temel kavramlarını açıklar.
+   - 1.2. Soru tiplerini açıklar.
+   - 1.3. Veri bilimcilerin çalışma basamaklarını açıklar.
+   - 1.4. Keşifçi veri analizini açıklar.
+   - 1.5. Veri döngüsü basamaklarını açıklar.
+   - 1.6. Veri türlerini açıklar.
+   - 1.7. Veri etiği kavramını açıklar.
+   - 1.8. Python programlama dili için etkileşimli tasarım ortamı kurar.
+   - 1.9.Python programlama dili temellerini veri bilimi bağlamında kullanır.
+   - 1.10. Açık kaynak kodlu programlama dili kavramını tanımlar.
+   - 1.11. Veri bilimi için gerekli olan Python programlama dili kütüphanelerini tanımlar.
+   - 1.12. Array veri yapısını kullanır.
+   - 1.13. Arraylerde birleştirme, sıralama, ayırma ve matematiksel işlemler yapar.
+   - 1.14. Arraylerde biçim, boyut ve boy işlemlerini uygular.
+   - 1.15. Veri seti oluşturarak veri çerçevesine dönüşüm işlemleri gerçekleştirir.
+   - 1.16. Belirli koşullara dayanarak bir veri çerçevesini filtreler.
+   - 1.17. Bir veri çerçevesinde indeksleme, satır ve sütun işlemlerini gerçekleştirir.
+   - 1.15., 1.16.)
+
+--------------------------------------------------------------------------------
+
+################################################################################
+2. ÜNİTE: TEMEL İSTATİSTİK
+################################################################################
+
+[Ünite Özeti/Kapsamı]:
+Bu ünitede veri biliminde sıklıkla kullanılan istatistiksel yapılardan bahsedilir. Veri analizinde merkezi eğilim ve yayılım ölçülerinin hesaplanması konusu üzerinde durulur.
+
+A) REVİZE EDİLMİŞ UZUN DÖNEMLİ AMAÇ (UDA / Uzak Hedef):
+   >>> Öğrenci, ekranda verilen 3 farklı sayıdan en büyüğünü veya en küçüğünü parmağıyla gösterir.
+
+B) REVİZE EDİLMİŞ KISA DÖNEMLİ AMAÇLAR (KDA / Kısa Hedefler - Görev Analizi):
+   * KDA 2.1: Ekranda görünen sayılardan en büyük olanı söyler.
+   * KDA 2.2: İki sayının ortalamasını hazır hesaplama butonuyla bulup gösterir.
+
+C) MEB ORİJİNAL MÜFREDAT KAZANIMLARI (Referans):
+   - 2.1. Bir seri veri yapısı oluşturur.
+   - 2.2. Bir serinin ortalama, mod ve medyan değerlerini hesaplar.
+   - 2.3. Bir serinin merkezi eğilim ve yayılım ölçülerini hesaplar.
+
+--------------------------------------------------------------------------------
+
+################################################################################
+3. ÜNİTE: DEĞİŞİM VE VERİ
+################################################################################
+
+[Ünite Özeti/Kapsamı]:
+Bu ünitede gerçek yaşam verilerinin nasıl yorumlanacağı üzerinde durulur. Bir veriyi çalışma ortamına aktarma, veriyi filtreleme, indeksleme, dilimleme ve birleştirme işlemlerinden bahsedilir.
+
+A) REVİZE EDİLMİŞ UZUN DÖNEMLİ AMAÇ (UDA / Uzak Hedef):
+   >>> Öğrenci, ekrandaki veri tablosunda ad ve numara yazan kutucukları fareyle tıklar.
+
+B) REVİZE EDİLMİŞ KISA DÖNEMLİ AMAÇLAR (KDA / Kısa Hedefler - Görev Analizi):
+   * KDA 3.1: Tablodaki ilk öğrencinin adını okur.
+   * KDA 3.2: Tabloya yeni bir satır eklendiğini fark edip işaret eder.
+
+C) MEB ORİJİNAL MÜFREDAT KAZANIMLARI (Referans):
+   - 3.1. Toplumsal problemler üzerinde veri biliminin etkilerini açıklar.
+   - 3.2. Veri setleri ile ilgili uygulamalar yapar.
+
+--------------------------------------------------------------------------------
+
+################################################################################
+4. ÜNİTE: VERİ GÖRSELLEŞTİRME
+################################################################################
+
+[Ünite Özeti/Kapsamı]:
+Bu ünitede verinin daha iyi anlaşılması, yorumlanması için veri görselleştirmenin öneminden bahsedilir. Çizgi grafiği, histogram grafiği, kutu grafiği, bar grafiği ve saçılma grafiklerinin nasıl oluşturulacağı gösterilir.
+
+A) REVİZE EDİLMİŞ UZUN DÖNEMLİ AMAÇ (UDA / Uzak Hedef):
+   >>> Öğrenci, ekranda beliren renkli sütun veya pasta grafiğini gösterir ve en uzun çubuğu işaret eder.
+
+B) REVİZE EDİLMİŞ KISA DÖNEMLİ AMAÇLAR (KDA / Kısa Hedefler - Görev Analizi):
+   * KDA 4.1: Sütun grafiğindeki en yüksek renkli sütunu parmağıyla gösterir.
+   * KDA 4.2: Pasta grafiğindeki en büyük dilimi söyler.
+
+C) MEB ORİJİNAL MÜFREDAT KAZANIMLARI (Referans):
+   - 4.1. Veriyi görselleştirmek için çizgi grafiği çizer.
+   - 4.2. Veriyi görselleştirmek için histogram grafiği çizer.
+   - 4.3. Veriyi görselleştirmek için kutu grafiği çizer.
+   - 4.4. Veriyi görselleştirmek için bar grafiği çizer.
+   - 4.5. Veriyi görselleştirmek için saçılım grafiği çizer.
+
+--------------------------------------------------------------------------------
+
+################################################################################
+5. ÜNİTE: VERİLER ARASI İLİŞKİ
+################################################################################
+
+[Ünite Özeti/Kapsamı]:
+Bu ünitede iki veri kümesi arasındaki ilişkinin matematiksel olarak hesaplanması öğretilir. 86 BİLİŞİM TEKNOLOJİLERİ VE YAZILIM DERSİ ÖĞRETİM PROGRAMI
+
+A) REVİZE EDİLMİŞ UZUN DÖNEMLİ AMAÇ (UDA / Uzak Hedef):
+   >>> Öğrenci, grafikte yukarı doğru çıkan çizgiyi parmağıyla takip ederek gösterir.
+
+B) REVİZE EDİLMİŞ KISA DÖNEMLİ AMAÇLAR (KDA / Kısa Hedefler - Görev Analizi):
+   * KDA 5.1: Çizgi grafiğindeki artış ve azalış yönünü parmağıyla takip eder.
+   * KDA 5.2: Grafikteki en yüksek noktayı işaretler.
+
+C) MEB ORİJİNAL MÜFREDAT KAZANIMLARI (Referans):
+   - 5.1. Bağımlı ve bağımsız değişken kavramını tanımlar.
+   - 5.2. İki değişken arasındaki ilişkiyi yorumlar.
+   - 5.3. Doğrusal regresyon modeli oluşturur.
+
+--------------------------------------------------------------------------------
+
+################################################################################
+6. ÜNİTE: VERİ MANİPÜLASYONU
+################################################################################
+
+[Ünite Özeti/Kapsamı]:
+Bu ünitede bir veri setinin kullanılabilir hâle getirilmesi işlemleri üzerinde durulur. Toplulaştırma ve gruplaştırma işlemleri gösterilir. Veri seti üzerinden Label Encoder uygulaması ve One-Hot dönüşümü öğretilir.
+
+A) REVİZE EDİLMİŞ UZUN DÖNEMLİ AMAÇ (UDA / Uzak Hedef):
+   >>> Öğrenci, veri tablosundaki boş veya hatalı kutucuğu fareyle tıklar ve silme (backspace) tuşuyla düzeltir.
+
+B) REVİZE EDİLMİŞ KISA DÖNEMLİ AMAÇLAR (KDA / Kısa Hedefler - Görev Analizi):
+   * KDA 6.1: Boş kalan hücreyi gösterir.
+   * KDA 6.2: Klavyeden doğru harfi yazarak kutuyu tamamlar.
+
+C) MEB ORİJİNAL MÜFREDAT KAZANIMLARI (Referans):
+   - 6.1. Veri setleri ile ilgili olan kavramları açıklar.
+   - 6.2. Veri setleri üzerinde toplulaştırma ve gruplama işlemleri yapar.
+   - 6.3. Bir veri setindeki eksik ve aykırı değerleri tespit eder.
+   - 6.4. One-Hot dönüşümü ile kategorik değişkenleri sayısal değişkenlere dönüştürür.
+   - 6.5. Label Encoder ile kategorik değişkenleri sayısal değişkenlere dönüştürür.
+   - 6.6. Verileri standart hâle getirmek için gerekli olan fonksiyonları kullanır.
+   - 6.7. Fonksiyon kullanarak verileri normalleştirir.
+
+--------------------------------------------------------------------------------
+
+################################################################################
+7. ÜNİTE: VERİ UYGULAMALARI
+################################################################################
+
+[Ünite Özeti/Kapsamı]:
+Bu ünitede açık kaynak kodlu platformları kullanarak önceki ünitelerde öğrendikleri bilgiler ile bir veri seti üzerinde işlemler yapılması öğretilir.
+
+A) REVİZE EDİLMİŞ UZUN DÖNEMLİ AMAÇ (UDA / Uzak Hedef):
+   >>> Öğrenci, öğretmenin gösterdiği hazır veri uygulamasında 'Yükle' ve 'Başlat' butonlarına tıklar.
+
+B) REVİZE EDİLMİŞ KISA DÖNEMLİ AMAÇLAR (KDA / Kısa Hedefler - Görev Analizi):
+   * KDA 7.1: 'Dosya Yükle' butonuna tıklar.
+   * KDA 7.2: 'Analizi Başlat' butonuna basarak sonucu bekler.
+
+C) MEB ORİJİNAL MÜFREDAT KAZANIMLARI (Referans):
+   - 7.1. Açık kaynak kodlu platformları kullanır.
+   - 7.2. Açık kaynak kodlu platformlar üzerinden veri analizi projeleri geliştirir.
+
+--------------------------------------------------------------------------------
+
+################################################################################
+8. ÜNİTE: YAPAY ZEKÂ TEMEL KAVRAMLARI VE UYGULAMALARI
+################################################################################
+
+[Ünite Özeti/Kapsamı]:
+Bu ünitede yapay zekâ temel kavramları ve yapay zekâ alt alanları üzerinde durulur. Yapay zekâ ile etik kavramları arasındaki ilişki öğretilir. Model ve tahmin modeli kavramları ile iki veri seti arasındaki korelasyon durumundan bahsedilir. Doğrusal ve çoklu doğrusal regresyon, karar ağacı ve rastgele orman regresyon algoritmaları ile ilgili uygulamalar yapılır. Lojistik regresyon, karar ağacı, rastgele orman, K en yakın komşuluk (KNN), destek vektör makinesi ve Naive Bayes sınıflandırma algoritmaları ile karmaşıklık matrisi konuları üzerinde durulur. Güdümsüz modeller tavsiye sistemleri ve görüntü sıkıştırma algoritmalarından bahsedilir.
+
+A) REVİZE EDİLMİŞ UZUN DÖNEMLİ AMAÇ (UDA / Uzak Hedef):
+   >>> Öğrenci, yapay zekâ kamera/çizim uygulamasına bir nesne gösterir ve ekranda ne tanıdığını söyler.
+
+B) REVİZE EDİLMİŞ KISA DÖNEMLİ AMAÇLAR (KDA / Kısa Hedefler - Görev Analizi):
+   * KDA 8.1: Kameraya kalemi gösterir ve ekranda beliren 'Kalem' yazısını okur.
+   * KDA 8.2: Yapay zekâ çizim aracına bir daire çizer ve yapay zekânın tahminini seçer.
+
+C) MEB ORİJİNAL MÜFREDAT KAZANIMLARI (Referans):
+   - 8.1. Yapay zekâyla ilişkili olan kavramları açıklar.
+   - 8.2. İstatistiksel yöntemler ve farklı makine öğrenimi teknikleri kullanarak tahmin modelleri geliştirir.
+   - 8.3. Sınıflandırma modellerini kullanarak belirli sınıflara ait verileri tanımlar.
+   - 8.4. Büyük ve karmaşık veri kümeleri içindeki desenleri keşfetmek ve veri setlerindeki bilgileri keşfetmek
+
+--------------------------------------------------------------------------------
+
+################################################################################
+9. ÜNİTE: YAPAY ZEKÂ TABANLI OYUN GELİŞTİRME
+################################################################################
+
+[Ünite Özeti/Kapsamı]:
+Bu ünitede oyunlarda yapay zekânın nasıl kullanıldığından bahsedilir. Python programlama dilinde oyun oluşturulması ve minimaks fonksiyonunun kullanımı öğretilir. Kural tabanlı, örüntü eşleştirme tabanlı ve yapay zekâ tabanlı sohbet robotlarının Python programlama dili kullanarak nasıl geliştirildiğinden bahsedilir.
+
+A) REVİZE EDİLMİŞ UZUN DÖNEMLİ AMAÇ (UDA / Uzak Hedef):
+   >>> Öğrenci, sohbet botunun (Chatbot) metin kutusuna 'Merhaba' yazar, 'Gönder' tuşuna tıklar ve gelen cevabı okur.
+
+B) REVİZE EDİLMİŞ KISA DÖNEMLİ AMAÇLAR (KDA / Kısa Hedefler - Görev Analizi):
+   * KDA 9.1: Sohbet kutusuna klavyeden bir soru veya selamlama yazar.
+   * KDA 9.2: Gönder (uçak simgesi veya Enter) tuşuna tıklar.
+   * KDA 9.3: Sohbet botunun verdiği cevabı seslendirir veya okur.
+
+C) MEB ORİJİNAL MÜFREDAT KAZANIMLARI (Referans):
+   - 9.1. Oyunlarda yapay zekânın kullanımını açıklar.
+   - 9.2. Bir yapay zekâ oyun uygulaması geliştirir.
+   - 9.3. Yapay zekâ tabanlı Chatbot uygulamaları geliştirir.
+   - 9.2., 9.3.)
+
+--------------------------------------------------------------------------------
+

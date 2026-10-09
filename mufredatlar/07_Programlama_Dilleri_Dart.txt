@@ -1,0 +1,99 @@
+================================================================================
+T.C. MİLLÎ EĞİTİM BAKANLIĞI - BİLİŞİM TEKNOLOJİLERİ VE YAZILIM DERSİ
+MODÜL: PROGRAMLAMA DİLLERİ (DART) (10. / 11. Sınıf)
+BEP (BİREYSELLEŞTİRİLMİŞ EĞİTİM PROGRAMI) UYARLAMA VE MÜFREDAT KILAVUZU
+================================================================================
+
+[BEP HEDEF YAZIM İLKELERİ VE AÇIKLAMA]
+1. UZUN DÖNEMLİ AMAÇ (UDA / Uzak Hedef):
+   Öğrencinin dönem veya öğretim yılı sonunda kazanması beklenen genel ve kalıcı davranıştır.
+   Soyut fiiller ("anlar", "kavrar", "özümser") yerine doğrudan gözlenebilir ve ölçülebilir
+   eylem bildiren fiillerle ("yazar", "söyler", "gösterir", "tıklar", "eşleştirir") formüle edilmiştir.
+
+2. KISA DÖNEMLİ AMAÇLAR (KDA / Kısa Hedefler - Görev Analizi):
+   UDA'ya ulaştıran küçük, basamaklandırılmış ara adımlardır.
+   Her bir KDA; Birey (Öğrenci), Koşul (şartlar/araçlar), Davranış (somut eylem) ve Ölçüt
+   bileşenlerini barındıracak şekilde yapılandırılmıştır.
+
+3. MEB ORİJİNAL MÜFREDAT KAZANIMLARI:
+   Dersin resmî öğretim programında yer alan akademik kazanımların tam listesidir.
+--------------------------------------------------------------------------------
+
+################################################################################
+1. ÜNİTE: DART PROGRAMLAMA DİLİ TEMELLERİ
+################################################################################
+
+[Ünite Özeti/Kapsamı]:
+Bu ünitede; dart programlama dilinin temel özellikleri, dart programlama dilindeki değişken tipleri, operatörler, fonksiyon ve parametreler, koşullu ifadeler ve döngüler üzerinde durulur. Dart programlama dili derleme süreci, derleme sürecinde AOT ve JIT arasındaki farklar, dart programlama dili paket yönetimi ile harici kütüphaneleri projeye ekleme anlatılır.
+
+A) REVİZE EDİLMİŞ UZUN DÖNEMLİ AMAÇ (UDA / Uzak Hedef):
+   >>> Öğrenci, çevrim içi DartPad editörünü tarayıcıda açar, `print()` fonksiyonu içerisine adını yazar ve çalıştırır.
+
+B) REVİZE EDİLMİŞ KISA DÖNEMLİ AMAÇLAR (KDA / Kısa Hedefler - Görev Analizi):
+   * KDA 1.1: Web tarayıcısında DartPad sayfasını açar.
+   * KDA 1.2: Kod satırına klavyeden adını tırnak içinde yazar.
+   * KDA 1.3: Mavi 'Run' butonuna tıklar ve konsoldaki çıktıyı gösterir.
+
+C) MEB ORİJİNAL MÜFREDAT KAZANIMLARI (Referans):
+   - 1.1. Dart programlama dilinin temel özelliklerini kavrar.
+   - 1.2. Dart programlama dilindeki değişken tiplerini kavrar.
+   - 1.3. Dart programlama dilindeki operatörleri öğrenir.
+   - 1.4. Dart programlama dilinde fonksiyonları ve parametreleri tanımlar.
+   - 1.5. Kontrol akışını yöneterek koşullu ifadeler ve döngüler kullanmayı kavrar.
+   - 1.6. Dart programlama dilinde derleme sürecini kavrar.
+   - 1.7. Derleme aşamasında AOT ile JIT arasındaki farkları kavrar.
+   - 1.8. Dart programlama dilinde paket yönetimini kullanarak harici kütüphaneleri projelerine dâhil etmeyi
+
+--------------------------------------------------------------------------------
+
+################################################################################
+2. ÜNİTE: NESNE TABANLI PROGRAMLAMA VE ASENKRON PROGRAMLAMA
+################################################################################
+
+[Ünite Özeti/Kapsamı]:
+Bu ünitede; dart programlama dilinde nesne tabanlı programlama, sınıf ve nesne kavramları açıklanır. Constructor yöntemlerini, kalıtımı ve arayüzleri kullanarak program geliştirme ile dart programlama dilindeki istisna (exception) mekanizmasını kullanma anlatılır. Fonksiyonel programlama özelliklerini kullanarak yüksek düzeyde fonksiyonları yönetme ve dart programlama dilinde asenkron programlamanın önemi üzerinde durulur. Asenkron programlamada Future ve Stream kavramlarından bahsedilir. Asenkron programlamada async/ await yapısını kullanma ile dart programlama dilinde dosya işlemleri yapma ve veri okuma/yazma işlemleri uygulamalı gösterilir.
+
+A) REVİZE EDİLMİŞ UZUN DÖNEMLİ AMAÇ (UDA / Uzak Hedef):
+   >>> Öğrenci, ekranda beliren yükleniyor simgesi sonrasında gelen metni konsol ekranında gösterir.
+
+B) REVİZE EDİLMİŞ KISA DÖNEMLİ AMAÇLAR (KDA / Kısa Hedefler - Görev Analizi):
+   * KDA 2.1: Veri getirme butonuna basar ve bekleme süresini takip eder.
+   * KDA 2.2: Gelen mesajı ekranda okur.
+
+C) MEB ORİJİNAL MÜFREDAT KAZANIMLARI (Referans):
+   - 2.1. Dart programlama dilinde nesne tabanlı programlama konusunu kavrar.
+   - 2.2. Sınıf ve nesne kavramlarını açıklar.
+   - 2.3. Constructor yöntemlerini, kalıtımı ve arayüzleri kullanarak programlar geliştirir.
+   - 2.4. Dart programlama dilindeki istisna (exception) mekanizmasını kullanmayı kavrar.
+   - 2.5. Fonksiyonel programlama özelliklerini kullanarak yüksek düzeyde fonksiyonları yönetir.
+   - 2.6. Dart programlama dilinde asenkron programlamanın önemini kavrar.
+   - 2.7. Future ve Stream terimlerini kavrar.
+   - 2.8. Asenkron operasyonların yönetimini sağlamak için async/await yapısını kullanmayı kavrar.
+   - 2.9. Dart programlama dilinde dosya işlemleri yapar.
+
+--------------------------------------------------------------------------------
+
+################################################################################
+3. ÜNİTE: DERİNLEMESİNE DART PROGRAMLAMA DİLİ
+################################################################################
+
+[Ünite Özeti/Kapsamı]:
+Bu ünitede; dart programlama dilinde reflection, metaprogramming kavramları, özel veri tipleri ve operatörler tanımlama, dart programlama dilinde yüksek performanslı uygulama hazırlama teknikleri anlatılır. Dart programlama dilindeki kod analiz araçlarını kullanma ve bu araçların geliştirme ortamına entegrasyonu ile dart programlama dilinde testler yazma gösterilir.
+
+A) REVİZE EDİLMİŞ UZUN DÖNEMLİ AMAÇ (UDA / Uzak Hedef):
+   >>> Öğrenci, hazır listedeki şehir isimlerini konsola yazdırır ve listeden bir şehri seçer.
+
+B) REVİZE EDİLMİŞ KISA DÖNEMLİ AMAÇLAR (KDA / Kısa Hedefler - Görev Analizi):
+   * KDA 3.1: Şehirler listesine yeni bir şehir adı ekler.
+   * KDA 3.2: Listenin kaç elemandan oluştuğunu konsol çıktısından söyler.
+
+C) MEB ORİJİNAL MÜFREDAT KAZANIMLARI (Referans):
+   - 3.1. Dart programlama dilinde reflection ve metaprogramming kavramlarını kavrar.
+   - 3.2. Dart programlama dilinin genişletilebilirlik özelliklerini kullanarak özel veri tipleri ve operatörler
+   - 3.3. Dart programlama dilindeki kodları performanslı hâle getirmek için en uygun şekle sokma tekniklerini
+   - 3.4. Dart programlama dilinde mevcut olan kod analiz araçlarını ve IDE entegrasyonunu kullanmayı kavrar.
+   - 3.5. Dart programlama dilinde test odaklı geliştirme (TDD) kavramını açıklar.
+   - 3.6. Dart programlama dilinde test yazmayı kavrar.
+
+--------------------------------------------------------------------------------
+

@@ -1,0 +1,102 @@
+================================================================================
+T.C. MİLLÎ EĞİTİM BAKANLIĞI - BİLİŞİM TEKNOLOJİLERİ VE YAZILIM DERSİ
+MODÜL: ROBOTİK KODLAMA (10. / 11. Sınıf)
+BEP (BİREYSELLEŞTİRİLMİŞ EĞİTİM PROGRAMI) UYARLAMA VE MÜFREDAT KILAVUZU
+================================================================================
+
+[BEP HEDEF YAZIM İLKELERİ VE AÇIKLAMA]
+1. UZUN DÖNEMLİ AMAÇ (UDA / Uzak Hedef):
+   Öğrencinin dönem veya öğretim yılı sonunda kazanması beklenen genel ve kalıcı davranıştır.
+   Soyut fiiller ("anlar", "kavrar", "özümser") yerine doğrudan gözlenebilir ve ölçülebilir
+   eylem bildiren fiillerle ("yazar", "söyler", "gösterir", "tıklar", "eşleştirir") formüle edilmiştir.
+
+2. KISA DÖNEMLİ AMAÇLAR (KDA / Kısa Hedefler - Görev Analizi):
+   UDA'ya ulaştıran küçük, basamaklandırılmış ara adımlardır.
+   Her bir KDA; Birey (Öğrenci), Koşul (şartlar/araçlar), Davranış (somut eylem) ve Ölçüt
+   bileşenlerini barındıracak şekilde yapılandırılmıştır.
+
+3. MEB ORİJİNAL MÜFREDAT KAZANIMLARI:
+   Dersin resmî öğretim programında yer alan akademik kazanımların tam listesidir.
+--------------------------------------------------------------------------------
+
+################################################################################
+1. ÜNİTE: ROBOTİK SİSTEMLER VE TARİHSEL GELİŞİMİ
+################################################################################
+
+[Ünite Özeti/Kapsamı]:
+Bu ünitede, robotik ve otomasyonun tarihçesi, temel kavramları, farklı robot platformları, otomatik sistemlerin farklılıkları, öğrenebilen sistemlerin çalışma mantığı anlatılarak bir soruna robotik sistemler ile çözüm getirmeye yönelik süreçler üzerinde durulur.
+
+A) REVİZE EDİLMİŞ UZUN DÖNEMLİ AMAÇ (UDA / Uzak Hedef):
+   >>> Öğrenci, robotik set kutusundaki temel parçaları (kart, motor, tekerlek, kablo) gösterir, adını söyler ve robotların kullanım alanlarına 2 örnek verir.
+
+B) REVİZE EDİLMİŞ KISA DÖNEMLİ AMAÇLAR (KDA / Kısa Hedefler - Görev Analizi):
+   * KDA 1.1: Öğrenci, robotik set kutusundan adı söylenen parçayı (kart, tekerlek, motor) 4 denemenin en az 3'ünde bulup çıkarır.
+   * KDA 1.2: Öğrenci, robotların temizlik, üretim veya sağlık alanındaki kullanımını gösteren resimleri doğru adlandırır.
+   * KDA 1.3: Öğrenci, otomatik çalışan cihazlar ile uzaktan kumandalı cihazlar arasındaki farkı basit örnekle söyler.
+
+C) MEB ORİJİNAL MÜFREDAT KAZANIMLARI (Referans):
+   - 1.1.Robotiğin tarihsel gelişimini açıklar.
+   - 1.2. Robotik kodlamanın endüstriyel ve günlük hayattaki uygulamalarını araştırır.
+   - 1.3. Günümüz sorunlarından birine robotik ile çözüm fikri oluşturur.
+   - 1.4. Farklı robot türleri ve mikrodenetleyicileri karşılaştırır.
+   - 1.5. Otomatik sistemlerin çalışma mantığını kavrar.
+   - 1.6. Yarı otonom ve otonom sistemlerin çalışma mantığını kavrar
+   - 1.7. Otomatik, yarı otomatik ve otonom sistemler arasındaki farkı bilir.
+   - 1.8. Öğrenebilen sistemlerin çalışma mantığını kavrar.
+
+--------------------------------------------------------------------------------
+
+################################################################################
+2. ÜNİTE: ROBOTİK BİLEŞENLER
+################################################################################
+
+[Ünite Özeti/Kapsamı]:
+Bu ünite, robotik teknolojinin temel bileşenlerini, kodlama ve tasarım süreçlerini, farklı motor türlerini ve hareket nesnelerini öğrencilere tanıtarak robotik projeleri oluşturma ve sorunları çözme yeteneklerini geliştirmeye odaklanır.
+
+A) REVİZE EDİLMİŞ UZUN DÖNEMLİ AMAÇ (UDA / Uzak Hedef):
+   >>> Öğrenci, USB bağlantı kablosunu karta ve bilgisayara takıp çıkarır; devre kartı üzerindeki LED lamba ve butonu gösterir.
+
+B) REVİZE EDİLMİŞ KISA DÖNEMLİ AMAÇLAR (KDA / Kısa Hedefler - Görev Analizi):
+   * KDA 2.1: Öğrenci, USB kablosunu bilgisayar girişine ve karta doğru yönde zarar vermeden takar ve çıkarır.
+   * KDA 2.2: Öğrenci, devre tahtası veya kart üzerindeki LED lambayı ve buton anahtarı parmağıyla gösterir.
+   * KDA 2.3: Öğrenci, basit bir bağlantı kablosunun iki ucunu karta takarak öğretmenin rehberliğinde devreyi tamamlar.
+
+C) MEB ORİJİNAL MÜFREDAT KAZANIMLARI (Referans):
+   - 2.1. Yazılım ve sistem tasarımına uygun akış diyagramı tasarlar.
+   - 2.2. Kodların anlamını açıklar.
+   - 2.3. Kodları amacına uygun düzenler.
+   - 2.4. Temel elektronik kavramları ve bileşenleri açıklar.
+   - 2.5. Elektronik eklentileri belirler.
+   - 2.6. Problemleri robotik kodlama ile çözebilmek için mantık geliştirir.
+   - 2.7. Sensörler kullanarak yeni sistemler önerir.
+   - 2.8. Modüller kullanarak yeni sistemler geliştirir.
+   - 2.9. Motor türlerini kullanarak özgün sistemler geliştirir.
+   - 2.10. Hareketli nesnelerin kullanıldığı farklı sistemler geliştirir.
+   - 2.11. Elektronik tasarımın kodlarını hazırlar.
+
+--------------------------------------------------------------------------------
+
+################################################################################
+3. ÜNİTE: PROJE GELİŞTİRME
+################################################################################
+
+[Ünite Özeti/Kapsamı]:
+Bu ünite öğrencilere, ileri düzeyde robotik projeler tasarlama ve geliştirme sürecini öğretmeye odaklanmaktadır. Öğrenciler, çeşitli ortam algılayıcı sensörler, motor türleri, iletişim ekipmanları ve ileri seviye sensörler gibi robotik bileşenleri kullanarak özgün projeler oluşturmayı öğrenirler. Ayrıca, hareketli parçaların ve farklı bileşenlerin nasıl entegre edileceği konuları da bu ünite içinde ele alınır. Bu sayede öğrenciler, karmaşık ve yenilikçi robotik projeler tasarlama ve geliştirme becerilerini kazanırlar.
+
+A) REVİZE EDİLMİŞ UZUN DÖNEMLİ AMAÇ (UDA / Uzak Hedef):
+   >>> Öğrenci, hazır kodlanmış devre kartındaki butona basarak LED ışığı yakar ve robot tekerleğinin döndüğünü gözlemleyerek gösterir.
+
+B) REVİZE EDİLMİŞ KISA DÖNEMLİ AMAÇLAR (KDA / Kısa Hedefler - Görev Analizi):
+   * KDA 3.1: Öğrenci, devre kartındaki başlat butonuna basarak LED lambanın yandığını işaret eder.
+   * KDA 3.2: Öğrenci, motora bağlı tekerleğin döndüğünü fark edip açma/kapama düğmesinden robotu durdurur.
+   * KDA 3.3: Öğrenci, ışık sensörüne elini yaklaştırdığında meydana gelen değişimi (ses veya ışık) gözlemler ve söyler.
+
+C) MEB ORİJİNAL MÜFREDAT KAZANIMLARI (Referans):
+   - 3.1. Ortam algılayıcı sensörler ile uygulamalar geliştirir.
+   - 3.2. Farklı motor türleri ve sürücüler ile projeler geliştirir.
+   - 3.3. Hareketli parçalar ile robotik üniteler oluşturur.
+   - 3.4. İletişim ekipmanlarının kullanıldığı sistemler oluşturur.
+   - 3.5. İleri seviye sensörlerin kullanıldığı özgün projeler hazırlar.
+
+--------------------------------------------------------------------------------
+

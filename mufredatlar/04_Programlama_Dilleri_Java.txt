@@ -1,0 +1,190 @@
+================================================================================
+T.C. MİLLÎ EĞİTİM BAKANLIĞI - BİLİŞİM TEKNOLOJİLERİ VE YAZILIM DERSİ
+MODÜL: PROGRAMLAMA DİLLERİ (JAVA) (10. / 11. Sınıf)
+BEP (BİREYSELLEŞTİRİLMİŞ EĞİTİM PROGRAMI) UYARLAMA VE MÜFREDAT KILAVUZU
+================================================================================
+
+[BEP HEDEF YAZIM İLKELERİ VE AÇIKLAMA]
+1. UZUN DÖNEMLİ AMAÇ (UDA / Uzak Hedef):
+   Öğrencinin dönem veya öğretim yılı sonunda kazanması beklenen genel ve kalıcı davranıştır.
+   Soyut fiiller ("anlar", "kavrar", "özümser") yerine doğrudan gözlenebilir ve ölçülebilir
+   eylem bildiren fiillerle ("yazar", "söyler", "gösterir", "tıklar", "eşleştirir") formüle edilmiştir.
+
+2. KISA DÖNEMLİ AMAÇLAR (KDA / Kısa Hedefler - Görev Analizi):
+   UDA'ya ulaştıran küçük, basamaklandırılmış ara adımlardır.
+   Her bir KDA; Birey (Öğrenci), Koşul (şartlar/araçlar), Davranış (somut eylem) ve Ölçüt
+   bileşenlerini barındıracak şekilde yapılandırılmıştır.
+
+3. MEB ORİJİNAL MÜFREDAT KAZANIMLARI:
+   Dersin resmî öğretim programında yer alan akademik kazanımların tam listesidir.
+--------------------------------------------------------------------------------
+
+################################################################################
+1. ÜNİTE: JAVA PROGRAMLAMAYA GİRİŞ
+################################################################################
+
+[Ünite Özeti/Kapsamı]:
+Bu ünitede, Java programlama dilinin özellikleri üzerinde durularak öğrenciye neden bu programlama dilinin popüler olduğu kavratılır. Java programlama dilinin nesne tabanlı ve açık kaynak kodlu olması, geniş bir alanda ve yapay zekâ uygulamalarında kullanılabilirliğinin bulunması, dünya çapında yaygın ve geçerli olması özellikleri açıklanarak öğrenciye kavratılır. Gerekli kurulumların yapılması üzerinde durulur.
+
+A) REVİZE EDİLMİŞ UZUN DÖNEMLİ AMAÇ (UDA / Uzak Hedef):
+   >>> Öğrenci, Java geliştirme ortamını bilgisayarda açar ve hazır kod projesini 'Run' butonuna basarak konsolda çalıştırır.
+
+B) REVİZE EDİLMİŞ KISA DÖNEMLİ AMAÇLAR (KDA / Kısa Hedefler - Görev Analizi):
+   * KDA 1.1: Masaüstündeki Java IDE simgesine çift tıklayarak programı açar.
+   * KDA 1.2: Ekranda görünen yeşil üçgen 'Run / Çalıştır' butonuna fareyle tıklar.
+   * KDA 1.3: Konsol ekranında beliren yazıyı fareyle işaret eder.
+
+C) MEB ORİJİNAL MÜFREDAT KAZANIMLARI (Referans):
+   - 1.1. Java programlama dilini popüler kılan özellikleri kavrar.
+   - 1.2. Java programlama için gerekli (Java Geliştime Kiti ve Tümleşik Geliştirme Ortamı) kurulumları yapar.
+
+--------------------------------------------------------------------------------
+
+################################################################################
+2. ÜNİTE: İLKEL VERİ TİPLERİ
+################################################################################
+
+[Ünite Özeti/Kapsamı]:
+Bu ünitede, Java programlamanın temelini oluşturan bilgiler verilecektir. Ekranda çıktı oluşturmak için metot kullanımı, dize değişmezi kullanımı, veri tiplerinin öğrenilerek amaca uygun olarak kullanımı yaptırılacaktır. Kazanım ve Açıklamalar 40 BİLİŞİM TEKNOLOJİLERİ VE YAZILIM DERSİ ÖĞRETİM PROGRAMI
+
+A) REVİZE EDİLMİŞ UZUN DÖNEMLİ AMAÇ (UDA / Uzak Hedef):
+   >>> Öğrenci, tamsayı (int) ve metin (String) türündeki basit değerleri klavyeden kod içerisindeki ilgili alanlara yazar.
+
+B) REVİZE EDİLMİŞ KISA DÖNEMLİ AMAÇLAR (KDA / Kısa Hedefler - Görev Analizi):
+   * KDA 2.1: Tırnak işaretleri arasına klavyeden kendi adını yazar.
+   * KDA 2.2: Sayı değişkeninin karşısına klavyeden kendi yaşını yazar.
+   * KDA 2.3: Yazılan değerlerin konsolda ekrana geldiğini kontrol eder.
+
+C) MEB ORİJİNAL MÜFREDAT KAZANIMLARI (Referans):
+   - 2.1. Ekranda çıktı oluşturabilmek için gereken kodları kullanır.
+   - 2.2. Dize değişmezleri oluşturur.
+   - 2.3. En uygun veri tipinin hangisi olduğunu belirler.
+   - 2.4. Doğru türlerde değişkenleri kullanır.
+
+--------------------------------------------------------------------------------
+
+################################################################################
+3. ÜNİTE: SINIFLAR VE NESNELER
+################################################################################
+
+[Ünite Özeti/Kapsamı]:
+Bu ünitede, nesne tabanlı programlamanın temel kavramları olan nesne ve sınıf tanıtılarak öğretilir. Public, private, yapılandırıcı metot kavramları öğretilir. Öğrencinin, sınıftan parametreli ve parametresiz nesne oluşturması beklenir. Öğrenciye Void ve Non-Void Metot çağrımı yaptırılır.
+
+A) REVİZE EDİLMİŞ UZUN DÖNEMLİ AMAÇ (UDA / Uzak Hedef):
+   >>> Öğrenci, kodlama ekranındaki hazır nesneye ait özellikleri (renk, boyut) listeden seçerek değiştirir.
+
+B) REVİZE EDİLMİŞ KISA DÖNEMLİ AMAÇLAR (KDA / Kısa Hedefler - Görev Analizi):
+   * KDA 3.1: Hazır araba/öğrenci nesnesinin adını kodda bulup değiştirir.
+   * KDA 3.2: Nesne oluşturma butonuna tıklayarak yeni nesnenin oluştuğunu gözlemler.
+
+C) MEB ORİJİNAL MÜFREDAT KAZANIMLARI (Referans):
+   - 3.1. Nesne ve sınıf kavramlarını açıklar.
+   - 3.2. Sınıftan nesne oluşturur.
+   - 3.3. Void ve Non-Void Metotları çağırır.
+
+--------------------------------------------------------------------------------
+
+################################################################################
+4. ÜNİTE: KARŞILAŞTIRMA OPERATÖRLERİ, MANTIKSAL OPERATÖRLER VE KOŞULLU İFADELER
+################################################################################
+
+[Ünite Özeti/Kapsamı]:
+Bu ünitede, karşılaştırma operatörleri tanıtılarak aritmetik ifadelerin değerlerini kıyaslama öğretilir. Mantıksal operatörler açıklanır ve örnek uygulama yaptırılır. Koşullara göre karar verme imkanı tanıyan koşullu ifadeler tanıtılarak uygulamalar yaptırılır.
+
+A) REVİZE EDİLMİŞ UZUN DÖNEMLİ AMAÇ (UDA / Uzak Hedef):
+   >>> Öğrenci, ekrandaki iki sayıdan büyük olanı şartlı ifadeyle (if-else) karşılaştırıp sonucu konsolda gösterir.
+
+B) REVİZE EDİLMİŞ KISA DÖNEMLİ AMAÇLAR (KDA / Kısa Hedefler - Görev Analizi):
+   * KDA 4.1: Kod satırındaki sayıları değiştirerek sonucu konsolda gözlemler.
+   * KDA 4.2: 'Doğru' veya 'Yanlış' çıktısını konsolda parmağıyla işaret eder.
+
+C) MEB ORİJİNAL MÜFREDAT KAZANIMLARI (Referans):
+   - 4.1. Java programlama dili kurallarıyla karşılaştırma operatörleri ve mantıksal operatörler kullanır.
+   - 4.2. Koşullu ifadeleri (if, If-else ve if else-if else) kullanır.
+
+--------------------------------------------------------------------------------
+
+################################################################################
+5. ÜNİTE: DÖNGÜLER
+################################################################################
+
+[Ünite Özeti/Kapsamı]:
+Bu ünitede, Java programlama dilinde kullanılan döngüler, iç içe döngü kavramı ve dallanma ifadeleri açıklanarak örnek uygulamalar yaptırılır.
+
+A) REVİZE EDİLMİŞ UZUN DÖNEMLİ AMAÇ (UDA / Uzak Hedef):
+   >>> Öğrenci, döngü komutuyla ekranda 1'den 5'e kadar sayıların sıralandığını konsol ekranında gösterir.
+
+B) REVİZE EDİLMİŞ KISA DÖNEMLİ AMAÇLAR (KDA / Kısa Hedefler - Görev Analizi):
+   * KDA 5.1: Döngü sayısını 3 yaparak ekranda 3 kez tekrar eden yazıyı parmağıyla gösterir.
+   * KDA 5.2: Döngünün başladığı ve bittiği anı öğretmenin rehberliğinde takip eder.
+
+C) MEB ORİJİNAL MÜFREDAT KAZANIMLARI (Referans):
+   - 5.1. Farklı döngüleri (while, do-while, for) kullanarak program kodu yazar.
+   - 5.2. İç içe döngüler kullanır.
+   - 5.3. Dallanma ifadelerini (break, continue) kullanır.
+
+--------------------------------------------------------------------------------
+
+################################################################################
+6. ÜNİTE: ARRAY VE ARRAYLİST SINIFI
+################################################################################
+
+[Ünite Özeti/Kapsamı]:
+Bu ünitede sırasıyla; Array oluşturma, Array ile işlemler yapma, ArrayList ve ArrayList metotlarının kullanımı, ArrayList üzerinde dolaşım yapma ve algoritma oluşturma konuları hakkında açıklamalar ve uygulamalar yapılır. 43 BİLİŞİM TEKNOLOJİLERİ VE YAZILIM DERSİ ÖĞRETİM PROGRAMI
+
+A) REVİZE EDİLMİŞ UZUN DÖNEMLİ AMAÇ (UDA / Uzak Hedef):
+   >>> Öğrenci, liste (Array) içerisindeki 3 elemandan ilk elemanı fareyle veya klavyeyle seçip görüntüler.
+
+B) REVİZE EDİLMİŞ KISA DÖNEMLİ AMAÇLAR (KDA / Kısa Hedefler - Görev Analizi):
+   * KDA 6.1: Hazır listeye yeni bir kelime ekleme alanına klavyeden yazı yazar.
+   * KDA 6.2: Listenin 1. sırasındaki meyve/öğrenci adını konsoldan okur.
+
+C) MEB ORİJİNAL MÜFREDAT KAZANIMLARI (Referans):
+   - 6.1. Array (dizi) oluşturur.
+   - 6.2. Array ile işlemler yapar.
+   - 6.3. ArrayList kullanımını bilir.
+   - 6.4. ArrayList metotlarını kullanır.
+   - 6.5. ArrayList üzerinde dolaşım yapar.
+
+--------------------------------------------------------------------------------
+
+################################################################################
+7. ÜNİTE: KALITIM
+################################################################################
+
+[Ünite Özeti/Kapsamı]:
+44 BİLİŞİM TEKNOLOJİLERİ VE YAZILIM DERSİ ÖĞRETİM PROGRAMI Bu ünitede kalıtım yöntemi kavratılır. Superclass ve subclass kavramları açıklanarak uygulama yaptırılır. Overriding metodu, super anahtar kelimesi ve çok biçimlilik yöntemi kullandırılır.
+
+A) REVİZE EDİLMİŞ UZUN DÖNEMLİ AMAÇ (UDA / Uzak Hedef):
+   >>> Öğrenci, üst sınıf ve alt sınıf kavramını resimli hayvan/araç şemaları üzerinden eşleştirir.
+
+B) REVİZE EDİLMİŞ KISA DÖNEMLİ AMAÇLAR (KDA / Kısa Hedefler - Görev Analizi):
+   * KDA 7.1: Taşıt üst sınıfının altına araba ve uçak kartlarını yerleştirir.
+   * KDA 7.2: Anne-baba ve çocuk benzetmesiyle kalıtım mantığını söyler.
+
+C) MEB ORİJİNAL MÜFREDAT KAZANIMLARI (Referans):
+   - 7.1. Kalıtım yöntemini kullanır.
+   - 7.2. Çok biçimlilik yöntemini kullanır.
+
+--------------------------------------------------------------------------------
+
+################################################################################
+8. ÜNİTE: RECURSIVE (ÖZYİNELEMELİ) FONKSİYON
+################################################################################
+
+[Ünite Özeti/Kapsamı]:
+Bu ünitede, recursive fonksiyon açıklanarak ve örneklenerek tanıtılır. Öğrenciye recursive fonksiyon ile ilgili uygulama yaptırılır.
+
+A) REVİZE EDİLMİŞ UZUN DÖNEMLİ AMAÇ (UDA / Uzak Hedef):
+   >>> Öğrenci, kendini tekrar eden basit bir geri sayım işlemini (3-2-1-Bitti) ekranda gözlemler ve söyler.
+
+B) REVİZE EDİLMİŞ KISA DÖNEMLİ AMAÇLAR (KDA / Kısa Hedefler - Görev Analizi):
+   * KDA 8.1: Sayacın sıfıra ulaştığında durduğunu belirtir.
+   * KDA 8.2: Başlangıç sayısını 5 yaparak geri sayımı yeniden başlatır.
+
+C) MEB ORİJİNAL MÜFREDAT KAZANIMLARI (Referans):
+   - 8.1. Recursive fonksiyonun ne olduğunu kavrar.
+   - 8.2. Recursive fonksiyon kullanımı yapar.
+
+--------------------------------------------------------------------------------
+

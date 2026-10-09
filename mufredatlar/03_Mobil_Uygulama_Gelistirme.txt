@@ -1,0 +1,104 @@
+================================================================================
+T.C. MİLLÎ EĞİTİM BAKANLIĞI - BİLİŞİM TEKNOLOJİLERİ VE YAZILIM DERSİ
+MODÜL: MOBİL UYGULAMA GELİŞTİRME (10. / 11. Sınıf)
+BEP (BİREYSELLEŞTİRİLMİŞ EĞİTİM PROGRAMI) UYARLAMA VE MÜFREDAT KILAVUZU
+================================================================================
+
+[BEP HEDEF YAZIM İLKELERİ VE AÇIKLAMA]
+1. UZUN DÖNEMLİ AMAÇ (UDA / Uzak Hedef):
+   Öğrencinin dönem veya öğretim yılı sonunda kazanması beklenen genel ve kalıcı davranıştır.
+   Soyut fiiller ("anlar", "kavrar", "özümser") yerine doğrudan gözlenebilir ve ölçülebilir
+   eylem bildiren fiillerle ("yazar", "söyler", "gösterir", "tıklar", "eşleştirir") formüle edilmiştir.
+
+2. KISA DÖNEMLİ AMAÇLAR (KDA / Kısa Hedefler - Görev Analizi):
+   UDA'ya ulaştıran küçük, basamaklandırılmış ara adımlardır.
+   Her bir KDA; Birey (Öğrenci), Koşul (şartlar/araçlar), Davranış (somut eylem) ve Ölçüt
+   bileşenlerini barındıracak şekilde yapılandırılmıştır.
+
+3. MEB ORİJİNAL MÜFREDAT KAZANIMLARI:
+   Dersin resmî öğretim programında yer alan akademik kazanımların tam listesidir.
+--------------------------------------------------------------------------------
+
+################################################################################
+1. ÜNİTE: MOBİL PROGRAMLAMA OKURYAZARLIĞI
+################################################################################
+
+[Ünite Özeti/Kapsamı]:
+Bu ünitede; sırasıyla mobil cihaz ve uygulamaların tarihsel gelişimi, mobil teknolojilerin ve mobil uygulamaların günümüzdeki önemi, mobil uygulamaların kullanım alanları ve ülkemizde en çok kullanılan mobil uygulamalar üzerinde durulur. Mobil donanım bileşenleri ile mobil cihazlarda yer alan sensörlerin çalışma mantığı anlatılır. Mobil işletim sistemlerine değinildikten sonra mobil işletim sistemlerinin benzer ve farklı yönleri tartışılır. Uygulama geliştirirken kullanılan farklı tasarım yapılarına değinilir.
+
+A) REVİZE EDİLMİŞ UZUN DÖNEMLİ AMAÇ (UDA / Uzak Hedef):
+   >>> Öğrenci, tablet/telefon ekranındaki temel uygulama simgelerine (kamera, galeri, ayarlar) dokunarak açar ve kapatır.
+
+B) REVİZE EDİLMİŞ KISA DÖNEMLİ AMAÇLAR (KDA / Kısa Hedefler - Görev Analizi):
+   * KDA 1.1: Öğrenci, tablet ekranındaki kamera uygulamasının simgesini bulup dokunarak açar.
+   * KDA 1.2: Öğrenci, açtığı uygulamayı 'ana ekran' veya 'geri' tuşuna basarak kapatır.
+   * KDA 1.3: Öğrenci, dokunmatik ekranda parmağıyla sağa/sola kaydırma hareketini amacına uygun yapar.
+
+C) MEB ORİJİNAL MÜFREDAT KAZANIMLARI (Referans):
+   - 1.1. Mobil cihaz ve uygulamaların tarihsel gelişimini kavrar.
+   - 1.2. Mobil uygulamaların ve mobil teknolojilerin günümüzdeki önemini kavrar.
+   - 1.3. Mobil Uygulamaların kullanım alanlarını sıralar.
+   - 1.4. Ülkemizde en çok kullanılan ve topluma yararlı olan yerli mobil uygulamaları tanır.
+   - 1.5. Mobil donanım bileşenlerinin çalışma mantığını açıklar.
+   - 1.6. Mobil cihazlarda yer alan sensörlerin çalışma mantığını kavrar.
+   - 1.7. Mobil işletim sistemlerini sıralar.
+   - 1.8. Mobil uygulama geliştirme tasarım yapılarını açıklar.
+   - 1.9. Mobil uygulama geliştirme araçlarını kavrar.
+
+--------------------------------------------------------------------------------
+
+################################################################################
+2. ÜNİTE: MOBİL UYGULAMA TASARIMI VE ARAYÜZÜ
+################################################################################
+
+[Ünite Özeti/Kapsamı]:
+Bu ünitede; sırasıyla hedef kitleyi belirlemenin önemi, mobil uygulamanın basit ve kullanılabilir olmasının gerekliliği, mobil uygulamaların farklı cihazlar ve farklı işletim sistemlerine uyumluluğunun önemi üzerinde durulur. Uygulama tasarımlarında dikkat edilmesi gereken görsel-estetik ilkeler anlatılır. Mobil uygulama geliştirme programının sistem gereksinimlerinden bahsedilir. Mobil uygulama geliştirme programının kurulumu, emülatör kurulumu gösterilir. Mobil uygulama geliştirme programının arayüz bileşenleri tanıtılır.
+
+A) REVİZE EDİLMİŞ UZUN DÖNEMLİ AMAÇ (UDA / Uzak Hedef):
+   >>> Öğrenci, mobil geliştirme programında buton veya resim simgesini fareyle tutup ekrana sürükleyip bırakır.
+
+B) REVİZE EDİLMİŞ KISA DÖNEMLİ AMAÇLAR (KDA / Kısa Hedefler - Görev Analizi):
+   * KDA 2.1: Öğrenci, sol araç panelindeki 'Button' (Düğme) bileşenini fareyle tutup mobil tasarım ekranına bırakır.
+   * KDA 2.2: Öğrenci, ekrana eklenen butonun rengini veya üzerindeki yazıyı öğretmenin yardımıyla değiştirir.
+   * KDA 2.3: Öğrenci, mobil ekran tasarımına bir resim kutusu (Image) ekler.
+
+C) MEB ORİJİNAL MÜFREDAT KAZANIMLARI (Referans):
+   - 2.1. Mobil uygulama tasarımında hedef kitleyi belirlemenin önemini kavrar.
+   - 2.2. Etkin bir mobil uygulamada olması gereken özellikleri açıklar.
+   - 2.3. Mobil uygulamanın farklı cihazlar ve farklı işletim sistemlerine uyumlu olmasının önemini açıklar.
+   - 2.4. Mobil uygulama tasarım ilkelerini açıklar.
+   - 2.5. Mobil uygulama geliştirme programının sistem gereksinimlerini açıklar.
+   - 2.6. Mobil uygulama geliştirme programının kurulumunu yapar.
+   - 2.7. Emülatör kurulumu yapar.
+   - 2.8. Emülatör çalışma mantığını kavrar.
+   - 2.9. Mobil uygulama geliştirme programının arayüz bileşenlerini tanır.
+
+--------------------------------------------------------------------------------
+
+################################################################################
+3. ÜNİTE: PROGRAM BİLEŞENLERİ İLE ÇALIŞMA
+################################################################################
+
+[Ünite Özeti/Kapsamı]:
+Bu ünitede; temel bileşenlerin, yatay ve dikey yerleşim düzeni bileşenlerinin ve navigatör bileşeninin özellikleri üzerinde durulur. Sırasıyla temel bileşenlerin kullanımı ile ilgili basit mobil uygulama geliştirme, yatay ve dikey yerleşim düzeni bileşenlerinin kullanımı ile ilgili basit mobil uygulama geliştirme, temel bileşenler ile yatay ve dikey yerleşim düzeni bileşenlerinin birlikte kullanımı ile ilgili mobil uygulama geliştirme gösterilir. Temel bileşenlerle hazırlanmış bir sayfadan başka bir sayfaya geçiş yapma anlatılır. Bileşenlerin hepsini kullanmayı gerektiren karmaşık mobil uygulama geliştirme gösterilir.
+
+A) REVİZE EDİLMİŞ UZUN DÖNEMLİ AMAÇ (UDA / Uzak Hedef):
+   >>> Öğrenci, hazırlanan basit uygulamadaki butona tıkladığında ekranda çıkan resmi veya yazıyı parmağıyla gösterir.
+
+B) REVİZE EDİLMİŞ KISA DÖNEMLİ AMAÇLAR (KDA / Kısa Hedefler - Görev Analizi):
+   * KDA 3.1: Öğrenci, 'Tıkla ve Dinle' butonuna basarak çıkan sesi dinler ve ne sesi olduğunu söyler.
+   * KDA 3.2: Öğrenci, iki ekranlı basit bir uygulamada 'İleri' butonuna basarak diğer sayfaya geçer.
+   * KDA 3.3: Öğrenci, ekrandaki butona her bastığında rengin değiştiğini gözlemler ve açıklar.
+
+C) MEB ORİJİNAL MÜFREDAT KAZANIMLARI (Referans):
+   - 3.1. Mobil uygulamalarda kullanılan temel bileşenleri tanır.
+   - 3.2. Temel bileşenleri kullanarak basit mobil uygulamalar geliştirir.
+   - 3.3. Yatay ve dikey yerleşim düzeni bileşenlerini ve özelliklerini tanır.
+   - 3.4. Yerleşim düzeni bileşenlerini kullanarak basit mobil uygulamalar geliştirir.
+   - 3.5. Yerleşim düzeni bileşenleri arasındaki farkları ve kullanım yerlerini kavrar.
+   - 3.6. Temel bileşenleri ve yerleşim düzeni bileşenlerini bir arada kullanır.
+   - 3.7. Temel bileşenler ile hazırlanmış birden çok sahneyle çalışır.
+   - 3.8. Çeşitli mobil uygulamalar geliştirir.
+
+--------------------------------------------------------------------------------
+

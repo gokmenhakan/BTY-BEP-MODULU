@@ -1,0 +1,149 @@
+================================================================================
+T.C. MİLLÎ EĞİTİM BAKANLIĞI - BİLİŞİM TEKNOLOJİLERİ VE YAZILIM DERSİ
+MODÜL: PROGRAMLAMAYA GİRİŞ VE ALGORİTMA (9. Sınıf)
+BEP (BİREYSELLEŞTİRİLMİŞ EĞİTİM PROGRAMI) UYARLAMA VE MÜFREDAT KILAVUZU
+================================================================================
+
+[BEP HEDEF YAZIM İLKELERİ VE AÇIKLAMA]
+1. UZUN DÖNEMLİ AMAÇ (UDA / Uzak Hedef):
+   Öğrencinin dönem veya öğretim yılı sonunda kazanması beklenen genel ve kalıcı davranıştır.
+   Soyut fiiller ("anlar", "kavrar", "özümser") yerine doğrudan gözlenebilir ve ölçülebilir
+   eylem bildiren fiillerle ("yazar", "söyler", "gösterir", "tıklar", "eşleştirir") formüle edilmiştir.
+
+2. KISA DÖNEMLİ AMAÇLAR (KDA / Kısa Hedefler - Görev Analizi):
+   UDA'ya ulaştıran küçük, basamaklandırılmış ara adımlardır.
+   Her bir KDA; Birey (Öğrenci), Koşul (şartlar/araçlar), Davranış (somut eylem) ve Ölçüt
+   bileşenlerini barındıracak şekilde yapılandırılmıştır.
+
+3. MEB ORİJİNAL MÜFREDAT KAZANIMLARI:
+   Dersin resmî öğretim programında yer alan akademik kazanımların tam listesidir.
+--------------------------------------------------------------------------------
+
+################################################################################
+1. ÜNİTE: BİLİŞİM TEKNOLOJİLERİNİN PROGRAMLAMADAKİ YERİ
+################################################################################
+
+[Ünite Özeti/Kapsamı]:
+Bilişim teknolojileri, programlama dünyasının temel yapılarından biridir. Programlama, bilgisayarlar ve diğer dijital cihazlar tarafından anlaşılabilir komutlar dizisi olarak yazılır ve bu komutlar, bilişim teknolojileri kullanılarak işlenir. Bilişim teknolojileri yazılım geliştirme, veri tabanı yönetimi, ağ iletişimi, web uygulamaları, mobil uygulamalar gibi birçok alanda kullanılır. Bilişim teknolojileri, programlamayı kolaylaştırır ve program geliştiricilere entegre geliştirme ortamları (IDE’ler), veri tabanları ve diğer yazılım geliştirme araçları gibi güçlü araçlar sunar. Bilgi işleme, depolama ve iletişim konularında da programlara destek sağlar.
+
+A) REVİZE EDİLMİŞ UZUN DÖNEMLİ AMAÇ (UDA / Uzak Hedef):
+   >>> Öğrenci, temel bilgisayar donanım parçalarını (monitör, klavye, fare, kasa) ve yaygın bilişim araçlarını gösterir ve kullanım amaçlarını söyler.
+
+B) REVİZE EDİLMİŞ KISA DÖNEMLİ AMAÇLAR (KDA / Kısa Hedefler - Görev Analizi):
+   * KDA 1.1: Öğrenci, masada bulunan temel donanım birimlerinden (kasa, monitör, klavye, fare) adı söylenen parçayı 4 denemenin en az 3'ünde parmağıyla gösterir.
+   * KDA 1.2: Öğrenci, kendisine gösterilen bilişim araçlarının (bilgisayar, telefon, tablet) ne amaçla kullanıldığını istendiğinde söyler.
+   * KDA 1.3: Öğrenci, bilgisayarı kurallara uygun olarak açma/kapama butonuna basarak açar ve güvenli şekilde kapatır.
+   * KDA 1.4: Öğrenci, bilişim araçlarının günlük yaşamdaki faydalarına dair en az iki örnek verir.
+
+C) MEB ORİJİNAL MÜFREDAT KAZANIMLARI (Referans):
+   - 1.1. Bilişim teknolojilerine ilişkin temel kavramları tanımlar.
+   - 1.2. Bilişim teknolojisi araçlarını listeler.
+   - 1.3. Bilişim teknolojileri cihazlarının gelişimini açıklar.
+   - 1.4. Bilişim teknolojilerinin gelişiminde önemli rol oynayan keşifler, buluşlar, olaylar ve dönüm noktalarını
+   - 1.5. Bilişim teknolojilerinin kullanım alanlarını açıklar.
+   - 1.6. Bilişim teknolojilerinin olumlu ve olumsuz yönlerini tartışır.
+   - 1.7. Teknolojik gelişmeleri takip etmenin öneminin farkına varır.
+
+--------------------------------------------------------------------------------
+
+################################################################################
+2. ÜNİTE: ALGORİTMA İLE PROBLEM ÇÖZME VE AKIŞ DİYAGRAMI
+################################################################################
+
+[Ünite Özeti/Kapsamı]:
+Akış diyagramları, bir sürecin işlem adımlarını sıralı bir şekilde özetlemek için semboller kullanan görsel şemalardır. Akış diyagramları programcıların en verimli kodlamayı geliştirmelerine ve programcıların potansiyel sorunlu alanın nerede olduğunu anlamalarına yardımcı olur. Bu ünitede sırasıyla; programlamanın önemi, programlama dillerinin gelişimi, algoritma kavramı, çözümü istenen bir problemin kavranması, gereksinimleri ve çözümü için gerekli olan en doğru algoritmanın yazımı, akış diyagramının nerelerde kullanıldığı, akış diyagramı şekilleri ve elemanlarının listesi, var olan akış diyagramından problemin kavranması ve bir problemin akış diyagramının tasarlanması üzerinde durulur.
+
+A) REVİZE EDİLMİŞ UZUN DÖNEMLİ AMAÇ (UDA / Uzak Hedef):
+   >>> Öğrenci, günlük hayattaki olayların işlem adımlarını oluş sırasına göre resimli kartlarla masaya dizer ve temel akış şeması şekillerini (başla/bitir, işlem) eşleştirir.
+
+B) REVİZE EDİLMİŞ KISA DÖNEMLİ AMAÇLAR (KDA / Kısa Hedefler - Görev Analizi):
+   * KDA 2.1: Öğrenci, önüne konulan 3 adımlı resimli günlük yaşam kartlarını (ör. el yıkama, çay yapma, uyanma) doğru oluş sırasına göre soldan sağa dizer.
+   * KDA 2.2: Öğrenci, verilen bir akış diyagramındaki 'Başla/Bitir' elips sembolü ile 'İşlem' dikdörtgen sembolünü doğru adıyla gösterir.
+   * KDA 2.3: Öğrenci, 2 adımlı basit bir yönergeyi (ör. 1. Adım: Butona bas, 2. Adım: Ekrana bak) sırasıyla hatasız uygular.
+   * KDA 2.4: Öğrenci, öğretmenin anlattığı basit bir problem durumunu dinleyerek ilk yapılacak adımı söyler.
+
+C) MEB ORİJİNAL MÜFREDAT KAZANIMLARI (Referans):
+   - 2.1. Çözümü istenen problemi kavrar.
+   - 2.2. Çözüm için gereksinimlerini belirler.
+   - 2.3. Problemin girdi, çıktı ve işlem aşamalarını belirler.
+   - 2.4. Algoritma kavramını açıklar.
+   - 2.5. Bir problemin çözümü için en doğru algoritmayı geliştirir.
+   - 2.6. Programlamanın önemini yorumlar.
+   - 2.7. Programlama dillerinin gelişimini açıklar.
+   - 2.8. Akış diyagramının kullanım amaçlarını açıklar.
+   - 2.9. Temel akış diyagramı şekillerini ve elemanlarını listeler.
+   - 2.10. Var olan bir akış diyagramını okuyarak problemi kavrar.
+   - 2.11. Problemin akış diyagramını tasarlar.
+
+--------------------------------------------------------------------------------
+
+################################################################################
+3. ÜNİTE: PROGRAMLAMANIN TEMEL KAVRAMLARI
+################################################################################
+
+[Ünite Özeti/Kapsamı]:
+Bu ünitede sırasıyla; programlamada kullanılan işlem ve semboller, veri türleri, karar ve döngü yapıları ve ikisinin birlikte kullanıldığı bir program tasarlama üzerinde durulur.
+
+A) REVİZE EDİLMİŞ UZUN DÖNEMLİ AMAÇ (UDA / Uzak Hedef):
+   >>> Öğrenci, kodlama ekranındaki başlatma ve durdurma butonlarını fareyle tıklar; sayı ve metin veri türlerini ilgili kutucuklara yazar.
+
+B) REVİZE EDİLMİŞ KISA DÖNEMLİ AMAÇLAR (KDA / Kısa Hedefler - Görev Analizi):
+   * KDA 3.1: Öğrenci, ekrandaki yeşil bayrak / başlat butonunu ve kırmızı durdur butonunu fareyle tıklar.
+   * KDA 3.2: Öğrenci, kendisine verilen örnek verilerden sayıyı sayı kutusuna, kelimeyi metin kutusuna klavye kullanarak yazar.
+   * KDA 3.3: Öğrenci, 'Eğer / Değilse' (karar) mantığını içeren basit bir şartlı yönergeyi ('Hava yağmurluysa şemsiye al') doğru davranışla açıklar.
+   * KDA 3.4: Öğrenci, döngü yapısı ile tekrarlanan basit bir hareketi (3 kez zıpla / 3 kez tıkla) komuta göre uygular.
+
+C) MEB ORİJİNAL MÜFREDAT KAZANIMLARI (Referans):
+   - 3.1. Programlamada kullanılan işlem ve sembolleri listeler.
+   - 3.2. Veri türlerini amacına uygun şekilde programa tanımlar.
+   - 3.3. Farklı veri türlerini program içerisinde kullanır.
+   - 3.4. Karar yapılarını kullanarak programı geliştirir.
+   - 3.5. Döngü yapılarını kullanarak programı geliştirir.
+   - 3.6. Döngü ve karar yapıları ile program tasarlar.
+
+--------------------------------------------------------------------------------
+
+################################################################################
+4. ÜNİTE: ALGORİTMA VE AKIŞ DİYAGRAMINI TEST ETME
+################################################################################
+
+[Ünite Özeti/Kapsamı]:
+Hata ayıklama, bir problemin çözümü için tasarlanan algoritmanın düzensiz davranmasına veya çalışmamasına neden olabilecek hataları bulma ve düzeltme işlemidir. Programlamada hata ayıklama, yazılan bir programın düzgün çalışması açısından önemli rol oynar. Bu ünitede sırasıyla; tasarlanan algoritma ve akış diyagramının test edilmesi, hatalarının listelenmesi ve hataların düzeltilerek algoritmanın iyileştirilmesi üzerinde durulur.
+
+A) REVİZE EDİLMİŞ UZUN DÖNEMLİ AMAÇ (UDA / Uzak Hedef):
+   >>> Öğrenci, sırası karışmış 3 işlem adımı içerisindeki hatalı adımı parmağıyla gösterir ve öğretmenin rehberliğinde doğru sırasına koyar.
+
+B) REVİZE EDİLMİŞ KISA DÖNEMLİ AMAÇLAR (KDA / Kısa Hedefler - Görev Analizi):
+   * KDA 4.1: Öğrenci, sırası ters verilmiş 3 adımlı akış sıralamasında hata olan basamağı işaret eder.
+   * KDA 4.2: Öğrenci, öğretmenin yönlendirmesiyle programdaki basit bir komut sırasını düzelterek kodu yeniden çalıştırır.
+   * KDA 4.3: Öğrenci, hatalı çalışan bir program çıktısı ile doğru çalışan çıktıyı ekranda karşılaştırır.
+
+C) MEB ORİJİNAL MÜFREDAT KAZANIMLARI (Referans):
+   - 4.1. Tasarlanan algoritma ve akış diyagramını test eder.
+   - 4.2. Tasarladığı algoritma ve akış diyagramının hatalarını listeler.
+   - 4.3. Hatalı algoritma ve akış diyagramlarının, programın istenilen çıktıyı vermesine engel olacağını fark
+   - 4.4. Tasarladığı algoritma ve akış diyagramının hatalarını düzeltir.
+
+--------------------------------------------------------------------------------
+
+################################################################################
+5. ÜNİTE: İLERİ DÜZEY ALGORİTMA UYGULAMALARI
+################################################################################
+
+[Ünite Özeti/Kapsamı]:
+Bu ünitede sırasıyla; arama ve sıralama algoritmalarının akış diyagramıyla gösterilmesi ve ileri algoritma uygulamalarının ve kullanım yerlerinin açıklanması üzerinde durulur.
+
+A) REVİZE EDİLMİŞ UZUN DÖNEMLİ AMAÇ (UDA / Uzak Hedef):
+   >>> Öğrenci, üzerinde 1'den 5'e kadar rakamlar yazan kartları küçükten büyüğe sırayla yan yana dizer ve aranan kartı bulup gösterir.
+
+B) REVİZE EDİLMİŞ KISA DÖNEMLİ AMAÇLAR (KDA / Kısa Hedefler - Görev Analizi):
+   * KDA 5.1: Öğrenci, karışık verilen 5 adet rakam kartını masada soldan sağa küçükten büyüğe doğru dizer.
+   * KDA 5.2: Öğrenci, önüne konulan kartlar arasından öğretmenin söylediği hedef sayıyı en fazla 2 denemede seçip gösterir.
+   * KDA 5.3: Öğrenci, sıralama ve arama işlemlerinin günlük hayatta (ör. rehberden isim arama, boy sırasına girme) nerede kullanıldığını söyler.
+
+C) MEB ORİJİNAL MÜFREDAT KAZANIMLARI (Referans):
+   - 5.1. Arama ve sıralama algoritmalarını akış diyagramıyla gösterir.
+   - 5.2. İleri algoritma uygulamalarını ve kullanım yerlerini açıklar.
+
+--------------------------------------------------------------------------------
+
