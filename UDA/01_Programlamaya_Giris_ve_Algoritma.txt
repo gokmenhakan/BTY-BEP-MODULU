@@ -32,11 +32,11 @@ Her bir ünite ve konu kümesi için iki düzeyde Uzak Hedef tanımlanmıştır:
 [SÜREÇ BİLEŞENLERİ (KISA DÖNEMLİ HEDEFLER / KDA)]:
 * 1.1. Bilişim teknolojilerine ilişkin temel kavramları tanımlar.
   - BEP Uyarlaması: Temel bilişim kavramlarını (bilgisayar, yazılım, veri, donanım) temsil eden kartlardan veya seçeneklerden adı söyleneni seçip gösterir.
-  - Ölçüt: 4 denemenin en az 3'ünde (%75)
+  - Ölçüt: %80 (4/5)
 
 * 1.2. Bilişim teknolojisi araçlarını listeler.
   - BEP Uyarlaması: Masada/ekranda bulunan bilişim araçlarından (bilgisayar, kasa, monitör, klavye, fare, tablet) adı söyleneni parmağıyla gösterir.
-  - Ölçüt: %80 doğrulukla
+  - Ölçüt: %80 (4/5)
 
 --------------------------------------------------------------------------------
 [2. KONU (İÇERİK ÇERÇEVESİ)]: Bilişim Teknolojileri Cihazlarının Gelişimi ve Tarihsel Dönüm Noktaları
@@ -50,11 +50,11 @@ Her bir ünite ve konu kümesi için iki düzeyde Uzak Hedef tanımlanmıştır:
 [SÜREÇ BİLEŞENLERİ (KISA DÖNEMLİ HEDEFLER / KDA)]:
 * 1.3. Bilişim teknolojileri cihazlarının gelişimini açıklar.
   - BEP Uyarlaması: Eski ve yeni teknoloji kartlarını (tüplü ekran ile düz ekran) eskiden yeniye doğru dizer.
-  - Ölçüt: 3/4 denemede
+  - Ölçüt: %80 (4/5)
 
 * 1.4. Bilişim teknolojilerinin gelişiminde önemli rol oynayan keşifler, buluşlar, olaylar ve dönüm noktalarını tartışır/listeler.
   - BEP Uyarlaması: Bilgisayarın ve internetin icadını temsil eden görselleri panoda yardımla gösterir.
-  - Ölçüt: Yardımla %70
+  - Ölçüt: Yardımla %60 (3/5)
 
 --------------------------------------------------------------------------------
 [3. KONU (İÇERİK ÇERÇEVESİ)]: Bilişimin Kullanım Alanları, Toplumsal Etkileri ve Teknolojik Gelişmeler
@@ -68,15 +68,15 @@ Her bir ünite ve konu kümesi için iki düzeyde Uzak Hedef tanımlanmıştır:
 [SÜREÇ BİLEŞENLERİ (KISA DÖNEMLİ HEDEFLER / KDA)]:
 * 1.5. Bilişim teknolojilerinin kullanım alanlarını açıklar.
   - BEP Uyarlaması: Bilişim araçlarının okulda, hastanede veya evde ne amaçla kullanıldığını istendiğinde söyler.
-  - Ölçüt: En az 2 farklı kullanım alanı söyler
+  - Ölçüt: %80 (4/5)
 
 * 1.6. Bilişim teknolojilerinin olumlu ve olumsuz yönlerini tartışır.
   - BEP Uyarlaması: Teknolojinin faydalı (ödev, haberleşme) ve zararlı (uzun süre ekrana bakma) yönlerine birer örnek söyler.
-  - Ölçüt: 1 olumlu, 1 olumsuz örnek
+  - Ölçüt: %80 (4/5)
 
 * 1.7. Teknolojik gelişmeleri takip etmenin öneminin farkına varır.
   - BEP Uyarlaması: Yeni bir teknolojik aracın hayatımızı nasıl kolaylaştırdığını (ör. akıllı telefon ile konuşma) söyler.
-  - Ölçüt: 3/4 denemede
+  - Ölçüt: %80 (4/5)
 
 --------------------------------------------------------------------------------
 
@@ -96,23 +96,23 @@ Her bir ünite ve konu kümesi için iki düzeyde Uzak Hedef tanımlanmıştır:
 [SÜREÇ BİLEŞENLERİ (KISA DÖNEMLİ HEDEFLER / KDA)]:
 * 2.1. Çözümü istenen problemi kavrar.
   - BEP Uyarlaması: Öğretmenin anlattığı basit bir problem durumunu (ör. çanta hazırlama) dinleyerek problemin ne olduğunu söyler.
-  - Ölçüt: %80
+  - Ölçüt: %80 (4/5)
 
 * 2.2. Çözüm için gereksinimlerini belirler.
   - BEP Uyarlaması: Belirtilen iş için gereken girdi malzemelerini/araçlarını resimler arasından belirler ve seçip gösterir.
-  - Ölçüt: 4 denemenin 3'ünde
+  - Ölçüt: %80 (4/5)
 
 * 2.3. Problemin girdi, çıktı ve işlem aşamalarını belirler.
   - BEP Uyarlaması: Günlük bir olayda (ör. tost yapma) ekmeği/peyniri (girdi), pişirmeyi (işlem) ve tostu (çıktı) ayırt edip gösterir.
-  - Ölçüt: %75
+  - Ölçüt: %80 (4/5)
 
 * 2.4. Algoritma kavramını açıklar.
   - BEP Uyarlaması: Algoritmanın "sıralı işlem adımları" olduğunu söyler.
-  - Ölçüt: İstendiğinde ifade eder
+  - Ölçüt: %80 (4/5)
 
 * 2.5. Bir problemin çözümü için en doğru algoritmayı geliştirir.
   - BEP Uyarlaması: Önüne konulan 3-4 adımlı günlük yaşam kartlarını doğru oluş sırasına göre soldan sağa dizer ve adımları numaralandırarak sıralar.
-  - Ölçüt: 4 denemenin en az 3'ünde
+  - Ölçüt: %80 (4/5)
 
 --------------------------------------------------------------------------------
 [2. KONU (İÇERİK ÇERÇEVESİ)]: Programlamanın Önemi ve Programlama Dillerinin Tarihsel Gelişimi
@@ -126,11 +126,11 @@ Her bir ünite ve konu kümesi için iki düzeyde Uzak Hedef tanımlanmıştır:
 [SÜREÇ BİLEŞENLERİ (KISA DÖNEMLİ HEDEFLER / KDA)]:
 * 2.6. Programlamanın önemini yorumlar.
   - BEP Uyarlaması: Bilgisayarların komutlar olmadan çalışamayacağını söyler.
-  - Ölçüt: 1 geçerli ifade
+  - Ölçüt: %80 (4/5)
 
 * 2.7. Programlama dillerinin gelişimini açıklar.
   - BEP Uyarlaması: İnsanların bilgisayara komut vermek için programlama dili kullandığını görseller eşliğinde söyler.
-  - Ölçüt: Yardımla %70
+  - Ölçüt: Yardımla %60 (3/5)
 
 --------------------------------------------------------------------------------
 [3. KONU (İÇERİK ÇERÇEVESİ)]: Akış Diyagramı Sembolleri, Okuma ve Tasarım
@@ -144,19 +144,19 @@ Her bir ünite ve konu kümesi için iki düzeyde Uzak Hedef tanımlanmıştır:
 [SÜREÇ BİLEŞENLERİ (KISA DÖNEMLİ HEDEFLER / KDA)]:
 * 2.8. Akış diyagramının kullanım amaçlarını açıklar.
   - BEP Uyarlaması: Akış şemasının algoritmayı şekillerle göstermeye yaradığını söyler.
-  - Ölçüt: 3/4 denemede
+  - Ölçüt: %80 (4/5)
 
 * 2.9. Temel akış diyagramı şekillerini ve elemanlarını listeler.
   - BEP Uyarlaması: 'Başla/Bitir' elipsi, 'İşlem' dikdörtgeni ve 'Karar' eşkenar dörtgen sembollerini doğru adıyla gösterir.
-  - Ölçüt: 4 sembolden en az 3'ünü doğru gösterir
+  - Ölçüt: %80 (4/5)
 
 * 2.10. Var olan bir akış diyagramını okuyarak problemi kavrar.
   - BEP Uyarlaması: Verilen 3 adımlı basit bir akış şemasını parmağıyla takip ederek sonuca ulaşır ve söyler.
-  - Ölçüt: %80
+  - Ölçüt: %80 (4/5)
 
 * 2.11. Problemin akış diyagramını tasarlar.
   - BEP Uyarlaması: Hazır sembol kartlarını kullanarak 2 adımlı bir sürecin akış diyagramını yan yana dizer.
-  - Ölçüt: %75
+  - Ölçüt: %80 (4/5)
 
 --------------------------------------------------------------------------------
 
@@ -176,15 +176,15 @@ Her bir ünite ve konu kümesi için iki düzeyde Uzak Hedef tanımlanmıştır:
 [SÜREÇ BİLEŞENLERİ (KISA DÖNEMLİ HEDEFLER / KDA)]:
 * 3.1. Programlamada kullanılan işlem ve sembolleri listeler.
   - BEP Uyarlaması: Programlama ortamındaki başlat (yeşil bayrak), durdur (kırmızı buton) sembollerini tıklar, gösterir ve programı çalıştırır.
-  - Ölçüt: %100
+  - Ölçüt: %100 (5/5)
 
 * 3.2. Veri türlerini amacına uygun şekilde programa tanımlar.
   - BEP Uyarlaması: Sayısal veriyi (yaş) sayı kutusuna, metinsel veriyi (isim) metin kutusuna klavyeyle yazar.
-  - Ölçüt: 4 denemenin 3'ünde
+  - Ölçüt: %80 (4/5)
 
 * 3.3. Farklı veri türlerini program içerisinde kullanır.
   - BEP Uyarlaması: Ekranda gösterilen örnek verileri ilgili veri kutusuna sürükleyip bırakır veya yazar.
-  - Ölçüt: %80
+  - Ölçüt: %80 (4/5)
 
 --------------------------------------------------------------------------------
 [2. KONU (İÇERİK ÇERÇEVESİ)]: Karar Yapıları (Koşullar) ve Döngü Yapıları (Tekrarlı İşlemler)
@@ -198,21 +198,21 @@ Her bir ünite ve konu kümesi için iki düzeyde Uzak Hedef tanımlanmıştır:
 [SÜREÇ BİLEŞENLERİ (KISA DÖNEMLİ HEDEFLER / KDA)]:
 * 3.4. Karar yapılarını kullanarak programı geliştirir.
   - BEP Uyarlaması: 'Eğer hava yağmurluysa şemsiye al' mantığını içeren şartlı kartı seçip gösterir.
-  - Ölçüt: 3/4 denemede
+  - Ölçüt: %80 (4/5)
 
 * 3.5. Döngü yapılarını kullanarak programı geliştirir.
   - BEP Uyarlaması: '3 kez tıkla / 3 kez zıpla' gibi döngü komutunu sayarak hatasız uygular.
-  - Ölçüt: %80
+  - Ölçüt: %80 (4/5)
 
 * 3.6. Döngü ve karar yapıları ile program tasarlar.
   - BEP Uyarlaması: Şart ve döngü içeren hazır blokları (Scratch'te tekrarla bloğu) fareyle sürükleyip birleştirir, çalıştırır ve projeyi kaydeder.
-  - Ölçüt: Yardımla %75
+  - Ölçüt: Yardımla %80 (4/5)
 
 --------------------------------------------------------------------------------
 
-################################################################################
+###############################################################################
 4. ÜNİTE / TEMA: ALGORİTMA VE AKIŞ DİYAGRAMINI TEST ETME
-################################################################################
+###############################################################################
 
 --------------------------------------------------------------------------------
 [KONU (İÇERİK ÇERÇEVESİ)]: Algoritma ve Akış Şemalarında Test Süreci, Hata Belirleme ve Hata Ayıklama (Debugging)
@@ -226,25 +226,25 @@ Her bir ünite ve konu kümesi için iki düzeyde Uzak Hedef tanımlanmıştır:
 [SÜREÇ BİLEŞENLERİ (KISA DÖNEMLİ HEDEFLER / KDA)]:
 * 4.1. Tasarlanan algoritma ve akış diyagramını test eder.
   - BEP Uyarlaması: Hazırlanan 3 adımlı bir akış şemasını öğretmenin yönergeleriyle sırayla takip eder.
-  - Ölçüt: %80
+  - Ölçüt: %80 (4/5)
 
 * 4.2. Tasarladığı algoritma ve akış diyagramının hatalarını listeler.
   - BEP Uyarlaması: Sırası ters verilmiş veya eksik bırakılmış adımı parmağıyla işaret eder.
-  - Ölçüt: 3/4 denemede
+  - Ölçüt: %80 (4/5)
 
 * 4.3. Hatalı algoritma ve akış diyagramlarının, programın istenilen çıktıyı vermesine engel olacağını fark eder.
   - BEP Uyarlaması: Yanlış sırayla yapılan işlemin sonucunun bozuk çıkacağını (ör. musluk açılmadan el köpüklenmez) söyler.
-  - Ölçüt: İstendiğinde açıklar
+  - Ölçüt: %80 (4/5)
 
 * 4.4. Tasarladığı algoritma ve akış diyagramının hatalarını düzeltir.
   - BEP Uyarlaması: Hatalı kartı çıkarıp yerine doğru adımı koyarak akışı düzenler ve çalışır hâle getirir.
-  - Ölçüt: 4 denemenin 3'ünde
+  - Ölçüt: %80 (4/5)
 
 --------------------------------------------------------------------------------
 
-################################################################################
+###############################################################################
 5. ÜNİTE / TEMA: İLERİ DÜZEY ALGORİTMA UYGULAMALARI
-################################################################################
+###############################################################################
 
 --------------------------------------------------------------------------------
 [KONU (İÇERİK ÇERÇEVESİ)]: Arama ve Sıralama Algoritmaları Mantığı ve Kullanım Alanları
@@ -258,10 +258,10 @@ Her bir ünite ve konu kümesi için iki düzeyde Uzak Hedef tanımlanmıştır:
 [SÜREÇ BİLEŞENLERİ (KISA DÖNEMLİ HEDEFLER / KDA)]:
 * 5.1. Arama ve sıralama algoritmalarını akış diyagramıyla gösterir.
   - BEP Uyarlaması: Karışık verilen 5 adet rakam kartını masada soldan sağa küçükten büyüğe doğru dizer.
-  - Ölçüt: 4 denemenin 3'ünde
+  - Ölçüt: %80 (4/5)
 
 * 5.2. İleri algoritma uygulamalarını ve kullanım yerlerini açıklar.
   - BEP Uyarlaması: Kartlar arasından aranan hedef sayıyı seçip gösterir; telefon rehberinden isim arama örneğini söyler.
-  - Ölçüt: %80
+  - Ölçüt: %80 (4/5)
 
 ================================================================================

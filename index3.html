@@ -389,14 +389,24 @@
         </div>
       </div>
 
+      <!-- 3. KAZANIM EKLE (MANUEL KAZANIM GİRİŞİ) -->
+      <div style="grid-column: span 2;">
+        <label style="color: #0f172a; font-weight: 700;">✍️ Kazanım Ekle</label>
+        <div style="display: flex; gap: 8px;">
+          <input type="text" id="bep_manuel_kazanim" placeholder="Örn: 1.8. Öğrenci kendi belirlediği bir problemi çözer (Manuel / özel kazanım yazınız)...">
+          <button type="button" class="btn" id="bep_btn_manuel_ekle" style="background: #0284c7; color: #ffffff; white-space: nowrap; padding: 8px 14px; font-size: 12px;">+ Listeye Ekle</button>
+        </div>
+        <small style="color: #64748b; font-size: 11px; margin-top: 3px; display: block;">İpucu: Yazdığınız kazanımı '+ Listeye Ekle' butonuyla yukarıdaki listeye dahil edebilir veya doğrudan aşağıdaki '+ Seçilen Amacı Plana Ekle' butonuna basarak plana aktarabilirsiniz.</small>
+      </div>
+
       <div>
         <label>Ölçüt*</label>
         <select id="bep_degerlendirme">
-          <option value="1/5 (%20)">1/5 (%20)</option>
-          <option value="2/5 (%40)">2/5 (%40)</option>
-          <option value="3/5 (%60)">3/5 (%60)</option>
-          <option value="4/5 (%80)" selected>4/5 (%80)</option>
-          <option value="5/5 (%100)">5/5 (%100)</option>
+          <option value="%20 (1/5)">%20 (1/5)</option>
+          <option value="%40 (2/5)">%40 (2/5)</option>
+          <option value="%60 (3/5)">%60 (3/5)</option>
+          <option value="%80 (4/5)" selected>%80 (4/5)</option>
+          <option value="%100 (5/5)">%100 (5/5)</option>
         </select>
       </div>
       <div>
@@ -719,8 +729,8 @@
         "bep_uda": "Öğrenci, dönem sonunda bilişim teknolojilerine ilişkin temel kavramları ve yaygın bilişim araçlarını eşleştirir, gösterir ve kullanım amacını söyler.",
         "uda": "Öğrenci, bilişim teknolojilerine ilişkin temel kavramları ve yaygın bilişim araçlarını eşleştirir, gösterir ve söyler.",
         "kda": [
-          "KDA 1.1: Temel bilişim kavramlarını (bilgisayar, yazılım, veri, donanım) temsil eden kartlardan veya seçeneklerden adı söyleneni seçip gösterir. [%75]",
-          "KDA 1.2: Masada/ekranda bulunan bilişim araçlarından (bilgisayar, kasa, monitör, klavye, fare, tablet) adı söyleneni parmağıyla gösterir. [%80]"
+          "KDA 1.1: Temel bilişim kavramlarını (bilgisayar, yazılım, veri, donanım) temsil eden kartlardan veya seçeneklerden adı söyleneni seçip gösterir. [%80 (4/5)]",
+          "KDA 1.2: Masada/ekranda bulunan bilişim araçlarından (bilgisayar, kasa, monitör, klavye, fare, tablet) adı söyleneni parmağıyla gösterir. [%80 (4/5)]"
         ],
         "meb_kda": [
           "1.1. Bilişim teknolojilerine ilişkin temel kavramları tanımlar.",
@@ -735,8 +745,8 @@
         "bep_uda": "Öğrenci, dönem sonunda kendisine karışık verilen eski ve yeni teknolojik cihaz kartlarını (tüplü/düz ekran, tuşlu/dokunmatik telefon) eskiden yeniye doğru sırasıyla masaya dizer.",
         "uda": "Öğrenci, eski ve yeni teknolojik cihaz kartlarını eskiden yeniye doğru sırayla masaya dizer.",
         "kda": [
-          "KDA 1.3: Eski ve yeni teknoloji kartlarını (tüplü ekran ile düz ekran) eskiden yeniye doğru dizer. [3/4]",
-          "KDA 1.4: Bilgisayarın ve internetin icadını temsil eden görselleri panoda yardımla gösterir. [%70]"
+          "KDA 1.3: Eski ve yeni teknoloji kartlarını (tüplü ekran ile düz ekran) eskiden yeniye doğru dizer. [%80 (4/5)]",
+          "KDA 1.4: Bilgisayarın ve internetin icadını temsil eden görselleri panoda yardımla gösterir. [%60 (3/5)]"
         ],
         "meb_kda": [
           "1.3. Bilişim teknolojileri cihazlarının gelişimini açıklar.",
@@ -751,9 +761,9 @@
         "bep_uda": "Öğrenci, dönem sonunda bilişim araçlarının günlük yaşamdaki faydalarına ve olumlu/olumsuz yönlerine ilişkin sorulan sorulara en az ikişer örnek söyler.",
         "uda": "Öğrenci, bilişim araçlarının günlük yaşamdaki faydalarını ve olumlu/olumsuz yönlerini söyler.",
         "kda": [
-          "KDA 1.5: Bilişim araçlarının okulda, hastanede veya evde ne amaçla kullanıldığını istendiğinde söyler. [En az 2 farklı alan]",
-          "KDA 1.6: Teknolojinin faydalı (ödev, haberleşme) ve zararlı (uzun süre ekrana bakma) yönlerine birer örnek söyler. [1 olumlu, 1 olumsuz]",
-          "KDA 1.7: Yeni bir teknolojik aracın hayatımızı nasıl kolaylaştırdığını (ör. akıllı telefon ile konuşma) söyler. [3/4]"
+          "KDA 1.5: Bilişim araçlarının okulda, hastanede veya evde ne amaçla kullanıldığını istendiğinde söyler. [%80 (4/5)]",
+          "KDA 1.6: Teknolojinin faydalı (ödev, haberleşme) ve zararlı (uzun süre ekrana bakma) yönlerine birer örnek söyler. [%80 (4/5)]",
+          "KDA 1.7: Yeni bir teknolojik aracın hayatımızı nasıl kolaylaştırdığını (ör. akıllı telefon ile konuşma) söyler. [%80 (4/5)]"
         ],
         "meb_kda": [
           "1.5. Bilişim teknolojilerinin kullanım alanlarını açıklar.",
@@ -769,11 +779,11 @@
         "bep_uda": "Öğrenci, dönem sonunda önüne konulan 3-4 adımlı günlük yaşam probleminin girdi-çıktılarını belirler; işlem adımı kartlarını oluş sırasına göre soldan sağa hatasız dizer ve sıralar.",
         "uda": "Öğrenci, günlük yaşam probleminin girdi-çıktılarını belirler; işlem adımı kartlarını sırayla dizer ve sıralar.",
         "kda": [
-          "KDA 2.1: Basit bir problem durumunu dinleyerek problemin ne olduğunu söyler. [%80]",
-          "KDA 2.2: Belirtilen iş için gereken girdi malzemelerini/araçlarını resimler arasından belirler ve seçip gösterir. [3/4]",
-          "KDA 2.3: Günlük bir olayda malzemeleri (girdi), pişirmeyi (işlem) ve tostu (çıktı) ayırt edip gösterir. [%75]",
-          "KDA 2.4: Algoritmanın 'sıralı işlem adımları' olduğunu söyler. [İstendiğinde]",
-          "KDA 2.5: Önüne konulan 3-4 adımlı günlük yaşam kartlarını doğru oluş sırasına göre soldan sağa dizer ve adımları numaralandırarak sıralar. [3/4]"
+          "KDA 2.1: Basit bir problem durumunu dinleyerek problemin ne olduğunu söyler. [%80 (4/5)]",
+          "KDA 2.2: Belirtilen iş için gereken girdi malzemelerini/araçlarını resimler arasından belirler ve seçip gösterir. [%80 (4/5)]",
+          "KDA 2.3: Günlük bir olayda malzemeleri (girdi), pişirmeyi (işlem) ve tostu (çıktı) ayırt edip gösterir. [%80 (4/5)]",
+          "KDA 2.4: Algoritmanın 'sıralı işlem adımları' olduğunu söyler. [%80 (4/5)]",
+          "KDA 2.5: Önüne konulan 3-4 adımlı günlük yaşam kartlarını doğru oluş sırasına göre soldan sağa dizer ve adımları numaralandırarak sıralar. [%80 (4/5)]"
         ],
         "meb_kda": [
           "2.1. Çözümü istenen problemi kavrar.",
@@ -791,8 +801,8 @@
         "bep_uda": "Öğrenci, dönem sonunda bilgisayarların komut verilmeden çalışamayacağını söyler ve gösterilen programlama simgelerini seçip gösterir.",
         "uda": "Öğrenci, bilgisayarların komut verilmeden çalışamayacağını söyler ve program simgelerini gösterir.",
         "kda": [
-          "KDA 2.6: Bilgisayarların komutlar olmadan çalışamayacağını söyler. [1 geçerli ifade]",
-          "KDA 2.7: İnsanların bilgisayara komut vermek için programlama dili kullandığını görseller eşliğinde söyler. [%70]"
+          "KDA 2.6: Bilgisayarların komutlar olmadan çalışamayacağını söyler. [%80 (4/5)]",
+          "KDA 2.7: İnsanların bilgisayara komut vermek için programlama dili kullandığını görseller eşliğinde söyler. [%60 (3/5)]"
         ],
         "meb_kda": [
           "2.6. Programlamanın önemini yorumlar.",
@@ -807,10 +817,10 @@
         "bep_uda": "Öğrenci, dönem sonunda temel akış şeması şekillerini (Başla/Bitir, İşlem, Karar) tanır ve 2-3 adımlı basit bir süreci sembol kartlarıyla masada yan yana dizerek oluşturur.",
         "uda": "Öğrenci, temel akış şeması sembollerini tanır ve basit bir süreci sembol kartlarıyla masada oluşturur.",
         "kda": [
-          "KDA 2.8: Akış şemasının algoritmayı şekillerle göstermeye yaradığını söyler. [3/4]",
-          "KDA 2.9: 'Başla/Bitir' elipsi, 'İşlem' dikdörtgeni ve 'Karar' eşkenar dörtgen sembollerini doğru adıyla gösterir. [En az 3/4]",
-          "KDA 2.10: Verilen 3 adımlı basit bir akış şemasını parmağıyla takip ederek sonuca ulaşır ve söyler. [%80]",
-          "KDA 2.11: Hazır sembol kartlarını kullanarak 2 adımlı bir sürecin akış diyagramını yan yana dizer. [%75]"
+          "KDA 2.8: Akış şemasının algoritmayı şekillerle göstermeye yaradığını söyler. [%80 (4/5)]",
+          "KDA 2.9: 'Başla/Bitir' elipsi, 'İşlem' dikdörtgeni ve 'Karar' eşkenar dörtgen sembollerini doğru adıyla gösterir. [%80 (4/5)]",
+          "KDA 2.10: Verilen 3 adımlı basit bir akış şemasını parmağıyla takip ederek sonuca ulaşır ve söyler. [%80 (4/5)]",
+          "KDA 2.11: Hazır sembol kartlarını kullanarak 2 adımlı bir sürecin akış diyagramını yan yana dizer. [%80 (4/5)]"
         ],
         "meb_kda": [
           "2.8. Akış diyagramının kullanım amaçlarını açıklar.",
@@ -827,9 +837,9 @@
         "bep_uda": "Öğrenci, dönem sonunda programlama ekranındaki başlatma/durdurma butonlarını tıklar; sayı ve metin kutucuklarına klavyeyle yazar ve 'Çalıştır' butonuyla programı çalıştırır.",
         "uda": "Öğrenci, programlama ekranındaki başlat/durdur butonlarını tıklar; sayı ve metin verilerini girer ve programı çalıştırır.",
         "kda": [
-          "KDA 3.1: Programlama ortamındaki başlat (yeşil bayrak), durdur (kırmızı buton) sembollerini tıklar, gösterir ve programı çalıştırır. [%100]",
-          "KDA 3.2: Sayısal veriyi (yaş) sayı kutusuna, metinsel veriyi (isim) metin kutusuna klavyeyle yazar. [3/4]",
-          "KDA 3.3: Ekranda gösterilen örnek verileri ilgili veri kutusuna sürükleyip bırakır veya yazar. [%80]"
+          "KDA 3.1: Programlama ortamındaki başlat (yeşil bayrak), durdur (kırmızı buton) sembollerini tıklar, gösterir ve programı çalıştırır. [%100 (5/5)]",
+          "KDA 3.2: Sayısal veriyi (yaş) sayı kutusuna, metinsel veriyi (isim) metin kutusuna klavyeyle yazar. [%80 (4/5)]",
+          "KDA 3.3: Ekranda gösterilen örnek verileri ilgili veri kutusuna sürükleyip bırakır veya yazar. [%80 (4/5)]"
         ],
         "meb_kda": [
           "3.1. Programlamada kullanılan işlem ve sembolleri listeler.",
@@ -845,9 +855,9 @@
         "bep_uda": "Öğrenci, dönem sonunda şartlı (eğer-ise) ve tekrarlı (döngü) komut kartlarını seçer; blok kodlama ekranında sürükleyip birleştirerek programı çalıştırır ve projeyi kaydeder.",
         "uda": "Öğrenci, şartlı ve tekrarlı blokları kod ortamında birleştirir, programı çalıştırır ve kaydeder.",
         "kda": [
-          "KDA 3.4: 'Eğer hava yağmurluysa şemsiye al' mantığını içeren şartlı kartı seçip gösterir. [3/4]",
-          "KDA 3.5: '3 kez tıkla / 3 kez zıpla' gibi döngü komutunu sayarak hatasız uygular. [%80]",
-          "KDA 3.6: Şart ve döngü içeren hazır blokları (Scratch tekrarla bloğu) fareyle sürükleyip birleştirir, çalıştırır ve projeyi kaydeder. [%75]"
+          "KDA 3.4: 'Eğer hava yağmurluysa şemsiye al' mantığını içeren şartlı kartı seçip gösterir. [%80 (4/5)]",
+          "KDA 3.5: '3 kez tıkla / 3 kez zıpla' gibi döngü komutunu sayarak hatasız uygular. [%80 (4/5)]",
+          "KDA 3.6: Şart ve döngü içeren hazır blokları (Scratch tekrarla bloğu) fareyle sürükleyip birleştirir, çalıştırır ve projeyi kaydeder. [%80 (4/5)]"
         ],
         "meb_kda": [
           "3.4. Karar yapılarını kullanarak programı geliştirir.",
@@ -863,10 +873,10 @@
         "bep_uda": "Öğrenci, dönem sonunda sırası karışmış veya eksik verilmiş işlem adımı içerisindeki hatayı parmağıyla gösterir, yönergeyle düzelterek akışı hatasız çalışır hâle getirir.",
         "uda": "Öğrenci, sırası karışmış veya eksik işlem adımındaki hatayı gösterir, yönergeyle düzelterek akışı çalışır hâle getirir.",
         "kda": [
-          "KDA 4.1: Hazırlanan 3 adımlı bir akış şemasını öğretmenin yönergeleriyle sırayla takip eder. [%80]",
-          "KDA 4.2: Sırası ters verilmiş veya eksik bırakılmış adımı parmağıyla işaret eder. [3/4]",
-          "KDA 4.3: Yanlış sırayla yapılan işlemin sonucunun bozuk çıkacağını söyler. [İstendiğinde]",
-          "KDA 4.4: Hatalı kartı çıkarıp yerine doğru adımı koyarak akışı düzenler ve çalışır hâle getirir. [3/4]"
+          "KDA 4.1: Hazırlanan 3 adımlı bir akış şemasını öğretmenin yönergeleriyle sırayla takip eder. [%80 (4/5)]",
+          "KDA 4.2: Sırası ters verilmiş veya eksik bırakılmış adımı parmağıyla işaret eder. [%80 (4/5)]",
+          "KDA 4.3: Yanlış sırayla yapılan işlemin sonucunun bozuk çıkacağını söyler. [%80 (4/5)]",
+          "KDA 4.4: Hatalı kartı çıkarıp yerine doğru adımı koyarak akışı düzenler ve çalışır hâle getirir. [%80 (4/5)]"
         ],
         "meb_kda": [
           "4.1. Tasarlanan algoritma ve akış diyagramını test eder.",
@@ -883,8 +893,8 @@
         "bep_uda": "Öğrenci, dönem sonunda önüne karışık konulan 1'den 5'e kadar rakam kartlarını küçükten büyüğe sırayla dizer ve söylenen hedef kartı seçip gösterir.",
         "uda": "Öğrenci, karışık verilen 1'den 5'e kadar rakam kartlarını küçükten büyüğe dizer ve hedef kartı bulup gösterir.",
         "kda": [
-          "KDA 5.1: Karışık verilen 5 adet rakam kartını masada soldan sağa küçükten büyüğe doğru dizer. [3/4]",
-          "KDA 5.2: Kartlar arasından aranan hedef sayıyı seçip gösterir; telefon rehberinden isim arama örneğini söyler. [%80]"
+          "KDA 5.1: Karışık verilen 5 adet rakam kartını masada soldan sağa küçükten büyüğe doğru dizer. [%80 (4/5)]",
+          "KDA 5.2: Kartlar arasından aranan hedef sayıyı seçip gösterir; telefon rehberinden isim arama örneğini söyler. [%80 (4/5)]"
         ],
         "meb_kda": [
           "5.1. Arama ve sıralama algoritmalarını akış diyagramıyla gösterir.",
@@ -1499,8 +1509,8 @@
         "bep_uda": "Öğrenci, dönem sonunda masaüstündeki Python IDE (Thonny/IDLE) simgesini çift tıklayarak açar, yeni dosya oluşturur ve 'Kaydet' butonuna basarak kod dosyasını kaydeder.",
         "uda": "Öğrenci, masaüstündeki Python IDE simgesini çift tıklayarak açar, yeni dosya oluşturur ve dosyayı kaydeder.",
         "kda": [
-          "KDA 1.1: Masaüstündeki Python IDE simgesini (Thonny, IDLE) diğer simgeler arasından tanıyıp gösterir. [%100]",
-          "KDA 1.2: Gösterilen IDE simgesine çift tıklayarak çalışma ortamını başlatır ve yeni bir kod dosyası oluşturur. [%100]"
+          "KDA 1.1: Masaüstündeki Python IDE simgesini (Thonny, IDLE) diğer simgeler arasından tanıyıp gösterir. [%100 (5/5)]",
+          "KDA 1.2: Gösterilen IDE simgesine çift tıklayarak çalışma ortamını başlatır ve yeni bir kod dosyası oluşturur. [%100 (5/5)]"
         ],
         "meb_kda": [
           "1.1. Python programlama diliyle çalışılacak ortamları tanır.",
@@ -1515,11 +1525,11 @@
         "bep_uda": "Öğrenci, dönem sonunda klavyeden print() fonksiyonu içine adını yazar, 'Run / Çalıştır' butonuna basarak programı çalıştırır ve konsol ekranında çıktısını gösterir.",
         "uda": "Öğrenci, print() fonksiyonu ile adını yazıp programı çalıştırır; klavyeden veri girerek sonucu ekranda inceler.",
         "kda": [
-          "KDA 1.3: Klavyeden `ad = \"Ahmet\"` gibi basit bir metin değişkenini ekrana yazar. [%75]",
-          "KDA 1.4: Verilen verinin (sayı/metin) türünü belirler ve uygun veri türü kartını seçip gösterir. [%75]",
-          "KDA 1.5: İki sayıyı toplayan (`sayi1 + sayi2`) basit komut satırını yazar ve 'Çalıştır' butonuyla programı çalıştırır. [3/4]",
-          "KDA 1.6: Ekranda beliren girdi istemine klavyeden adını veya yaşını yazıp Enter tuşuna basar. [%100]",
-          "KDA 1.7: Girilen verinin ekranda görüntülendiğini konsolda parmağıyla işaret eder. [%80]"
+          "KDA 1.3: Klavyeden `ad = \"Ahmet\"` gibi basit bir metin değişkenini ekrana yazar. [%80 (4/5)]",
+          "KDA 1.4: Verilen verinin (sayı/metin) türünü belirler ve uygun veri türü kartını seçip gösterir. [%80 (4/5)]",
+          "KDA 1.5: İki sayıyı toplayan (`sayi1 + sayi2`) basit komut satırını yazar ve 'Çalıştır' butonuyla programı çalıştırır. [%80 (4/5)]",
+          "KDA 1.6: Ekranda beliren girdi istemine klavyeden adını veya yaşını yazıp Enter tuşuna basar. [%100 (5/5)]",
+          "KDA 1.7: Girilen verinin ekranda görüntülendiğini konsolda parmağıyla işaret eder. [%80 (4/5)]"
         ],
         "meb_kda": [
           "1.3. Değişkenlerde tutulacak verileri tanımlar.",
@@ -1537,9 +1547,9 @@
         "bep_uda": "Öğrenci, dönem sonunda hazır verilen koşullu (if-else) programı çalıştırır, konsoldan veri girer ve ekranda beliren çıktıyı fareyle işaret eder.",
         "uda": "Öğrenci, hazır verilen koşullu ve döngülü programları çalıştırır; konsola değer girerek sonucu gösterir.",
         "kda": [
-          "KDA 2.1: Konsola yaşını girerek 'Geçtiniz' veya 'Kaldınız' çıktısını ekranda fareyle işaret eder. [3/4]",
-          "KDA 2.2: 3 kez tekrar eden for döngüsünün ekrandaki çıktısını sayarak gösterir. [%80]",
-          "KDA 2.3: İki şartın birlikte sağlandığı (yaş > 18 ve bilet == var) durumu seçeneklerden işaretler. [3/4]"
+          "KDA 2.1: Konsola yaşını girerek 'Geçtiniz' veya 'Kaldınız' çıktısını ekranda fareyle işaret eder. [%80 (4/5)]",
+          "KDA 2.2: 3 kez tekrar eden for döngüsünün ekrandaki çıktısını sayarak gösterir. [%80 (4/5)]",
+          "KDA 2.3: İki şartın birlikte sağlandığı (yaş > 18 ve bilet == var) durumu seçeneklerden işaretler. [%80 (4/5)]"
         ],
         "meb_kda": [
           "2.1. Python programlama dili karar yapılarını içeren programlar geliştirir.",
@@ -1555,8 +1565,8 @@
         "bep_uda": "Öğrenci, dönem sonunda hazır rastgele sayı üreten fonksiyonu çalıştırır, konsola gelen sayıyı sesli okur ve kod dosyasını kaydeder.",
         "uda": "Öğrenci, hazır fonksiyon veya kütüphaneli kodu çalıştırır, çıktıyı sesli söyler ve dosyayı kaydeder.",
         "kda": [
-          "KDA 2.4: Önceden yazılmış `selamla()` gibi basit bir fonksiyonu çağırma satırını çalıştırır. [%80]",
-          "KDA 2.5: Rastgele sayı üreten `random` kütüphanesi fonksiyonunu çalıştırıp ekrana gelen sayıyı sesli söyler. [3/4]"
+          "KDA 2.4: Önceden yazılmış `selamla()` gibi basit bir fonksiyonu çağırma satırını çalıştırır. [%80 (4/5)]",
+          "KDA 2.5: Rastgele sayı üreten `random` kütüphanesi fonksiyonunu çalıştırıp ekrana gelen sayıyı sesli söyler. [%80 (4/5)]"
         ],
         "meb_kda": [
           "2.4. Fonksiyonları program içinde yöntemlerine göre kullanır.",
@@ -1571,11 +1581,11 @@
         "bep_uda": "Öğrenci, dönem sonunda gerçek hayattaki nesneler ile sınıfları temsil eden resimli kartları masada eşleştirir ve ekrandaki nesneye fareyle tıklar.",
         "uda": "Öğrenci, sınıfların ve nesnelerin gerçek hayattaki eşyalar gibi özelliklere sahip olduğunu görsel kartlarla eşleştirir.",
         "kda": [
-          "KDA 3.1: Nesnelerin gerçek hayattaki eşyalar gibi özelliklere sahip olduğunu görsel kartlarla eşleştirir. [İstendiğinde]",
-          "KDA 3.2: Kodların düzenli ve tekrar kullanılabilir olmasının faydasını söyler. [1 geçerli ifade]",
-          "KDA 3.3: Örnek bir `Araba` sınıfı şablonundaki özellikleri (renk, model) öğretmenin rehberliğinde inceler. [%70]",
-          "KDA 3.4: Hazır metotları (str, int) içeren komut satırını çalıştırır. [%80]",
-          "KDA 3.5: Alt sınıf ve üst sınıf kartlarını (Hayvan -> Kedi) masada alt alta eşleştirir. [3/4]"
+          "KDA 3.1: Nesnelerin gerçek hayattaki eşyalar gibi özelliklere sahip olduğunu görsel kartlarla eşleştirir. [%80 (4/5)]",
+          "KDA 3.2: Kodların düzenli ve tekrar kullanılabilir olmasının faydasını söyler. [%80 (4/5)]",
+          "KDA 3.3: Örnek bir `Araba` sınıfı şablonundaki özellikleri (renk, model) öğretmenin rehberliğinde inceler. [%60 (3/5)]",
+          "KDA 3.4: Hazır metotları (str, int) içeren komut satırını çalıştırır. [%80 (4/5)]",
+          "KDA 3.5: Alt sınıf ve üst sınıf kartlarını (Hayvan -> Kedi) masada alt alta eşleştirir. [%80 (4/5)]"
         ],
         "meb_kda": [
           "3.1. Nesne yönelimli programlama kavramını açıklar.",
@@ -1593,10 +1603,10 @@
         "bep_uda": "Öğrenci, dönem sonunda ekranda listelenen verilerden istenen elemanı seçer; 'Dosyadan Oku / Kaydet' butonuna basarak veriyi kaydeder ve programı çalıştırır.",
         "uda": "Öğrenci, listeden istenen elemanı seçer; 'Dosyadan Oku/Kaydet' butonuna basarak veriyi kaydeder ve projeyi çalıştırır.",
         "kda": [
-          "KDA 3.6: Hazır listedeki 3 meyve isminden birincisini konsolda fareyle işaret eder. [%80]",
-          "KDA 3.7: 'Dosyadan Oku' veya 'Kaydet' butonuna basarak metin belgesini ekranda açar. [%100]",
-          "KDA 3.8: Dosyadan okunan listenin ekrana geldiğini parmağıyla gösterir. [%80]",
-          "KDA 3.9: Hazır bir projede butonlara tıklayarak projeyi baştan sona tamamlar ve kaydeder. [%80]"
+          "KDA 3.6: Hazır listedeki 3 meyve isminden birincisini konsolda fareyle işaret eder. [%80 (4/5)]",
+          "KDA 3.7: 'Dosyadan Oku' veya 'Kaydet' butonuna basarak metin belgesini ekranda açar. [%100 (5/5)]",
+          "KDA 3.8: Dosyadan okunan listenin ekrana geldiğini parmağıyla gösterir. [%80 (4/5)]",
+          "KDA 3.9: Hazır bir projede butonlara tıklayarak projeyi baştan sona tamamlar ve kaydeder. [%80 (4/5)]"
         ],
         "meb_kda": [
           "3.6. List, tuple, set ve dictionary türlerinde verileri tanımlar.",
@@ -1901,6 +1911,41 @@
       }
     });
 
+    // ===================== MANUEL KAZANIM EKLE =====================
+    const btnManuelEkle = document.getElementById("bep_btn_manuel_ekle");
+    const inputManuelKazanim = document.getElementById("bep_manuel_kazanim");
+
+    if (btnManuelEkle && inputManuelKazanim) {
+      btnManuelEkle.addEventListener("click", function() {
+        const metin = inputManuelKazanim.value.trim();
+        if (!metin) {
+          alert("Lütfen eklemek istediğiniz kazanım metnini yazınız.");
+          inputManuelKazanim.focus();
+          return;
+        }
+
+        // Eğer henüz UDA seçilmediyse ve checkboxesMeb boş mesajı içeriyorsa temizle
+        if (checkboxesMeb.querySelector("div") && checkboxesMeb.querySelectorAll("label").length === 0) {
+          checkboxesMeb.innerHTML = '';
+        }
+
+        const lbl = document.createElement("label");
+        lbl.style.background = "#eff6ff";
+        lbl.style.borderLeft = "3px solid #0284c7";
+        lbl.innerHTML = `<input type="checkbox" value="${metin}" checked onchange="guncelleMebLabel()"> <span><strong>[Özel]</strong> ${metin}</span>`;
+        checkboxesMeb.appendChild(lbl);
+        guncelleMebLabel();
+        inputManuelKazanim.value = "";
+      });
+
+      inputManuelKazanim.addEventListener("keydown", function(e) {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          btnManuelEkle.click();
+        }
+      });
+    }
+
     // Satır Ekle (Seçilen tüm Revize KDA ve Orijinal MEB Kazanımlarını TEK BİR SATIRDA ekler)
     elBtnEkle.addEventListener("click", function() {
       senkronizeEt();
@@ -1908,7 +1953,8 @@
       const udaIdx = elUda.value;
       const seciliKdalar = getSeciliKdaListesi();
       const seciliMebKdalar = getSeciliMebListesi();
-      const tumSeciliKdalar = [...seciliKdalar, ...seciliMebKdalar];
+      const kalanManuel = (inputManuelKazanim && inputManuelKazanim.value.trim()) ? [inputManuelKazanim.value.trim()] : [];
+      const tumSeciliKdalar = [...seciliKdalar, ...seciliMebKdalar, ...kalanManuel];
 
       if (!modulKey || udaIdx === "") {
         alert("Lütfen önce bir modül ve UDA (Ünite) seçiniz.");
@@ -1916,7 +1962,7 @@
       }
 
       if (tumSeciliKdalar.length === 0) {
-        alert("Lütfen 'Revize Edilmiş KDA' veya 'Resmî MEB Kazanımları' listesinden en az bir kazanım işaretleyiniz.");
+        alert("Lütfen 'Revize Edilmiş KDA' veya 'Resmî MEB Kazanımları' listesinden en az bir kazanım işaretleyiniz ya da 'Kazanım Ekle' kutusuna yazınız.");
         return;
       }
 

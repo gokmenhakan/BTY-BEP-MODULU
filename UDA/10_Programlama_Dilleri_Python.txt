@@ -32,11 +32,11 @@ Her bir ünite ve konu kümesi için iki düzeyde Uzak Hedef tanımlanmıştır:
 [SÜREÇ BİLEŞENLERİ (KISA DÖNEMLİ HEDEFLER / KDA)]:
 * 1.1. Python programlama diliyle çalışılacak ortamları tanır.
   - BEP Uyarlaması: Masaüstündeki Python IDE simgesini (Thonny, IDLE) diğer simgeler arasından tanıyıp gösterir.
-  - Ölçüt: %100
+  - Ölçüt: %100 (5/5)
 
 * 1.2. Farklı entegre geliştirme ortamlarını analiz ederek kendisine en uygun çalışma ortamını seçer.
   - BEP Uyarlaması: Kendisine gösterilen IDE simgesine çift tıklayarak çalışma ortamını başlatır ve yeni bir kod dosyası oluşturur.
-  - Ölçüt: %100
+  - Ölçüt: %100 (5/5)
 
 --------------------------------------------------------------------------------
 [2. KONU (İÇERİK ÇERÇEVESİ)]: Değişkenler, Veri Türleri, İşlem Önceliği ve Girdi/Çıktı İşlemleri
@@ -50,23 +50,23 @@ Her bir ünite ve konu kümesi için iki düzeyde Uzak Hedef tanımlanmıştır:
 [SÜREÇ BİLEŞENLERİ (KISA DÖNEMLİ HEDEFLER / KDA)]:
 * 1.3. Değişkenlerde tutulacak verileri tanımlar.
   - BEP Uyarlaması: Klavyeden `ad = "Ahmet"` gibi basit bir metin değişkenini ekrana yazar.
-  - Ölçüt: Yardımla %75
+  - Ölçüt: Yardımla %80 (4/5)
 
 * 1.4. Bir değişkeni tanımlarken hangi tür veriyi tutacağını belirler.
   - BEP Uyarlaması: Kendisine verilen verinin (ör. yaş: sayı, isim: metin) türünü belirler ve uygun veri türü kartını seçip gösterir.
-  - Ölçüt: 4 denemenin en az 3'ünde (%75)
+  - Ölçüt: %80 (4/5)
 
 * 1.5. Tanımlanan değişkenlerde işlem önceliğini gözetir.
   - BEP Uyarlaması: İki sayıyı toplayan (`sayi1 + sayi2`) basit komut satırını yazar ve 'Çalıştır' butonuyla programı çalıştırır.
-  - Ölçüt: 3/4 denemede
+  - Ölçüt: %80 (4/5)
 
 * 1.6. Kullanıcıdan veri alır.
   - BEP Uyarlaması: Ekranda beliren girdi istemine klavyeden adını veya yaşını yazıp Enter tuşuna basar.
-  - Ölçüt: %100
+  - Ölçüt: %100 (5/5)
 
 * 1.7. Kullanıcıdan alınan veriyi değişkene tanımlar.
   - BEP Uyarlaması: Girilen verinin ekranda görüntülendiğini konsolda parmağıyla işaret eder.
-  - Ölçüt: %80
+  - Ölçüt: %80 (4/5)
 
 --------------------------------------------------------------------------------
 
@@ -86,15 +86,15 @@ Her bir ünite ve konu kümesi için iki düzeyde Uzak Hedef tanımlanmıştır:
 [SÜREÇ BİLEŞENLERİ (KISA DÖNEMLİ HEDEFLER / KDA)]:
 * 2.1. Python programlama dili karar yapılarını içeren programlar geliştirir.
   - BEP Uyarlaması: Konsola yaşını girerek 'Geçtiniz' veya 'Kaldınız' çıktısını ekranda fareyle işaret eder.
-  - Ölçüt: 4 denemenin 3'ünde
+  - Ölçüt: %80 (4/5)
 
 * 2.2. Bir problemi çözmek için kullanacağı döngü yapısına karar verir.
   - BEP Uyarlaması: 3 kez tekrar eden for döngüsünün ekrandaki çıktısını sayarak gösterir.
-  - Ölçüt: %80
+  - Ölçüt: %80 (4/5)
 
 * 2.3. Çoklu koşulların mantıksal sonuçlarını değerlendirir.
   - BEP Uyarlaması: İki şartın birlikte sağlandığı (ör. yaş > 18 ve bilet == var) durumu seçeneklerden işaretler.
-  - Ölçüt: 3/4 denemede
+  - Ölçüt: %80 (4/5)
 
 --------------------------------------------------------------------------------
 [2. KONU (İÇERİK ÇERÇEVESİ)]: Fonksiyonlar (def) ve Standart Kütüphaneler
@@ -108,11 +108,11 @@ Her bir ünite ve konu kümesi için iki düzeyde Uzak Hedef tanımlanmıştır:
 [SÜREÇ BİLEŞENLERİ (KISA DÖNEMLİ HEDEFLER / KDA)]:
 * 2.4. Fonksiyonları program içinde yöntemlerine göre kullanır.
   - BEP Uyarlaması: Önceden yazılmış `selamla()` gibi basit bir fonksiyonu çağırma satırını çalıştırır.
-  - Ölçüt: %80
+  - Ölçüt: %80 (4/5)
 
 * 2.5. Standart fonksiyon kümelerini ve kütüphanelerini kullanır.
   - BEP Uyarlaması: Rastgele sayı üreten `random` kütüphanesi fonksiyonunu çalıştırıp ekrana gelen sayıyı sesli söyler.
-  - Ölçüt: 3/4 denemede
+  - Ölçüt: %80 (4/5)
 
 --------------------------------------------------------------------------------
 
@@ -132,23 +132,23 @@ Her bir ünite ve konu kümesi için iki düzeyde Uzak Hedef tanımlanmıştır:
 [SÜREÇ BİLEŞENLERİ (KISA DÖNEMLİ HEDEFLER / KDA)]:
 * 3.1. Nesne yönelimli programlama kavramını açıklar.
   - BEP Uyarlaması: Nesnelerin gerçek hayattaki eşyalar gibi özelliklere sahip olduğunu görsel kartlarla eşleştirir.
-  - Ölçüt: İstendiğinde gösterir
+  - Ölçüt: %80 (4/5)
 
 * 3.2. Nesne yönelimli programlamanın faydalarının farkına varır.
   - BEP Uyarlaması: Kodların düzenli ve tekrar kullanılabilir olmasının faydasını söyler.
-  - Ölçüt: 1 geçerli ifade
+  - Ölçüt: %80 (4/5)
 
 * 3.3. Programın ihtiyacına yönelik sınıf tanımlaması yapar.
   - BEP Uyarlaması: Örnek bir `Araba` sınıfı şablonundaki özellikleri (renk, model) öğretmenin rehberliğinde inceler.
-  - Ölçüt: Yardımla %70
+  - Ölçüt: Yardımla %60 (3/5)
 
 * 3.4. Python programlama diline özgü temel sınıfları kullanır.
   - BEP Uyarlaması: Hazır metotları (str, int) içeren komut satırını çalıştırır.
-  - Ölçüt: %80
+  - Ölçüt: %80 (4/5)
 
 * 3.5. Geliştirdiği programda kapsülleme, kalıtım ve çok biçimlilik prensiplerini kullanır.
   - BEP Uyarlaması: Alt sınıf ve üst sınıf kartlarını (ör. Hayvan -> Kedi) masada alt alta eşleştirir.
-  - Ölçüt: 3/4 denemede
+  - Ölçüt: %80 (4/5)
 
 --------------------------------------------------------------------------------
 [2. KONU (İÇERİK ÇERÇEVESİ)]: Veri Koleksiyonları (List, Tuple, Dict), Dosya İşlemleri ve Proje Geliştirme
@@ -162,18 +162,18 @@ Her bir ünite ve konu kümesi için iki düzeyde Uzak Hedef tanımlanmıştır:
 [SÜREÇ BİLEŞENLERİ (KISA DÖNEMLİ HEDEFLER / KDA)]:
 * 3.6. List, tuple, set ve dictionary türlerinde verileri tanımlar.
   - BEP Uyarlaması: Hazır listedeki 3 meyve isminden birincisini konsolda fareyle işaret eder.
-  - Ölçüt: %80
+  - Ölçüt: %80 (4/5)
 
 * 3.7. Dosya nesnesi üzerinde okuma yazma silme işlemlerini uygular.
   - BEP Uyarlaması: 'Dosyadan Oku' veya 'Kaydet' butonuna basarak metin belgesini ekranda açar.
-  - Ölçüt: %100
+  - Ölçüt: %100 (5/5)
 
 * 3.8. Dizi türündeki verileri dosya nesnesi içerisinde örneklendirir.
   - BEP Uyarlaması: Dosyadan okunan listenin ekrana geldiğini parmağıyla gösterir.
-  - Ölçüt: %80
+  - Ölçüt: %80 (4/5)
 
 * 3.9. İleri seviye nesne yönelimi teknikleriyle özgün projeler geliştirir.
   - BEP Uyarlaması: Hazır bir projede (hesap makinesi veya mini quiz) butonlara tıklayarak projeyi baştan sona tamamlar ve kaydeder.
-  - Ölçüt: Yardımla %80
+  - Ölçüt: Yardımla %80 (4/5)
 
 ================================================================================
