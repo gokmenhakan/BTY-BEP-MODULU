@@ -1921,7 +1921,9 @@
         }
 
         const ogrAd = document.getElementById("bep_ogrAd").value || "-";
-        const sinifNo = (document.getElementById("bep_sinif").value || "") + " / " + (document.getElementById("bep_no").value || "");
+        const sVal = (document.getElementById("bep_sinif").value || "").trim();
+        const nVal = (document.getElementById("bep_no").value || "").trim();
+        const sinifNo = (sVal && nVal) ? `${sVal} - ${nVal}` : (sVal || nVal || "-");
         const yil = document.getElementById("bep_yil").value || "2026-2027";
         const ogrt = document.getElementById("bep_ogretmen").value || "-";
         const dersAdi = document.getElementById("bep_lblDers").textContent || "-";
@@ -2189,7 +2191,9 @@
 
   function senkronizeEt() {
     document.getElementById("bep_lblOgr").textContent = document.getElementById("bep_ogrAd").value || "-";
-    document.getElementById("bep_lblSinifNo").textContent = (document.getElementById("bep_sinif").value || "") + " / " + (document.getElementById("bep_no").value || "-");
+    const sVal = (document.getElementById("bep_sinif").value || "").trim();
+    const nVal = (document.getElementById("bep_no").value || "").trim();
+    document.getElementById("bep_lblSinifNo").textContent = (sVal && nVal) ? `${sVal} - ${nVal}` : (sVal || nVal || "-");
     document.getElementById("bep_lblYil").textContent = document.getElementById("bep_yil").value || "-";
     document.getElementById("bep_lblOgrt").textContent = document.getElementById("bep_ogretmen").value || "-";
     
