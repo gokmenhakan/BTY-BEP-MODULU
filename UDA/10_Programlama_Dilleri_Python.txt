@@ -52,6 +52,10 @@ Her bir ünite ve konu kümesi için iki düzeyde Uzak Hedef tanımlanmıştır:
   - BEP Uyarlaması: Klavyeden `ad = "Ahmet"` gibi basit bir metin değişkenini ekrana yazar.
   - Ölçüt: Yardımla %75
 
+* 1.4. Bir değişkeni tanımlarken hangi tür veriyi tutacağını belirler.
+  - BEP Uyarlaması: Kendisine verilen verinin (ör. yaş: sayı, isim: metin) türünü belirler ve uygun veri türü kartını seçip gösterir.
+  - Ölçüt: 4 denemenin en az 3'ünde (%75)
+
 * 1.5. Tanımlanan değişkenlerde işlem önceliğini gözetir.
   - BEP Uyarlaması: İki sayıyı toplayan (`sayi1 + sayi2`) basit komut satırını yazar ve 'Çalıştır' butonuyla programı çalıştırır.
   - Ölçüt: 3/4 denemede
