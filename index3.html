@@ -106,6 +106,10 @@
       margin-bottom: 4px;
       line-height: 1.35;
     }
+    .kda-item.kda-sub {
+      padding-left: 14px;
+      color: #1e40af;
+    }
     .kda-item:last-child {
       margin-bottom: 0;
     }
@@ -1945,7 +1949,88 @@
       });
     }
 
-    // Satır Ekle (Seçilen tüm Revize KDA ve Orijinal MEB Kazanımlarını TEK BİR SATIRDA ekler)
+    // KDA Sıralama ve MEB - Revize Eşleştirme Fonksiyonu
+    function siralaVeGruplaKdalar(seciliMebler, seciliKdalar, manuelKdalar) {
+      function getKod(metin) {
+        if (!metin) return null;
+        const mKda = metin.match(/KDA\s*(\d+(?:\.\d+)+)/i);
+        if (mKda) return mKda[1];
+        const mMeb = metin.match(/^\s*(\d+(?:\.\d+)+)/);
+        if (mMeb) return mMeb[1];
+        return null;
+      }
+
+      function kodKarsilastir(a, b) {
+        if (!a && !b) return 0;
+        if (!a) return 1;
+        if (!b) return -1;
+        const partsA = a.split('.').map(Number);
+        const partsB = b.split('.').map(Number);
+        for (let i = 0; i < Math.max(partsA.length, partsB.length); i++) {
+          const na = isNaN(partsA[i]) ? 0 : partsA[i];
+          const nb = isNaN(partsB[i]) ? 0 : partsB[i];
+          if (na !== nb) return na - nb;
+        }
+        return 0;
+      }
+
+      const kodlarSet = new Set();
+      const mebMap = {};
+      const kdaMap = {};
+      const digerMeb = [];
+      const digerKda = [];
+
+      (seciliMebler || []).forEach(item => {
+        const k = getKod(item);
+        if (k) {
+          kodlarSet.add(k);
+          if (!mebMap[k]) mebMap[k] = [];
+          mebMap[k].push(item);
+        } else {
+          digerMeb.push(item);
+        }
+      });
+
+      (seciliKdalar || []).forEach(item => {
+        const k = getKod(item);
+        if (k) {
+          kodlarSet.add(k);
+          if (!kdaMap[k]) kdaMap[k] = [];
+          kdaMap[k].push(item);
+        } else {
+          digerKda.push(item);
+        }
+      });
+
+      const siraliKodlar = Array.from(kodlarSet).sort(kodKarsilastir);
+      const sonuc = [];
+
+      siraliKodlar.forEach(k => {
+        const mebler = mebMap[k] || [];
+        const kdalar = kdaMap[k] || [];
+
+        if (mebler.length > 0 && kdalar.length > 0) {
+          // Önce MEB kazanımı üstte, hemen altında ilişkili öğrenci seviyesindeki Revize KDA
+          mebler.forEach(m => sonuc.push({ metin: m, tip: 'meb', iliskili: true }));
+          kdalar.forEach(kItem => sonuc.push({ metin: kItem, tip: 'kda_iliskili', iliskili: true }));
+        } else if (mebler.length > 0) {
+          mebler.forEach(m => sonuc.push({ metin: m, tip: 'meb', iliskili: false }));
+        } else {
+          kdalar.forEach(kItem => sonuc.push({ metin: kItem, tip: 'kda_tek', iliskili: false }));
+        }
+      });
+
+      digerMeb.forEach(m => sonuc.push({ metin: m, tip: 'meb', iliskili: false }));
+      digerKda.forEach(k => sonuc.push({ metin: k, tip: 'kda_tek', iliskili: false }));
+
+      if (manuelKdalar && manuelKdalar.length > 0) {
+        manuelKdalar.forEach(man => sonuc.push({ metin: man, tip: 'manuel', iliskili: false }));
+      }
+
+      return sonuc;
+    }
+
+    // Satır Ekle (Seçilen tüm MEB ve Revize KDA'ları sıralı ve eşleştirilmiş olarak tek hücrede ekler)
     elBtnEkle.addEventListener("click", function() {
       senkronizeEt();
       const modulKey = elModul.value;
@@ -1953,14 +2038,15 @@
       const seciliKdalar = getSeciliKdaListesi();
       const seciliMebKdalar = getSeciliMebListesi();
       const kalanManuel = (inputManuelKazanim && inputManuelKazanim.value.trim()) ? [inputManuelKazanim.value.trim()] : [];
-      const tumSeciliKdalar = [...seciliKdalar, ...seciliMebKdalar, ...kalanManuel];
+      
+      const siraliKdalar = siralaVeGruplaKdalar(seciliMebKdalar, seciliKdalar, kalanManuel);
 
       if (!modulKey || udaIdx === "") {
         alert("Lütfen önce bir modül ve UDA (Ünite) seçiniz.");
         return;
       }
 
-      if (tumSeciliKdalar.length === 0) {
+      if (siraliKdalar.length === 0) {
         alert("Lütfen 'Revize Edilmiş KDA' veya 'Resmî MEB Kazanımları' listesinden en az bir kazanım işaretleyiniz ya da 'Kazanım Ekle' kutusuna yazınız.");
         return;
       }
@@ -1981,8 +2067,19 @@
       const performans = document.getElementById("bep_performans").value || "";
       const tbody = document.getElementById("bep_govde");
 
-      // Seçilen tüm kazanımları tek hücre içinde madde işaretiyle alt alta diz
-      const kdaHtml = tumSeciliKdalar.map(item => `<div class="kda-item">• ${item}</div>`).join('');
+      // Seçilen kazanımları: Önce MEB üstte, hemen altında ilişkili KDA olacak şekilde diz
+      const kdaHtml = siraliKdalar.map(item => {
+        if (item.tip === 'kda_iliskili') {
+          return `<div class="kda-item kda-sub" style="padding-left: 14px; color: #1e40af;">↳ ${item.metin}</div>`;
+        } else if (item.tip === 'meb') {
+          return `<div class="kda-item kda-meb" style="font-weight: 600;">• ${item.metin}</div>`;
+        } else if (item.tip === 'manuel') {
+          const mTxt = item.metin.startsWith('[Özel]') ? item.metin : `[Özel] ${item.metin}`;
+          return `<div class="kda-item kda-ozel" style="color: #0369a1;">• ${mTxt}</div>`;
+        } else {
+          return `<div class="kda-item">• ${item.metin}</div>`;
+        }
+      }).join('');
 
       const tr = document.createElement("tr");
       tr.innerHTML = `
