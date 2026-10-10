@@ -9,6 +9,14 @@
   <!-- xlsx-js-style: Hücre Kenarlığı (Border), Hizalama ve Biçimlendirme Destekli Excel Kütüphanesi -->
   <script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js"></script>
 
+  <!-- docx: Microsoft Word (.docx) Formatında Dışa Aktarma Kütüphanesi -->
+  <script src="docx.umd.js"></script>
+  <script>
+    if (typeof docx === 'undefined') {
+      document.write('<script src="https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js"><\/script>');
+    }
+  </script>
+
   <style>
     * { box-sizing: border-box; }
     body {
@@ -73,6 +81,8 @@
     .btn-print:hover { background: #0369a1; }
     .btn-excel { background: #107c41; color: #ffffff; }
     .btn-excel:hover { background: #0b582e; }
+    .btn-word { background: #2b579a; color: #ffffff; }
+    .btn-word:hover { background: #1e3e6d; }
     .btn-del {
       background: #ef4444;
       color: #ffffff;
@@ -585,6 +595,7 @@
   <!-- BUTONLAR -->
   <div class="bep-no-print" style="text-align: right; margin-top: 15px; display: flex; justify-content: flex-end; gap: 10px;">
     <button class="btn btn-print" id="bep_btn_yazdir">🖨️ Yazdır / PDF Olarak Kaydet (Yatay A4)</button>
+    <button class="btn btn-word" id="bep_btn_word">📄 Word'e Aktar (.docx)</button>
     <button class="btn btn-excel" id="bep_btn_excel">📊 Excel'e Aktar (.xlsx)</button>
   </div>
 
@@ -2385,6 +2396,325 @@
 
         let dosyaAdi = "BEP_Plani_" + (ogrAd !== "-" ? ogrAd.replace(/\s+/g, '_') : "Ogrenci") + ".xlsx";
         XLSX.writeFile(wb, dosyaAdi);
+      });
+    }
+
+    // =========================================================
+    // WORD (.DOCX) FORMATINDA DIŞA AKTAR
+    // =========================================================
+    const elBtnWord = document.getElementById("bep_btn_word");
+    if (elBtnWord) {
+      elBtnWord.addEventListener("click", async function() {
+        if (typeof docx === "undefined") {
+          alert("Word (.docx) kütüphanesi yüklenemedi. Lütfen internet bağlantınızı kontrol ediniz veya docx.umd.js dosyasının mevcut olduğundan emin olunuz.");
+          return;
+        }
+
+        const tbody = document.getElementById("bep_govde");
+        const satirlar = tbody.querySelectorAll("tr");
+        if (satirlar.length === 0) {
+          alert("Lütfen önce plana en az bir kazanım ekleyiniz.");
+          return;
+        }
+
+        senkronizeEt();
+
+        const ogrAd = document.getElementById("bep_lblOgr").textContent.trim();
+        const sinifNo = document.getElementById("bep_lblSinifNo").textContent.trim();
+        const yil = document.getElementById("bep_lblYil").textContent.trim();
+        const ders = document.getElementById("bep_lblDers").textContent.trim();
+        const modul = document.getElementById("bep_lblModul").textContent.trim();
+        const ogrt = document.getElementById("bep_lblOgrt").textContent.trim();
+        const tarih = document.getElementById("bep_lblTarih").textContent.trim();
+
+        const sinifOgrt = document.getElementById("bep_imza_sinifOgretmeni").textContent.trim();
+        const veli = document.getElementById("bep_imza_veli").textContent.trim();
+        const rehberOgrt = document.getElementById("bep_imza_rehberOgretmen").textContent.trim();
+        const mudurYrd = document.getElementById("bep_imza_mudurYrd").textContent.trim();
+
+        const {
+          Document, Packer, Paragraph, TextRun, PageOrientation,
+          Table, TableRow, TableCell, WidthType, AlignmentType, BorderStyle
+        } = window.docx;
+
+        const borderThin = {
+          top: { style: BorderStyle.SINGLE, size: 4, color: "64748B" },
+          bottom: { style: BorderStyle.SINGLE, size: 4, color: "64748B" },
+          left: { style: BorderStyle.SINGLE, size: 4, color: "64748B" },
+          right: { style: BorderStyle.SINGLE, size: 4, color: "64748B" }
+        };
+
+        const borderNone = {
+          top: { style: BorderStyle.NONE },
+          bottom: { style: BorderStyle.NONE },
+          left: { style: BorderStyle.NONE },
+          right: { style: BorderStyle.NONE }
+        };
+
+        const cellMargins = { top: 80, bottom: 80, left: 100, right: 100 };
+
+        // 1. Üst Başlıklar
+        const titles = [
+          new Paragraph({
+            alignment: AlignmentType.CENTER,
+            spacing: { after: 50 },
+            children: [new TextRun({ text: "T.C. MİLLÎ EĞİTİM BAKANLIĞI", bold: true, size: 22, font: "Arial" })]
+          }),
+          new Paragraph({
+            alignment: AlignmentType.CENTER,
+            spacing: { after: 50 },
+            children: [new TextRun({ text: "SÜLEYMAN ÇELEBİ ANADOLU LİSESİ", bold: true, size: 22, font: "Arial" })]
+          }),
+          new Paragraph({
+            alignment: AlignmentType.CENTER,
+            spacing: { after: 160 },
+            children: [new TextRun({ text: "BİLİŞİM TEKNOLOJİLERİ VE YAZILIM DERSİ BİREYSELLEŞTİRİLMİŞ EĞİTİM PROGRAMI (BEP) FORMU", bold: true, size: 20, font: "Arial" })]
+          })
+        ];
+
+        // 2. Bilgi Tablosu
+        const infoTable = new Table({
+          width: { size: 15398, type: WidthType.DXA },
+          borders: {
+            top: { style: BorderStyle.NONE },
+            bottom: { style: BorderStyle.NONE },
+            left: { style: BorderStyle.NONE },
+            right: { style: BorderStyle.NONE },
+            insideHorizontal: { style: BorderStyle.NONE },
+            insideVertical: { style: BorderStyle.NONE }
+          },
+          rows: [
+            new TableRow({
+              children: [
+                new TableCell({ width: { size: 2600, type: WidthType.DXA }, borders: borderNone, children: [new Paragraph({ children: [new TextRun({ text: "Öğrenci Adı Soyadı:", bold: true, size: 18, font: "Arial" })] })] }),
+                new TableCell({ width: { size: 5100, type: WidthType.DXA }, borders: borderNone, children: [new Paragraph({ children: [new TextRun({ text: ogrAd || "-", size: 18, font: "Arial" })] })] }),
+                new TableCell({ width: { size: 2600, type: WidthType.DXA }, borders: borderNone, children: [new Paragraph({ children: [new TextRun({ text: "Eğitim-Öğretim Yılı:", bold: true, size: 18, font: "Arial" })] })] }),
+                new TableCell({ width: { size: 5098, type: WidthType.DXA }, borders: borderNone, children: [new Paragraph({ children: [new TextRun({ text: yil || "-", size: 18, font: "Arial" })] })] })
+              ]
+            }),
+            new TableRow({
+              children: [
+                new TableCell({ width: { size: 2600, type: WidthType.DXA }, borders: borderNone, children: [new Paragraph({ children: [new TextRun({ text: "Sınıfı / Numarası:", bold: true, size: 18, font: "Arial" })] })] }),
+                new TableCell({ width: { size: 5100, type: WidthType.DXA }, borders: borderNone, children: [new Paragraph({ children: [new TextRun({ text: sinifNo || "-", size: 18, font: "Arial" })] })] }),
+                new TableCell({ width: { size: 2600, type: WidthType.DXA }, borders: borderNone, children: [new Paragraph({ children: [new TextRun({ text: "Ders:", bold: true, size: 18, font: "Arial" })] })] }),
+                new TableCell({ width: { size: 5098, type: WidthType.DXA }, borders: borderNone, children: [new Paragraph({ children: [new TextRun({ text: ders || "-", size: 18, font: "Arial" })] })] })
+              ]
+            }),
+            new TableRow({
+              children: [
+                new TableCell({ width: { size: 2600, type: WidthType.DXA }, borders: borderNone, children: [new Paragraph({ children: [new TextRun({ text: "Ders Öğretmeni:", bold: true, size: 18, font: "Arial" })] })] }),
+                new TableCell({ width: { size: 5100, type: WidthType.DXA }, borders: borderNone, children: [new Paragraph({ children: [new TextRun({ text: ogrt || "-", size: 18, font: "Arial" })] })] }),
+                new TableCell({ width: { size: 2600, type: WidthType.DXA }, borders: borderNone, children: [new Paragraph({ children: [new TextRun({ text: "Modül:", bold: true, size: 18, font: "Arial" })] })] }),
+                new TableCell({ width: { size: 5098, type: WidthType.DXA }, borders: borderNone, children: [new Paragraph({ children: [new TextRun({ text: modul || "-", size: 18, font: "Arial" })] })] })
+              ]
+            }),
+            new TableRow({
+              children: [
+                new TableCell({ width: { size: 2600, type: WidthType.DXA }, borders: borderNone, children: [new Paragraph({ children: [new TextRun({ text: "Düzenleme Tarihi:", bold: true, size: 18, font: "Arial" })] })] }),
+                new TableCell({ width: { size: 12798, type: WidthType.DXA }, columnSpan: 3, borders: borderNone, children: [new Paragraph({ children: [new TextRun({ text: tarih || "-", size: 18, font: "Arial" })] })] })
+              ]
+            })
+          ]
+        });
+
+        // 3. Ana Tablo
+        const colWidths = [2750, 4400, 1100, 1800, 1700, 1100, 1050, 750, 748];
+
+        const headerRow1 = new TableRow({
+          children: [
+            new TableCell({ width: { size: colWidths[0], type: WidthType.DXA }, rowSpan: 2, margins: cellMargins, borders: borderThin, shading: { fill: "F1F5F9" }, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Uzun Dönemli Amaçlar", bold: true, size: 17, font: "Arial" })] })] }),
+            new TableCell({ width: { size: colWidths[1], type: WidthType.DXA }, rowSpan: 2, margins: cellMargins, borders: borderThin, shading: { fill: "F1F5F9" }, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Kısa Dönemli Amaçlar", bold: true, size: 17, font: "Arial" })] })] }),
+            new TableCell({ width: { size: colWidths[2], type: WidthType.DXA }, rowSpan: 2, margins: cellMargins, borders: borderThin, shading: { fill: "F1F5F9" }, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Ölçüt*", bold: true, size: 17, font: "Arial" })] })] }),
+            new TableCell({ width: { size: colWidths[3], type: WidthType.DXA }, rowSpan: 2, margins: cellMargins, borders: borderThin, shading: { fill: "F1F5F9" }, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Öğretim Yöntem ve Teknikleri", bold: true, size: 17, font: "Arial" })] })] }),
+            new TableCell({ width: { size: colWidths[4], type: WidthType.DXA }, rowSpan: 2, margins: cellMargins, borders: borderThin, shading: { fill: "F1F5F9" }, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Kullanılacak Materyaller", bold: true, size: 17, font: "Arial" })] })] }),
+            new TableCell({ width: { size: colWidths[5], type: WidthType.DXA }, rowSpan: 2, margins: cellMargins, borders: borderThin, shading: { fill: "F1F5F9" }, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Başlama ve Bitiş Tarihi", bold: true, size: 17, font: "Arial" })] })] }),
+            new TableCell({ width: { size: colWidths[6] + colWidths[7] + colWidths[8], type: WidthType.DXA }, columnSpan: 3, margins: cellMargins, borders: borderThin, shading: { fill: "F1F5F9" }, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Ölçme – Değerlendirme", bold: true, size: 17, font: "Arial" })] })] })
+          ]
+        });
+
+        const headerRow2 = new TableRow({
+          children: [
+            new TableCell({ width: { size: colWidths[6], type: WidthType.DXA }, margins: cellMargins, borders: borderThin, shading: { fill: "F1F5F9" }, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Değerlendirme Yöntem ve Teknikleri", bold: true, size: 16, font: "Arial" })] })] }),
+            new TableCell({ width: { size: colWidths[7], type: WidthType.DXA }, margins: cellMargins, borders: borderThin, shading: { fill: "F1F5F9" }, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Değerlendirme Tarihleri", bold: true, size: 16, font: "Arial" })] })] }),
+            new TableCell({ width: { size: colWidths[8], type: WidthType.DXA }, margins: cellMargins, borders: borderThin, shading: { fill: "F1F5F9" }, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Performans (+ / -)", bold: true, size: 16, font: "Arial" })] })] })
+          ]
+        });
+
+        const dataRows = [];
+        satirlar.forEach(tr => {
+          const tds = tr.children;
+          if (tds.length < 9) return;
+
+          // UDA
+          const udaText = tds[0].textContent.trim();
+          const udaParagraph = new Paragraph({
+            children: [new TextRun({ text: udaText, bold: true, size: 17, font: "Arial" })]
+          });
+
+          // KDA (MEB ve Revize KDA'lar)
+          const kdaItems = tds[1].querySelectorAll(".kda-item");
+          const kdaParagraphs = [];
+          if (kdaItems.length > 0) {
+            kdaItems.forEach(item => {
+              const text = item.textContent.trim();
+              if (item.classList.contains("kda-sub") || text.startsWith("↳")) {
+                kdaParagraphs.push(new Paragraph({
+                  indent: { left: 240 },
+                  spacing: { after: 30 },
+                  children: [new TextRun({ text: text, color: "1E40AF", size: 17, font: "Arial" })]
+                }));
+              } else if (item.classList.contains("kda-meb")) {
+                kdaParagraphs.push(new Paragraph({
+                  spacing: { after: 30 },
+                  children: [new TextRun({ text: text, bold: true, color: "0F172A", size: 17, font: "Arial" })]
+                }));
+              } else if (item.classList.contains("kda-ozel")) {
+                kdaParagraphs.push(new Paragraph({
+                  spacing: { after: 30 },
+                  children: [new TextRun({ text: text, color: "0369A1", size: 17, font: "Arial" })]
+                }));
+              } else {
+                kdaParagraphs.push(new Paragraph({
+                  spacing: { after: 30 },
+                  children: [new TextRun({ text: text, size: 17, font: "Arial" })]
+                }));
+              }
+            });
+          } else {
+            const rawLines = tds[1].innerText.split("\n").map(l => l.trim()).filter(l => l.length > 0);
+            rawLines.forEach(l => {
+              kdaParagraphs.push(new Paragraph({
+                spacing: { after: 30 },
+                children: [new TextRun({ text: l, size: 17, font: "Arial" })]
+              }));
+            });
+          }
+          if (kdaParagraphs.length === 0) {
+            kdaParagraphs.push(new Paragraph({ children: [new TextRun({ text: "-", size: 17, font: "Arial" })] }));
+          }
+
+          const olcutText = tds[2].textContent.trim();
+          const yontemText = tds[3].textContent.trim();
+          const materyalText = tds[4].textContent.trim();
+          const sureText = tds[5].textContent.trim();
+          const degYontemText = tds[6].textContent.trim();
+          const degTarihText = tds[7].textContent.trim();
+          const perfText = tds[8].textContent.trim();
+
+          dataRows.push(new TableRow({
+            children: [
+              new TableCell({ width: { size: colWidths[0], type: WidthType.DXA }, margins: cellMargins, borders: borderThin, children: [udaParagraph] }),
+              new TableCell({ width: { size: colWidths[1], type: WidthType.DXA }, margins: cellMargins, borders: borderThin, children: kdaParagraphs }),
+              new TableCell({ width: { size: colWidths[2], type: WidthType.DXA }, margins: cellMargins, borders: borderThin, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: olcutText || "-", size: 17, font: "Arial" })] })] }),
+              new TableCell({ width: { size: colWidths[3], type: WidthType.DXA }, margins: cellMargins, borders: borderThin, children: [new Paragraph({ children: [new TextRun({ text: yontemText || "-", size: 17, font: "Arial" })] })] }),
+              new TableCell({ width: { size: colWidths[4], type: WidthType.DXA }, margins: cellMargins, borders: borderThin, children: [new Paragraph({ children: [new TextRun({ text: materyalText || "-", size: 17, font: "Arial" })] })] }),
+              new TableCell({ width: { size: colWidths[5], type: WidthType.DXA }, margins: cellMargins, borders: borderThin, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: sureText || "-", size: 17, font: "Arial" })] })] }),
+              new TableCell({ width: { size: colWidths[6], type: WidthType.DXA }, margins: cellMargins, borders: borderThin, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: degYontemText || "-", size: 17, font: "Arial" })] })] }),
+              new TableCell({ width: { size: colWidths[7], type: WidthType.DXA }, margins: cellMargins, borders: borderThin, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: degTarihText || "-", size: 17, font: "Arial" })] })] }),
+              new TableCell({ width: { size: colWidths[8], type: WidthType.DXA }, margins: cellMargins, borders: borderThin, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: perfText || "-", bold: true, size: 20, font: "Arial" })] })] })
+            ]
+          }));
+        });
+
+        const bepTable = new Table({
+          width: { size: 15398, type: WidthType.DXA },
+          rows: [headerRow1, headerRow2, ...dataRows]
+        });
+
+        // 4. İmzalar Tablosu
+        const sigColWidth = 5132;
+        const sigTable = new Table({
+          width: { size: 15398, type: WidthType.DXA },
+          borders: {
+            top: { style: BorderStyle.NONE },
+            bottom: { style: BorderStyle.NONE },
+            left: { style: BorderStyle.NONE },
+            right: { style: BorderStyle.NONE },
+            insideHorizontal: { style: BorderStyle.NONE },
+            insideVertical: { style: BorderStyle.NONE }
+          },
+          rows: [
+            new TableRow({
+              children: [
+                new TableCell({ width: { size: sigColWidth, type: WidthType.DXA }, borders: borderNone, children: [
+                  new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 360 }, children: [new TextRun({ text: "İmza", size: 18, font: "Arial" })] }),
+                  new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: ogrt || "______________________", bold: true, size: 18, font: "Arial" })] }),
+                  new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Ders Öğretmeni", bold: true, size: 17, font: "Arial" })] })
+                ]}),
+                new TableCell({ width: { size: sigColWidth, type: WidthType.DXA }, borders: borderNone, children: [
+                  new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 360 }, children: [new TextRun({ text: "İmza", size: 18, font: "Arial" })] }),
+                  new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: sinifOgrt || "______________________", bold: true, size: 18, font: "Arial" })] }),
+                  new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Sınıf Rehber Öğretmeni", bold: true, size: 17, font: "Arial" })] })
+                ]}),
+                new TableCell({ width: { size: sigColWidth, type: WidthType.DXA }, borders: borderNone, children: [
+                  new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 360 }, children: [new TextRun({ text: "İmza", size: 18, font: "Arial" })] }),
+                  new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: veli || "______________________", bold: true, size: 18, font: "Arial" })] }),
+                  new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Öğrenci Velisi", bold: true, size: 17, font: "Arial" })] })
+                ]})
+              ]
+            }),
+            new TableRow({
+              children: [
+                new TableCell({ width: { size: sigColWidth, type: WidthType.DXA }, borders: borderNone, children: [new Paragraph({ spacing: { after: 240 }, children: [] })] }),
+                new TableCell({ width: { size: sigColWidth, type: WidthType.DXA }, borders: borderNone, children: [new Paragraph({ spacing: { after: 240 }, children: [] })] }),
+                new TableCell({ width: { size: sigColWidth, type: WidthType.DXA }, borders: borderNone, children: [new Paragraph({ spacing: { after: 240 }, children: [] })] })
+              ]
+            }),
+            new TableRow({
+              children: [
+                new TableCell({ width: { size: sigColWidth, type: WidthType.DXA }, borders: borderNone, children: [
+                  new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 360 }, children: [new TextRun({ text: "İmza", size: 18, font: "Arial" })] }),
+                  new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: rehberOgrt || "______________________", bold: true, size: 18, font: "Arial" })] }),
+                  new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Rehber Öğretmen", bold: true, size: 17, font: "Arial" })] })
+                ]}),
+                new TableCell({ width: { size: sigColWidth, type: WidthType.DXA }, borders: borderNone, children: [new Paragraph({ children: [] })] }),
+                new TableCell({ width: { size: sigColWidth, type: WidthType.DXA }, borders: borderNone, children: [
+                  new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 360 }, children: [new TextRun({ text: "İmza", size: 18, font: "Arial" })] }),
+                  new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: mudurYrd || "______________________", bold: true, size: 18, font: "Arial" })] }),
+                  new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "BEP Birim BAŞKANI", bold: true, size: 17, font: "Arial" })] })
+                ]})
+              ]
+            })
+          ]
+        });
+
+        // 5. Dokümanı Oluştur ve İndir
+        const doc = new Document({
+          sections: [{
+            properties: {
+              page: {
+                size: {
+                  orientation: PageOrientation.LANDSCAPE
+                },
+                margin: { top: 720, bottom: 720, left: 720, right: 720 }
+              }
+            },
+            children: [
+              ...titles,
+              infoTable,
+              new Paragraph({ spacing: { after: 120 }, children: [] }),
+              bepTable,
+              new Paragraph({ spacing: { after: 260 }, children: [] }),
+              sigTable
+            ]
+          }]
+        });
+
+        try {
+          const blob = await Packer.toBlob(doc);
+          const dosyaAdi = "BEP_Plani_" + (ogrAd !== "-" ? ogrAd.replace(/\s+/g, '_') : "Ogrenci") + ".docx";
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = dosyaAdi;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+        } catch (exportErr) {
+          console.error("Word dışa aktarma hatası:", exportErr);
+          alert("Word dosyası oluşturulurken bir hata oluştu: " + exportErr.message);
+        }
       });
     }
   }
