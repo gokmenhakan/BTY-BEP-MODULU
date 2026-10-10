@@ -2117,9 +2117,35 @@
 
     if (elBtnYazdir) {
       elBtnYazdir.addEventListener("click", function() {
+        senkronizeEt();
+        const ogrAd = (document.getElementById("bep_ogrAd").value || "").trim();
+        const eskiBaslik = document.title;
+        const dosyaAdi = "BEP_Plani_" + (ogrAd ? ogrAd.replace(/\s+/g, '_') : "Ogrenci");
+        
+        document.title = dosyaAdi;
+
+        const restoreTitle = function() {
+          document.title = eskiBaslik;
+          window.removeEventListener("afterprint", restoreTitle);
+        };
+        window.addEventListener("afterprint", restoreTitle);
+
         window.print();
+
+        setTimeout(restoreTitle, 2000);
       });
     }
+
+    // Doğrudan Ctrl+P veya Tarayıcı Menüsünden Yazdırıldığında da Dosya Adını Öğrenci İsmi Yap
+    window.addEventListener("beforeprint", function() {
+      senkronizeEt();
+      const ogrAd = (document.getElementById("bep_ogrAd").value || "").trim();
+      document.title = "BEP_Plani_" + (ogrAd ? ogrAd.replace(/\s+/g, '_') : "Ogrenci");
+    });
+
+    window.addEventListener("afterprint", function() {
+      document.title = "Bilişim Teknolojileri ve Yazılım BEP Modülü (Temel / Uygulamalı Düzey)";
+    });
 
     if (elBtnExcel) {
       elBtnExcel.addEventListener("click", function() {
