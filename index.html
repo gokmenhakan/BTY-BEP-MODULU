@@ -564,6 +564,32 @@
 </div>
 
 <script>
+  function escapeHtml(text) {
+    if (!text) return "";
+    return String(text)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  function createCheckboxItem(kazanimMetni, onchangeFn) {
+    const lbl = document.createElement("label");
+    const chk = document.createElement("input");
+    chk.type = "checkbox";
+    chk.value = kazanimMetni;
+    chk.addEventListener("change", onchangeFn);
+
+    const span = document.createElement("span");
+    span.appendChild(document.createTextNode(kazanimMetni));
+
+    lbl.appendChild(chk);
+    lbl.appendChild(document.createTextNode(" "));
+    lbl.appendChild(span);
+    return lbl;
+  }
+
   // ===================== DEĞERLENDİRME ÇOKLU SEÇİM =====================
   let expandedDeg = false;
   const triggerDeg = document.getElementById("selectBoxTrigger");
@@ -1041,9 +1067,7 @@
 
         const kdalar = item.kda;
         kdalar.forEach(function(kazanimMetni) {
-          const lbl = document.createElement("label");
-          lbl.innerHTML = `<input type="checkbox" value="${kazanimMetni}" onchange="guncelleKdaLabel()"> <span>${kazanimMetni}</span>`;
-          checkboxesKda.appendChild(lbl);
+          checkboxesKda.appendChild(createCheckboxItem(kazanimMetni, guncelleKdaLabel));
         });
         document.getElementById('multiSelectKdaLabel').textContent = "Kazanım Seçiniz (0 Seçildi)";
       } else {
@@ -1085,19 +1109,19 @@
       const tbody = document.getElementById("bep_govde");
 
       // KDA'ları tek hücre içinde madde işaretiyle alt alta diz
-      const kdaHtml = seciliKdalar.map(item => `<div class="kda-item">• ${item}</div>`).join('');
+      const kdaHtml = seciliKdalar.map(item => `<div class="kda-item">• ${escapeHtml(item)}</div>`).join('');
 
       const tr = document.createElement("tr");
       tr.innerHTML = `
-        <td class="text-left">${secilenUda}</td>
+        <td class="text-left">${escapeHtml(secilenUda)}</td>
         <td class="text-left">${kdaHtml}</td>
-        <td>${olcut}</td>
-        <td class="text-left">${yontem}</td>
-        <td class="text-left">${materyal}</td>
-        <td>${sure}</td>
-        <td>${degYontem}</td>
-        <td>${degTarih}</td>
-        <td style="font-weight: bold; font-size: 11pt;">${performans}</td>
+        <td>${escapeHtml(olcut)}</td>
+        <td class="text-left">${escapeHtml(yontem)}</td>
+        <td class="text-left">${escapeHtml(materyal)}</td>
+        <td>${escapeHtml(sure)}</td>
+        <td>${escapeHtml(degYontem)}</td>
+        <td>${escapeHtml(degTarih)}</td>
+        <td style="font-weight: bold; font-size: 11pt;">${escapeHtml(performans)}</td>
         <td class="bep-no-print">
           <button type="button" class="btn btn-del">Sil</button>
         </td>

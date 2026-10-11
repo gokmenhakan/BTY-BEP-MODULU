@@ -620,6 +620,44 @@
 </div>
 
 <script>
+  function escapeHtml(text) {
+    if (!text) return "";
+    return String(text)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  function createCheckboxItem(kazanimMetni, onchangeFn, isCustom) {
+    const lbl = document.createElement("label");
+    if (isCustom) {
+      lbl.style.background = "#eff6ff";
+      lbl.style.borderLeft = "3px solid #0284c7";
+    }
+    const chk = document.createElement("input");
+    chk.type = "checkbox";
+    chk.value = kazanimMetni;
+    if (isCustom) {
+      chk.checked = true;
+    }
+    chk.addEventListener("change", onchangeFn);
+
+    const span = document.createElement("span");
+    if (isCustom) {
+      const strong = document.createElement("strong");
+      strong.textContent = "[Özel] ";
+      span.appendChild(strong);
+    }
+    span.appendChild(document.createTextNode(kazanimMetni));
+
+    lbl.appendChild(chk);
+    lbl.appendChild(document.createTextNode(" "));
+    lbl.appendChild(span);
+    return lbl;
+  }
+
   // ===================== DEĞERLENDİRME ÇOKLU SEÇİM =====================
   let expandedDeg = false;
   const triggerDeg = document.getElementById("selectBoxTrigger");
@@ -1783,18 +1821,14 @@
         // 1. Revize Edilmiş Kısa Dönemli Amaçlar (Somut / Temel Düzey)
         const kdalar = item.kda || [];
         kdalar.forEach(function(kazanimMetni) {
-          const lbl = document.createElement("label");
-          lbl.innerHTML = `<input type="checkbox" value="${kazanimMetni}" onchange="guncelleKdaLabel()"> <span>${kazanimMetni}</span>`;
-          checkboxesKda.appendChild(lbl);
+          checkboxesKda.appendChild(createCheckboxItem(kazanimMetni, guncelleKdaLabel, false));
         });
         document.getElementById('multiSelectKdaLabel').textContent = "Revize KDA Seçiniz (0 Seçildi)";
 
         // 2. Resmî Orijinal MEB Kazanımları (Revize Edilmemiş)
         const mebKdalar = item.meb_kda || [];
         mebKdalar.forEach(function(kazanimMetni) {
-          const lbl = document.createElement("label");
-          lbl.innerHTML = `<input type="checkbox" value="${kazanimMetni}" onchange="guncelleMebLabel()"> <span>${kazanimMetni}</span>`;
-          checkboxesMeb.appendChild(lbl);
+          checkboxesMeb.appendChild(createCheckboxItem(kazanimMetni, guncelleMebLabel, false));
         });
         document.getElementById('multiSelectMebLabel').textContent = "MEB Kazanımı Seçiniz (0 Seçildi)";
       } else {
@@ -1921,26 +1955,27 @@
 
       // Seçilen kazanımları: Önce MEB üstte, hemen altında ilişkili KDA olacak şekilde diz
       const kdaHtml = siraliKdalar.map(item => {
+        const safeMetin = escapeHtml(item.metin);
         if (item.tip === 'kda_iliskili') {
-          return `<div class="kda-item kda-sub" style="padding-left: 14px; color: #1e40af;">↳ ${item.metin}</div>`;
+          return `<div class="kda-item kda-sub" style="padding-left: 14px; color: #1e40af;">↳ ${safeMetin}</div>`;
         } else if (item.tip === 'meb') {
-          return `<div class="kda-item kda-meb" style="font-weight: 600;">• ${item.metin}</div>`;
+          return `<div class="kda-item kda-meb" style="font-weight: 600;">• ${safeMetin}</div>`;
         } else {
-          return `<div class="kda-item">• ${item.metin}</div>`;
+          return `<div class="kda-item">• ${safeMetin}</div>`;
         }
       }).join('');
 
       const tr = document.createElement("tr");
       tr.innerHTML = `
-        <td class="text-left">${secilenUda}</td>
+        <td class="text-left">${escapeHtml(secilenUda)}</td>
         <td class="text-left">${kdaHtml}</td>
-        <td>${olcut}</td>
-        <td class="text-left">${yontem}</td>
-        <td class="text-left">${materyal}</td>
-        <td>${sure}</td>
-        <td>${degYontem}</td>
-        <td>${degTarih}</td>
-        <td style="font-weight: bold; font-size: 11pt;">${performans}</td>
+        <td>${escapeHtml(olcut)}</td>
+        <td class="text-left">${escapeHtml(yontem)}</td>
+        <td class="text-left">${escapeHtml(materyal)}</td>
+        <td>${escapeHtml(sure)}</td>
+        <td>${escapeHtml(degYontem)}</td>
+        <td>${escapeHtml(degTarih)}</td>
+        <td style="font-weight: bold; font-size: 11pt;">${escapeHtml(performans)}</td>
         <td class="bep-no-print">
           <button type="button" class="btn btn-del">Sil</button>
         </td>
