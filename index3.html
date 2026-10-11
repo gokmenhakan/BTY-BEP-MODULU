@@ -45,6 +45,27 @@
       gap: 12px;
       margin-bottom: 12px;
     }
+    /* Form Gruplama Kapsayıcıları (Fieldset / Legend) */
+    fieldset.bep-group-box {
+      border: 1px solid #cbd5e1;
+      background: #f8fafc;
+      border-radius: 8px;
+      padding: 14px 16px 14px 16px;
+      margin: 0 0 16px 0;
+    }
+    legend.bep-group-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1e3a8a;
+      background: #ffffff;
+      padding: 4px 12px;
+      border-radius: 6px;
+      border: 1px solid #cbd5e1;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
     label {
       font-size: 12px;
       font-weight: bold;
@@ -285,219 +306,236 @@
     </div>
     <h3 style="margin-top:0; color:#1e3a8a;">Bilişim Teknolojileri ve Yazılım Dersi BEP Hazırlama Modülü <span style="font-size:13px; color:#15803d; font-weight:normal;">(Maarif Modeli & UDA Sürümü)</span></h3>
     
-    <div class="bep-grid">
-      <div>
-        <label>Öğrenci Adı Soyadı</label>
-        <input type="text" id="bep_ogrAd" placeholder="Örn: Ahmet Yılmaz">
-      </div>
-      <div>
-        <label>Sınıfı / Şubesi</label>
-        <input type="text" id="bep_sinif" placeholder="Örn: 9/A veya 10/B">
-      </div>
-      <div>
-        <label>Öğrenci Numarası</label>
-        <input type="text" id="bep_no" placeholder="Örn: 450">
-      </div>
-      <div>
-        <label>Ders Öğretmeni</label>
-        <input type="text" id="bep_ogretmen" value="Hakan GÖKMEN">
-      </div>
-      <div>
-        <label>Sınıf Rehber Öğretmeni</label>
-        <input type="text" id="bep_sinifOgretmeni" placeholder="Örn: Ad Soyad">
-      </div>
-      <div>
-        <label>Öğrenci Velisi</label>
-        <input type="text" id="bep_veli" placeholder="Örn: Veli Ad Soyad">
-      </div>
-      <div>
-        <label>Rehber Öğretmen</label>
-        <input type="text" id="bep_rehberOgretmen" placeholder="Örn: Ad Soyad">
-      </div>
-      <div>
-        <label>BEP Birim Başkanı</label>
-        <input type="text" id="bep_mudurYrd" value="Hasan KÖSEOĞLU">
-      </div>
-      <div>
-        <label>Eğitim-Öğretim Yılı</label>
-        <input type="text" id="bep_yil" value="2026-2027">
-      </div>
-      <div>
-        <label>Ders Seçiniz</label>
-        <select id="bep_ders">
-          <option value="Bilişim Teknolojileri ve Yazılım 9.Sınıf" selected>Bilişim Teknolojileri ve Yazılım 9.Sınıf</option>
-          <option value="Bilişim Teknolojileri ve Yazılım 10.Sınıf">Bilişim Teknolojileri ve Yazılım 10.Sınıf</option>
-          <option value="Bilişim Teknolojileri ve Yazılım 11.Sınıf">Bilişim Teknolojileri ve Yazılım 11.Sınıf</option>
-        </select>
-      </div>
-      <div>
-        <label>Modül Seçiniz</label>
-        <select id="bep_modul">
-          <option value="9_algoritma" selected>Programlamaya Giriş ve Algoritma</option>
-          <option value="10_python">Programlama Dilleri (Python)</option>
-          <option value="robotik_kodlama">Robotik Kodlama</option>
-          <option value="mobil_uygulama">Mobil Uygulama Geliştirme</option>
-          <option value="java">Programlama Dilleri (Java)</option>
-          <option value="cpp">Programlama Dilleri (C++)</option>
-          <option value="csharp">Programlama Dilleri (C#)</option>
-          <option value="dart">Programlama Dilleri (Dart)</option>
-          <option value="php">Programlama Dilleri (PHP)</option>
-          <option value="javascript">Programlama Dilleri (JavaScript)</option>
-          <option value="yapay_zeka">Yapay Zekâ Uygulamaları</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="bep-grid" style="margin-top: 15px;">
-      <div style="grid-column: span 2;">
-        <label>Uzun Dönemli Amaç (UDA) / Maarif Öğrenme Çıktısı Seçiniz</label>
-        <select id="bep_uda">
-          <option value="">Önce modül seçiniz...</option>
-        </select>
-      </div>
-
-      <div style="grid-column: span 2;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; flex-wrap: wrap; gap: 8px;">
-          <label style="margin: 0; font-weight: 700;">Uzun Dönemli Amaç (UDA) Cümlesi</label>
-          <div style="font-size: 12px; display: flex; gap: 14px; background: #f8fafc; padding: 4px 10px; border-radius: 6px; border: 1px solid #cbd5e1;">
-            <label style="cursor: pointer; color: #0369a1; font-weight: 600; margin: 0; display: flex; align-items: center; gap: 4px;">
-              <input type="radio" name="bep_uda_tipi" value="bep" checked> ⭐ BEP Uyarlaması (Ölçülebilir Eylem)
-            </label>
-            <label style="cursor: pointer; color: #15803d; font-weight: 600; margin: 0; display: flex; align-items: center; gap: 4px;">
-              <input type="radio" name="bep_uda_tipi" value="maarif"> 📜 Resmî Maarif Çıktısı (TYMM / -ebilme)
-            </label>
-          </div>
+    <!-- 1. GRUP: KİŞİSEL BİLGİLER VE KURUL ÜYELERİ -->
+    <fieldset class="bep-group-box">
+      <legend class="bep-group-title">👤 Kişisel Bilgiler & Kurul Üyeleri</legend>
+      <div class="bep-grid">
+        <div>
+          <label>Öğrenci Adı Soyadı</label>
+          <input type="text" id="bep_ogrAd" placeholder="Örn: Ahmet Yılmaz">
         </div>
-        <textarea id="bep_uda_metin" rows="2" placeholder="UDA seçildiğinde otomatik doldurulur..."></textarea>
-      </div>
-      
-      <!-- 1. KISA DÖNEMLİ AMAÇLAR (REVİZE EDİLMİŞ - ÇOKLU SEÇİM) -->
-      <div style="grid-column: span 2;">
-        <label style="color: #0369a1; font-weight: 700;">⭐ Revize Edilmiş KDA (Temel / Somut Düzey)</label>
-        <div class="multiselect-container">
-          <div class="selectBox" id="selectBoxKdaTrigger">
-            <select>
-              <option id="multiSelectKdaLabel">Önce UDA seçiniz...</option>
-            </select>
-            <div class="overSelect"></div>
-          </div>
-          <div id="checkboxesKdaArea" class="checkboxes-panel">
-            <div style="padding: 6px; font-size: 12px; color: #64748b;">Önce yukarıdan bir UDA seçiniz.</div>
-          </div>
+        <div>
+          <label>Sınıfı / Şubesi</label>
+          <input type="text" id="bep_sinif" placeholder="Örn: 9/A veya 10/B">
+        </div>
+        <div>
+          <label>Öğrenci Numarası</label>
+          <input type="text" id="bep_no" placeholder="Örn: 450">
+        </div>
+        <div>
+          <label>Ders Öğretmeni</label>
+          <input type="text" id="bep_ogretmen" value="Hakan GÖKMEN">
+        </div>
+        <div>
+          <label>Sınıf Rehber Öğretmeni</label>
+          <input type="text" id="bep_sinifOgretmeni" placeholder="Örn: Ad Soyad">
+        </div>
+        <div>
+          <label>Öğrenci Velisi</label>
+          <input type="text" id="bep_veli" placeholder="Örn: Veli Ad Soyad">
+        </div>
+        <div>
+          <label>Rehber Öğretmen</label>
+          <input type="text" id="bep_rehberOgretmen" placeholder="Örn: Ad Soyad">
+        </div>
+        <div>
+          <label>BEP Birim Başkanı</label>
+          <input type="text" id="bep_mudurYrd" value="Hasan KÖSEOĞLU">
         </div>
       </div>
+    </fieldset>
 
-      <!-- 2. RESMÎ MEB KAZANIMLARI (REVİZE EDİLMEYEN ORİJİNAL KDA - ÇOKLU SEÇİM) -->
-      <div style="grid-column: span 2;">
-        <label style="color: #b45309; font-weight: 700;">📜 Resmî MEB Kazanımları (Orijinal / Revize Edilmemiş)</label>
-        <div class="multiselect-container">
-          <div class="selectBox" id="selectBoxMebTrigger">
-            <select>
-              <option id="multiSelectMebLabel">Önce UDA seçiniz...</option>
-            </select>
-            <div class="overSelect"></div>
+    <!-- 2. GRUP: DERS VE MÜFREDAT BİLGİLERİ -->
+    <fieldset class="bep-group-box">
+      <legend class="bep-group-title">📚 Ders ve Müfredat Bilgileri</legend>
+      <div class="bep-grid">
+        <div>
+          <label>Eğitim-Öğretim Yılı</label>
+          <input type="text" id="bep_yil" value="2026-2027">
+        </div>
+        <div>
+          <label>Ders Seçiniz</label>
+          <select id="bep_ders">
+            <option value="Bilişim Teknolojileri ve Yazılım 9.Sınıf" selected>Bilişim Teknolojileri ve Yazılım 9.Sınıf</option>
+            <option value="Bilişim Teknolojileri ve Yazılım 10.Sınıf">Bilişim Teknolojileri ve Yazılım 10.Sınıf</option>
+            <option value="Bilişim Teknolojileri ve Yazılım 11.Sınıf">Bilişim Teknolojileri ve Yazılım 11.Sınıf</option>
+          </select>
+        </div>
+        <div>
+          <label>Modül Seçiniz</label>
+          <select id="bep_modul">
+            <option value="9_algoritma" selected>Programlamaya Giriş ve Algoritma</option>
+            <option value="10_python">Programlama Dilleri (Python)</option>
+            <option value="robotik_kodlama">Robotik Kodlama</option>
+            <option value="mobil_uygulama">Mobil Uygulama Geliştirme</option>
+            <option value="java">Programlama Dilleri (Java)</option>
+            <option value="cpp">Programlama Dilleri (C++)</option>
+            <option value="csharp">Programlama Dilleri (C#)</option>
+            <option value="dart">Programlama Dilleri (Dart)</option>
+            <option value="php">Programlama Dilleri (PHP)</option>
+            <option value="javascript">Programlama Dilleri (JavaScript)</option>
+            <option value="yapay_zeka">Yapay Zekâ Uygulamaları</option>
+          </select>
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- 3. GRUP: AMAÇ VE KAZANIM SEÇİMİ (UDA & KDA) -->
+    <fieldset class="bep-group-box">
+      <legend class="bep-group-title">🎯 Amaç ve Kazanım Seçimi (UDA & KDA)</legend>
+      <div class="bep-grid">
+        <div style="grid-column: span 2;">
+          <label>Uzun Dönemli Amaç (UDA) / Maarif Öğrenme Çıktısı Seçiniz</label>
+          <select id="bep_uda">
+            <option value="">Önce modül seçiniz...</option>
+          </select>
+        </div>
+
+        <div style="grid-column: span 2;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; flex-wrap: wrap; gap: 8px;">
+            <label style="margin: 0; font-weight: 700;">Uzun Dönemli Amaç (UDA) Cümlesi</label>
+            <div style="font-size: 12px; display: flex; gap: 14px; background: #f8fafc; padding: 4px 10px; border-radius: 6px; border: 1px solid #cbd5e1;">
+              <label style="cursor: pointer; color: #0369a1; font-weight: 600; margin: 0; display: flex; align-items: center; gap: 4px;">
+                <input type="radio" name="bep_uda_tipi" value="bep" checked> ⭐ BEP Uyarlaması (Ölçülebilir Eylem)
+              </label>
+              <label style="cursor: pointer; color: #15803d; font-weight: 600; margin: 0; display: flex; align-items: center; gap: 4px;">
+                <input type="radio" name="bep_uda_tipi" value="maarif"> 📜 Resmî Maarif Çıktısı (TYMM / -ebilme)
+              </label>
+            </div>
           </div>
-          <div id="checkboxesMebArea" class="checkboxes-panel">
-            <div style="padding: 6px; font-size: 12px; color: #64748b;">Önce yukarıdan bir UDA seçiniz.</div>
+          <textarea id="bep_uda_metin" rows="2" placeholder="UDA seçildiğinde otomatik doldurulur..."></textarea>
+        </div>
+        
+        <!-- 1. KISA DÖNEMLİ AMAÇLAR (REVİZE EDİLMİŞ - ÇOKLU SEÇİM) -->
+        <div style="grid-column: span 2;">
+          <label style="color: #0369a1; font-weight: 700;">⭐ Revize Edilmiş KDA (Temel / Somut Düzey)</label>
+          <div class="multiselect-container">
+            <div class="selectBox" id="selectBoxKdaTrigger">
+              <select>
+                <option id="multiSelectKdaLabel">Önce UDA seçiniz...</option>
+              </select>
+              <div class="overSelect"></div>
+            </div>
+            <div id="checkboxesKdaArea" class="checkboxes-panel">
+              <div style="padding: 6px; font-size: 12px; color: #64748b;">Önce yukarıdan bir UDA seçiniz.</div>
+            </div>
           </div>
+        </div>
+
+        <!-- 2. RESMÎ MEB KAZANIMLARI (REVİZE EDİLMEYEN ORİJİNAL KDA - ÇOKLU SEÇİM) -->
+        <div style="grid-column: span 2;">
+          <label style="color: #b45309; font-weight: 700;">📜 Resmî MEB Kazanımları (Orijinal / Revize Edilmemiş)</label>
+          <div class="multiselect-container">
+            <div class="selectBox" id="selectBoxMebTrigger">
+              <select>
+                <option id="multiSelectMebLabel">Önce UDA seçiniz...</option>
+              </select>
+              <div class="overSelect"></div>
+            </div>
+            <div id="checkboxesMebArea" class="checkboxes-panel">
+              <div style="padding: 6px; font-size: 12px; color: #64748b;">Önce yukarıdan bir UDA seçiniz.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. KAZANIM EKLE (MANUEL KAZANIM GİRİŞİ) -->
+        <div style="grid-column: span 2;">
+          <label style="color: #0f172a; font-weight: 700;">✍️ Kazanım Ekle</label>
+          <div style="display: flex; gap: 8px;">
+            <input type="text" id="bep_manuel_kazanim" placeholder="Örn: 1.8. Öğrenci kendi belirlediği bir problemi çözer (Manuel / özel kazanım yazınız)...">
+            <button type="button" class="btn" id="bep_btn_manuel_ekle" style="background: #0284c7; color: #ffffff; white-space: nowrap; padding: 8px 14px; font-size: 12px;">+ Listeye Ekle</button>
+          </div>
+          <small style="color: #64748b; font-size: 11px; margin-top: 3px; display: block;">İpucu: Yazdığınız kazanımı '+ Listeye Ekle' butonuyla yukarıdaki listeye dahil edebilir veya doğrudan aşağıdaki '+ Seçilen Amacı Plana Ekle' butonuna basarak plana aktarabilirsiniz.</small>
+        </div>
+
+        <div>
+          <label>Ölçüt*</label>
+          <select id="bep_degerlendirme">
+            <option value="%20 (1/5)">%20 (1/5)</option>
+            <option value="%40 (2/5)">%40 (2/5)</option>
+            <option value="%60 (3/5)">%60 (3/5)</option>
+            <option value="%80 (4/5)" selected>%80 (4/5)</option>
+            <option value="%100 (5/5)">%100 (5/5)</option>
+          </select>
+        </div>
+        <div>
+          <label>Öğretim Yöntem ve Teknikleri</label>
+          <input type="text" id="bep_yontem" value="Anlatım, Soru-Cevap, Gösterip Yaptırma, Takım/Grup Çalışması, Akran Öğrenmesi, Örnek Olay İncelemesi, Problem Çözme">
+        </div>
+        <div>
+          <label>Kullanılacak Materyaller</label>
+          <input type="text" id="bep_materyal" value="Ders Kitabı, Bilgisayar, Etkileşimli Tahta, Flowgorithm / Kodlama Araçları">
+        </div>
+        <div>
+          <label>Başlama Tarihi</label>
+          <select id="bep_baslamaAy">
+            <option value="Eylül">Eylül</option>
+            <option value="Ekim" selected>Ekim</option>
+            <option value="Kasım">Kasım</option>
+            <option value="Aralık">Aralık</option>
+            <option value="Ocak">Ocak</option>
+            <option value="Şubat">Şubat</option>
+            <option value="Mart">Mart</option>
+            <option value="Nisan">Nisan</option>
+            <option value="Mayıs">Mayıs</option>
+            <option value="Haziran">Haziran</option>
+            <option value="Temmuz">Temmuz</option>
+            <option value="Ağustos">Ağustos</option>
+          </select>
+        </div>
+        <div>
+          <label>Bitiş Tarihi</label>
+          <select id="bep_bitisAy">
+            <option value="Eylül">Eylül</option>
+            <option value="Ekim">Ekim</option>
+            <option value="Kasım">Kasım</option>
+            <option value="Aralık">Aralık</option>
+            <option value="Ocak" selected>Ocak</option>
+            <option value="Şubat">Şubat</option>
+            <option value="Mart">Mart</option>
+            <option value="Nisan">Nisan</option>
+            <option value="Mayıs">Mayıs</option>
+            <option value="Haziran">Haziran</option>
+            <option value="Temmuz">Temmuz</option>
+            <option value="Ağustos">Ağustos</option>
+          </select>
+        </div>
+        <div>
+          <label>Değ. Yöntem ve Teknikleri (Çoklu Seçim)</label>
+          <div class="multiselect-container">
+            <div class="selectBox" id="selectBoxTrigger">
+              <select>
+                <option id="multiSelectLabel">Gözlem formu</option>
+              </select>
+              <div class="overSelect"></div>
+            </div>
+            <div id="checkboxesArea" class="checkboxes-panel">
+              <label><input type="checkbox" value="Gözlem formu" checked onchange="guncelleSecimLabel()"> Gözlem formu</label>
+              <label><input type="checkbox" value="Performans görevi" onchange="guncelleSecimLabel()"> Performans görevi</label>
+              <label><input type="checkbox" value="Görüşme formu" onchange="guncelleSecimLabel()"> Görüşme formu</label>
+              <label><input type="checkbox" value="Çalışma kâğıdı" onchange="guncelleSecimLabel()"> Çalışma kâğıdı</label>
+              <label><input type="checkbox" value="Kontrol listesi" onchange="guncelleSecimLabel()"> Kontrol listesi</label>
+            </div>
+          </div>
+        </div>
+        <div>
+          <label>Değerlendirme Tarihleri</label>
+          <input type="text" id="bep_degTarih" value="" placeholder="Tarih giriniz...">
+        </div>
+        <div>
+          <label>Performans Yeterli (+) / Geliştirilmeli (-)</label>
+          <select id="bep_performans">
+            <option value="" selected>Boş Bırak</option>
+            <option value="( + )">Yeterli ( + )</option>
+            <option value="( - )">Geliştirilmeli ( - )</option>
+          </select>
         </div>
       </div>
 
-      <!-- 3. KAZANIM EKLE (MANUEL KAZANIM GİRİŞİ) -->
-      <div style="grid-column: span 2;">
-        <label style="color: #0f172a; font-weight: 700;">✍️ Kazanım Ekle</label>
-        <div style="display: flex; gap: 8px;">
-          <input type="text" id="bep_manuel_kazanim" placeholder="Örn: 1.8. Öğrenci kendi belirlediği bir problemi çözer (Manuel / özel kazanım yazınız)...">
-          <button type="button" class="btn" id="bep_btn_manuel_ekle" style="background: #0284c7; color: #ffffff; white-space: nowrap; padding: 8px 14px; font-size: 12px;">+ Listeye Ekle</button>
-        </div>
-        <small style="color: #64748b; font-size: 11px; margin-top: 3px; display: block;">İpucu: Yazdığınız kazanımı '+ Listeye Ekle' butonuyla yukarıdaki listeye dahil edebilir veya doğrudan aşağıdaki '+ Seçilen Amacı Plana Ekle' butonuna basarak plana aktarabilirsiniz.</small>
+      <div style="margin-top: 15px; text-align: right;">
+        <button type="button" class="btn btn-add" id="bep_btn_ekle">+ Seçilen Amacı Plana Ekle</button>
       </div>
-
-      <div>
-        <label>Ölçüt*</label>
-        <select id="bep_degerlendirme">
-          <option value="%20 (1/5)">%20 (1/5)</option>
-          <option value="%40 (2/5)">%40 (2/5)</option>
-          <option value="%60 (3/5)">%60 (3/5)</option>
-          <option value="%80 (4/5)" selected>%80 (4/5)</option>
-          <option value="%100 (5/5)">%100 (5/5)</option>
-        </select>
-      </div>
-      <div>
-        <label>Öğretim Yöntem ve Teknikleri</label>
-        <input type="text" id="bep_yontem" value="Anlatım, Soru-Cevap, Gösterip Yaptırma, Takım/Grup Çalışması, Akran Öğrenmesi, Örnek Olay İncelemesi, Problem Çözme">
-      </div>
-      <div>
-        <label>Kullanılacak Materyaller</label>
-        <input type="text" id="bep_materyal" value="Ders Kitabı, Bilgisayar, Etkileşimli Tahta, Flowgorithm / Kodlama Araçları">
-      </div>
-      <div>
-        <label>Başlama Tarihi</label>
-        <select id="bep_baslamaAy">
-          <option value="Eylül">Eylül</option>
-          <option value="Ekim" selected>Ekim</option>
-          <option value="Kasım">Kasım</option>
-          <option value="Aralık">Aralık</option>
-          <option value="Ocak">Ocak</option>
-          <option value="Şubat">Şubat</option>
-          <option value="Mart">Mart</option>
-          <option value="Nisan">Nisan</option>
-          <option value="Mayıs">Mayıs</option>
-          <option value="Haziran">Haziran</option>
-          <option value="Temmuz">Temmuz</option>
-          <option value="Ağustos">Ağustos</option>
-        </select>
-      </div>
-      <div>
-        <label>Bitiş Tarihi</label>
-        <select id="bep_bitisAy">
-          <option value="Eylül">Eylül</option>
-          <option value="Ekim">Ekim</option>
-          <option value="Kasım">Kasım</option>
-          <option value="Aralık">Aralık</option>
-          <option value="Ocak" selected>Ocak</option>
-          <option value="Şubat">Şubat</option>
-          <option value="Mart">Mart</option>
-          <option value="Nisan">Nisan</option>
-          <option value="Mayıs">Mayıs</option>
-          <option value="Haziran">Haziran</option>
-          <option value="Temmuz">Temmuz</option>
-          <option value="Ağustos">Ağustos</option>
-        </select>
-      </div>
-      <div>
-        <label>Değ. Yöntem ve Teknikleri (Çoklu Seçim)</label>
-        <div class="multiselect-container">
-          <div class="selectBox" id="selectBoxTrigger">
-            <select>
-              <option id="multiSelectLabel">Gözlem formu</option>
-            </select>
-            <div class="overSelect"></div>
-          </div>
-          <div id="checkboxesArea" class="checkboxes-panel">
-            <label><input type="checkbox" value="Gözlem formu" checked onchange="guncelleSecimLabel()"> Gözlem formu</label>
-            <label><input type="checkbox" value="Performans görevi" onchange="guncelleSecimLabel()"> Performans görevi</label>
-            <label><input type="checkbox" value="Görüşme formu" onchange="guncelleSecimLabel()"> Görüşme formu</label>
-            <label><input type="checkbox" value="Çalışma kâğıdı" onchange="guncelleSecimLabel()"> Çalışma kâğıdı</label>
-            <label><input type="checkbox" value="Kontrol listesi" onchange="guncelleSecimLabel()"> Kontrol listesi</label>
-          </div>
-        </div>
-      </div>
-      <div>
-        <label>Değerlendirme Tarihleri</label>
-        <input type="text" id="bep_degTarih" value="" placeholder="Tarih giriniz...">
-      </div>
-      <div>
-        <label>Performans Yeterli (+) / Geliştirilmeli (-)</label>
-        <select id="bep_performans">
-          <option value="" selected>Boş Bırak</option>
-          <option value="( + )">Yeterli ( + )</option>
-          <option value="( - )">Geliştirilmeli ( - )</option>
-        </select>
-      </div>
-    </div>
-
-    <button type="button" class="btn btn-add" id="bep_btn_ekle">+ Seçilen Amacı Plana Ekle</button>
+    </fieldset>
   </div>
 
   <!-- YAZDIRILABİLİR MEB BEP FORMU (ORTALANMIŞ YATAY ÇIKTI ALANI) -->

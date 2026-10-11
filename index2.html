@@ -45,6 +45,27 @@
       gap: 12px;
       margin-bottom: 12px;
     }
+    /* Form Gruplama Kapsayıcıları (Fieldset / Legend) */
+    fieldset.bep-group-box {
+      border: 1px solid #cbd5e1;
+      background: #f8fafc;
+      border-radius: 8px;
+      padding: 14px 16px 14px 16px;
+      margin: 0 0 16px 0;
+    }
+    legend.bep-group-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1e3a8a;
+      background: #ffffff;
+      padding: 4px 12px;
+      border-radius: 6px;
+      border: 1px solid #cbd5e1;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
     label {
       font-size: 12px;
       font-weight: bold;
@@ -285,70 +306,84 @@
     </div>
     <h3 style="margin-top:0; color:#1e3a8a;">Bilişim Teknolojileri ve Yazılım Dersi BEP Hazırlama Modülü <span style="font-size:13px; color:#d97706; font-weight:normal;">(Temel / Uygulamalı Düzey)</span></h3>
     
-    <div class="bep-grid">
-      <div>
-        <label>Öğrenci Adı Soyadı</label>
-        <input type="text" id="bep_ogrAd" placeholder="Örn: Ahmet Yılmaz">
+    <!-- 1. GRUP: KİŞİSEL BİLGİLER VE KURUL ÜYELERİ -->
+    <fieldset class="bep-group-box">
+      <legend class="bep-group-title">👤 Kişisel Bilgiler & Kurul Üyeleri</legend>
+      <div class="bep-grid">
+        <div>
+          <label>Öğrenci Adı Soyadı</label>
+          <input type="text" id="bep_ogrAd" placeholder="Örn: Ahmet Yılmaz">
+        </div>
+        <div>
+          <label>Sınıfı / Şubesi</label>
+          <input type="text" id="bep_sinif" placeholder="Örn: 9/A veya 10/B">
+        </div>
+        <div>
+          <label>Öğrenci Numarası</label>
+          <input type="text" id="bep_no" placeholder="Örn: 450">
+        </div>
+        <div>
+          <label>Ders Öğretmeni</label>
+          <input type="text" id="bep_ogretmen" value="Hakan GÖKMEN">
+        </div>
+        <div>
+          <label>Sınıf Rehber Öğretmeni</label>
+          <input type="text" id="bep_sinifOgretmeni" placeholder="Örn: Ad Soyad">
+        </div>
+        <div>
+          <label>Öğrenci Velisi</label>
+          <input type="text" id="bep_veli" placeholder="Örn: Veli Ad Soyad">
+        </div>
+        <div>
+          <label>Rehber Öğretmen</label>
+          <input type="text" id="bep_rehberOgretmen" placeholder="Örn: Ad Soyad">
+        </div>
+        <div>
+          <label>BEP Birim Başkanı</label>
+          <input type="text" id="bep_mudurYrd" value="Hasan KÖSEOĞLU">
+        </div>
       </div>
-      <div>
-        <label>Sınıfı / Şubesi</label>
-        <input type="text" id="bep_sinif" placeholder="Örn: 9/A veya 10/B">
-      </div>
-      <div>
-        <label>Öğrenci Numarası</label>
-        <input type="text" id="bep_no" placeholder="Örn: 450">
-      </div>
-      <div>
-        <label>Ders Öğretmeni</label>
-        <input type="text" id="bep_ogretmen" value="Hakan GÖKMEN">
-      </div>
-      <div>
-        <label>Sınıf Rehber Öğretmeni</label>
-        <input type="text" id="bep_sinifOgretmeni" placeholder="Örn: Ad Soyad">
-      </div>
-      <div>
-        <label>Öğrenci Velisi</label>
-        <input type="text" id="bep_veli" placeholder="Örn: Veli Ad Soyad">
-      </div>
-      <div>
-        <label>Rehber Öğretmen</label>
-        <input type="text" id="bep_rehberOgretmen" placeholder="Örn: Ad Soyad">
-      </div>
-      <div>
-        <label>BEP Birim Başkanı</label>
-        <input type="text" id="bep_mudurYrd" value="Hasan KÖSEOĞLU">
-      </div>
-      <div>
-        <label>Eğitim-Öğretim Yılı</label>
-        <input type="text" id="bep_yil" value="2026-2027">
-      </div>
-      <div>
-        <label>Ders Seçiniz</label>
-        <select id="bep_ders">
-          <option value="Bilişim Teknolojileri ve Yazılım 9.Sınıf" selected>Bilişim Teknolojileri ve Yazılım 9.Sınıf</option>
-          <option value="Bilişim Teknolojileri ve Yazılım 10.Sınıf">Bilişim Teknolojileri ve Yazılım 10.Sınıf</option>
-          <option value="Bilişim Teknolojileri ve Yazılım 11.Sınıf">Bilişim Teknolojileri ve Yazılım 11.Sınıf</option>
-        </select>
-      </div>
-      <div>
-        <label>Modül Seçiniz</label>
-        <select id="bep_modul">
-          <option value="9_algoritma" selected>Programlamaya Giriş ve Algoritma</option>
-          <option value="10_python">Programlama Dilleri (Python)</option>
-          <option value="robotik_kodlama">Robotik Kodlama</option>
-          <option value="mobil_uygulama">Mobil Uygulama Geliştirme</option>
-          <option value="java">Programlama Dilleri (Java)</option>
-          <option value="cpp">Programlama Dilleri (C++)</option>
-          <option value="csharp">Programlama Dilleri (C#)</option>
-          <option value="dart">Programlama Dilleri (Dart)</option>
-          <option value="php">Programlama Dilleri (PHP)</option>
-          <option value="javascript">Programlama Dilleri (JavaScript)</option>
-          <option value="yapay_zeka">Yapay Zekâ Uygulamaları</option>
-        </select>
-      </div>
-    </div>
+    </fieldset>
 
-    <div class="bep-grid" style="margin-top: 15px;">
+    <!-- 2. GRUP: DERS VE MÜFREDAT BİLGİLERİ -->
+    <fieldset class="bep-group-box">
+      <legend class="bep-group-title">📚 Ders ve Müfredat Bilgileri</legend>
+      <div class="bep-grid">
+        <div>
+          <label>Eğitim-Öğretim Yılı</label>
+          <input type="text" id="bep_yil" value="2026-2027">
+        </div>
+        <div>
+          <label>Ders Seçiniz</label>
+          <select id="bep_ders">
+            <option value="Bilişim Teknolojileri ve Yazılım 9.Sınıf" selected>Bilişim Teknolojileri ve Yazılım 9.Sınıf</option>
+            <option value="Bilişim Teknolojileri ve Yazılım 10.Sınıf">Bilişim Teknolojileri ve Yazılım 10.Sınıf</option>
+            <option value="Bilişim Teknolojileri ve Yazılım 11.Sınıf">Bilişim Teknolojileri ve Yazılım 11.Sınıf</option>
+          </select>
+        </div>
+        <div>
+          <label>Modül Seçiniz</label>
+          <select id="bep_modul">
+            <option value="9_algoritma" selected>Programlamaya Giriş ve Algoritma</option>
+            <option value="10_python">Programlama Dilleri (Python)</option>
+            <option value="robotik_kodlama">Robotik Kodlama</option>
+            <option value="mobil_uygulama">Mobil Uygulama Geliştirme</option>
+            <option value="java">Programlama Dilleri (Java)</option>
+            <option value="cpp">Programlama Dilleri (C++)</option>
+            <option value="csharp">Programlama Dilleri (C#)</option>
+            <option value="dart">Programlama Dilleri (Dart)</option>
+            <option value="php">Programlama Dilleri (PHP)</option>
+            <option value="javascript">Programlama Dilleri (JavaScript)</option>
+            <option value="yapay_zeka">Yapay Zekâ Uygulamaları</option>
+          </select>
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- 3. GRUP: AMAÇ VE KAZANIM SEÇİMİ (UDA & KDA) -->
+    <fieldset class="bep-group-box">
+      <legend class="bep-group-title">🎯 Amaç ve Kazanım Seçimi (UDA & KDA)</legend>
+      <div class="bep-grid">
       <div style="grid-column: span 2;">
         <label>Uzun Dönemli Amaç (UDA) / Ünite Seçiniz</label>
         <select id="bep_uda">
@@ -475,9 +510,12 @@
           <option value="( - )">Geliştirilmeli ( - )</option>
         </select>
       </div>
-    </div>
+      </div>
 
-    <button type="button" class="btn btn-add" id="bep_btn_ekle">+ Seçilen Amacı Plana Ekle</button>
+      <div style="margin-top: 15px; text-align: right;">
+        <button type="button" class="btn btn-add" id="bep_btn_ekle">+ Seçilen Amacı Plana Ekle</button>
+      </div>
+    </fieldset>
   </div>
 
   <!-- YAZDIRILABİLİR MEB BEP FORMU (ORTALANMIŞ YATAY ÇIKTI ALANI) -->
