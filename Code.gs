@@ -47,3 +47,4 @@ function sayfaBasligiGetir(page) {
 function getScriptUrl() {
   return ScriptApp.getService().getUrl();
 }
+

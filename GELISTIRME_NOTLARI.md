@@ -13,22 +13,42 @@ Yerel sunucu (`python3 -m http.server`) ihtiyacını tamamen ortadan kaldırmak 
 2. Proje adını `BTY BEP Modülü` olarak belirleyin.
 
 ### Adım 2: Sunucu Kodunu (`Code.gs`) Yazma
-Varsayılan `Code.gs` dosyasının içine aşağıdaki kodu ekleyin:
+Varsayılan `Code.gs` dosyasının içine, tüm sayfaları (`index`, `index2`, `index3`) dinamik yönlendiren şu kodu ekleyin:
 
 ```javascript
-function doGet() {
-  return HtmlService.createHtmlOutputFromFile('index3')
-    .setTitle('BTY BEP Modülü (Temel / Uygulamalı Düzey)')
+function doGet(e) {
+  // URL'deki ?page= parametresini oku (Varsayılan: index3)
+  var page = (e && e.parameter && e.parameter.page) ? e.parameter.page.toString().toLowerCase() : 'index3';
+  
+  // Güvenlik kontrolü (Sadece izin verilen sayfalara izin ver)
+  var izinVerilenSayfalar = ['index', 'index2', 'index3'];
+  if (izinVerilenSayfalar.indexOf(page) === -1) {
+    page = 'index3';
+  }
+  
+  return HtmlService.createTemplateFromFile(page)
+    .evaluate()
+    .setTitle(sayfaBasligiGetir(page))
     .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL)
     .addMetaTag('viewport', 'width=device-width, initial-scale=1');
 }
+
+function sayfaBasligiGetir(page) {
+  switch (page) {
+    case 'index': return 'BTY BEP Modülü (v1 Standart / Akademik)';
+    case 'index2': return 'BTY BEP Modülü (v2 Temel / Uygulamalı)';
+    case 'index3': return 'BTY BEP Modülü (v3 Maarif Modeli & UDA)';
+    default: return 'BTY BEP Modülü';
+  }
+}
 ```
 
-### Adım 3: Arayüz Dosyasını (`index3.html`) Ekleme
-1. Sol menüde **Dosyalar** yanındaki `+` butonuna tıklayıp **HTML** seçin.
-2. Adını `index3` olarak kaydedin.
-3. Yerel projedeki `index3.html` dosyasının tüm kodunu kopyalayıp buraya yapıştırın.
-   *(Word kütüphanesi CDN yedeği ile çalıştığı için Google Apps Script ortamında da çevrim içi sorunsuz yüklenir).*
+### Adım 3: Arayüz Dosyalarını (`index`, `index2`, `index3`) Ekleme
+Sol menüde **Dosyalar** yanındaki `+` butonuna tıklayıp sırayla **HTML** dosyaları oluşturun:
+1. `index` adı verip yerel `index.html` kodlarını yapıştırın.
+2. `index2` adı verip yerel `index2.html` kodlarını yapıştırın.
+3. `index3` adı verip yerel `index3.html` kodlarını yapıştırın.
+*(Sayfalar arası geçiş butonları bu 3 dosya arasında tek tıkla geçiş sağlayacaktır).*
 
 ### Adım 4: Yayına Alma (Deploy)
 1. Sağ üstteki mavi **Dağıt (Deploy)** butonuna tıklayın -> **Yeni Dağıtım (New deployment)** seçin.
