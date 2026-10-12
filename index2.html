@@ -724,15 +724,25 @@
     return lbl;
   }
 
-  // Google Apps Script ortamında sayfa linklerini otomatik olarak ?page= parametresine ve _top hedefine bağlar
-  if (window.location.hostname.includes("google")) {
-    document.addEventListener("DOMContentLoaded", function() {
+  // Google Apps Script (GAS) çoklu sayfa bağlantı adaptörü
+  (function initGasNavigation() {
+    var gasUrl = "<?= scriptUrl ?>";
+
+    function applyGasLinks(baseUrl) {
+      if (!baseUrl || !baseUrl.startsWith("http")) return;
       document.querySelectorAll("a[data-gas]").forEach(function(link) {
-        link.href = "?page=" + link.getAttribute("data-gas");
+        var page = link.getAttribute("data-gas");
+        link.href = baseUrl + "?page=" + page;
         link.target = "_top";
       });
-    });
-  }
+    }
+
+    if (gasUrl && gasUrl.startsWith("http")) {
+      applyGasLinks(gasUrl);
+    } else if (typeof google !== "undefined" && google.script && google.script.run) {
+      google.script.run.withSuccessHandler(applyGasLinks).getScriptUrl();
+    }
+  })();
 
   // ===================== DEĞERLENDİRME ÇOKLU SEÇİM =====================
   let expandedDeg = false;

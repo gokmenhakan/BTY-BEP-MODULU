@@ -17,9 +17,15 @@ function doGet(e) {
     page = 'index3';
   }
   
-  // 3. HTML dosyasını şablon olarak derle ve yayınla
-  return HtmlService.createTemplateFromFile(page)
-    .evaluate()
+  // 3. HTML dosyasını şablon olarak derle, ana web uygulama URL'sini aktar ve yayınla
+  var template = HtmlService.createTemplateFromFile(page);
+  try {
+    template.scriptUrl = ScriptApp.getService().getUrl();
+  } catch (err) {
+    template.scriptUrl = "";
+  }
+  
+  return template.evaluate()
     .setTitle(sayfaBasligiGetir(page))
     .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL)
     .addMetaTag('viewport', 'width=device-width, initial-scale=1');
