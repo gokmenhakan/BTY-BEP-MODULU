@@ -336,9 +336,9 @@
         <span>📌 <strong>Sürüm Seçimi:</strong> Şu an <strong style="color:#d97706;">v2 (Temel / Uygulamalı Saha Düzeyi)</strong> sürümündesiniz.</span>
       </div>
       <div style="display:flex; gap:8px; flex-wrap:wrap;">
-        <a href="index.html" style="color:#0284c7; font-weight:bold; text-decoration:none; background:#fff; padding:5px 12px; border-radius:6px; border:1px solid #bae6fd;">📘 v1 (Akademik)</a>
+        <a href="index.html" data-gas="index" style="color:#0284c7; font-weight:bold; text-decoration:none; background:#fff; padding:5px 12px; border-radius:6px; border:1px solid #bae6fd;">📘 v1 (Akademik)</a>
         <span style="background:#d97706; color:#fff; font-weight:bold; padding:5px 12px; border-radius:6px;">✓ v2 (Temel / Uygulamalı)</span>
-        <a href="index3.html" style="color:#15803d; font-weight:bold; text-decoration:none; background:#fff; padding:5px 12px; border-radius:6px; border:1px solid #bbf7d0;">🌱 v3 (Maarif / UDA)</a>
+        <a href="index3.html" data-gas="index3" style="color:#15803d; font-weight:bold; text-decoration:none; background:#fff; padding:5px 12px; border-radius:6px; border:1px solid #bbf7d0;">🌱 v3 (Maarif / UDA)</a>
       </div>
     </div>
     <h3 style="margin-top:0; color:#1e3a8a;">Bilişim Teknolojileri ve Yazılım Dersi BEP Hazırlama Modülü <span style="font-size:13px; color:#d97706; font-weight:normal;">(Temel / Uygulamalı Düzey)</span></h3>
@@ -722,6 +722,16 @@
     lbl.appendChild(document.createTextNode(" "));
     lbl.appendChild(span);
     return lbl;
+  }
+
+  // Google Apps Script ortamında sayfa linklerini otomatik olarak ?page= parametresine ve _top hedefine bağlar
+  if (window.location.hostname.includes("google")) {
+    document.addEventListener("DOMContentLoaded", function() {
+      document.querySelectorAll("a[data-gas]").forEach(function(link) {
+        link.href = "?page=" + link.getAttribute("data-gas");
+        link.target = "_top";
+      });
+    });
   }
 
   // ===================== DEĞERLENDİRME ÇOKLU SEÇİM =====================
