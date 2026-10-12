@@ -45,6 +45,39 @@
       gap: 12px;
       margin-bottom: 12px;
     }
+    .bep-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .bep-grid-kda-olcut {
+      display: grid;
+      grid-template-columns: 3fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .bep-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .bep-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    @media (max-width: 900px) {
+      .bep-grid-4 { grid-template-columns: repeat(2, 1fr); }
+      .bep-grid-3 { grid-template-columns: 1fr; }
+      .bep-grid-kda-olcut { grid-template-columns: 1fr; }
+      .bep-grid-2 { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .bep-grid-4 { grid-template-columns: 1fr; }
+    }
     /* Form Gruplama Kapsayıcıları (Fieldset / Legend) */
     fieldset.bep-group-box {
       border: 1px solid #cbd5e1;
@@ -86,6 +119,10 @@
     input:focus, select:focus, textarea:focus {
       outline: none;
       border-color: #0284c7;
+    }
+    #bep_rehberOgretmen::-webkit-calendar-picker-indicator {
+      display: none !important;
+      opacity: 0 !important;
     }
     .btn {
       border: none;
@@ -332,7 +369,24 @@
         </div>
         <div>
           <label>Rehber Öğretmen</label>
-          <input type="text" id="bep_rehberOgretmen" placeholder="Örn: Ad Soyad">
+          <div style="position: relative; display: flex; align-items: center;" id="bep_rehberContainer">
+            <input type="text" id="bep_rehberOgretmen" placeholder="Seçiniz veya yazınız..." autocomplete="off" style="padding-right: 50px;">
+            <div style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: 4px; z-index: 2;">
+              <button type="button" id="bep_toggleRehberOgretmen" title="Açılır Listeyi Göster" style="background: transparent; border: none; font-size: 11px; color: #64748b; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 18px; height: 18px; padding: 0; user-select: none;" onmouseover="this.style.color='#0284c7'" onmouseout="this.style.color='#64748b'">▼</button>
+              <button type="button" id="bep_clearRehberOgretmen" title="Temizle" style="background: transparent; border: none; font-size: 16px; font-weight: bold; color: #94a3b8; cursor: pointer; display: none; align-items: center; justify-content: center; width: 18px; height: 18px; line-height: 1; padding: 0; user-select: none;" onmouseover="this.style.color='#ef4444'" onmouseout="this.style.color='#94a3b8'">&times;</button>
+            </div>
+            <!-- Özel Açılır Liste Menüsü -->
+            <div id="bep_rehberMenu" style="display: none; position: absolute; top: calc(100% + 4px); left: 0; right: 0; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1); z-index: 1000; overflow: hidden;">
+              <div class="bep-rehber-item" data-value="Mehmet Ünal MEMOĞLU" style="padding: 9px 12px; cursor: pointer; font-size: 13px; color: #1e293b; border-bottom: 1px solid #f1f5f9; display: flex; align-items: center; justify-content: space-between; transition: background 0.15s;" onmouseover="this.style.background='#f0f9ff'" onmouseout="this.style.background='#ffffff'">
+                <span>Mehmet Ünal MEMOĞLU</span>
+                <span class="bep-check" style="font-size: 12px; color: #0284c7; font-weight: bold; display: none;">✓</span>
+              </div>
+              <div class="bep-rehber-item" data-value="Nermin KUMRU" style="padding: 9px 12px; cursor: pointer; font-size: 13px; color: #1e293b; display: flex; align-items: center; justify-content: space-between; transition: background 0.15s;" onmouseover="this.style.background='#f0f9ff'" onmouseout="this.style.background='#ffffff'">
+                <span>Nermin KUMRU</span>
+                <span class="bep-check" style="font-size: 12px; color: #0284c7; font-weight: bold; display: none;">✓</span>
+              </div>
+            </div>
+          </div>
         </div>
         <div>
           <label>BEP Birim Başkanı</label>
@@ -373,21 +427,24 @@
     <!-- 3. GRUP: AMAÇ VE KAZANIM SEÇİMİ (UDA & KDA) -->
     <fieldset class="bep-group-box">
       <legend class="bep-group-title">🎯 Amaç ve Kazanım Seçimi (UDA & KDA)</legend>
-      <div class="bep-grid">
-        <div style="grid-column: span 2;">
+      <!-- 1. SATIR: UDA Ünite Seçimi ve UDA Metni (2 Sütun) -->
+      <div class="bep-grid-2">
+        <div>
           <label>Uzun Dönemli Amaç (UDA) / Ünite Seçiniz</label>
           <select id="bep_uda">
             <option value="">Önce modül seçiniz...</option>
           </select>
         </div>
-
-        <div style="grid-column: span 2;">
+        <div>
           <label>Uzun Dönemli Amaç Cümlesi (Öğrenci düzeyine göre düzenleyebilirsiniz)</label>
           <textarea id="bep_uda_metin" rows="2" placeholder="UDA seçildiğinde otomatik doldurulur..."></textarea>
         </div>
+      </div>
         
+      <!-- 2. SATIR: KDA ve Ölçüt (2 Sütun: 3fr 1fr) -->
+      <div class="bep-grid-kda-olcut">
         <!-- KISA DÖNEMLİ AMAÇLAR (ÇOKLU SEÇİM DROPDOWN) -->
-        <div style="grid-column: span 2;">
+        <div>
           <label>Kısa Dönemli Amaçlar (Çoklu Seçim)</label>
           <div class="multiselect-container">
             <div class="selectBox" id="selectBoxKdaTrigger">
@@ -412,6 +469,10 @@
             <option value="%100 (5/5)">%100 (5/5)</option>
           </select>
         </div>
+      </div>
+
+      <!-- 3. SATIR: 4 SÜTUN (Öğretim Yöntem ve Teknikleri, Kullanılacak Materyaller, Başlama Tarihi, Bitiş Tarihi) -->
+      <div class="bep-grid-4">
         <div>
           <label>Öğretim Yöntem ve Teknikleri</label>
           <input type="text" id="bep_yontem" value="Anlatım, Soru-Cevap, Gösterip Yaptırma, Takım/Grup Çalışması, Akran Öğrenmesi, Örnek Olay İncelemesi, Problem Çözme">
@@ -421,9 +482,43 @@
           <input type="text" id="bep_materyal" value="Ders Kitabı, Bilgisayar, Etkileşimli Tahta, Flowgorithm / Kodlama Araçları">
         </div>
         <div>
-          <label>Başlama ve Bitiş Tarihi</label>
-          <input type="text" id="bep_sure" value="Ekim - Ocak">
+          <label>Başlama Tarihi</label>
+          <select id="bep_baslamaAy">
+            <option value="Eylül">Eylül</option>
+            <option value="Ekim" selected>Ekim</option>
+            <option value="Kasım">Kasım</option>
+            <option value="Aralık">Aralık</option>
+            <option value="Ocak">Ocak</option>
+            <option value="Şubat">Şubat</option>
+            <option value="Mart">Mart</option>
+            <option value="Nisan">Nisan</option>
+            <option value="Mayıs">Mayıs</option>
+            <option value="Haziran">Haziran</option>
+            <option value="Temmuz">Temmuz</option>
+            <option value="Ağustos">Ağustos</option>
+          </select>
         </div>
+        <div>
+          <label>Bitiş Tarihi</label>
+          <select id="bep_bitisAy">
+            <option value="Eylül">Eylül</option>
+            <option value="Ekim">Ekim</option>
+            <option value="Kasım">Kasım</option>
+            <option value="Aralık">Aralık</option>
+            <option value="Ocak" selected>Ocak</option>
+            <option value="Şubat">Şubat</option>
+            <option value="Mart">Mart</option>
+            <option value="Nisan">Nisan</option>
+            <option value="Mayıs">Mayıs</option>
+            <option value="Haziran">Haziran</option>
+            <option value="Temmuz">Temmuz</option>
+            <option value="Ağustos">Ağustos</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- 4. SATIR: 3 SÜTUN (Değ. Yöntem ve Teknikleri, Değerlendirme Tarihleri, Performans) -->
+      <div class="bep-grid-3">
         <div>
           <label>Değ. Yöntem ve Teknikleri (Çoklu Seçim)</label>
           <div class="multiselect-container">
@@ -1017,6 +1112,117 @@
       }
     });
 
+    // Rehber Öğretmen Açılır Liste Menüsü (▼) ve Temizleme (X) Kontrolleri
+    const inpRehber = document.getElementById("bep_rehberOgretmen");
+    const containerRehber = document.getElementById("bep_rehberContainer");
+    const menuRehber = document.getElementById("bep_rehberMenu");
+    const btnToggleRehber = document.getElementById("bep_toggleRehberOgretmen");
+    const btnClearRehber = document.getElementById("bep_clearRehberOgretmen");
+
+    if (inpRehber && menuRehber) {
+      function guncelleRehberClearBtn() {
+        if (inpRehber.value && inpRehber.value.trim().length > 0) {
+          btnClearRehber.style.display = "flex";
+        } else {
+          btnClearRehber.style.display = "none";
+        }
+      }
+
+      function guncelleRehberSeciliIsaret() {
+        const val = inpRehber.value.trim();
+        const items = menuRehber.querySelectorAll(".bep-rehber-item");
+        items.forEach(function(item) {
+          const itemVal = item.getAttribute("data-value");
+          const check = item.querySelector(".bep-check");
+          if (itemVal === val) {
+            item.style.fontWeight = "bold";
+            item.style.color = "#0284c7";
+            if (check) check.style.display = "inline";
+          } else {
+            item.style.fontWeight = "normal";
+            item.style.color = "#1e293b";
+            if (check) check.style.display = "none";
+          }
+        });
+      }
+
+      function acRehberMenu() {
+        guncelleRehberSeciliIsaret();
+        menuRehber.style.display = "block";
+      }
+
+      function kapatRehberMenu() {
+        menuRehber.style.display = "none";
+      }
+
+      function toggleRehberMenu() {
+        if (menuRehber.style.display === "block") {
+          kapatRehberMenu();
+        } else {
+          acRehberMenu();
+        }
+      }
+
+      // Kutuya tıklanınca açılır menüyü göster (her zaman her iki ismi de listeler)
+      inpRehber.addEventListener("click", function(e) {
+        e.stopPropagation();
+        acRehberMenu();
+      });
+
+      // Ok butonuna basılınca aç/kapat
+      if (btnToggleRehber) {
+        btnToggleRehber.addEventListener("click", function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          toggleRehberMenu();
+        });
+      }
+
+      // Menüdeki bir isme tıklandığında kutuya yaz ve kapat
+      const items = menuRehber.querySelectorAll(".bep-rehber-item");
+      items.forEach(function(item) {
+        item.addEventListener("click", function(e) {
+          e.stopPropagation();
+          inpRehber.value = item.getAttribute("data-value");
+          inpRehber.dispatchEvent(new Event("input", { bubbles: true }));
+          inpRehber.dispatchEvent(new Event("change", { bubbles: true }));
+          guncelleRehberClearBtn();
+          kapatRehberMenu();
+        });
+      });
+
+      // Dışarı tıklanınca menüyü kapat
+      document.addEventListener("click", function(e) {
+        if (containerRehber && !containerRehber.contains(e.target)) {
+          kapatRehberMenu();
+        }
+      });
+
+      // X (Temizle) butonu
+      btnClearRehber.addEventListener("click", function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        inpRehber.value = "";
+        inpRehber.dispatchEvent(new Event("input", { bubbles: true }));
+        inpRehber.dispatchEvent(new Event("change", { bubbles: true }));
+        guncelleRehberClearBtn();
+        acRehberMenu();
+        inpRehber.focus();
+      });
+
+      inpRehber.addEventListener("input", function() {
+        guncelleRehberClearBtn();
+        guncelleRehberSeciliIsaret();
+      });
+
+      inpRehber.addEventListener("change", function() {
+        guncelleRehberClearBtn();
+        guncelleRehberSeciliIsaret();
+      });
+
+      guncelleRehberClearBtn();
+    }
+
     // Modüle göre UDA'ları yükle
     function modulYukle() {
       senkronizeEt();
@@ -1101,7 +1307,9 @@
       const olcut = document.getElementById("bep_degerlendirme").value;
       const yontem = document.getElementById("bep_yontem").value || "-";
       const materyal = document.getElementById("bep_materyal").value || "-";
-      const sure = document.getElementById("bep_sure").value || "-";
+      const baslamaAy = document.getElementById("bep_baslamaAy") ? document.getElementById("bep_baslamaAy").value.trim() : "";
+      const bitisAy = document.getElementById("bep_bitisAy") ? document.getElementById("bep_bitisAy").value.trim() : "";
+      const sure = (baslamaAy && bitisAy) ? `${baslamaAy} - ${bitisAy}` : (baslamaAy || bitisAy || "-");
       
       const degYontem = getSeciliYontemler();
       const degTarih = document.getElementById("bep_degTarih").value || "";

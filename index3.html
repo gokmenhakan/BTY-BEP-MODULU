@@ -45,6 +45,39 @@
       gap: 12px;
       margin-bottom: 12px;
     }
+    .bep-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .bep-grid-kda-olcut {
+      display: grid;
+      grid-template-columns: 2fr 2fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .bep-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .bep-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    @media (max-width: 900px) {
+      .bep-grid-4 { grid-template-columns: repeat(2, 1fr); }
+      .bep-grid-3 { grid-template-columns: 1fr; }
+      .bep-grid-kda-olcut { grid-template-columns: 1fr; }
+      .bep-grid-2 { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .bep-grid-4 { grid-template-columns: 1fr; }
+    }
     /* Form Gruplama Kapsayıcıları (Fieldset / Legend) */
     fieldset.bep-group-box {
       border: 1px solid #cbd5e1;
@@ -86,6 +119,10 @@
     input:focus, select:focus, textarea:focus {
       outline: none;
       border-color: #0284c7;
+    }
+    #bep_rehberOgretmen::-webkit-calendar-picker-indicator {
+      display: none !important;
+      opacity: 0 !important;
     }
     .btn {
       border: none;
@@ -336,7 +373,24 @@
         </div>
         <div>
           <label>Rehber Öğretmen</label>
-          <input type="text" id="bep_rehberOgretmen" placeholder="Örn: Ad Soyad">
+          <div style="position: relative; display: flex; align-items: center;" id="bep_rehberContainer">
+            <input type="text" id="bep_rehberOgretmen" placeholder="Seçiniz veya yazınız..." autocomplete="off" style="padding-right: 50px;">
+            <div style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: 4px; z-index: 2;">
+              <button type="button" id="bep_toggleRehberOgretmen" title="Açılır Listeyi Göster" style="background: transparent; border: none; font-size: 11px; color: #64748b; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 18px; height: 18px; padding: 0; user-select: none;" onmouseover="this.style.color='#0284c7'" onmouseout="this.style.color='#64748b'">▼</button>
+              <button type="button" id="bep_clearRehberOgretmen" title="Temizle" style="background: transparent; border: none; font-size: 16px; font-weight: bold; color: #94a3b8; cursor: pointer; display: none; align-items: center; justify-content: center; width: 18px; height: 18px; line-height: 1; padding: 0; user-select: none;" onmouseover="this.style.color='#ef4444'" onmouseout="this.style.color='#94a3b8'">&times;</button>
+            </div>
+            <!-- Özel Açılır Liste Menüsü -->
+            <div id="bep_rehberMenu" style="display: none; position: absolute; top: calc(100% + 4px); left: 0; right: 0; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1); z-index: 1000; overflow: hidden;">
+              <div class="bep-rehber-item" data-value="Mehmet Ünal MEMOĞLU" style="padding: 9px 12px; cursor: pointer; font-size: 13px; color: #1e293b; border-bottom: 1px solid #f1f5f9; display: flex; align-items: center; justify-content: space-between; transition: background 0.15s;" onmouseover="this.style.background='#f0f9ff'" onmouseout="this.style.background='#ffffff'">
+                <span>Mehmet Ünal MEMOĞLU</span>
+                <span class="bep-check" style="font-size: 12px; color: #0284c7; font-weight: bold; display: none;">✓</span>
+              </div>
+              <div class="bep-rehber-item" data-value="Nermin KUMRU" style="padding: 9px 12px; cursor: pointer; font-size: 13px; color: #1e293b; display: flex; align-items: center; justify-content: space-between; transition: background 0.15s;" onmouseover="this.style.background='#f0f9ff'" onmouseout="this.style.background='#ffffff'">
+                <span>Nermin KUMRU</span>
+                <span class="bep-check" style="font-size: 12px; color: #0284c7; font-weight: bold; display: none;">✓</span>
+              </div>
+            </div>
+          </div>
         </div>
         <div>
           <label>BEP Birim Başkanı</label>
@@ -383,15 +437,15 @@
     <!-- 3. GRUP: AMAÇ VE KAZANIM SEÇİMİ (UDA & KDA) -->
     <fieldset class="bep-group-box">
       <legend class="bep-group-title">🎯 Amaç ve Kazanım Seçimi (UDA & KDA)</legend>
-      <div class="bep-grid">
-        <div style="grid-column: span 2;">
+      <!-- 1. SATIR: UDA Öğrenme Çıktısı Seçimi ve UDA Metni (2 Sütun) -->
+      <div class="bep-grid-2">
+        <div>
           <label>Uzun Dönemli Amaç (UDA) / Maarif Öğrenme Çıktısı Seçiniz</label>
           <select id="bep_uda">
             <option value="">Önce modül seçiniz...</option>
           </select>
         </div>
-
-        <div style="grid-column: span 2;">
+        <div>
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; flex-wrap: wrap; gap: 8px;">
             <label style="margin: 0; font-weight: 700;">Uzun Dönemli Amaç (UDA) Cümlesi</label>
             <div style="font-size: 12px; display: flex; gap: 14px; background: #f8fafc; padding: 4px 10px; border-radius: 6px; border: 1px solid #cbd5e1;">
@@ -405,9 +459,12 @@
           </div>
           <textarea id="bep_uda_metin" rows="2" placeholder="UDA seçildiğinde otomatik doldurulur..."></textarea>
         </div>
+      </div>
         
+      <!-- 2. SATIR: Revize KDA, Resmî MEB Kazanımları ve Ölçüt (3 Sütun: 2fr 2fr 1fr) -->
+      <div class="bep-grid-kda-olcut">
         <!-- 1. KISA DÖNEMLİ AMAÇLAR (REVİZE EDİLMİŞ - ÇOKLU SEÇİM) -->
-        <div style="grid-column: span 2;">
+        <div>
           <label style="color: #0369a1; font-weight: 700;">⭐ Revize Edilmiş KDA (Temel / Somut Düzey)</label>
           <div class="multiselect-container">
             <div class="selectBox" id="selectBoxKdaTrigger">
@@ -423,7 +480,7 @@
         </div>
 
         <!-- 2. RESMÎ MEB KAZANIMLARI (REVİZE EDİLMEYEN ORİJİNAL KDA - ÇOKLU SEÇİM) -->
-        <div style="grid-column: span 2;">
+        <div>
           <label style="color: #b45309; font-weight: 700;">📜 Resmî MEB Kazanımları (Orijinal / Revize Edilmemiş)</label>
           <div class="multiselect-container">
             <div class="selectBox" id="selectBoxMebTrigger">
@@ -438,16 +495,7 @@
           </div>
         </div>
 
-        <!-- 3. KAZANIM EKLE (MANUEL KAZANIM GİRİŞİ) -->
-        <div style="grid-column: span 2;">
-          <label style="color: #0f172a; font-weight: 700;">✍️ Kazanım Ekle</label>
-          <div style="display: flex; gap: 8px;">
-            <input type="text" id="bep_manuel_kazanim" placeholder="Örn: 1.8. Öğrenci kendi belirlediği bir problemi çözer (Manuel / özel kazanım yazınız)...">
-            <button type="button" class="btn" id="bep_btn_manuel_ekle" style="background: #0284c7; color: #ffffff; white-space: nowrap; padding: 8px 14px; font-size: 12px;">+ Listeye Ekle</button>
-          </div>
-          <small style="color: #64748b; font-size: 11px; margin-top: 3px; display: block;">İpucu: Yazdığınız kazanımı '+ Listeye Ekle' butonuyla yukarıdaki listeye dahil edebilir veya doğrudan aşağıdaki '+ Seçilen Amacı Plana Ekle' butonuna basarak plana aktarabilirsiniz.</small>
-        </div>
-
+        <!-- 3. ÖLÇÜT -->
         <div>
           <label>Ölçüt*</label>
           <select id="bep_degerlendirme">
@@ -458,6 +506,20 @@
             <option value="%100 (5/5)">%100 (5/5)</option>
           </select>
         </div>
+      </div>
+
+      <!-- 3. SATIR: MANUEL KAZANIM GİRİŞİ -->
+      <div style="margin-bottom: 12px;">
+        <label style="color: #0f172a; font-weight: 700;">✍️ Kazanım Ekle</label>
+        <div style="display: flex; gap: 8px;">
+          <input type="text" id="bep_manuel_kazanim" placeholder="Örn: 1.8. Öğrenci kendi belirlediği bir problemi çözer (Manuel / özel kazanım yazınız)...">
+          <button type="button" class="btn" id="bep_btn_manuel_ekle" style="background: #0284c7; color: #ffffff; white-space: nowrap; padding: 8px 14px; font-size: 12px;">+ Listeye Ekle</button>
+        </div>
+        <small style="color: #64748b; font-size: 11px; margin-top: 3px; display: block;">İpucu: Yazdığınız kazanımı '+ Listeye Ekle' butonuyla yukarıdaki listeye dahil edebilir veya doğrudan aşağıdaki '+ Seçilen Amacı Plana Ekle' butonuna basarak plana aktarabilirsiniz.</small>
+      </div>
+
+      <!-- 4. SATIR: 4 SÜTUN (Öğretim Yöntem ve Teknikleri, Kullanılacak Materyaller, Başlama Tarihi, Bitiş Tarihi) -->
+      <div class="bep-grid-4">
         <div>
           <label>Öğretim Yöntem ve Teknikleri</label>
           <input type="text" id="bep_yontem" value="Anlatım, Soru-Cevap, Gösterip Yaptırma, Takım/Grup Çalışması, Akran Öğrenmesi, Örnek Olay İncelemesi, Problem Çözme">
@@ -500,6 +562,10 @@
             <option value="Ağustos">Ağustos</option>
           </select>
         </div>
+      </div>
+
+      <!-- 5. SATIR: 3 SÜTUN (Değ. Yöntem ve Teknikleri, Değerlendirme Tarihleri, Performans) -->
+      <div class="bep-grid-3">
         <div>
           <label>Değ. Yöntem ve Teknikleri (Çoklu Seçim)</label>
           <div class="multiselect-container">
@@ -1879,6 +1945,117 @@
         el.addEventListener("input", senkronizeEt);
       }
     });
+
+    // Rehber Öğretmen Açılır Liste Menüsü (▼) ve Temizleme (X) Kontrolleri
+    const inpRehber = document.getElementById("bep_rehberOgretmen");
+    const containerRehber = document.getElementById("bep_rehberContainer");
+    const menuRehber = document.getElementById("bep_rehberMenu");
+    const btnToggleRehber = document.getElementById("bep_toggleRehberOgretmen");
+    const btnClearRehber = document.getElementById("bep_clearRehberOgretmen");
+
+    if (inpRehber && menuRehber) {
+      function guncelleRehberClearBtn() {
+        if (inpRehber.value && inpRehber.value.trim().length > 0) {
+          btnClearRehber.style.display = "flex";
+        } else {
+          btnClearRehber.style.display = "none";
+        }
+      }
+
+      function guncelleRehberSeciliIsaret() {
+        const val = inpRehber.value.trim();
+        const items = menuRehber.querySelectorAll(".bep-rehber-item");
+        items.forEach(function(item) {
+          const itemVal = item.getAttribute("data-value");
+          const check = item.querySelector(".bep-check");
+          if (itemVal === val) {
+            item.style.fontWeight = "bold";
+            item.style.color = "#0284c7";
+            if (check) check.style.display = "inline";
+          } else {
+            item.style.fontWeight = "normal";
+            item.style.color = "#1e293b";
+            if (check) check.style.display = "none";
+          }
+        });
+      }
+
+      function acRehberMenu() {
+        guncelleRehberSeciliIsaret();
+        menuRehber.style.display = "block";
+      }
+
+      function kapatRehberMenu() {
+        menuRehber.style.display = "none";
+      }
+
+      function toggleRehberMenu() {
+        if (menuRehber.style.display === "block") {
+          kapatRehberMenu();
+        } else {
+          acRehberMenu();
+        }
+      }
+
+      // Kutuya tıklanınca açılır menüyü göster (her zaman her iki ismi de listeler)
+      inpRehber.addEventListener("click", function(e) {
+        e.stopPropagation();
+        acRehberMenu();
+      });
+
+      // Ok butonuna basılınca aç/kapat
+      if (btnToggleRehber) {
+        btnToggleRehber.addEventListener("click", function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          toggleRehberMenu();
+        });
+      }
+
+      // Menüdeki bir isme tıklandığında kutuya yaz ve kapat
+      const items = menuRehber.querySelectorAll(".bep-rehber-item");
+      items.forEach(function(item) {
+        item.addEventListener("click", function(e) {
+          e.stopPropagation();
+          inpRehber.value = item.getAttribute("data-value");
+          inpRehber.dispatchEvent(new Event("input", { bubbles: true }));
+          inpRehber.dispatchEvent(new Event("change", { bubbles: true }));
+          guncelleRehberClearBtn();
+          kapatRehberMenu();
+        });
+      });
+
+      // Dışarı tıklanınca menüyü kapat
+      document.addEventListener("click", function(e) {
+        if (containerRehber && !containerRehber.contains(e.target)) {
+          kapatRehberMenu();
+        }
+      });
+
+      // X (Temizle) butonu
+      btnClearRehber.addEventListener("click", function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        inpRehber.value = "";
+        inpRehber.dispatchEvent(new Event("input", { bubbles: true }));
+        inpRehber.dispatchEvent(new Event("change", { bubbles: true }));
+        guncelleRehberClearBtn();
+        acRehberMenu();
+        inpRehber.focus();
+      });
+
+      inpRehber.addEventListener("input", function() {
+        guncelleRehberClearBtn();
+        guncelleRehberSeciliIsaret();
+      });
+
+      inpRehber.addEventListener("change", function() {
+        guncelleRehberClearBtn();
+        guncelleRehberSeciliIsaret();
+      });
+
+      guncelleRehberClearBtn();
+    }
 
     // Modüle göre UDA'ları yükle
     function modulYukle() {
