@@ -42,3 +42,4 @@ Bu klasör, BEP kazanımlarını doğrudan **Google E-Tablolar (Spreadsheet)** �
 2. Bu klasördeki `Code.gs` ve `index.html` kodlarını yapıştırın.
 3. Sağ üstteki **Dağıt (Deploy) > Yeni Dağıtım > Web Uygulaması** seçeneğini seçin.
 4. Erişim iznini **"Herkes (Anyone)"** yapıp yayınlayın.
+

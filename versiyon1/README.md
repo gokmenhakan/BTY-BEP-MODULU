@@ -13,3 +13,4 @@ Bu klasör, sistemin **v1 kararlı sürümünü** içeren bağımsız arşiv ve 
 * **`docx.umd.js`**: Çevrimdışı Word aktarımı için yerel kütüphane
 
 Tüm sayfalar birbirine bağlantılıdır; URL parametreleri ve üst navigasyon menüsü üzerinden sayfalar arası geçiş sorunsuz çalışır.
+
