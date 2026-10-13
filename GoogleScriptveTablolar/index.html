@@ -939,23 +939,123 @@ const DEFAULT_BEP_DATABASE = {
       ]
     },
     "Bilişim Teknolojileri ve Yazılım 10.Sınıf": {
-      "Programlama Dilleri (Python)": [
-        {
-          "unite": "1. ÜNİTE: PYTHON İLE VERİ YAPILARI VE DÖNGÜLER",
-          "konu": "Koşul Yapıları ve Döngüler",
-          "kod": "BTY.10.1.1",
-          "maarif_uda": "BTY.10.1.1. Python dilinde koşul ve döngü yapılarını kullanarak algoritmalar tasarlayabilme",
-          "bep_uda": "Öğrenci, if-else koşul blokları içeren basit karar yapılarını öğretmen rehberliğinde kodlar.",
-          "uda": "Öğrenci, sayı karşılaştırması yapan if-else kodunu çalıştırır.",
-          "kda": [
-            "KDA 1.1: if koşul ifadesini kullanarak girilen sayının pozitif olduğunu ekrana yazdırır."
-          ],
-          "meb_kda": [
-            "1.1. Koşullu ifadeleri ve mantıksal operatörleri program akışında kullanır."
-          ]
-        }
-      ]
-    }
+        "Programlama Dilleri (Python)": [
+                {
+                        "unite": "1. ÜNİTE: PYTHON PROGRAMLAMAYA GİRİŞ",
+                        "konu": "Python programlama dili ve entegre geliştirme ortamı (IDE) ile amacına uygun çalışabilme",
+                        "kod": "BTY.10.1.1",
+                        "maarif_uda": "BTY.10.1.1. Python programlama dili ve entegre geliştirme ortamı (IDE) ile amacına uygun çalışabilme",
+                        "bep_uda": "Öğrenci, dönem sonunda masaüstündeki Python IDE (Thonny/IDLE) simgesini çift tıklayarak açar, yeni dosya oluşturur ve 'Kaydet' butonuna basarak kod dosyasını kaydeder.",
+                        "uda": "Öğrenci, dönem sonunda masaüstündeki Python IDE (Thonny/IDLE) simgesini çift tıklayarak açar, yeni dosya oluşturur ve 'Kaydet' butonuna basarak kod dosyasını kaydeder.",
+                        "kda": [
+                                "KDA 1.1: Masaüstündeki Python IDE simgesini (Thonny, IDLE) diğer simgeler arasından tanıyıp gösterir.",
+                                "KDA 1.2: Kendisine gösterilen IDE simgesine çift tıklayarak çalışma ortamını başlatır ve yeni bir kod dosyası oluşturur."
+                        ],
+                        "meb_kda": [
+                                "1.1: Python programlama diliyle çalışılacak ortamları tanır.",
+                                "1.2: Farklı entegre geliştirme ortamlarını analiz ederek kendisine en uygun çalışma ortamını seçer."
+                        ]
+                },
+                {
+                        "unite": "1. ÜNİTE: PYTHON PROGRAMLAMAYA GİRİŞ",
+                        "konu": "Değişkenler, işlem önceliği ve veri giriş-çıkış komutlarından yararlanarak temel Python programları oluşturabilme",
+                        "kod": "BTY.10.1.2",
+                        "maarif_uda": "BTY.10.1.2. Değişkenler, işlem önceliği ve veri giriş-çıkış komutlarından yararlanarak temel Python programları oluşturabilme",
+                        "bep_uda": "Öğrenci, dönem sonunda klavyeden print() fonksiyonu içine adını yazar, 'Run / Çalıştır' butonuna basarak programı çalıştırır ve konsol ekranında çıktısını gösterir.",
+                        "uda": "Öğrenci, dönem sonunda klavyeden print() fonksiyonu içine adını yazar, 'Run / Çalıştır' butonuna basarak programı çalıştırır ve konsol ekranında çıktısını gösterir.",
+                        "kda": [
+                                "KDA 1.3: Klavyeden `ad = \"Ahmet\"` gibi basit bir metin değişkenini ekrana yazar.",
+                                "KDA 1.4: Kendisine verilen verinin (ör. yaş: sayı, isim: metin) türünü belirler ve uygun veri türü kartını seçip gösterir.",
+                                "KDA 1.5: İki sayıyı toplayan (`sayi1 + sayi2`) basit komut satırını yazar ve 'Çalıştır' butonuyla programı çalıştırır.",
+                                "KDA 1.6: Ekranda beliren girdi istemine klavyeden adını veya yaşını yazıp Enter tuşuna basar.",
+                                "KDA 1.7: Girilen verinin ekranda görüntülendiğini konsolda parmağıyla işaret eder."
+                        ],
+                        "meb_kda": [
+                                "1.3: Değişkenlerde tutulacak verileri tanımlar.",
+                                "1.4: Bir değişkeni tanımlarken hangi tür veriyi tutacağını belirler.",
+                                "1.5: Tanımlanan değişkenlerde işlem önceliğini gözetir.",
+                                "1.6: Kullanıcıdan veri alır.",
+                                "1.7: Kullanıcıdan alınan veriyi değişkene tanımlar."
+                        ]
+                },
+                {
+                        "unite": "2. ÜNİTE: PYTHON PROGRAMLAMA DİLİ İLE YAZILIM GELİŞTİRME",
+                        "konu": "Python dilinde çoklu koşul durumlarını (if-else) ve tekrarlı döngü yapılarını yönetebilme ve geliştirebilme",
+                        "kod": "BTY.10.2.1",
+                        "maarif_uda": "BTY.10.2.1. Python dilinde çoklu koşul durumlarını (if-else) ve tekrarlı döngü yapılarını yönetebilme ve geliştirebilme",
+                        "bep_uda": "Öğrenci, dönem sonunda hazır verilen koşullu (if-else) programı çalıştırır, konsoldan veri girer ve ekranda beliren çıktıyı fareyle işaret eder.",
+                        "uda": "Öğrenci, dönem sonunda hazır verilen koşullu (if-else) programı çalıştırır, konsoldan veri girer ve ekranda beliren çıktıyı fareyle işaret eder.",
+                        "kda": [
+                                "KDA 2.1: Konsola yaşını girerek 'Geçtiniz' veya 'Kaldınız' çıktısını ekranda fareyle işaret eder.",
+                                "KDA 2.2: 3 kez tekrar eden for döngüsünün ekrandaki çıktısını sayarak gösterir.",
+                                "KDA 2.3: İki şartın birlikte sağlandığı (ör. yaş > 18 ve bilet == var) durumu seçeneklerden işaretler."
+                        ],
+                        "meb_kda": [
+                                "2.1: Python programlama dili karar yapılarını içeren programlar geliştirir.",
+                                "2.2: Bir problemi çözmek için kullanacağı döngü yapısına karar verir.",
+                                "2.3: Çoklu koşulların mantıksal sonuçlarını değerlendirir."
+                        ]
+                },
+                {
+                        "unite": "2. ÜNİTE: PYTHON PROGRAMLAMA DİLİ İLE YAZILIM GELİŞTİRME",
+                        "konu": "Python programlarında fonksiyonlar ve hazır kütüphanelerden amaca uygun yararlanabilme",
+                        "kod": "BTY.10.2.2",
+                        "maarif_uda": "BTY.10.2.2. Python programlarında fonksiyonlar ve hazır kütüphanelerden amaca uygun yararlanabilme",
+                        "bep_uda": "Öğrenci, dönem sonunda hazır rastgele sayı üreten fonksiyonu çalıştırır, konsola gelen sayıyı sesli okur ve kod dosyasını kaydeder.",
+                        "uda": "Öğrenci, dönem sonunda hazır rastgele sayı üreten fonksiyonu çalıştırır, konsola gelen sayıyı sesli okur ve kod dosyasını kaydeder.",
+                        "kda": [
+                                "KDA 2.4: Önceden yazılmış `selamla()` gibi basit bir fonksiyonu çağırma satırını çalıştırır.",
+                                "KDA 2.5: Rastgele sayı üreten `random` kütüphanesi fonksiyonunu çalıştırıp ekrana gelen sayıyı sesli söyler."
+                        ],
+                        "meb_kda": [
+                                "2.4: Fonksiyonları program içinde yöntemlerine göre kullanır.",
+                                "2.5: Standart fonksiyon kümelerini ve kütüphanelerini kullanır."
+                        ]
+                },
+                {
+                        "unite": "3. ÜNİTE: NESNE YÖNELİMLİ PROJE GELİŞTİRME",
+                        "konu": "Nesne yönelimli programlama prensiplerinin sağladığı avantajları değerlendirebilme ve sınıf yapılarını modelleyebilme",
+                        "kod": "BTY.10.3.1",
+                        "maarif_uda": "BTY.10.3.1. Nesne yönelimli programlama prensiplerinin sağladığı avantajları değerlendirebilme ve sınıf yapılarını modelleyebilme",
+                        "bep_uda": "Öğrenci, dönem sonunda gerçek hayattaki nesneler ile sınıfları temsil eden resimli kartları masada eşleştirir ve ekrandaki nesneye fareyle tıklar.",
+                        "uda": "Öğrenci, dönem sonunda gerçek hayattaki nesneler ile sınıfları temsil eden resimli kartları masada eşleştirir ve ekrandaki nesneye fareyle tıklar.",
+                        "kda": [
+                                "KDA 3.1: Nesnelerin gerçek hayattaki eşyalar gibi özelliklere sahip olduğunu görsel kartlarla eşleştirir.",
+                                "KDA 3.2: Kodların düzenli ve tekrar kullanılabilir olmasının faydasını söyler.",
+                                "KDA 3.3: Örnek bir `Araba` sınıfı şablonundaki özellikleri (renk, model) öğretmenin rehberliğinde inceler.",
+                                "KDA 3.4: Hazır metotları (str, int) içeren komut satırını çalıştırır.",
+                                "KDA 3.5: Alt sınıf ve üst sınıf kartlarını (ör. Hayvan -> Kedi) masada alt alta eşleştirir."
+                        ],
+                        "meb_kda": [
+                                "3.1: Nesne yönelimli programlama kavramını açıklar.",
+                                "3.2: Nesne yönelimli programlamanın faydalarının farkına varır.",
+                                "3.3: Programın ihtiyacına yönelik sınıf tanımlaması yapar.",
+                                "3.4: Python programlama diline özgü temel sınıfları kullanır.",
+                                "3.5: Geliştirdiği programda kapsülleme, kalıtım ve çok biçimlilik prensiplerini kullanır."
+                        ]
+                },
+                {
+                        "unite": "3. ÜNİTE: NESNE YÖNELİMLİ PROJE GELİŞTİRME",
+                        "konu": "Veri koleksiyonları ve dosya işlemlerinden yararlanarak Python ile çalışan bir ürün ve yazılım ortaya koyabilme",
+                        "kod": "BTY.10.3.2",
+                        "maarif_uda": "BTY.10.3.2. Veri koleksiyonları ve dosya işlemlerinden yararlanarak Python ile çalışan bir ürün ve yazılım ortaya koyabilme",
+                        "bep_uda": "Öğrenci, dönem sonunda ekranda listelenen verilerden istenen elemanı seçer; 'Dosyadan Oku / Kaydet' butonuna basarak veriyi kaydeder ve programı çalıştırır.",
+                        "uda": "Öğrenci, dönem sonunda ekranda listelenen verilerden istenen elemanı seçer; 'Dosyadan Oku / Kaydet' butonuna basarak veriyi kaydeder ve programı çalıştırır.",
+                        "kda": [
+                                "KDA 3.6: Hazır listedeki 3 meyve isminden birincisini konsolda fareyle işaret eder.",
+                                "KDA 3.7: 'Dosyadan Oku' veya 'Kaydet' butonuna basarak metin belgesini ekranda açar.",
+                                "KDA 3.8: Dosyadan okunan listenin ekrana geldiğini parmağıyla gösterir.",
+                                "KDA 3.9: Hazır bir projede (hesap makinesi veya mini quiz) butonlara tıklayarak projeyi baştan sona tamamlar ve kaydeder."
+                        ],
+                        "meb_kda": [
+                                "3.6: List, tuple, set ve dictionary türlerinde verileri tanımlar.",
+                                "3.7: Dosya nesnesi üzerinde okuma yazma silme işlemlerini uygular.",
+                                "3.8: Dizi türündeki verileri dosya nesnesi içerisinde örneklendirir.",
+                                "3.9: İleri seviye nesne yönelimi teknikleriyle özgün projeler geliştirir."
+                        ]
+                }
+        ]
+}
   },
   "KLASIK": {
     "Bilişim Teknolojileri ve Yazılım 5.Sınıf": {
