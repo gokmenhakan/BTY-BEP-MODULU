@@ -9,8 +9,8 @@
  * 4. Yeni ders/müfredat eklendiğinde kod değişikliğine gerek kalmadan anında yansıtır.
  */
 
-// Varsayılan / Yedek E-Tablo ID'si (Buraya kendi oluşturacağınız Google E-Tablo ID'nizi yazabilirsiniz)
-var DEFAULT_SPREADSHEET_ID = "";
+// Varsayılan / Canlı Google E-Tablo ID'si
+var DEFAULT_SPREADSHEET_ID = "1kXuaEAdVsG6VzuQxuAtvmeEOIPty4lcT3CjNd9p79RU";
 
 /**
  * Web uygulaması GET isteklerini karşılar

@@ -822,7 +822,7 @@
     </div>
     <div style="margin-bottom: 12px;">
       <label>Google E-Tablo URL'si veya ID'si:</label>
-      <input type="text" id="inputSheetId" placeholder="Örn: 1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms">
+      <input type="text" id="inputSheetId" value="1kXuaEAdVsG6VzuQxuAtvmeEOIPty4lcT3CjNd9p79RU">
     </div>
     <div style="margin-bottom: 16px; font-size: 12px; color: #64748b; background: #f8fafc; padding: 10px; border-radius: 6px; border: 1px solid #e2e8f0;">
       ℹ️ <strong>İpucu:</strong> E-Tablonuzun paylaşım ayarını <em>"Bağlantıya sahip olan herkes görüntüleyebilir"</em> yapmayı unutmayınız.
@@ -1296,10 +1296,143 @@ function initDataSource(forceRefresh = false) {
       })
       .getBepDataFromSheet(forceRefresh);
   } else {
-    setTimeout(function() {
-      fallbackToLocal("Yerel Mod (Google Apps Script ortamında E-Tabloya canlı bağlanır)");
-    }, 300);
+    // Tarayıcıda yerel açıldığında Google E-Tablo'dan canlı CSV çekmeyi dene
+    const defaultSheetId = "1kXuaEAdVsG6VzuQxuAtvmeEOIPty4lcT3CjNd9p79RU";
+    const csvUrl = "https://docs.google.com/spreadsheets/d/" + defaultSheetId + "/export?format=csv";
+    
+    fetch(csvUrl)
+      .then(r => {
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        return r.text();
+      })
+      .then(csvText => {
+        const parsedTree = parseCsvToBepTree(csvText);
+        if (parsedTree && Object.keys(parsedTree).length > 0) {
+          currentBepTree = parsedTree;
+          elDbBadge.className = "db-badge online";
+          elDbBadge.innerHTML = "🟢 Google E-Tablolar (Canlı Çevrim İçi)";
+          elDbDetails.textContent = "Google E-Tablonuzdan (1kXuaE...) canlı veri yüklendi.";
+          populateDropdowns();
+        } else {
+          fallbackToLocal("E-Tablo verisi ayrıştırılamadı, dahili havuz devrede.");
+        }
+      })
+      .catch(err => {
+        fallbackToLocal("Yerel Mod (İnternet bağlantısı yoksa dahili havuz devrede)");
+      });
   }
+}
+
+/**
+ * Google E-Tablo CSV Metnini Hiyerarşik Ağaca Dönüştürür
+ */
+function parseCsvToBepTree(csvText) {
+  if (!csvText) return null;
+  
+  // Basit ve güvenli CSV ayrıştırıcı
+  const lines = [];
+  let row = [''];
+  let inQuotes = false;
+  let prevChar = '';
+  
+  for (let i = 0; i < csvText.length; i++) {
+    const c = csvText[i];
+    if (c === '"') {
+      if (inQuotes && csvText[i + 1] === '"') {
+        row[row.length - 1] += '"';
+        i++;
+      } else {
+        inQuotes = !inQuotes;
+      }
+    } else if (c === ',' && !inQuotes) {
+      row.push('');
+    } else if ((c === '\r' || c === '\n') && !inQuotes) {
+      if (c === '\r' && csvText[i + 1] === '\n') i++;
+      lines.push(row);
+      row = [''];
+    } else {
+      row[row.length - 1] += c;
+    }
+  }
+  if (row.length > 1 || row[0] !== '') lines.push(row);
+  if (lines.length < 2) return null;
+
+  const headers = lines[0].map(h => h.trim().toUpperCase());
+  const colMap = {};
+  headers.forEach((h, idx) => colMap[h] = idx);
+
+  function getIdx(names) {
+    for (let name of names) {
+      if (typeof colMap[name] !== 'undefined') return colMap[name];
+    }
+    return -1;
+  }
+
+  const idxMufredat = getIdx(['MUFREDAT_TURU', 'MÜFREDAT_TÜRÜ', 'MUFREDAT']);
+  const idxDers = getIdx(['DERS_ADI', 'DERS']);
+  const idxModul = getIdx(['MODUL_TEMA', 'MODÜL_TEMA', 'MODUL']);
+  const idxUnite = getIdx(['UNITE_KONU', 'ÜNİTE_KONU', 'UNITE']);
+  const idxUdaKod = getIdx(['UDA_KODU', 'UDA_KOD', 'KOD']);
+  const idxUdaMetin = getIdx(['UDA_METNI', 'UDA_METNİ', 'UDA']);
+  const idxBepUda = getIdx(['BEP_UDA_METNI', 'BEP_UDA']);
+  const idxKdaKod = getIdx(['KDA_KODU', 'KDA_KOD']);
+  const idxKdaMetin = getIdx(['KDA_METNI', 'KDA_METNİ', 'KDA']);
+  const idxKdaTipi = getIdx(['KDA_TIPI', 'KDA_TİPİ']);
+  const idxAktif = getIdx(['AKTIF_MI', 'AKTİF_Mİ', 'AKTIF']);
+
+  const tree = {};
+
+  for (let r = 1; r < lines.length; r++) {
+    const cols = lines[r];
+    if (idxAktif !== -1) {
+      const aktifVal = (cols[idxAktif] || '').trim().toUpperCase();
+      if (aktifVal === 'HAYIR' || aktifVal === 'PASİF' || aktifVal === '0') continue;
+    }
+
+    const mufredat = (idxMufredat !== -1 ? cols[idxMufredat] : 'TYMM') || 'TYMM';
+    const ders = (idxDers !== -1 ? cols[idxDers] : 'Genel Ders') || 'Genel Ders';
+    const modul = (idxModul !== -1 ? cols[idxModul] : 'Genel Modül') || 'Genel Modül';
+    const unite = idxUnite !== -1 ? (cols[idxUnite] || '') : '';
+    const udaKod = idxUdaKod !== -1 ? (cols[idxUdaKod] || '') : '';
+    const udaMetin = idxUdaMetin !== -1 ? (cols[idxUdaMetin] || '') : '';
+    const bepUda = idxBepUda !== -1 ? (cols[idxBepUda] || udaMetin) : udaMetin;
+    const kdaKod = idxKdaKod !== -1 ? (cols[idxKdaKod] || '') : '';
+    const kdaMetin = idxKdaMetin !== -1 ? (cols[idxKdaMetin] || '') : '';
+    const kdaTipi = idxKdaTipi !== -1 ? (cols[idxKdaTipi] || 'MEB_Resmi') : 'MEB_Resmi';
+
+    if (!kdaMetin && !udaMetin) continue;
+
+    if (!tree[mufredat]) tree[mufredat] = {};
+    if (!tree[mufredat][ders]) tree[mufredat][ders] = {};
+    if (!tree[mufredat][ders][modul]) tree[mufredat][ders][modul] = [];
+
+    const modulItems = tree[mufredat][ders][modul];
+    let udaItem = modulItems.find(it => (udaKod && it.kod === udaKod) || (!udaKod && it.uda === udaMetin));
+
+    if (!udaItem) {
+      udaItem = {
+        unite: unite,
+        kod: udaKod,
+        uda: udaMetin,
+        bep_uda: bepUda,
+        maarif_uda: udaMetin,
+        kda: [],
+        meb_kda: []
+      };
+      modulItems.push(udaItem);
+    }
+
+    if (kdaMetin) {
+      const tamKdaMetin = (kdaKod ? kdaKod + ': ' : '') + kdaMetin;
+      if (kdaTipi === 'Revize_Temel' || kdaKod.startsWith('KDA')) {
+        udaItem.kda.push(tamKdaMetin);
+      } else {
+        udaItem.meb_kda.push(tamKdaMetin);
+      }
+    }
+  }
+
+  return tree;
 }
 
 function fallbackToLocal(msg) {
