@@ -1270,13 +1270,45 @@ if (btnManuelEkle && inputManuelKazanim) {
 }
 
 /**
- * GOOGLE APPS SCRIPT / TABLOLAR BAĞLANTISI
+ * GOOGLE APPS SCRIPT / TABLOLAR BAĞLANTISI (Kotasız Yüksek Hızlı Canlı Köprü)
  */
 function initDataSource(forceRefresh = false) {
   elDbBadge.className = "db-badge loading";
   elDbBadge.innerHTML = "⏳ Veritabanı Yükleniyor...";
   elDbDetails.textContent = "Google E-Tablolar kontrol ediliyor...";
 
+  const defaultSheetId = "1kXuaEAdVsG6VzuQxuAtvmeEOIPty4lcT3CjNd9p79RU";
+  const savedId = (localStorage.getItem("BEP_SAVED_SHEET_ID") || defaultSheetId).trim();
+  const csvUrl = "https://docs.google.com/spreadsheets/d/" + savedId + "/export?format=csv" + (forceRefresh ? "&t=" + Date.now() : "");
+
+  // 1. Öncelikli: Doğrudan Canlı CSV Köprüsü (Google Apps Script 50KB limitine takılmaz, 6.000+ satırı anında yükler)
+  fetch(csvUrl)
+    .then(r => {
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return r.text();
+    })
+    .then(csvText => {
+      const parsedTree = parseCsvToBepTree(csvText);
+      if (parsedTree && Object.keys(parsedTree).length > 0) {
+        currentBepTree = parsedTree;
+        elDbBadge.className = "db-badge online";
+        elDbBadge.innerHTML = "🟢 Google E-Tablolar (Canlı Çevrim İçi)";
+        let dersSayisi = 0;
+        for (let m in parsedTree) {
+          dersSayisi += Object.keys(parsedTree[m]).length;
+        }
+        elDbDetails.textContent = `Tablo: ${savedId.substring(0, 8)}... | ${dersSayisi} Farklı Ders & Branş Hazır.`;
+        populateDropdowns();
+      } else {
+        fallbackToGAS(forceRefresh);
+      }
+    })
+    .catch(err => {
+      fallbackToGAS(forceRefresh);
+    });
+}
+
+function fallbackToGAS(forceRefresh) {
   if (typeof google !== "undefined" && google.script && google.script.run) {
     google.script.run
       .withSuccessHandler(function(response) {
@@ -1285,41 +1317,18 @@ function initDataSource(forceRefresh = false) {
           elDbBadge.className = "db-badge online";
           elDbBadge.innerHTML = "🟢 Google E-Tablolar (Canlı)";
           const meta = response.meta || {};
-          elDbDetails.textContent = `Tablo: ${meta.sheetName || 'BEP_HAVUZU'} | ${meta.totalRows || 0} Kazanım Satırı (${response.fromCache ? 'Hızlı Önbellek' : 'Canlı Okuma'})`;
+          elDbDetails.textContent = `Tablo: ${meta.sheetName || 'BEP_HAVUZU'} | ${meta.totalRows || 0} Satır`;
           populateDropdowns();
         } else {
           fallbackToLocal(response ? response.message : "Tablo yapılandırması bulunamadı.");
         }
       })
       .withFailureHandler(function(err) {
-        fallbackToLocal("GAS Bağlantı Hatası: " + err.message);
+        fallbackToLocal("Bağlantı Hatası: " + err.message);
       })
       .getBepDataFromSheet(forceRefresh);
   } else {
-    // Tarayıcıda yerel açıldığında Google E-Tablo'dan canlı CSV çekmeyi dene
-    const defaultSheetId = "1kXuaEAdVsG6VzuQxuAtvmeEOIPty4lcT3CjNd9p79RU";
-    const csvUrl = "https://docs.google.com/spreadsheets/d/" + defaultSheetId + "/export?format=csv";
-    
-    fetch(csvUrl)
-      .then(r => {
-        if (!r.ok) throw new Error("HTTP " + r.status);
-        return r.text();
-      })
-      .then(csvText => {
-        const parsedTree = parseCsvToBepTree(csvText);
-        if (parsedTree && Object.keys(parsedTree).length > 0) {
-          currentBepTree = parsedTree;
-          elDbBadge.className = "db-badge online";
-          elDbBadge.innerHTML = "🟢 Google E-Tablolar (Canlı Çevrim İçi)";
-          elDbDetails.textContent = "Google E-Tablonuzdan (1kXuaE...) canlı veri yüklendi.";
-          populateDropdowns();
-        } else {
-          fallbackToLocal("E-Tablo verisi ayrıştırılamadı, dahili havuz devrede.");
-        }
-      })
-      .catch(err => {
-        fallbackToLocal("Yerel Mod (İnternet bağlantısı yoksa dahili havuz devrede)");
-      });
+    fallbackToLocal("E-Tablo verisi ayrıştırılamadı, dahili havuz devrede.");
   }
 }
 
@@ -1848,28 +1857,48 @@ btnSaveSheetConfig.addEventListener("click", function() {
     return;
   }
 
-  if (typeof google !== "undefined" && google.script && google.script.run) {
-    settingsFeedback.style.display = "block";
-    settingsFeedback.style.color = "#0284c7";
-    settingsFeedback.textContent = "Bağlantı test ediliyor...";
+  // URL girildiyse ID'yi ayıkla
+  let cleanId = val;
+  const match = val.match(/\/spreadsheets\/d\/([a-zA-Z0-9-_]+)/);
+  if (match && match[1]) cleanId = match[1];
 
+  localStorage.setItem("BEP_SAVED_SHEET_ID", cleanId);
+
+  settingsFeedback.style.display = "block";
+  settingsFeedback.style.color = "#0284c7";
+  settingsFeedback.textContent = "Bağlantı test ediliyor...";
+
+  if (typeof google !== "undefined" && google.script && google.script.run) {
     google.script.run
       .withSuccessHandler(function(res) {
         if (res.success) {
           settingsFeedback.style.color = "#15803d";
           settingsFeedback.textContent = res.message;
-          setTimeout(() => {
-            modalSettings.style.display = "none";
-            initDataSource(true);
-          }, 1200);
         } else {
-          settingsFeedback.style.color = "#ef4444";
-          settingsFeedback.textContent = res.message;
+          settingsFeedback.style.color = "#b45309";
+          settingsFeedback.textContent = "Tablo ID kaydedildi, canlı köprü üzerinden bağlanılıyor...";
         }
+        setTimeout(() => {
+          modalSettings.style.display = "none";
+          initDataSource(true);
+        }, 1000);
       })
-      .saveSpreadsheetId(val);
+      .withFailureHandler(function(err) {
+        settingsFeedback.style.color = "#15803d";
+        settingsFeedback.textContent = "ID kaydedildi, canlı bağlantı yenileniyor...";
+        setTimeout(() => {
+          modalSettings.style.display = "none";
+          initDataSource(true);
+        }, 1000);
+      })
+      .saveSpreadsheetId(cleanId);
   } else {
-    alert("Google Apps Script ortamında çalışırken E-Tablo ID kaydedilir.");
+    settingsFeedback.style.color = "#15803d";
+    settingsFeedback.textContent = "ID yerel olarak kaydedildi, veriler güncelleniyor...";
+    setTimeout(() => {
+      modalSettings.style.display = "none";
+      initDataSource(true);
+    }, 1000);
   }
 });
 
