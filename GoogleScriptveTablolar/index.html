@@ -228,67 +228,6 @@
       cursor: pointer;
     }
 
-    /* KDA Kart ve Seçim Alanı */
-    .kda-container {
-      margin-top: 10px;
-      border: 1px solid #cbd5e1;
-      border-radius: 6px;
-      background: #ffffff;
-      padding: 10px;
-      max-height: 240px;
-      overflow-y: auto;
-    }
-    .kda-header-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 8px;
-      padding-bottom: 6px;
-      border-bottom: 1px solid #e2e8f0;
-    }
-    .kda-filter-btn {
-      padding: 3px 8px;
-      font-size: 11px;
-      border-radius: 4px;
-      border: 1px solid #cbd5e1;
-      background: #fff;
-      cursor: pointer;
-      font-weight: 600;
-    }
-    .kda-filter-btn.active {
-      background: #0284c7;
-      color: #fff;
-      border-color: #0284c7;
-    }
-    .kda-card {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      padding: 8px 10px;
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 6px;
-      margin-bottom: 6px;
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-    .kda-card:hover { border-color: #0284c7; background: #f0f9ff; }
-    .kda-card.selected {
-      border-color: #0284c7;
-      background: #e0f2fe;
-    }
-    .kda-card input[type="radio"] { margin-top: 3px; cursor: pointer; width: auto; }
-    .kda-card-text { font-size: 12px; flex: 1; }
-    .kda-badge {
-      font-size: 10px;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-    .kda-badge.resmi { background: #dbeafe; color: #1e40af; }
-    .kda-badge.revize { background: #fef3c7; color: #92400e; }
-
     /* Çoklu Seçim Dropdown Menüleri */
     .multiselect-container {
       position: relative;
@@ -599,9 +538,11 @@
       </div>
     </fieldset>
 
-    <!-- 3. GRUP: AMAÇ VE KAZANIM SEÇİMİ (UDA & KDA) -->
+    <!-- 3. GRUP: AMAÇ VE KAZANIM SEÇİMİ (UDA & KDA) - Birebir index3.html Düzeni -->
     <fieldset class="bep-group-box">
       <legend class="bep-group-title">🎯 Amaç ve Kazanım Seçimi (UDA & KDA)</legend>
+      
+      <!-- 1. SATIR: UDA Öğrenme Çıktısı Seçimi ve UDA Metni (2 Sütun) -->
       <div class="bep-grid-2">
         <div>
           <label>Uzun Dönemli Amaç (UDA) / Maarif Öğrenme Çıktısı Seçiniz</label>
@@ -612,114 +553,158 @@
         <div>
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; flex-wrap: wrap; gap: 8px;">
             <label style="margin: 0; font-weight: 700;">Uzun Dönemli Amaç (UDA) Cümlesi</label>
-            <div style="display: flex; align-items: center; gap: 12px; font-size: 11px;">
-              <label style="margin: 0; font-weight: normal; cursor: pointer; display: flex; align-items: center; gap: 4px;">
-                <input type="radio" name="bep_udaTuru" value="bep" id="bep_udaTuru_bep" checked style="cursor: pointer; width: auto;">
-                <span>BEP Uyarlaması</span>
+            <div style="font-size: 12px; display: flex; gap: 14px; background: #f8fafc; padding: 4px 10px; border-radius: 6px; border: 1px solid #cbd5e1;">
+              <label style="cursor: pointer; color: #0369a1; font-weight: 600; margin: 0; display: flex; align-items: center; gap: 4px;">
+                <input type="radio" name="bep_uda_tipi" value="bep" checked style="width: auto;"> ⭐ BEP Uyarlaması (Ölçülebilir Eylem)
               </label>
-              <label style="margin: 0; font-weight: normal; cursor: pointer; display: flex; align-items: center; gap: 4px;">
-                <input type="radio" name="bep_udaTuru" value="maarif" id="bep_udaTuru_maarif" style="cursor: pointer; width: auto;">
-                <span>Maarif Öğrenme Çıktısı</span>
+              <label style="cursor: pointer; color: #15803d; font-weight: 600; margin: 0; display: flex; align-items: center; gap: 4px;">
+                <input type="radio" name="bep_uda_tipi" value="maarif" style="width: auto;"> 📜 Resmî Maarif Çıktısı (TYMM / -ebilme)
               </label>
             </div>
           </div>
-          <textarea id="bep_udaMetni" rows="2" placeholder="Seçilen UDA metni buraya gelecektir..."></textarea>
+          <textarea id="bep_uda_metin" rows="2" placeholder="UDA seçildiğinde otomatik doldurulur..."></textarea>
         </div>
       </div>
-
-      <!-- KDA Seçim Alanı -->
-      <div style="margin-top: 10px;">
-        <div class="kda-header-bar">
-          <label style="margin: 0;">🔍 Kısa Dönemli Amaçlar (KDA) / Süreç Bileşenleri Seçiniz</label>
-          <div style="display: flex; gap: 4px;">
-            <button type="button" class="kda-filter-btn active" data-filter="all">Tümü</button>
-            <button type="button" class="kda-filter-btn" data-filter="Revize_Temel">Yalnızca BEP (Revize)</button>
-            <button type="button" class="kda-filter-btn" data-filter="MEB_Resmi">Yalnızca MEB Resmî</button>
-          </div>
-        </div>
-        <div class="kda-container" id="kdaListContainer">
-          <div style="color: #94a3b8; font-size: 12px; text-align: center; padding: 20px;">
-            Lütfen yukarıdan bir UDA seçiniz...
-          </div>
-        </div>
-      </div>
-    </fieldset>
-
-    <!-- 4. GRUP: ÖĞRETİM, MATERYAL, ÖLÇÜT VE DEĞERLENDİRME -->
-    <fieldset class="bep-group-box">
-      <legend class="bep-group-title">🛠️ Öğretim, Materyal ve Değerlendirme Bilgileri</legend>
+        
+      <!-- 2. SATIR: Revize KDA, Resmî MEB Kazanımları ve Ölçüt (3 Sütun: 2fr 2fr 1fr) -->
       <div class="bep-grid-kda-olcut">
-        <!-- Çoklu Seçim: Öğretim Yöntem ve Teknikleri -->
-        <div class="multiselect-container">
-          <label>💡 Öğretim Yöntem ve Teknikleri</label>
-          <div class="selectBox" id="bep_btnSelectYontem">
-            <select><option id="bep_lblSelectYontem">Seçiniz...</option></select>
-            <div class="overSelect"></div>
-          </div>
-          <div id="bep_panelYontem" class="checkboxes-panel">
-            <label><input type="checkbox" value="Doğrudan Öğretim" checked> Doğrudan Öğretim</label>
-            <label><input type="checkbox" value="Gösterip Yaptırma" checked> Gösterip Yaptırma</label>
-            <label><input type="checkbox" value="Model Olma" checked> Model Olma</label>
-            <label><input type="checkbox" value="Birebir Öğretim"> Birebir Öğretim</label>
-            <label><input type="checkbox" value="Basamaklandırılmış Yöntem"> Basamaklandırılmış Yöntem</label>
-            <label><input type="checkbox" value="İpuçlarının Geri Çekilmesi"> İpuçlarının Geri Çekilmesi</label>
-            <label><input type="checkbox" value="Soru-Cevap"> Soru-Cevap</label>
-            <label><input type="checkbox" value="Akran Öğretimi"> Akran Öğretimi</label>
-            <label><input type="checkbox" value="Anlatım"> Anlatım</label>
-            <label><input type="checkbox" value="Problem Çözme"> Problem Çözme</label>
+        <!-- 1. KISA DÖNEMLİ AMAÇLAR (REVİZE EDİLMİŞ - ÇOKLU SEÇİM) -->
+        <div>
+          <label style="color: #0369a1; font-weight: 700;">⭐ Revize Edilmiş KDA (Temel / Somut Düzey)</label>
+          <div class="multiselect-container">
+            <div class="selectBox" id="selectBoxKdaTrigger">
+              <select>
+                <option id="multiSelectKdaLabel">Önce UDA seçiniz...</option>
+              </select>
+              <div class="overSelect"></div>
+            </div>
+            <div id="checkboxesKdaArea" class="checkboxes-panel">
+              <div style="padding: 6px; font-size: 12px; color: #64748b;">Önce yukarıdan bir UDA seçiniz.</div>
+            </div>
           </div>
         </div>
 
-        <!-- Çoklu Seçim: Kullanılacak Materyaller -->
-        <div class="multiselect-container">
-          <label>🧰 Kullanılacak Materyaller</label>
-          <div class="selectBox" id="bep_btnSelectMateryal">
-            <select><option id="bep_lblSelectMateryal">Seçiniz...</option></select>
-            <div class="overSelect"></div>
-          </div>
-          <div id="bep_panelMateryal" class="checkboxes-panel">
-            <label><input type="checkbox" value="Bilgisayar" checked> Bilgisayar</label>
-            <label><input type="checkbox" value="Görsel Sıralama Kartları" checked> Görsel Sıralama Kartları</label>
-            <label><input type="checkbox" value="Çalışma Yaprakları" checked> Çalışma Yaprakları</label>
-            <label><input type="checkbox" value="EBA İçerikleri"> EBA İçerikleri</label>
-            <label><input type="checkbox" value="Akıllı Tahta"> Akıllı Tahta</label>
-            <label><input type="checkbox" value="Blok Tabanlı Kodlama Kartları"> Blok Tabanlı Kodlama Kartları</label>
-            <label><input type="checkbox" value="Gerçek Donanım Parçaları"> Gerçek Donanım Parçaları</label>
-            <label><input type="checkbox" value="Ders Kitabı"> Ders Kitabı</label>
+        <!-- 2. RESMÎ MEB KAZANIMLARI (REVİZE EDİLMEYEN ORİJİNAL KDA - ÇOKLU SEÇİM) -->
+        <div>
+          <label style="color: #b45309; font-weight: 700;">📜 Resmî MEB Kazanımları (Orijinal / Revize Edilmemiş)</label>
+          <div class="multiselect-container">
+            <div class="selectBox" id="selectBoxMebTrigger">
+              <select>
+                <option id="multiSelectMebLabel">Önce UDA seçiniz...</option>
+              </select>
+              <div class="overSelect"></div>
+            </div>
+            <div id="checkboxesMebArea" class="checkboxes-panel">
+              <div style="padding: 6px; font-size: 12px; color: #64748b;">Önce yukarıdan bir UDA seçiniz.</div>
+            </div>
           </div>
         </div>
 
+        <!-- 3. ÖLÇÜT -->
         <div>
           <label>⚖️ Ölçüt*</label>
-          <select id="bep_olcut">
-            <option value="%70 Başarı ile">%70 Başarı ile</option>
-            <option value="%80 Başarı ile">%80 Başarı ile</option>
-            <option value="%90 Başarı ile">%90 Başarı ile</option>
-            <option value="%100 Başarı ile">%100 Başarı ile</option>
-            <option value="3/4 Oranında">3/4 Oranında</option>
-            <option value="4/5 Oranında">4/5 Oranında</option>
-            <option value="5/5 Oranında">5/5 Oranında</option>
+          <select id="bep_degerlendirme">
+            <option value="%20 (1/5)">%20 (1/5)</option>
+            <option value="%40 (2/5)">%40 (2/5)</option>
+            <option value="%60 (3/5)">%60 (3/5)</option>
+            <option value="%80 (4/5)" selected>%80 (4/5)</option>
+            <option value="%100 (5/5)">%100 (5/5)</option>
           </select>
         </div>
       </div>
 
-      <div class="bep-grid-kda-olcut" style="margin-bottom: 0;">
+      <!-- 3. SATIR: MANUEL KAZANIM GİRİŞİ -->
+      <div style="margin-bottom: 12px;">
+        <label style="color: #0f172a; font-weight: 700;">✍️ Kazanım Ekle</label>
+        <div style="display: flex; gap: 8px;">
+          <input type="text" id="bep_manuel_kazanim" placeholder="Örn: 1.8. Öğrenci kendi belirlediği bir problemi çözer (Manuel / özel kazanım yazınız)...">
+          <button type="button" class="btn" id="bep_btn_manuel_ekle" style="background: #0284c7; color: #ffffff; white-space: nowrap; padding: 8px 14px; font-size: 12px;">+ Listeye Ekle</button>
+        </div>
+        <small style="color: #64748b; font-size: 11px; margin-top: 3px; display: block;">İpucu: Yazdığınız kazanımı '+ Listeye Ekle' butonuyla yukarıdaki listeye dahil edebilir veya doğrudan aşağıdaki '+ Seçilen Amacı Plana Ekle' butonuna basarak plana aktarabilirsiniz.</small>
+      </div>
+
+      <!-- 4. SATIR: 4 SÜTUN (Öğretim Yöntem ve Teknikleri, Kullanılacak Materyaller, Başlama Tarihi, Bitiş Tarihi) -->
+      <div class="bep-grid-4">
+        <div>
+          <label>💡 Öğretim Yöntem ve Teknikleri</label>
+          <input type="text" id="bep_yontem" value="Anlatım, Soru-Cevap, Gösterip Yaptırma, Takım/Grup Çalışması, Akran Öğrenmesi, Örnek Olay İncelemesi, Problem Çözme">
+        </div>
+        <div>
+          <label>🧰 Kullanılacak Materyaller</label>
+          <input type="text" id="bep_materyal" value="Ders Kitabı, Bilgisayar, Etkileşimli Tahta, Flowgorithm / Kodlama Araçları">
+        </div>
         <div>
           <label>📅 Başlama Tarihi</label>
-          <input type="date" id="bep_baslama">
+          <select id="bep_baslamaAy">
+            <option value="Eylül">Eylül</option>
+            <option value="Ekim" selected>Ekim</option>
+            <option value="Kasım">Kasım</option>
+            <option value="Aralık">Aralık</option>
+            <option value="Ocak">Ocak</option>
+            <option value="Şubat">Şubat</option>
+            <option value="Mart">Mart</option>
+            <option value="Nisan">Nisan</option>
+            <option value="Mayıs">Mayıs</option>
+            <option value="Haziran">Haziran</option>
+            <option value="Temmuz">Temmuz</option>
+            <option value="Ağustos">Ağustos</option>
+          </select>
         </div>
         <div>
           <label>📅 Bitiş Tarihi</label>
-          <input type="date" id="bep_bitis">
+          <select id="bep_bitisAy">
+            <option value="Eylül">Eylül</option>
+            <option value="Ekim">Ekim</option>
+            <option value="Kasım">Kasım</option>
+            <option value="Aralık">Aralık</option>
+            <option value="Ocak" selected>Ocak</option>
+            <option value="Şubat">Şubat</option>
+            <option value="Mart">Mart</option>
+            <option value="Nisan">Nisan</option>
+            <option value="Mayıs">Mayıs</option>
+            <option value="Haziran">Haziran</option>
+            <option value="Temmuz">Temmuz</option>
+            <option value="Ağustos">Ağustos</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- 5. SATIR: 3 SÜTUN (Değ. Yöntem ve Teknikleri, Değerlendirme Tarihleri, Performans) -->
+      <div class="bep-grid-3">
+        <div>
+          <label>Değ. Yöntem ve Teknikleri (Çoklu Seçim)</label>
+          <div class="multiselect-container">
+            <div class="selectBox" id="selectBoxTrigger">
+              <select>
+                <option id="multiSelectLabel">Gözlem formu</option>
+              </select>
+              <div class="overSelect"></div>
+            </div>
+            <div id="checkboxesArea" class="checkboxes-panel">
+              <label><input type="checkbox" value="Gözlem formu" checked> Gözlem formu</label>
+              <label><input type="checkbox" value="Performans görevi"> Performans görevi</label>
+              <label><input type="checkbox" value="Görüşme formu"> Görüşme formu</label>
+              <label><input type="checkbox" value="Çalışma kâğıdı"> Çalışma kâğıdı</label>
+              <label><input type="checkbox" value="Kontrol listesi"> Kontrol listesi</label>
+            </div>
+          </div>
         </div>
         <div>
           <label>🗓️ Değerlendirme Tarihleri</label>
-          <input type="text" id="bep_degTarih" value="1. Dönem Sonu, 2. Dönem Sonu">
+          <input type="text" id="bep_degTarih" value="" placeholder="Tarih giriniz...">
+        </div>
+        <div>
+          <label>Performans Yeterli (+) / Geliştirilmeli (-)</label>
+          <select id="bep_performans">
+            <option value="" selected>Boş Bırak</option>
+            <option value="( + )">Yeterli ( + )</option>
+            <option value="( - )">Geliştirilmeli ( - )</option>
+          </select>
         </div>
       </div>
 
       <div style="margin-top: 15px; text-align: right;">
-        <button type="button" class="btn btn-add" id="bep_btn_ekle">➕ Seçilen Amacı Plana Ekle</button>
+        <button type="button" class="btn btn-add" id="bep_btn_ekle">+ Seçilen Amacı Plana Ekle</button>
       </div>
     </fieldset>
   </div>
@@ -857,8 +842,7 @@
 
 <script>
 /**
- * YEREL YEDEK / BAŞLANGIÇ VERİ HAVUZU
- * Google E-Tablo'ya bağlanılmadığında veya offline çalışırken bu zengin havuz kullanılır.
+ * YEREL YEDEK / BAŞLANGIÇ VERİ HAVUZU (Birebir index3.html Maarif 2.0 Zengin Verileri)
  */
 const DEFAULT_BEP_DATABASE = {
   "TYMM": {
@@ -868,82 +852,54 @@ const DEFAULT_BEP_DATABASE = {
           "unite": "1. ÜNİTE: BİLİŞİM TEKNOLOJİLERİNİN PROGRAMLAMADAKİ YERİ",
           "konu": "Temel Kavramlar ve Bilişim Araçları",
           "kod": "BTY.9.1.1",
-          "uda": "BTY.9.1.1. Bilişim teknolojilerine ilişkin temel kavramları ve bilişim araçlarını sınıflandırabilme",
+          "maarif_uda": "BTY.9.1.1. Bilişim teknolojilerine ilişkin temel kavramları ve bilişim araçlarını sınıflandırabilme",
           "bep_uda": "Öğrenci, dönem sonunda bilişim teknolojilerine ilişkin temel kavramları ve yaygın bilişim araçlarını eşleştirir, gösterir ve kullanım amacını söyler.",
-          "kda_listesi": [
-            {
-              "kod": "KDA 1.1",
-              "metin": "Temel bilişim kavramlarını (bilgisayar, yazılım, veri, donanım) temsil eden kartlardan veya seçeneklerden adı söyleneni seçip gösterir.",
-              "tip": "Revize_Temel",
-              "olcut": "%70 Başarı ile",
-              "yontem": "Doğrudan Öğretim, Gösterip Yaptırma, Model Olma",
-              "materyal": "Bilgisayar, Görsel Sıralama Kartları, Çalışma Yaprakları"
-            },
-            {
-              "kod": "KDA 1.2",
-              "metin": "Masada/ekranda bulunan bilişim araçlarından (bilgisayar, kasa, monitör, klavye, fare, tablet) adı söyleneni parmağıyla gösterir.",
-              "tip": "Revize_Temel",
-              "olcut": "%70 Başarı ile",
-              "yontem": "Model Olma, İpuçlarının Geri Çekilmesi",
-              "materyal": "Gerçek Donanım Parçaları, Bilgisayar"
-            },
-            {
-              "kod": "1.1",
-              "metin": "Bilişim teknolojilerine ilişkin temel kavramları tanımlar.",
-              "tip": "MEB_Resmi",
-              "olcut": "%75 Başarı ile",
-              "yontem": "Anlatım, Soru-Cevap, Tartışma",
-              "materyal": "Ders Kitabı, EBA İçerikleri, Bilgisayar"
-            },
-            {
-              "kod": "1.2",
-              "metin": "Bilişim teknolojisi araçlarını listeler.",
-              "tip": "MEB_Resmi",
-              "olcut": "%75 Başarı ile",
-              "yontem": "Anlatım, Soru-Cevap, Gösterip Yaptırma",
-              "materyal": "Akıllı Tahta, Bilgisayar"
-            }
+          "uda": "Öğrenci, bilişim teknolojilerine ilişkin temel kavramları ve yaygın bilişim araçlarını eşleştirir, gösterir ve söyler.",
+          "kda": [
+            "KDA 1.1: Temel bilişim kavramlarını (bilgisayar, yazılım, veri, donanım) temsil eden kartlardan veya seçeneklerden adı söyleneni seçip gösterir.",
+            "KDA 1.2: Masada/ekranda bulunan bilişim araçlarından (bilgisayar, kasa, monitör, klavye, fare, tablet) adı söyleneni parmağıyla gösterir."
+          ],
+          "meb_kda": [
+            "1.1. Bilişim teknolojilerine ilişkin temel kavramları tanımlar.",
+            "1.2. Bilişim teknolojisi araçlarını listeler."
+          ]
+        },
+        {
+          "unite": "1. ÜNİTE: BİLİŞİM TEKNOLOJİLERİNİN PROGRAMLAMADAKİ YERİ",
+          "konu": "Cihazların Gelişimi ve Tarihsel Dönüm Noktaları",
+          "kod": "BTY.9.1.2",
+          "maarif_uda": "BTY.9.1.2. Bilişim teknolojisi cihazlarının tarihsel gelişimini ve önemli dönüm noktalarını karşılaştırarak yorumlayabilme",
+          "bep_uda": "Öğrenci, dönem sonunda kendisine karışık verilen eski ve yeni teknolojik cihaz kartlarını (tüplü/düz ekran, tuşlu/dokunmatik telefon) eskiden yeniye doğru sırasıyla masaya dizer.",
+          "uda": "Öğrenci, eski ve yeni teknolojik cihaz kartlarını eskiden yeniye doğru sırayla masaya dizer.",
+          "kda": [
+            "KDA 1.3: Eski ve yeni teknoloji kartlarını (tüplü ekran ile düz ekran) eskiden yeniye doğru dizer.",
+            "KDA 1.4: Bilgisayarın ve internetin icadını temsil eden görselleri panoda yardımla gösterir."
+          ],
+          "meb_kda": [
+            "1.3. Bilişim teknolojileri cihazlarının gelişimini açıklar.",
+            "1.4. Bilişim teknolojilerinin gelişiminde önemli rol oynayan keşifler, buluşlar, olaylar ve dönüm noktalarını tartışır/listeler."
           ]
         },
         {
           "unite": "2. ÜNİTE: ALGORİTMA İLE PROBLEM ÇÖZME VE AKIŞ DİYAGRAMI",
           "konu": "Problem Çözme, Girdi-İşlem-Çıktı ve Algoritma",
           "kod": "BTY.9.2.1",
-          "uda": "BTY.9.2.1. Problem çözme sürecinde girdi-işlem-çıktı bileşenlerini ilişkilendirerek algoritmik düşünebilme ve çözüm algoritması geliştirebilme",
+          "maarif_uda": "BTY.9.2.1. Problem çözme sürecinde girdi-işlem-çıktı bileşenlerini ilişkilendirerek algoritmik düşünebilme ve çözüm algoritması geliştirebilme",
           "bep_uda": "Öğrenci, dönem sonunda önüne konulan 3-4 adımlı günlük yaşam probleminin girdi-çıktılarını belirler; işlem adımı kartlarını oluş sırasına göre soldan sağa hatasız dizer ve sıralar.",
-          "kda_listesi": [
-            {
-              "kod": "KDA 2.1",
-              "metin": "Basit bir problem durumunu dinleyerek problemin ne olduğunu söyler.",
-              "tip": "Revize_Temel",
-              "olcut": "3/4 Oranında",
-              "yontem": "Model Olma, İpuçlarının Geri Çekilmesi",
-              "materyal": "Görsel Sıralama Kartları, Blok Tabanlı Kodlama Kartları"
-            },
-            {
-              "kod": "KDA 2.2",
-              "metin": "Belirtilen iş için gereken girdi malzemelerini/araçlarını resimler arasından belirler ve seçip gösterir.",
-              "tip": "Revize_Temel",
-              "olcut": "3/4 Oranında",
-              "yontem": "Gösterip Yaptırma, Rehberli Uygulama",
-              "materyal": "Görsel Sıralama Kartları"
-            },
-            {
-              "kod": "2.1",
-              "metin": "Çözümü istenen problemi kavrar.",
-              "tip": "MEB_Resmi",
-              "olcut": "%80 Başarı ile",
-              "yontem": "Problem Çözme, Anlatım",
-              "materyal": "Çalışma Yaprakları, Akıllı Tahta"
-            },
-            {
-              "kod": "2.5",
-              "metin": "Bir problemin çözümü için en doğru algoritmayı geliştirir.",
-              "tip": "MEB_Resmi",
-              "olcut": "%70 Başarı ile",
-              "yontem": "Gösterip Yaptırma, Uygulamalı Çalışma",
-              "materyal": "Bilgisayar, Çalışma Yaprakları"
-            }
+          "uda": "Öğrenci, günlük yaşam probleminin girdi-çıktılarını belirler; işlem adımı kartlarını sırayla dizer ve sıralar.",
+          "kda": [
+            "KDA 2.1: Basit bir problem durumunu dinleyerek problemin ne olduğunu söyler.",
+            "KDA 2.2: Belirtilen iş için gereken girdi malzemelerini/araçlarını resimler arasından belirler ve seçip gösterir.",
+            "KDA 2.3: Günlük bir olayda malzemeleri (girdi), pişirmeyi (işlem) ve tostu (çıktı) ayırt edip gösterir.",
+            "KDA 2.4: Algoritmanın 'sıralı işlem adımları' olduğunu söyler.",
+            "KDA 2.5: Önüne konulan 3-4 adımlı günlük yaşam kartlarını doğru oluş sırasına göre soldan sağa dizer ve adımları numaralandırarak sıralar."
+          ],
+          "meb_kda": [
+            "2.1. Çözümü istenen problemi kavrar.",
+            "2.2. Çözüm için gereksinimlerini belirler.",
+            "2.3. Problemin girdi, çıktı ve işlem aşamalarını belirler.",
+            "2.4. Algoritma kavramını açıklar.",
+            "2.5. Bir problemin çözümü için en doğru algoritmayı geliştirir."
           ]
         }
       ],
@@ -952,33 +908,16 @@ const DEFAULT_BEP_DATABASE = {
           "unite": "1. ÜNİTE: PYTHON İLE PROGRAMLAMAYA GİRİŞ",
           "konu": "Python Geliştirme Ortamı ve Temel Kodlar",
           "kod": "BTY.9.3.1",
-          "uda": "BTY.9.3.1. Python dilinin temel geliştirme ortamını ve kod bloklarını kavrayabilme",
+          "maarif_uda": "BTY.9.3.1. Python dilinin temel geliştirme ortamını ve kod bloklarını kavrayabilme",
           "bep_uda": "Öğrenci, Python çalışma ortamını (IDLE/VS Code) açar, yeni dosya oluşturur ve basit komutları çalıştırır.",
-          "kda_listesi": [
-            {
-              "kod": "KDA 3.1",
-              "metin": "Masaüstünde bulunan Python simgesine çift tıklayarak programı açar.",
-              "tip": "Revize_Temel",
-              "olcut": "%80 Başarı ile",
-              "yontem": "Gösterip Yaptırma",
-              "materyal": "Bilgisayar"
-            },
-            {
-              "kod": "KDA 3.2",
-              "metin": "print() komutunu kullanarak ekranda kendi adını yazdırır.",
-              "tip": "Revize_Temel",
-              "olcut": "%70 Başarı ile",
-              "yontem": "Doğrudan Öğretim, Birebir Öğretim",
-              "materyal": "Bilgisayar, Çalışma Yaprakları"
-            },
-            {
-              "kod": "3.1",
-              "metin": "Python çalışma ortamı bileşenlerini tanımlar.",
-              "tip": "MEB_Resmi",
-              "olcut": "%75 Başarı ile",
-              "yontem": "Anlatım, Gösterip Yaptırma",
-              "materyal": "Akıllı Tahta, Bilgisayar"
-            }
+          "uda": "Öğrenci, Python arayüzünü açar ve print() komutuyla adını yazdırır.",
+          "kda": [
+            "KDA 3.1: Masaüstünde bulunan Python simgesine çift tıklayarak programı açar.",
+            "KDA 3.2: print() komutunu kullanarak ekranda kendi adını yazdırır."
+          ],
+          "meb_kda": [
+            "3.1. Python çalışma ortamı bileşenlerini tanımlar.",
+            "3.2. Temel girdi ve çıktı fonksiyonlarını kullanır."
           ]
         }
       ],
@@ -987,17 +926,14 @@ const DEFAULT_BEP_DATABASE = {
           "unite": "1. ÜNİTE: ROBOTİK SİSTEMLER VE DONANIM",
           "konu": "Sensörler ve Motorlar",
           "kod": "BTY.9.4.1",
-          "uda": "BTY.9.4.1. Robotik bileşenleri tanıyarak temel devreleri kurabilme",
+          "maarif_uda": "BTY.9.4.1. Robotik bileşenleri tanıyarak temel devreleri kurabilme",
           "bep_uda": "Öğrenci, mikrokontrolcü kartına LED ve direnç bağlar; öğretmen rehberliğinde yakıp söndürür.",
-          "kda_listesi": [
-            {
-              "kod": "KDA 4.1",
-              "metin": "Verilen LED ve direnç elemanlarını breadboard üzerinde gösterilen yerlere takar.",
-              "tip": "Revize_Temel",
-              "olcut": "%70 Başarı ile",
-              "yontem": "Model Olma, Gösterip Yaptırma",
-              "materyal": "Robotik Kodlama Seti, Bilgisayar"
-            }
+          "uda": "Öğrenci, temel devre elemanlarını breadboard üzerinde gösterilen yerlere takar.",
+          "kda": [
+            "KDA 4.1: Verilen LED ve direnç elemanlarını breadboard üzerinde gösterilen yerlere takar."
+          ],
+          "meb_kda": [
+            "4.1. Temel devre elemanlarını ve mikrokontrolcüleri listeler."
           ]
         }
       ]
@@ -1008,17 +944,14 @@ const DEFAULT_BEP_DATABASE = {
           "unite": "1. ÜNİTE: PYTHON İLE VERİ YAPILARI VE DÖNGÜLER",
           "konu": "Koşul Yapıları ve Döngüler",
           "kod": "BTY.10.1.1",
-          "uda": "BTY.10.1.1. Python dilinde koşul ve döngü yapılarını kullanarak algoritmalar tasarlayabilme",
+          "maarif_uda": "BTY.10.1.1. Python dilinde koşul ve döngü yapılarını kullanarak algoritmalar tasarlayabilme",
           "bep_uda": "Öğrenci, if-else koşul blokları içeren basit karar yapılarını öğretmen rehberliğinde kodlar.",
-          "kda_listesi": [
-            {
-              "kod": "KDA 1.1",
-              "metin": "if koşul ifadesini kullanarak girilen sayının pozitif olduğunu ekrana yazdırır.",
-              "tip": "Revize_Temel",
-              "olcut": "%70 Başarı ile",
-              "yontem": "Gösterip Yaptırma, Birebir Rehberlik",
-              "materyal": "Bilgisayar, Kod Kartları"
-            }
+          "uda": "Öğrenci, sayı karşılaştırması yapan if-else kodunu çalıştırır.",
+          "kda": [
+            "KDA 1.1: if koşul ifadesini kullanarak girilen sayının pozitif olduğunu ekrana yazdırır."
+          ],
+          "meb_kda": [
+            "1.1. Koşullu ifadeleri ve mantıksal operatörleri program akışında kullanır."
           ]
         }
       ]
@@ -1033,15 +966,11 @@ const DEFAULT_BEP_DATABASE = {
           "kod": "BTY.5.1",
           "uda": "Bilişim teknolojilerinin günlük yaşamdaki yerini ve önemini fark eder.",
           "bep_uda": "Öğrenci, teknolojinin yararlı ve dikkatli kullanımına ilişkin örnekler verir.",
-          "kda_listesi": [
-            {
-              "kod": "KDA 1.1",
-              "metin": "Bilgisayarın okulda ne amaçla kullanıldığını sorulduğunda söyler.",
-              "tip": "Revize_Temel",
-              "olcut": "%70 Başarı ile",
-              "yontem": "Soru-Cevap, Anlatım",
-              "materyal": "Görsel Sıralama Kartları, Akıllı Tahta"
-            }
+          "kda": [
+            "KDA 1.1: Bilgisayarın okulda ne amaçla kullanıldığını sorulduğunda söyler."
+          ],
+          "meb_kda": [
+            "1.1. Bilişim teknolojilerinin günlük yaşamdaki kullanım alanlarını açıklar."
           ]
         }
       ]
@@ -1054,15 +983,11 @@ const DEFAULT_BEP_DATABASE = {
           "kod": "MAT.9.1",
           "uda": "Kümeler ile ilgili temel kavramları açıklar.",
           "bep_uda": "Öğrenci, verilen nesneler arasından küme oluşturanları ayırır ve venn şeması içinde gösterir.",
-          "kda_listesi": [
-            {
-              "kod": "KDA 1.1",
-              "metin": "Verilen 5 nesne resmini venn şeması içine yerleştirir.",
-              "tip": "Revize_Temel",
-              "olcut": "3/4 Oranında",
-              "yontem": "Gösterip Yaptırma, Birebir Öğretim",
-              "materyal": "Şema Kartları, Nesneler"
-            }
+          "kda": [
+            "KDA 1.1: Verilen 5 nesne resmini venn şeması içine yerleştirir."
+          ],
+          "meb_kda": [
+            "1.1. Kümeler ile ilgili temel kavramları açıklar."
           ]
         }
       ]
@@ -1074,7 +999,6 @@ const DEFAULT_BEP_DATABASE = {
  * UYGULAMA DURUM YÖNETİCİSİ
  */
 let currentBepTree = DEFAULT_BEP_DATABASE;
-let currentActiveFilter = "all";
 let currentSelectedUdaItem = null;
 
 // DOM Elemanları
@@ -1084,12 +1008,27 @@ const elMufredat = document.getElementById("bep_mufredatTuru");
 const elDers = document.getElementById("bep_ders");
 const elModul = document.getElementById("bep_modul");
 const elUda = document.getElementById("bep_uda");
-const elUdaMetni = document.getElementById("bep_udaMetni");
-const elKdaContainer = document.getElementById("kdaListContainer");
-const elOlcut = document.getElementById("bep_olcut");
-const elBaslama = document.getElementById("bep_baslama");
-const elBitis = document.getElementById("bep_bitis");
-const elDegTarih = document.getElementById("bep_degTarih");
+const elUdaMetin = document.getElementById("bep_uda_metin");
+
+// KDA ve MEB Checkbox Panel Elemanları
+const selectBoxKdaTrigger = document.getElementById("selectBoxKdaTrigger");
+const checkboxesKda = document.getElementById("checkboxesKdaArea");
+const multiSelectKdaLabel = document.getElementById("multiSelectKdaLabel");
+
+const selectBoxMebTrigger = document.getElementById("selectBoxMebTrigger");
+const checkboxesMeb = document.getElementById("checkboxesMebArea");
+const multiSelectMebLabel = document.getElementById("multiSelectMebLabel");
+
+// Manuel Kazanım Elemanları
+const inputManuelKazanim = document.getElementById("bep_manuel_kazanim");
+const btnManuelEkle = document.getElementById("bep_btn_manuel_ekle");
+
+// Değerlendirme Yöntemi Panel Elemanları
+const selectBoxTrigger = document.getElementById("selectBoxTrigger");
+const checkboxesArea = document.getElementById("checkboxesArea");
+const multiSelectLabel = document.getElementById("multiSelectLabel");
+
+const elBtnEkle = document.getElementById("bep_btn_ekle");
 const elTableBody = document.getElementById("bep_govde");
 
 // Rehber Öğretmen Elemanları
@@ -1097,15 +1036,6 @@ const elRehberInput = document.getElementById("bep_rehberOgretmen");
 const elRehberToggle = document.getElementById("bep_toggleRehberOgretmen");
 const elRehberClear = document.getElementById("bep_clearRehberOgretmen");
 const elRehberMenu = document.getElementById("bep_rehberMenu");
-
-// Çoklu Seçim Elemanları
-const btnSelectYontem = document.getElementById("bep_btnSelectYontem");
-const panelYontem = document.getElementById("bep_panelYontem");
-const lblSelectYontem = document.getElementById("bep_lblSelectYontem");
-
-const btnSelectMateryal = document.getElementById("bep_btnSelectMateryal");
-const panelMateryal = document.getElementById("bep_panelMateryal");
-const lblSelectMateryal = document.getElementById("bep_lblSelectMateryal");
 
 // Ayarlar Modal Elemanları
 const modalSettings = document.getElementById("settingsModal");
@@ -1117,13 +1047,45 @@ const btnSetupSampleSheet = document.getElementById("btnSetupSampleSheet");
 const inputSheetId = document.getElementById("inputSheetId");
 const settingsFeedback = document.getElementById("settingsFeedback");
 
-// Başlangıç Tarihlerini Ayarla
-const bugun = new Date().toISOString().split('T')[0];
-if (elBaslama) elBaslama.value = bugun;
-if (elBitis) {
-  const sonra = new Date();
-  sonra.setMonth(sonra.getMonth() + 1);
-  elBitis.value = sonra.toISOString().split('T')[0];
+function escapeHtml(text) {
+  if (!text) return "";
+  return String(text)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+/**
+ * CHECKBOX ÖĞESİ OLUŞTURMA YARDIMCISI (index3.html Standardı)
+ */
+function createCheckboxItem(kazanimMetni, onchangeFn, isCustom) {
+  const lbl = document.createElement("label");
+  if (isCustom) {
+    lbl.style.background = "#eff6ff";
+    lbl.style.borderLeft = "3px solid #0284c7";
+  }
+  const chk = document.createElement("input");
+  chk.type = "checkbox";
+  chk.value = kazanimMetni;
+  if (isCustom) {
+    chk.checked = true;
+  }
+  chk.addEventListener("change", onchangeFn);
+
+  const span = document.createElement("span");
+  if (isCustom) {
+    const strong = document.createElement("strong");
+    strong.textContent = "[Özel] ";
+    span.appendChild(strong);
+  }
+  span.appendChild(document.createTextNode(kazanimMetni));
+
+  lbl.appendChild(chk);
+  lbl.appendChild(document.createTextNode(" "));
+  lbl.appendChild(span);
+  return lbl;
 }
 
 /**
@@ -1170,44 +1132,142 @@ document.querySelectorAll(".bep-rehber-item").forEach(item => {
   });
 });
 
+/**
+ * AÇILIR KAPANIR PANEL KONTROLLERİ (Click Outside Koruması)
+ */
+let expandedKda = false;
+selectBoxKdaTrigger.addEventListener("click", function(e) {
+  e.stopPropagation();
+  expandedKda = !expandedKda;
+  checkboxesKda.style.display = expandedKda ? "block" : "none";
+  checkboxesMeb.style.display = "none"; expandedMeb = false;
+  checkboxesArea.style.display = "none"; expandedDeg = false;
+});
+
+let expandedMeb = false;
+selectBoxMebTrigger.addEventListener("click", function(e) {
+  e.stopPropagation();
+  expandedMeb = !expandedMeb;
+  checkboxesMeb.style.display = expandedMeb ? "block" : "none";
+  checkboxesKda.style.display = "none"; expandedKda = false;
+  checkboxesArea.style.display = "none"; expandedDeg = false;
+});
+
+let expandedDeg = false;
+selectBoxTrigger.addEventListener("click", function(e) {
+  e.stopPropagation();
+  expandedDeg = !expandedDeg;
+  checkboxesArea.style.display = expandedDeg ? "block" : "none";
+  checkboxesKda.style.display = "none"; expandedKda = false;
+  checkboxesMeb.style.display = "none"; expandedMeb = false;
+});
+
 document.addEventListener("click", function(e) {
   if (elRehberMenu && !elRehberMenu.contains(e.target) && e.target !== elRehberToggle) {
     elRehberMenu.style.display = "none";
   }
-  if (panelYontem && !panelYontem.contains(e.target) && !btnSelectYontem.contains(e.target)) {
-    panelYontem.style.display = "none";
+  if (checkboxesKda && !checkboxesKda.contains(e.target) && !selectBoxKdaTrigger.contains(e.target)) {
+    checkboxesKda.style.display = "none";
+    expandedKda = false;
   }
-  if (panelMateryal && !panelMateryal.contains(e.target) && !btnSelectMateryal.contains(e.target)) {
-    panelMateryal.style.display = "none";
+  if (checkboxesMeb && !checkboxesMeb.contains(e.target) && !selectBoxMebTrigger.contains(e.target)) {
+    checkboxesMeb.style.display = "none";
+    expandedMeb = false;
+  }
+  if (checkboxesArea && !checkboxesArea.contains(e.target) && !selectBoxTrigger.contains(e.target)) {
+    checkboxesArea.style.display = "none";
+    expandedDeg = false;
   }
 });
 
-/**
- * ÇOKLU SEÇİM MENÜLERİ (Yöntem & Materyal)
- */
-btnSelectYontem.addEventListener("click", function(e) {
-  e.stopPropagation();
-  panelYontem.style.display = (panelYontem.style.display === "block") ? "none" : "block";
-  panelMateryal.style.display = "none";
-});
-
-btnSelectMateryal.addEventListener("click", function(e) {
-  e.stopPropagation();
-  panelMateryal.style.display = (panelMateryal.style.display === "block") ? "none" : "block";
-  panelYontem.style.display = "none";
-});
-
-function guncelleCokluSecimEtiketleri() {
-  const yontemSecilenler = Array.from(panelYontem.querySelectorAll("input:checked")).map(cb => cb.value);
-  lblSelectYontem.textContent = yontemSecilenler.length > 0 ? yontemSecilenler.join(", ") : "Seçiniz...";
-
-  const matSecilenler = Array.from(panelMateryal.querySelectorAll("input:checked")).map(cb => cb.value);
-  lblSelectMateryal.textContent = matSecilenler.length > 0 ? matSecilenler.join(", ") : "Seçiniz...";
+function guncelleKdaLabel() {
+  const checkedBoxes = checkboxesKda.querySelectorAll('input[type="checkbox"]:checked');
+  if (checkedBoxes.length === 0) {
+    multiSelectKdaLabel.textContent = "Revize KDA Seçiniz (0 Seçildi)";
+  } else if (checkedBoxes.length === 1) {
+    const txt = checkedBoxes[0].value;
+    multiSelectKdaLabel.textContent = txt.length > 35 ? txt.substring(0, 32) + "..." : txt;
+  } else {
+    multiSelectKdaLabel.textContent = checkedBoxes.length + " Revize KDA Seçildi";
+  }
 }
 
-panelYontem.addEventListener("change", guncelleCokluSecimEtiketleri);
-panelMateryal.addEventListener("change", guncelleCokluSecimEtiketleri);
-guncelleCokluSecimEtiketleri();
+function getSeciliKdaListesi() {
+  const checkedBoxes = checkboxesKda.querySelectorAll('input[type="checkbox"]:checked');
+  const secilenler = [];
+  checkedBoxes.forEach(box => secilenler.push(box.value));
+  return secilenler;
+}
+
+function guncelleMebLabel() {
+  const checkedBoxes = checkboxesMeb.querySelectorAll('input[type="checkbox"]:checked');
+  if (checkedBoxes.length === 0) {
+    multiSelectMebLabel.textContent = "MEB Kazanımı Seçiniz (0 Seçildi)";
+  } else if (checkedBoxes.length === 1) {
+    const txt = checkedBoxes[0].value;
+    multiSelectMebLabel.textContent = txt.length > 35 ? txt.substring(0, 32) + "..." : txt;
+  } else {
+    multiSelectMebLabel.textContent = checkedBoxes.length + " MEB Kazanımı Seçildi";
+  }
+}
+
+function getSeciliMebListesi() {
+  const checkedBoxes = checkboxesMeb.querySelectorAll('input[type="checkbox"]:checked');
+  const secilenler = [];
+  checkedBoxes.forEach(box => secilenler.push(box.value));
+  return secilenler;
+}
+
+function guncelleSecimLabel() {
+  const checkedBoxes = checkboxesArea.querySelectorAll('input[type="checkbox"]:checked');
+  if (checkedBoxes.length === 0) {
+    multiSelectLabel.textContent = "Seçim Yapılmadı";
+  } else if (checkedBoxes.length === 1) {
+    multiSelectLabel.textContent = checkedBoxes[0].value;
+  } else {
+    multiSelectLabel.textContent = checkedBoxes.length + " Yöntem Seçildi";
+  }
+}
+
+checkboxesArea.querySelectorAll('input[type="checkbox"]').forEach(chk => {
+  chk.addEventListener("change", guncelleSecimLabel);
+});
+
+function getSeciliYontemler() {
+  const checkedBoxes = checkboxesArea.querySelectorAll('input[type="checkbox"]:checked');
+  const secilenler = [];
+  checkedBoxes.forEach(box => secilenler.push(box.value));
+  return secilenler.length > 0 ? secilenler.join(", ") : "-";
+}
+
+/**
+ * MANUEL KAZANIM EKLEME
+ */
+if (btnManuelEkle && inputManuelKazanim) {
+  btnManuelEkle.addEventListener("click", function() {
+    const metin = inputManuelKazanim.value.trim();
+    if (!metin) {
+      alert("Lütfen eklemek istediğiniz kazanım metnini yazınız.");
+      inputManuelKazanim.focus();
+      return;
+    }
+
+    if (checkboxesMeb.querySelector("div") && checkboxesMeb.querySelectorAll("label").length === 0) {
+      checkboxesMeb.innerHTML = '';
+    }
+
+    checkboxesMeb.appendChild(createCheckboxItem(metin, guncelleMebLabel, true));
+    guncelleMebLabel();
+    inputManuelKazanim.value = "";
+  });
+
+  inputManuelKazanim.addEventListener("keydown", function(e) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      btnManuelEkle.click();
+    }
+  });
+}
 
 /**
  * GOOGLE APPS SCRIPT / TABLOLAR BAĞLANTISI
@@ -1310,8 +1370,11 @@ function onModulChange() {
   elUda.innerHTML = "";
   if (udaList.length === 0) {
     elUda.innerHTML = "<option value=''>Bu modülde UDA bulunamadı</option>";
-    elUdaMetni.value = "";
-    elKdaContainer.innerHTML = "<div style='color:#94a3b8; font-size:12px; text-align:center; padding:15px;'>Kazanım bulunamadı.</div>";
+    elUdaMetin.value = "";
+    checkboxesKda.innerHTML = '<div style="padding: 6px; font-size: 12px; color: #64748b;">Kazanım bulunamadı.</div>';
+    checkboxesMeb.innerHTML = '<div style="padding: 6px; font-size: 12px; color: #64748b;">Kazanım bulunamadı.</div>';
+    multiSelectKdaLabel.textContent = "Önce UDA seçiniz...";
+    multiSelectMebLabel.textContent = "Önce UDA seçiniz...";
     senkronizeEt();
     return;
   }
@@ -1333,81 +1396,161 @@ function onUdaChange() {
   const udaIdx = elUda.value;
   const udaList = (currentBepTree[mufredatKey] && currentBepTree[mufredatKey][dersKey] && currentBepTree[mufredatKey][dersKey][modulKey]) || [];
 
+  checkboxesKda.innerHTML = '';
+  checkboxesMeb.innerHTML = '';
+
   if (udaIdx === "" || !udaList[udaIdx]) {
     currentSelectedUdaItem = null;
-    elUdaMetni.value = "";
-    renderKdaList([]);
+    elUdaMetin.value = "";
+    checkboxesKda.innerHTML = '<div style="padding: 6px; font-size: 12px; color: #64748b;">Önce yukarıdan bir UDA seçiniz.</div>';
+    checkboxesMeb.innerHTML = '<div style="padding: 6px; font-size: 12px; color: #64748b;">Önce yukarıdan bir UDA seçiniz.</div>';
+    multiSelectKdaLabel.textContent = "Önce UDA seçiniz...";
+    multiSelectMebLabel.textContent = "Önce UDA seçiniz...";
     senkronizeEt();
     return;
   }
 
   currentSelectedUdaItem = udaList[udaIdx];
-  updateUdaText();
-  renderKdaList(currentSelectedUdaItem.kda_listesi || []);
+  guncelleUdaMetni();
+
+  // KDA'ları Ayıkla (Hem kda/meb_kda dizilerini hem de kda_listesi nesnelerini destekler)
+  let revizeListesi = currentSelectedUdaItem.kda || [];
+  let mebListesi = currentSelectedUdaItem.meb_kda || [];
+
+  if (currentSelectedUdaItem.kda_listesi && currentSelectedUdaItem.kda_listesi.length > 0) {
+    revizeListesi = [];
+    mebListesi = [];
+    currentSelectedUdaItem.kda_listesi.forEach(k => {
+      const txt = (k.kod ? k.kod + ': ' : '') + k.metin;
+      if (k.tip === 'Revize_Temel' || (k.kod && k.kod.startsWith('KDA'))) {
+        revizeListesi.push(txt);
+      } else {
+        mebListesi.push(txt);
+      }
+    });
+  }
+
+  // 1. Revize Edilmiş KDA'lar
+  if (revizeListesi.length > 0) {
+    revizeListesi.forEach(function(kazanimMetni) {
+      checkboxesKda.appendChild(createCheckboxItem(kazanimMetni, guncelleKdaLabel, false));
+    });
+    multiSelectKdaLabel.textContent = "Revize KDA Seçiniz (0 Seçildi)";
+  } else {
+    checkboxesKda.innerHTML = '<div style="padding: 6px; font-size: 12px; color: #64748b;">Bu UDA için revize KDA bulunmamaktadır.</div>';
+    multiSelectKdaLabel.textContent = "Revize KDA Yok";
+  }
+
+  // 2. Resmî Orijinal MEB Kazanımları
+  if (mebListesi.length > 0) {
+    mebListesi.forEach(function(kazanimMetni) {
+      checkboxesMeb.appendChild(createCheckboxItem(kazanimMetni, guncelleMebLabel, false));
+    });
+    multiSelectMebLabel.textContent = "MEB Kazanımı Seçiniz (0 Seçildi)";
+  } else {
+    checkboxesMeb.innerHTML = '<div style="padding: 6px; font-size: 12px; color: #64748b;">Bu UDA için resmî MEB kazanımı bulunmamaktadır.</div>';
+    multiSelectMebLabel.textContent = "MEB Kazanımı Yok";
+  }
+
   senkronizeEt();
 }
 
-function updateUdaText() {
+function guncelleUdaMetni() {
   if (!currentSelectedUdaItem) return;
-  const isBep = document.getElementById("bep_udaTuru_bep").checked;
-  if (isBep) {
-    elUdaMetni.value = currentSelectedUdaItem.bep_uda || currentSelectedUdaItem.uda || "";
+  const seciliTip = document.querySelector('input[name="bep_uda_tipi"]:checked')?.value || 'bep';
+  if (seciliTip === 'maarif' && currentSelectedUdaItem.maarif_uda) {
+    elUdaMetin.value = currentSelectedUdaItem.maarif_uda;
+  } else if (currentSelectedUdaItem.bep_uda) {
+    elUdaMetin.value = currentSelectedUdaItem.bep_uda;
   } else {
-    elUdaMetni.value = currentSelectedUdaItem.uda || currentSelectedUdaItem.bep_uda || "";
+    elUdaMetin.value = currentSelectedUdaItem.uda || "";
   }
 }
 
+document.querySelectorAll('input[name="bep_uda_tipi"]').forEach(function(radio) {
+  radio.addEventListener("change", guncelleUdaMetni);
+});
+
 /**
- * KDA LİSTESİNİ FİLTRELEYİP KARTLAR HALİNDE RENDER ETME (Çoklu Checkbox Seçimiyle)
+ * KDA SIRALAMA VE MEB - REVİZE EŞLEŞTİRME FONKSİYONU (index3.html Standardı)
  */
-function renderKdaList(kdaList) {
-  elKdaContainer.innerHTML = "";
-  if (!kdaList || kdaList.length === 0) {
-    elKdaContainer.innerHTML = "<div style='color:#94a3b8; font-size:12px; text-align:center; padding:20px;'>Bu UDA altında KDA bulunmamaktadır.</div>";
-    return;
+function siralaVeGruplaKdalar(seciliMebler, seciliKdalar, manuelKdalar) {
+  function getKod(metin) {
+    if (!metin) return null;
+    const mKda = metin.match(/KDA\s*(\d+(?:\.\d+)+)/i);
+    if (mKda) return mKda[1];
+    const mMeb = metin.match(/^\s*(\d+(?:\.\d+)+)/);
+    if (mMeb) return mMeb[1];
+    return null;
   }
 
-  const filtered = kdaList.filter(function(kda) {
-    if (currentActiveFilter === "all") return true;
-    return kda.tip === currentActiveFilter;
-  });
-
-  if (filtered.length === 0) {
-    elKdaContainer.innerHTML = "<div style='color:#94a3b8; font-size:12px; text-align:center; padding:20px;'>Seçilen filtreye uygun KDA bulunamadı.</div>";
-    return;
+  function kodKarsilastir(a, b) {
+    if (!a && !b) return 0;
+    if (!a) return 1;
+    if (!b) return -1;
+    const partsA = a.split('.').map(Number);
+    const partsB = b.split('.').map(Number);
+    for (let i = 0; i < Math.max(partsA.length, partsB.length); i++) {
+      const na = isNaN(partsA[i]) ? 0 : partsA[i];
+      const nb = isNaN(partsB[i]) ? 0 : partsB[i];
+      if (na !== nb) return na - nb;
+    }
+    return 0;
   }
 
-  filtered.forEach(function(kda, idx) {
-    const itemDiv = document.createElement("div");
-    itemDiv.className = "kda-card" + (idx === 0 ? " selected" : "");
+  const kodlarSet = new Set();
+  const mebMap = {};
+  const kdaMap = {};
+  const digerMeb = [];
+  const digerKda = [];
 
-    const isRevize = (kda.tip === "Revize_Temel");
-    const tagClass = isRevize ? "kda-badge revize" : "kda-badge resmi";
-    const tagText = isRevize ? "BEP (Revize)" : "MEB Resmî";
-
-    itemDiv.innerHTML = `
-      <input type="checkbox" class="bep-kda-cb" value="${encodeURIComponent(JSON.stringify(kda))}" ${idx === 0 ? "checked" : ""}>
-      <div class="kda-card-text">
-        <strong>${kda.kod ? kda.kod + ' - ' : ''}</strong>${kda.metin}
-      </div>
-      <span class="${tagClass}">${tagText}</span>
-    `;
-
-    itemDiv.addEventListener("click", function(e) {
-      if (e.target.tagName !== "INPUT") {
-        const cb = itemDiv.querySelector(".bep-kda-cb");
-        cb.checked = !cb.checked;
-      }
-      if (itemDiv.querySelector(".bep-kda-cb").checked) {
-        itemDiv.classList.add("selected");
-        if (kda.olcut) elOlcut.value = kda.olcut;
-      } else {
-        itemDiv.classList.remove("selected");
-      }
-    });
-
-    elKdaContainer.appendChild(itemDiv);
+  (seciliMebler || []).forEach(item => {
+    const k = getKod(item);
+    if (k) {
+      kodlarSet.add(k);
+      if (!mebMap[k]) mebMap[k] = [];
+      mebMap[k].push(item);
+    } else {
+      digerMeb.push(item);
+    }
   });
+
+  (seciliKdalar || []).forEach(item => {
+    const k = getKod(item);
+    if (k) {
+      kodlarSet.add(k);
+      if (!kdaMap[k]) kdaMap[k] = [];
+      kdaMap[k].push(item);
+    } else {
+      digerKda.push(item);
+    }
+  });
+
+  const siraliKodlar = Array.from(kodlarSet).sort(kodKarsilastir);
+  const sonuc = [];
+
+  siraliKodlar.forEach(k => {
+    const mebler = mebMap[k] || [];
+    const kdalar = kdaMap[k] || [];
+
+    if (mebler.length > 0 && kdalar.length > 0) {
+      mebler.forEach(m => sonuc.push({ metin: m, tip: 'meb', iliskili: true }));
+      kdalar.forEach(kItem => sonuc.push({ metin: kItem, tip: 'kda_iliskili', iliskili: true }));
+    } else if (mebler.length > 0) {
+      mebler.forEach(m => sonuc.push({ metin: m, tip: 'meb', iliskili: false }));
+    } else {
+      kdalar.forEach(kItem => sonuc.push({ metin: kItem, tip: 'kda_tek', iliskili: false }));
+    }
+  });
+
+  digerMeb.forEach(m => sonuc.push({ metin: m, tip: 'meb', iliskili: false }));
+  digerKda.forEach(k => sonuc.push({ metin: k, tip: 'kda_tek', iliskili: false }));
+
+  if (manuelKdalar && manuelKdalar.length > 0) {
+    manuelKdalar.forEach(man => sonuc.push({ metin: man, tip: 'manuel', iliskili: false }));
+  }
+
+  return sonuc;
 }
 
 /**
@@ -1448,59 +1591,69 @@ document.querySelectorAll("#bep_app input, #bep_app select").forEach(el => {
 });
 
 /**
- * SEÇİLEN AMACI VE KAZANIMLARI PLANA EKLEME
+ * SEÇİLEN AMACI VE KAZANIMLARI PLANA EKLEME (index3.html Standardı)
  */
-document.getElementById("bep_btn_ekle").addEventListener("click", function() {
-  const udaText = (elUdaMetni.value || "").trim();
-  if (!udaText) {
-    alert("Lütfen bir Uzun Dönemli Amaç (UDA) belirleyiniz!");
-    return;
-  }
-
-  // Seçilen KDA'ları topla
-  const selectedCbs = Array.from(elKdaContainer.querySelectorAll(".bep-kda-cb:checked"));
-  if (selectedCbs.length === 0) {
-    alert("Lütfen en az bir Kısa Dönemli Amaç (KDA) seçiniz!");
-    return;
-  }
-
-  let kdaHtml = "";
-  selectedCbs.forEach(cb => {
-    try {
-      const kdaObj = JSON.parse(decodeURIComponent(cb.value));
-      const isRevize = (kdaObj.tip === "Revize_Temel");
-      const prefix = kdaObj.kod ? `<strong>${kdaObj.kod}:</strong> ` : "";
-      const subClass = isRevize ? " kda-sub" : "";
-      kdaHtml += `<div class="kda-item${subClass}">${prefix}${kdaObj.metin}</div>`;
-    } catch (e) {
-      kdaHtml += `<div class="kda-item">${cb.value}</div>`;
-    }
-  });
-
-  const olcut = elOlcut.value || "%70 Başarı ile";
+elBtnEkle.addEventListener("click", function() {
+  senkronizeEt();
+  const modulKey = elModul.value;
+  const udaIdx = elUda.value;
+  const seciliKdalar = getSeciliKdaListesi();
+  const seciliMebKdalar = getSeciliMebListesi();
+  const kalanManuel = (inputManuelKazanim && inputManuelKazanim.value.trim()) ? [inputManuelKazanim.value.trim()] : [];
   
-  const yontemSecilenler = Array.from(panelYontem.querySelectorAll("input:checked")).map(cb => cb.value);
-  const yontemText = yontemSecilenler.length > 0 ? yontemSecilenler.join(", ") : "-";
+  const siraliKdalar = siralaVeGruplaKdalar(seciliMebKdalar, seciliKdalar, kalanManuel);
 
-  const matSecilenler = Array.from(panelMateryal.querySelectorAll("input:checked")).map(cb => cb.value);
-  const matText = matSecilenler.length > 0 ? matSecilenler.join(", ") : "-";
+  if (!modulKey || udaIdx === "") {
+    alert("Lütfen önce bir modül ve UDA (Ünite) seçiniz.");
+    return;
+  }
 
-  const baslama = elBaslama.value || "-";
-  const bitis = elBitis.value || "-";
-  const tarihAraligi = (baslama !== "-" && bitis !== "-") ? `${baslama}<br>–<br>${bitis}` : "-";
-  const degTarih = elDegTarih.value || "1. Dönem Sonu, 2. Dönem Sonu";
+  if (siraliKdalar.length === 0) {
+    alert("Lütfen 'Revize Edilmiş KDA' veya 'Resmî MEB Kazanımları' listesinden en az bir kazanım işaretleyiniz ya da 'Kazanım Ekle' kutusuna yazınız.");
+    return;
+  }
+
+  const secilenUda = (elUdaMetin && elUdaMetin.value.trim()) 
+    ? elUdaMetin.value.trim() 
+    : (currentSelectedUdaItem ? (currentSelectedUdaItem.bep_uda || currentSelectedUdaItem.uda) : "-");
+  
+  const olcut = document.getElementById("bep_degerlendirme").value;
+  const yontem = document.getElementById("bep_yontem").value || "-";
+  const materyal = document.getElementById("bep_materyal").value || "-";
+  const baslamaAy = document.getElementById("bep_baslamaAy") ? document.getElementById("bep_baslamaAy").value.trim() : "";
+  const bitisAy = document.getElementById("bep_bitisAy") ? document.getElementById("bep_bitisAy").value.trim() : "";
+  const sure = (baslamaAy && bitisAy) ? `${baslamaAy} - ${bitisAy}` : (baslamaAy || bitisAy || "-");
+  
+  const degYontem = getSeciliYontemler();
+  const degTarih = document.getElementById("bep_degTarih").value || "";
+  const performans = document.getElementById("bep_performans").value || "";
+
+  // Seçilen kazanımları: Önce MEB üstte, hemen altında ilişkili KDA olacak şekilde diz
+  const kdaHtml = siraliKdalar.map(item => {
+    const safeMetin = escapeHtml(item.metin);
+    if (item.tip === 'kda_iliskili') {
+      return `<div class="kda-item kda-sub" style="padding-left: 14px; color: #1e40af;">↳ ${safeMetin}</div>`;
+    } else if (item.tip === 'meb') {
+      return `<div class="kda-item kda-meb" style="font-weight: 600;">• ${safeMetin}</div>`;
+    } else if (item.tip === 'manuel') {
+      const mTxt = item.metin.startsWith('[Özel]') ? item.metin : `[Özel] ${item.metin}`;
+      return `<div class="kda-item kda-ozel" style="color: #0369a1;">• ${escapeHtml(mTxt)}</div>`;
+    } else {
+      return `<div class="kda-item">• ${safeMetin}</div>`;
+    }
+  }).join('');
 
   const tr = document.createElement("tr");
   tr.innerHTML = `
-    <td class="text-left">${udaText}</td>
+    <td class="text-left">${escapeHtml(secilenUda)}</td>
     <td class="text-left">${kdaHtml}</td>
-    <td>${olcut}</td>
-    <td class="text-left">${yontemText}</td>
-    <td class="text-left">${matText}</td>
-    <td>${tarihAraligi}</td>
-    <td>Gözlem, Uygulama Sınavı</td>
-    <td>${degTarih}</td>
-    <td><strong>(+) / (-)</strong></td>
+    <td>${escapeHtml(olcut)}</td>
+    <td class="text-left">${escapeHtml(yontem)}</td>
+    <td class="text-left">${escapeHtml(materyal)}</td>
+    <td>${escapeHtml(sure)}</td>
+    <td>${escapeHtml(degYontem)}</td>
+    <td>${escapeHtml(degTarih)}</td>
+    <td>${escapeHtml(performans)}</td>
     <td class="bep-no-print">
       <button type="button" class="btn-del" title="Sil">Sil</button>
     </td>
@@ -1514,31 +1667,13 @@ document.getElementById("bep_btn_ekle").addEventListener("click", function() {
   senkronizeEt();
 
   // Onay efekti
-  const btn = document.getElementById("bep_btn_ekle");
-  const origText = btn.innerHTML;
-  btn.innerHTML = "✅ Plana Eklendi!";
-  btn.style.background = "#15803d";
+  const origText = elBtnEkle.innerHTML;
+  elBtnEkle.innerHTML = "✅ Plana Eklendi!";
+  elBtnEkle.style.background = "#15803d";
   setTimeout(() => {
-    btn.innerHTML = origText;
-    btn.style.background = "";
+    elBtnEkle.innerHTML = origText;
+    elBtnEkle.style.background = "";
   }, 1000);
-});
-
-// Filtre Butonları (Tümü / BEP / MEB)
-document.querySelectorAll(".kda-filter-btn").forEach(function(btn) {
-  btn.addEventListener("click", function() {
-    document.querySelectorAll(".kda-filter-btn").forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-    currentActiveFilter = btn.getAttribute("data-filter");
-    if (currentSelectedUdaItem) {
-      renderKdaList(currentSelectedUdaItem.kda_listesi || []);
-    }
-  });
-});
-
-// UDA Metin Türü Değişimi
-document.querySelectorAll("input[name='bep_udaTuru']").forEach(function(radio) {
-  radio.addEventListener("change", updateUdaText);
 });
 
 // Açılır Liste Değişim Olayları
