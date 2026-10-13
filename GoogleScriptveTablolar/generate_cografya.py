@@ -308,3 +308,4 @@ with open(csv_path, "w", encoding="utf-8-sig", newline="") as f:
     writer.writerows(output_rows)
 
 print(f"Toplam {len(output_rows)} adet Coğrafya satırı oluşturuldu: {csv_path}")
+

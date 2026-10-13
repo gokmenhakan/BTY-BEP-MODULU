@@ -12,7 +12,8 @@ import csv
 import pymupdf
 
 PDF_FOLDER = os.path.join(os.path.dirname(__file__), "müfredat")
-OUTPUT_FOLDER = os.path.dirname(__file__)
+OUTPUT_FOLDER = os.path.join(os.path.dirname(__file__), "csv")
+os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 
 HEADERS = [
     "Mufredat_Turu", "Ders_Adi", "Sinif_Duzeyi", "Modul_Tema", "Unite_Konu",
