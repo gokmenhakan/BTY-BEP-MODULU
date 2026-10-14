@@ -1433,6 +1433,22 @@ function fallbackToGAS(forceRefresh) {
 }
 
 /**
+ * UDA Metin Temizleyici (Çift Kod Tekrarını Önler)
+ */
+function cleanUdaText(udaText, udaKod) {
+  if (!udaText) return "";
+  let clean = udaText.trim();
+  if (udaKod) {
+    const escapedKod = udaKod.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp('^(' + escapedKod + '[\\.\\s\\-:]*)+', 'i');
+    clean = clean.replace(regex, '').trim();
+  }
+  // Kod öneki genel temizliği (örn: BİY.9.1.1. veya MAT.10.1. - )
+  clean = clean.replace(/^([A-ZÇĞİÖŞÜa-zçğıöşü]{2,8}\.[A-Za-z0-9\.]+[\\.\\s\\-:]*)+/, '').trim();
+  return clean || udaText;
+}
+
+/**
  * Google E-Tablo CSV Metnini Hiyerarşik Ağaca Dönüştürür
  */
 function parseCsvToBepTree(csvText) {
@@ -1502,14 +1518,16 @@ function parseCsvToBepTree(csvText) {
     const ders = (idxDers !== -1 ? cols[idxDers] : 'Genel Ders') || 'Genel Ders';
     const modul = (idxModul !== -1 ? cols[idxModul] : 'Genel Modül') || 'Genel Modül';
     const unite = idxUnite !== -1 ? (cols[idxUnite] || '') : '';
-    const udaKod = idxUdaKod !== -1 ? (cols[idxUdaKod] || '') : '';
-    const udaMetin = idxUdaMetin !== -1 ? (cols[idxUdaMetin] || '') : '';
-    const bepUda = idxBepUda !== -1 ? (cols[idxBepUda] || udaMetin) : udaMetin;
-    const kdaKod = idxKdaKod !== -1 ? (cols[idxKdaKod] || '') : '';
-    const kdaMetin = idxKdaMetin !== -1 ? (cols[idxKdaMetin] || '') : '';
-    const kdaTipi = idxKdaTipi !== -1 ? (cols[idxKdaTipi] || 'MEB_Resmi') : 'MEB_Resmi';
+    const udaKod = idxUdaKod !== -1 ? (cols[idxUdaKod] || '').trim() : '';
+    const rawUdaMetin = idxUdaMetin !== -1 ? (cols[idxUdaMetin] || '').trim() : '';
+    const rawBepUda = idxBepUda !== -1 ? (cols[idxBepUda] || rawUdaMetin).trim() : rawUdaMetin;
+    const udaMetin = cleanUdaText(rawUdaMetin, udaKod);
+    const bepUda = cleanUdaText(rawBepUda, udaKod);
+    const kdaKod = idxKdaKod !== -1 ? (cols[idxKdaKod] || '').trim() : '';
+    const kdaMetin = idxKdaMetin !== -1 ? (cols[idxKdaMetin] || '').trim() : '';
+    const kdaTipi = idxKdaTipi !== -1 ? (cols[idxKdaTipi] || 'MEB_Resmi').trim() : 'MEB_Resmi';
 
-    if (!kdaMetin && !udaMetin) continue;
+    if (!kdaMetin && !udaMetin && !bepUda) continue;
 
     if (!tree[mufredat]) tree[mufredat] = {};
     if (!tree[mufredat][ders]) tree[mufredat][ders] = {};
@@ -1524,7 +1542,7 @@ function parseCsvToBepTree(csvText) {
         kod: udaKod,
         uda: udaMetin,
         bep_uda: bepUda,
-        maarif_uda: udaMetin,
+        maarif_uda: udaKod ? (udaKod + ". " + udaMetin) : udaMetin,
         kda: [],
         meb_kda: []
       };
@@ -1624,7 +1642,8 @@ function onModulChange() {
   udaList.forEach(function(item, idx) {
     const opt = document.createElement("option");
     opt.value = idx;
-    opt.textContent = (item.kod ? item.kod + " - " : "") + (item.uda || item.bep_uda || "UDA");
+    const cleanText = cleanUdaText(item.uda || item.bep_uda || "UDA", item.kod);
+    opt.textContent = (item.kod ? item.kod + " - " : "") + cleanText;
     elUda.appendChild(opt);
   });
 
@@ -1700,12 +1719,12 @@ function onUdaChange() {
 function guncelleUdaMetni() {
   if (!currentSelectedUdaItem) return;
   const seciliTip = document.querySelector('input[name="bep_uda_tipi"]:checked')?.value || 'bep';
-  if (seciliTip === 'maarif' && currentSelectedUdaItem.maarif_uda) {
-    elUdaMetin.value = currentSelectedUdaItem.maarif_uda;
-  } else if (currentSelectedUdaItem.bep_uda) {
-    elUdaMetin.value = currentSelectedUdaItem.bep_uda;
+  const cleanMetin = cleanUdaText(currentSelectedUdaItem.maarif_uda || currentSelectedUdaItem.uda || "", currentSelectedUdaItem.kod);
+  const cleanBep = currentSelectedUdaItem.bep_uda || currentSelectedUdaItem.uda || "";
+  if (seciliTip === 'maarif') {
+    elUdaMetin.value = currentSelectedUdaItem.kod ? (currentSelectedUdaItem.kod + ". " + cleanMetin) : cleanMetin;
   } else {
-    elUdaMetin.value = currentSelectedUdaItem.uda || "";
+    elUdaMetin.value = cleanBep;
   }
 }
 

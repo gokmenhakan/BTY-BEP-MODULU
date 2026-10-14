@@ -361,8 +361,11 @@ def process_subject(config):
         else:
             ders_tam_adi = f"{ders_adi_base} {default_grade}.Sınıf"
             
-        uda_metni_full = f"{code}. {uda['text']}" if not uda['text'].startswith(code) else uda['text']
-        bep_uda_metni = adapt_to_bep_uda(ders_adi_base, uda['text'])
+        # UDA_Metni içinde kod tekrarı olmaması için sadece temiz kazanım metnini sakla
+        clean_uda_only = re.sub(rf'^{re.escape(code)}[\.\s\-:]*', '', uda['text'], flags=re.IGNORECASE).strip()
+        clean_uda_only = re.sub(r'^[A-ZÇĞİÖŞÜa-zçğıöşü0-9_\.]+\s*[\.\-:]\s*', '', clean_uda_only).strip()
+        uda_metni_clean = clean_uda_only or uda['text']
+        bep_uda_metni = adapt_to_bep_uda(ders_adi_base, uda_metni_clean)
         
         comps = uda["components"]
         if not comps:
