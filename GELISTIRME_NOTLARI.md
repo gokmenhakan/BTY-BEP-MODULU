@@ -82,6 +82,24 @@ Sistemi daha işlevsel, pratik ve kurumsal hale getirmek için planlanan özelli
 - **Açıklama:** Aynı okuldaki diğer branş öğretmenleri veya rehberlik servisi (RAM koordinatörleri) için yetkilendirilmiş erişim linki.
 - **Fayda:** Tüm okulun BEP hazırlama süreci tek bir standart MEB formatında birleştirilir.
 
+### 5. Müfredat & Okul Türü Ön Filtre Sistemi (Katalog Genişletme)
+- **Açıklama:** Yüzlerce farklı ders ve müfredat arasında öğretmenin aradığı dersi saniyeler içinde bulabilmesi için, ders seçimini filtreleyecek akıllı bir **Ön Filtre (Okul / Program Türü)** açılır menüsü entegrasyonu.
+- **Ön Filtre Başlıkları:**
+  - `TYMM Temel Eğitim`
+  - `TYMM Ortaöğretim`
+  - `TYMM İmam Hatip Liseleri`
+  - `TYMM Güzel Sanatlar Liseleri`
+  - `TYMM Özel Eğitim ve Rehberlik`
+  - `TYMM Spor Ortaokulları`
+  - `TYMM Spor Liseleri`
+  - `TYMM Müzik Okulları`
+  - `Güzel Sanatlar Liseleri`
+  - `Ortaöğretim`
+  - `Özel Eğitim ve Rehberlik`
+  - `Spor Liseleri`
+  - `Temel Eğitim`
+- **Fayda:** Ders açılır listesindeki kalabalığı ve karmaşayı önler; öğretmen okul türünü seçtiğinde yalnızca o kademeye ait dersleri görerek hızlı ve hedefe yönelik seçim yapar.
+
 ---
 
 ## 🛠️ 3. Bölüm: Tamamlanan Son Arayüz Güncellemeleri

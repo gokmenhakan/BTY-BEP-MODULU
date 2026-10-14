@@ -215,3 +215,26 @@ Google E-Tablolar üzerinden dinamik kazanım okuma geliştirmelerini yapabilece
   * Google Drive'da yeni açacağınız E-Tablo'ya doğrudan *"Dosya > İçe Aktar"* diyebileceğiniz hazır CSV şablonu.
 * [README.md](file:///c:/Users/HAKAN/Desktop/BEP%20script/GoogleScriptveTablolar/README.md): Adım adım kurulum ve E-Tablo bağlama kılavuzu.
 
+---
+
+### 🚀 Yapılacaklar Listesi: Kademeli Ön Filtre Sistemi (Katalog Genişletme)
+
+Gelecek geliştirmelerde, açılır ders menüsünün yüzlerce branş arasında kalabalıklaşmasını önlemek ve öğretmenin doğrudan kendi kurum ve kademesine ait dersleri listelemesini sağlamak amacıyla sisteme eklenecek **Ön Filtre (Okul / Program Türü)** başlıkları:
+
+1. **TYMM Temel Eğitim**
+2. **TYMM Ortaöğretim**
+3. **TYMM İmam Hatip Liseleri**
+4. **TYMM Güzel Sanatlar Liseleri**
+5. **TYMM Özel Eğitim ve Rehberlik**
+6. **TYMM Spor Ortaokulları**
+7. **TYMM Spor Liseleri**
+8. **TYMM Müzik Okulları**
+9. **Güzel Sanatlar Liseleri**
+10. **Ortaöğretim**
+11. **Özel Eğitim ve Rehberlik**
+12. **Spor Liseleri**
+13. **Temel Eğitim**
+
+> **Hedef:** Kullanıcı önce bu ön filtre üzerinden okul/müfredat türünü seçecek; `Ders` listesi bu seçime göre otomatik daralacak, ardından `Modül / Tema` $\rightarrow$ `UDA` $\rightarrow$ `KDA` kademeli akışı işletilecektir.
+
+
