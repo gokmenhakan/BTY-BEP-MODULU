@@ -377,14 +377,15 @@ def process_subject(config):
         step_idx = 1
         for letter, c_text in comps.items():
             # 1. Resmî MEB Satırı
+            muf_turu = "KLASIK" if ("bilişim" in ders_adi_base.lower() or "bty" in ders_adi_base.lower()) else "TYMM"
             rows.append([
-                "TYMM",
+                muf_turu,
                 ders_tam_adi,
                 grade,
                 uda["modul"],
                 uda["unit"],
                 code,
-                uda_metni_full,
+                uda_metni_clean,
                 bep_uda_metni,
                 f"1.{step_idx}",
                 c_text,
@@ -398,13 +399,13 @@ def process_subject(config):
             # 2. Revize BEP Satırı
             revize_text = adapt_to_bep_kda(ders_adi_base, c_text, step_idx)
             rows.append([
-                "TYMM",
+                muf_turu,
                 ders_tam_adi,
                 grade,
                 uda["modul"],
                 uda["unit"],
                 code,
-                uda_metni_full,
+                uda_metni_clean,
                 bep_uda_metni,
                 f"KDA 1.{step_idx}",
                 revize_text,
