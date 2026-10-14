@@ -840,6 +840,10 @@
   </div>
 </div>
 
+<!-- Sunucu Tarafından Doğrudan Enjekte Edilen Canlı Veri Adası (0ms yükleme & 50KB limitsiz) -->
+<script id="serverTreeData" type="application/json"><?!= typeof serverTreeJson !== 'undefined' ? serverTreeJson : 'null' ?></script>
+<script id="serverMetaData" type="application/json"><?!= typeof serverMetaJson !== 'undefined' ? serverMetaJson : 'null' ?></script>
+
 <script>
 /**
  * YEREL YEDEK / BAŞLANGIÇ VERİ HAVUZU (Birebir index3.html Maarif 2.0 Zengin Verileri)
@@ -2199,11 +2203,59 @@ function initDataSource(forceRefresh = false) {
   elDbBadge.innerHTML = "⏳ Veritabanı Yükleniyor...";
   elDbDetails.textContent = "Google E-Tablolar kontrol ediliyor...";
 
+  let isDataLoaded = false;
+  // Güvenlik Zaman Aşımı: 4 saniye içinde hiçbir yanıt gelmezse dahili havuzu hemen devreye sok (asla takılı kalmaz)
+  const safetyTimeout = setTimeout(function() {
+    if (!isDataLoaded) {
+      console.warn("E-Tablo bağlantısı zaman aşımına uğradı, dahili havuz açılıyor.");
+      fallbackToLocal("E-Tablo yanıt vermedi, dahili veritabanı aktif.");
+    }
+  }, 4000);
+
+  function onDataSuccess(tree, sourceName, metaInfo) {
+    if (isDataLoaded) return;
+    isDataLoaded = true;
+    clearTimeout(safetyTimeout);
+    currentBepTree = tree;
+    elDbBadge.className = "db-badge online";
+    elDbBadge.innerHTML = "🟢 Google E-Tablolar (" + sourceName + ")";
+    let dersSayisi = 0;
+    for (let m in tree) {
+      dersSayisi += Object.keys(tree[m]).length;
+    }
+    elDbDetails.textContent = `Tablo: ${metaInfo || 'BEP_HAVUZU'} | ${dersSayisi} Farklı Ders & Branş Hazır.`;
+    populateDropdowns();
+  }
+
+  // 1. ÖNCELİK: Sunucudan doğrudan şablona gömülen canlı veri (0 ms, kotasız, limitsiz)
+  if (!forceRefresh) {
+    try {
+      const serverTreeElem = document.getElementById("serverTreeData");
+      if (serverTreeElem && serverTreeElem.textContent && serverTreeElem.textContent.trim() !== "null") {
+        const sTree = JSON.parse(serverTreeElem.textContent);
+        if (sTree && Object.keys(sTree).length > 0) {
+          let sheetName = "BEP_HAVUZU";
+          try {
+            const metaElem = document.getElementById("serverMetaData");
+            if (metaElem && metaElem.textContent && metaElem.textContent.trim() !== "null") {
+              const meta = JSON.parse(metaElem.textContent);
+              if (meta && meta.sheetName) sheetName = meta.sheetName;
+            }
+          } catch(e) {}
+          onDataSuccess(sTree, "Canlı Çevrim İçi", sheetName);
+          return;
+        }
+      }
+    } catch(e) {
+      console.warn("Sunucu şablon verisi okunamadı:", e);
+    }
+  }
+
   const defaultSheetId = "1kXuaEAdVsG6VzuQxuAtvmeEOIPty4lcT3CjNd9p79RU";
   const savedId = (localStorage.getItem("BEP_SAVED_SHEET_ID") || defaultSheetId).trim();
   const csvUrl = "https://docs.google.com/spreadsheets/d/" + savedId + "/export?format=csv" + (forceRefresh ? "&t=" + Date.now() : "");
 
-  // 1. Öncelikli: Doğrudan Canlı CSV Köprüsü (Google Apps Script 50KB limitine takılmaz, 6.000+ satırı anında yükler)
+  // 2. ÖNCELİK: Doğrudan Canlı CSV Köprüsü (Google Apps Script 50KB limitine takılmaz, 6.000+ satırı anında yükler)
   fetch(csvUrl)
     .then(r => {
       if (!r.ok) throw new Error("HTTP " + r.status);
@@ -2212,35 +2264,31 @@ function initDataSource(forceRefresh = false) {
     .then(csvText => {
       const parsedTree = parseCsvToBepTree(csvText);
       if (parsedTree && Object.keys(parsedTree).length > 0) {
-        currentBepTree = parsedTree;
-        elDbBadge.className = "db-badge online";
-        elDbBadge.innerHTML = "🟢 Google E-Tablolar (Canlı Çevrim İçi)";
-        let dersSayisi = 0;
-        for (let m in parsedTree) {
-          dersSayisi += Object.keys(parsedTree[m]).length;
-        }
-        elDbDetails.textContent = `Tablo: ${savedId.substring(0, 8)}... | ${dersSayisi} Farklı Ders & Branş Hazır.`;
-        populateDropdowns();
+        onDataSuccess(parsedTree, "Canlı CSV", savedId.substring(0, 8) + "...");
       } else {
-        fallbackToGAS(forceRefresh);
+        fallbackToGAS(forceRefresh, onDataSuccess);
       }
     })
     .catch(err => {
-      fallbackToGAS(forceRefresh);
+      fallbackToGAS(forceRefresh, onDataSuccess);
     });
 }
 
-function fallbackToGAS(forceRefresh) {
+function fallbackToGAS(forceRefresh, onDataSuccess) {
   if (typeof google !== "undefined" && google.script && google.script.run) {
     google.script.run
       .withSuccessHandler(function(response) {
         if (response && response.success && response.tree) {
-          currentBepTree = response.tree;
-          elDbBadge.className = "db-badge online";
-          elDbBadge.innerHTML = "🟢 Google E-Tablolar (Canlı)";
           const meta = response.meta || {};
-          elDbDetails.textContent = `Tablo: ${meta.sheetName || 'BEP_HAVUZU'} | ${meta.totalRows || 0} Satır`;
-          populateDropdowns();
+          if (onDataSuccess) {
+            onDataSuccess(response.tree, "Canlı", meta.sheetName || 'BEP_HAVUZU');
+          } else {
+            currentBepTree = response.tree;
+            elDbBadge.className = "db-badge online";
+            elDbBadge.innerHTML = "🟢 Google E-Tablolar (Canlı)";
+            elDbDetails.textContent = `Tablo: ${meta.sheetName || 'BEP_HAVUZU'} | ${meta.totalRows || 0} Satır`;
+            populateDropdowns();
+          }
         } else {
           fallbackToLocal(response ? response.message : "Tablo yapılandırması bulunamadı.");
         }
@@ -2266,7 +2314,7 @@ function cleanUdaText(udaText, udaKod) {
     clean = clean.replace(regex, '').trim();
   }
   // Kod öneki genel temizliği (örn: BİY.9.1.1. veya MAT.10.1. - )
-  clean = clean.replace(/^([A-ZÇĞİÖŞÜa-zçğıöşü]{2,8}\.[A-Za-z0-9\.]+[\\.\\s\\-:]*)+/, '').trim();
+  clean = clean.replace(/^([A-Za-zÇĞİÖŞÜçğıöşü]{2,8}\.[A-Za-z0-9\.]+[.\s:\-]+)+/, '').trim();
   return clean || udaText;
 }
 
@@ -2365,7 +2413,8 @@ function parseCsvToBepTree(csvText) {
     const udaKod = idxUdaKod !== -1 ? (cols[idxUdaKod] || '').trim() : '';
 
     // Bilişim dersleri Klasik müfredat grubunda tutulur
-    if (ders.toLowerCase().includes('bilişim') || ders.toLowerCase().includes('bty')) {
+    const dersLower = ders.toLocaleLowerCase('tr-TR');
+    if (dersLower.includes('bilişim') || dersLower.includes('bilisim') || dersLower.includes('bty')) {
       mufredat = 'KLASIK';
     }
 
@@ -2611,9 +2660,10 @@ function onUdaChange() {
 
 function guncelleUdaMetni() {
   if (!currentSelectedUdaItem) return;
-  const seciliTip = document.querySelector('input[name="bep_uda_tipi"]:checked')?.value || 'bep';
+  const checkedRadio = document.querySelector('input[name="bep_uda_tipi"]:checked');
+  const seciliTip = checkedRadio ? checkedRadio.value : 'bep';
   const cleanMetin = cleanUdaText(currentSelectedUdaItem.maarif_uda || currentSelectedUdaItem.uda || "", currentSelectedUdaItem.kod);
-  const cleanBep = currentSelectedUdaItem.bep_uda || currentSelectedUdaItem.uda || "";
+  const cleanBep = cleanUdaText(currentSelectedUdaItem.bep_uda || currentSelectedUdaItem.uda || "", currentSelectedUdaItem.kod);
   if (seciliTip === 'maarif') {
     elUdaMetin.value = currentSelectedUdaItem.kod ? (currentSelectedUdaItem.kod + ". " + cleanMetin) : cleanMetin;
   } else {
@@ -2858,7 +2908,12 @@ document.getElementById("bep_btn_yazdir").addEventListener("click", function() {
 });
 
 // Ayarlar Modal Olayları
-btnOpenSettings.addEventListener("click", () => { modalSettings.style.display = "flex"; });
+btnOpenSettings.addEventListener("click", () => {
+  const defaultSheetId = "1kXuaEAdVsG6VzuQxuAtvmeEOIPty4lcT3CjNd9p79RU";
+  inputSheetId.value = localStorage.getItem("BEP_SAVED_SHEET_ID") || defaultSheetId;
+  settingsFeedback.style.display = "none";
+  modalSettings.style.display = "flex";
+});
 btnCloseSettings.addEventListener("click", () => { modalSettings.style.display = "none"; });
 btnCancelSettings.addEventListener("click", () => { modalSettings.style.display = "none"; });
 

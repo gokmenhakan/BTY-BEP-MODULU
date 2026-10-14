@@ -23,6 +23,22 @@ function doGet(e) {
     template.scriptUrl = "";
   }
   
+  // E-Tablo verilerini doğrudan sunucu tarafında oku ve şablona enjekte et
+  // Böylece google.script.run 50KB limitine ve tarayıcı CORS engeline takılmaz!
+  try {
+    var bepData = getBepDataFromSheet(false);
+    if (bepData && bepData.success && bepData.tree) {
+      template.serverTreeJson = JSON.stringify(bepData.tree);
+      template.serverMetaJson = JSON.stringify(bepData.meta);
+    } else {
+      template.serverTreeJson = "null";
+      template.serverMetaJson = "null";
+    }
+  } catch (dataErr) {
+    template.serverTreeJson = "null";
+    template.serverMetaJson = "null";
+  }
+  
   return template.evaluate()
     .setTitle('Dinamik BEP Modülü (Google E-Tablolar Destekli)')
     .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL)
@@ -191,11 +207,28 @@ function getBepDataFromSheet(forceRefresh) {
       
       var mufredat = (idxMufredat !== -1 ? row[idxMufredat] : 'TYMM') || 'TYMM';
       var ders = (idxDers !== -1 ? row[idxDers] : 'Bilişim Teknolojileri ve Yazılım') || 'Genel Ders';
+      
+      // Bilişim dersleri müfredatı Klasik olarak kabul edilir
+      var dersLower = ders.toString().toLowerCase();
+      if (dersLower.indexOf('bilişim') !== -1 || dersLower.indexOf('bilisim') !== -1 || dersLower.indexOf('bty') !== -1) {
+        mufredat = 'KLASIK';
+      }
+      
       var modul = (idxModul !== -1 ? row[idxModul] : 'Genel Modül') || 'Genel Modül';
       var unite = idxUnite !== -1 ? (row[idxUnite] || '') : '';
       var udaKod = idxUdaKod !== -1 ? (row[idxUdaKod] || '') : '';
       var udaMetin = idxUdaMetin !== -1 ? (row[idxUdaMetin] || '') : '';
       var bepUda = idxBepUda !== -1 ? (row[idxBepUda] || udaMetin) : udaMetin;
+      
+      // UDA kod tekrarını temizle (örn: Biy.9.1.1 - Biy.9.1.1 veya BİY.9.1.1.)
+      if (udaKod) {
+        var escapedKod = udaKod.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        udaMetin = udaMetin.replace(new RegExp('^(' + escapedKod + '[\\.\\s\\-:]*)+', 'i'), '').trim();
+        bepUda = bepUda.replace(new RegExp('^(' + escapedKod + '[\\.\\s\\-:]*)+', 'i'), '').trim();
+      }
+      udaMetin = udaMetin.replace(/^([A-Za-zÇĞİÖŞÜçğıöşü]{2,8}\.[A-Za-z0-9\.]+[.\s:\-]+)+/, '').trim();
+      bepUda = bepUda.replace(/^([A-Za-zÇĞİÖŞÜçğıöşü]{2,8}\.[A-Za-z0-9\.]+[.\s:\-]+)+/, '').trim();
+      
       var kdaKod = idxKdaKod !== -1 ? (row[idxKdaKod] || '') : '';
       var kdaMetin = idxKdaMetin !== -1 ? (row[idxKdaMetin] || '') : '';
       var kdaTipi = idxKdaTipi !== -1 ? (row[idxKdaTipi] || 'MEB_Resmi') : 'MEB_Resmi';
@@ -204,7 +237,7 @@ function getBepDataFromSheet(forceRefresh) {
       var materyal = idxMateryal !== -1 ? (row[idxMateryal] || '') : '';
       
       // Boş satırları atla
-      if (!kdaMetin && !udaMetin) continue;
+      if (!kdaMetin && !udaMetin && !bepUda) continue;
       
       // Ağaç dallarını oluştur
       if (!tree[mufredat]) tree[mufredat] = {};
