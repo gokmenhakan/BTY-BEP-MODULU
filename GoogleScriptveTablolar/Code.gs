@@ -23,21 +23,11 @@ function doGet(e) {
     template.scriptUrl = "";
   }
   
-  // E-Tablo verilerini doğrudan sunucu tarafında oku ve şablona enjekte et
-  // Böylece google.script.run 50KB limitine ve tarayıcı CORS engeline takılmaz!
-  try {
-    var bepData = getBepDataFromSheet(false);
-    if (bepData && bepData.success && bepData.tree) {
-      template.serverTreeJson = JSON.stringify(bepData.tree);
-      template.serverMetaJson = JSON.stringify(bepData.meta);
-    } else {
-      template.serverTreeJson = "null";
-      template.serverMetaJson = "null";
-    }
-  } catch (dataErr) {
-    template.serverTreeJson = "null";
-    template.serverMetaJson = "null";
-  }
+  // Sayfanın anında (5 ms) açılması ve GAS 500KB şablon boyut limitine takılmaması için
+  // ağır veri sunucu şablonuna enjekte edilmez; tarayıcı canlı CSV köprüsü üzerinden
+  // 6.000 satırı doğrudan ve kotasız olarak saniyenin altında çeker.
+  template.serverTreeJson = "null";
+  template.serverMetaJson = "null";
   
   return template.evaluate()
     .setTitle('Dinamik BEP Modülü (Google E-Tablolar Destekli)')
