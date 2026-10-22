@@ -118,6 +118,9 @@
       gap: 12px;
       margin-bottom: 12px;
     }
+    .bep-grid-2 > div, .bep-grid-3 > div, .bep-grid-4 > div, .bep-grid-kda-olcut > div {
+      min-width: 0;
+    }
     .bep-grid-3 {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -177,6 +180,7 @@
     }
     input, select, textarea {
       width: 100%;
+      max-width: 100%;
       padding: 8px 10px;
       border: 1px solid #cbd5e1;
       border-radius: 4px;
@@ -184,6 +188,22 @@
       color: #0f172a;
       background: #fff;
       font-family: inherit;
+      box-sizing: border-box;
+    }
+    select {
+      width: 100%;
+      max-width: 100%;
+      cursor: pointer;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    #bep_uda {
+      width: 100%;
+      max-width: 100%;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
     }
     input:focus, select:focus, textarea:focus {
       outline: none;
@@ -2303,6 +2323,25 @@ function fallbackToGAS(forceRefresh, onDataSuccess) {
 }
 
 /**
+ * Ders Anlatım Yolu / Etkinlik Yönergelerini Gerçek UDA'lardan Ayıklar
+ */
+function isActivityInstruction(kod, text) {
+  if (!text) return false;
+  const t = text.trim();
+  if (t.startsWith('Students can')) return false;
+  if (/^\d+\s*([a-z]\-[a-z]|[a-z])?\)?\s*(öğrenci|öğretmen|si birim|mantık|verilen|görsel|metin\b|video|animasyon|diyanet|mustafa|arap|aristoteles)/i.test(t)) {
+    return true;
+  }
+  if (/^(öğrencilere|öğrencilerden|öğrenciye|öğretmen)\b/i.test(t)) {
+    return true;
+  }
+  if (/(öğrencilerden\s+.*istenir|öğretmen\s+.*yapar|izletilerek\s+.*istenir)/i.test(t)) {
+    return true;
+  }
+  return false;
+}
+
+/**
  * UDA Metin Temizleyici (Çift Kod Tekrarını Önler)
  */
 function cleanUdaText(udaText, udaKod) {
@@ -2427,6 +2466,11 @@ function parseCsvToBepTree(csvText) {
     const kdaTipi = idxKdaTipi !== -1 ? (cols[idxKdaTipi] || 'MEB_Resmi').trim() : 'MEB_Resmi';
 
     if (!kdaMetin && !udaMetin && !bepUda) continue;
+
+    // Ders işleniş rehberi / etkinlik yönergelerini gerçek UDA'lardan ayıkla
+    if (isActivityInstruction(udaKod, rawUdaMetin)) {
+      continue;
+    }
 
     if (!tree[mufredat]) tree[mufredat] = {};
     if (!tree[mufredat][ders]) tree[mufredat][ders] = {};
@@ -2580,7 +2624,14 @@ function onModulChange() {
       displayTitle = item.unite || cleanText || ("Hedef " + (idx + 1));
     }
 
-    opt.textContent = displayTitle;
+    // Açılır kutuda uzun metinlerin ekranı patlatmasını önle (85 karakter sınırı + tooltip)
+    const MAX_OPT_LEN = 85;
+    let shortTitle = displayTitle;
+    if (shortTitle.length > MAX_OPT_LEN) {
+      shortTitle = shortTitle.substring(0, MAX_OPT_LEN).trim() + "...";
+    }
+    opt.textContent = shortTitle;
+    opt.title = displayTitle;
 
     if (currentGroup) {
       currentGroup.appendChild(opt);

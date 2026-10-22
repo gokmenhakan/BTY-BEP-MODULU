@@ -239,6 +239,11 @@ function getBepDataFromSheet(forceRefresh) {
       // Boş satırları atla
       if (!kdaMetin && !udaMetin && !bepUda) continue;
       
+      // Ders işleniş rehberi / etkinlik yönergelerini gerçek UDA'lardan ayıkla
+      if (isActivityInstruction_(udaKod, row[idxUdaMetin] || '')) {
+        continue;
+      }
+      
       // Ağaç dallarını oluştur
       if (!tree[mufredat]) tree[mufredat] = {};
       if (!tree[mufredat][ders]) tree[mufredat][ders] = {};
@@ -415,4 +420,24 @@ function setupSampleSpreadsheet(targetSheetId) {
   } catch (err) {
     return { success: false, message: "Şablon oluşturulamadı: " + err.message };
   }
+}
+
+
+/**
+ * Ders Anlatım Yolu / Etkinlik Yönergelerini Gerçek UDA'lardan Ayıklar
+ */
+function isActivityInstruction_(kod, text) {
+  if (!text) return false;
+  var t = text.toString().trim();
+  if (t.indexOf('Students can') === 0) return false;
+  if (/^\d+\s*([a-z]\-[a-z]|[a-z])?\)?\s*(öğrenci|öğretmen|si birim|mantık|verilen|görsel|metin\b|video|animasyon|diyanet|mustafa|arap|aristoteles)/i.test(t)) {
+    return true;
+  }
+  if (/^(öğrencilere|öğrencilerden|öğrenciye|öğretmen)\b/i.test(t)) {
+    return true;
+  }
+  if (/(öğrencilerden\s+.*istenir|öğretmen\s+.*yapar|izletilerek\s+.*istenir)/i.test(t)) {
+    return true;
+  }
+  return false;
 }
